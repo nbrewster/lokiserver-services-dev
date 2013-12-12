@@ -45,7 +45,7 @@ list all configured network elements (each BroadWorks, each Sonus, each SurgeMai
 * As this is currently specified, there's no way to fetch the list of supported network element types. 
 GET /INVALID/network-elements
 < 200
-<  thContent-Type: application/json
+< Content-Type: application/json
 { "network-elements": [
         { "url": "/network-elements/soft-switches/1", "id" : 1, "platform" : "Sonus PSX", "name": "Sonus East" },
         { "url": "/network-elements/application-servers/appservers/2", "id" : 2, "platform" : "BroadWorks AS", "name": "BroadWorks Cluster 1 AS2" },
@@ -1049,6 +1049,15 @@ POST /process-engine/process
         ]
     }
 }
++++++
+< 424
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : 4250,
+    "externalErrorSummary" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned.",
+    "externalErrorDetail" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
+}
+
 
 --
 BroadWorks Process Steps
@@ -1622,13 +1631,15 @@ POST /broadworks/service-providers/{sericeProviderId}/phone-numbers
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001
 +++++
 < 400
+< Content-Type: application/json
 {
     "errorCode" : "FORMAT_ERROR",
     "summary" : "Input validation failure",
     "detail" : "Request validation failed: phoneNumber does not match pattern^\\+[0-9]+-[0-9]+$: was processing value \"+1-\""
 }
 +++++
-< 424
+
+< Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
     "externalErrorCode" : 4250,
@@ -2426,6 +2437,7 @@ POST /network-elements/broadworks/{ne_id}/processOci
 < 204
 +++++
 < 401
+< Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_AUTHENTICATION_ERROR",
     "externalErrorCode" : 4962,
@@ -2434,11 +2446,13 @@ POST /network-elements/broadworks/{ne_id}/processOci
 }
 +++++
 < 400
+< Content-Type: application/json
 {
     "tbd": "placeholder for internal request validation failure (note a request validation error from the OCI itself will result in a 500"
 }
 +++++
 < 403
+< Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_FORBIDDEN",
     "externalErrorCode" : 4003,
@@ -2447,6 +2461,7 @@ POST /network-elements/broadworks/{ne_id}/processOci
 }
 +++++
 < 424
+< Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
     "externalErrorCode" : 4410,
