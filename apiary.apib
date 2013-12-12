@@ -1051,6 +1051,7 @@ POST /process-engine/process
 }
 +++++
 < 424
+< Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
     "externalErrorCode" : 4250,
@@ -1185,6 +1186,7 @@ POST /broadworks/phone-numbers
 }
 +++++
 < 400
+< Content-Type: application/json
 {
 "errorCode" : "FORMAT_ERROR",
 "summary" : "Input validation failure",
@@ -1328,6 +1330,7 @@ POST /broadworks/users
 }
 +++++
 < 400
+< Content-Type: application/json
 {
 "errorCode" : "URI_QUERY_FORMAT_ERROR",
 "summary" : "URI query parameter variable validation failure",
@@ -2023,6 +2026,7 @@ POST broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-num
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001
 +++++
 < 400
+< Content-Type: application/json
 {
     "errorCode" : "FORMAT_ERROR",
     "summary" : "Input validation failure",
