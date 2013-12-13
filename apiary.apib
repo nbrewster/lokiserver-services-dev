@@ -1184,14 +1184,6 @@ POST /broadworks/phone-numbers
         ]
     }
 }
-+++++
-< 400
-< Content-Type: application/json
-{
-"errorCode" : "FORMAT_ERROR",
-"summary" : "Input validation failure",
-"detail" : "Request validation failed: phoneNumber does not match pattern^\\+[0-9]+-[0-9]+$: was processing value \"+1-\""
-}
 
 
 Process Step: Create BroadWorks User (for voip-users input type)
@@ -1327,14 +1319,6 @@ POST /broadworks/users
             }
         ]
     }
-}
-+++++
-< 400
-< Content-Type: application/json
-{
-"errorCode" : "URI_QUERY_FORMAT_ERROR",
-"summary" : "URI query parameter variable validation failure",
-"detail" : "Request URI query parameter validation failed: mode must be create-only."
 }
 
 
@@ -1633,15 +1617,7 @@ POST /broadworks/service-providers/{sericeProviderId}/phone-numbers
 < 201
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001
 +++++
-< 400
-< Content-Type: application/json
-{
-    "errorCode" : "FORMAT_ERROR",
-    "summary" : "Input validation failure",
-    "detail" : "Request validation failed: phoneNumber does not match pattern^\\+[0-9]+-[0-9]+$: was processing value \"+1-\""
-}
-+++++
-
+< 424
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
@@ -2024,14 +2000,6 @@ POST broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-num
 }
 < 201
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001
-+++++
-< 400
-< Content-Type: application/json
-{
-    "errorCode" : "FORMAT_ERROR",
-    "summary" : "Input validation failure",
-    "detail" : "Request validation failed: phoneNumber does not match pattern^\\+[0-9]+-[0-9]+$: was processing value \"+1-\""
-}
 
 
 Check existence of an individual phone number in a Group.
@@ -2447,12 +2415,6 @@ POST /network-elements/broadworks/{ne_id}/processOci
     "externalErrorCode" : 4962,
     "externalErrorSummary" : "[Error 4962] Invalid password",
     "externalErrorDetail" : "[Error 4962] Invalid password"
-}
-+++++
-< 400
-< Content-Type: application/json
-{
-    "tbd": "placeholder for internal request validation failure (note a request validation error from the OCI itself will result in a 500"
 }
 +++++
 < 403
