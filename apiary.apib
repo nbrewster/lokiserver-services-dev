@@ -1623,7 +1623,7 @@ POST /broadworks/service-providers/{sericeProviderId}/phone-numbers
     "errorCode" : "EXTERNAL_API_ERROR",
     "externalErrorCode" : 4250,
     "externalErrorSummary" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned.",
-    "externalErrorDetail" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
+    "ThexternalErrorDetail" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
 }
 
 
@@ -2258,6 +2258,10 @@ POST /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users
 < 201
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/users/2005553001%40example.com
 
+
+Delete a BroadWorks User
+DELETE /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}
+< 204
 
 
 --
