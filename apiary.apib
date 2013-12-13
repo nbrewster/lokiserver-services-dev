@@ -1015,7 +1015,6 @@ POST /process-engine/process
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
-                "passcode" : "24601",
                 "firstName" : "John",
                 "lastName" : "Smith",
                 "callingLineIdLastName" : "Smith",
@@ -1309,7 +1308,6 @@ POST /broadworks/users
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
-                "passcode" : "24601",
                 "firstName" : "John",
                 "lastName" : "Smith",
                 "callingLineIdLastName" : "Smith",
@@ -1426,7 +1424,6 @@ POST /broadworks/configureUserServices
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
-                "passcode" : "24601",
                 "firstName" : "John",
                 "lastName" : "Smith",
                 "callingLineIdLastName" : "Smith",
@@ -1464,7 +1461,6 @@ POST /broadworks/configureUserServices
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
-                "passcode" : "24601",
                 "firstName" : "John",
                 "lastName" : "Smith",
                 "callingLineIdLastName" : "Smith",
@@ -2262,6 +2258,8 @@ POST /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users
 Delete a BroadWorks User
 DELETE /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}
 < 204
++++++
+< 404
 
 
 --
