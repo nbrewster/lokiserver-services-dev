@@ -1353,6 +1353,10 @@ represent multiple variants of this API resource; this will likely be done via c
         </tr>
     </tbody>
 </table>
+
+<i>Note, any value in services."Third-Party Voice Mail Support".noAnswerNumberOfRings will
+be overridden by services."Call Forwarding No Answer".numberOfRings if present, as they both affect the
+same setting on the user in BroadWorks.</i>
 POST /broadworks/configureUserServices
 > Content-Type: application/hal+json
 {
