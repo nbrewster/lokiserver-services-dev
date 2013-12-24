@@ -741,105 +741,52 @@ Service: Sonus Utility Service (uses the Sonus Insight API)
 Query Routes. Responses will include (at a minimum) they fields comprising the unique key for the resource.
 Querying on an extension field for a network element that is not configured will generate an error.
 
-In the initial release, the only supported mode is where all keys are fully specified in the search request. Thus, intially, the response
-will contain at most one match. Note, while some fields in a Sonus RouteKey are in fact optional in the "retrieve" method (userCallType,
-digitType, callParamFilterProfileId, domainName), for consistency the Loki Server API requires that all fields of the key be
-specified in the GET query.
+
+This request supports two modes. In both cases:
+
+* Each parameter is expected to be complete (the match is an "equals" match, with
+no support for wildcards or partial values).
+* A "null" value can be searched for by explicitly including the parameter with no value,
+e.g. "...&callProcessingElement1Id=".
+* If no match is found, the response will be 404 Not Founr
+* When one or more matches or found, they will be included in the embedded array _embedded."ls:routes"[].
+
+To retrieve a single route resource given all elements of the key, include **all** of the following
+parameters in the request (even if some have null values):
+
+* destinationNationalId
+* destinationCountryId
+* callProcessingElement1Id
+* callProcessingElement2Id
+* callProcessingElement3Id
+* callProcessingElement4Id
+* callProcessingElementType
+* routingType
+* partitionId
+* calltype
+* transmissionMedium
+* userCallType
+* digitType
+* timeRangeProfileId
+* callParamFilterProfileId
+* domainName
+
+To retrieve all matching route resources for various search criteria, include one or more of the following
+parameters in the request:
+
+* destinationNationalId
+* destinationCountryId
+* partitionId
+* callProcessingElement1Id
+* callProcessingElement2Id
+* callProcessingElement3Id
+* callProcessingElement4Id
+* routingLabelId
+* callParamFilterProfileId
+* domainName
 
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
-
-##URI Query Parameters
-
-<table border=1>
-    <thead>
-    <th>Parameter</th>
-    <th>Required?</th>
-    <th>Mode</th>
-    </thead>
-    <tbody>
-        <tr>
-			<td>callProcessingElement1Id
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>callProcessingElement2Id
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>callProcessingElement3Id
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>callProcessingElement4Id
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>callProcessingElementType
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>routingType
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>destinationNationalId
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>destinationCountryId
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>partitionId
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>calltype
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>transmissionMedium
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>userCallType
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>digitType
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>timeRangeProfileId
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>callParamFilterProfileId
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-        <tr>
-			<td>domainName
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>Equal To</td>
-        </tr>
-    </tbody>
-</table>
-GET /network-elements/sonus-psx/{ne_id}/routes{?callProcessingElement1Id,callProcessingElement2Id,...}
+GET /network-elements/sonus-psx/{ne_id}/routes{?...}
 < 200
 < Content-Type: application/hal+json
 {
@@ -865,6 +812,31 @@ GET /network-elements/sonus-psx/{ne_id}/routes{?callProcessingElement1Id,callPro
                 },
                 "id" : "1%3A%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AEXAMPLE_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A%3AEXAMPLE_RTNG_LBL",
             	"callProcessingElement1Id" : null,
+	            "callProcessingElement2Id" : null,
+	            "callProcessingElement3Id" : null,
+	            "callProcessingElement4Id" : null,
+	            "callProcessingElementType" : 0,
+	            "routingType" : 3,
+	            "destinationNationalId" : "2005553001",
+	            "destinationCountryId" : "1",
+	            "partitionId" : "EXAMPLE_PARTITION",
+	            "calltype" : 0,
+	            "transmissionMedium" : "0",
+	            "userCallType" : 0,
+	            "digitType" : 2147483647,
+	            "timeRangeProfileId" : "ALL",
+	            "callParamFilterProfileId" : null,
+	            "domainName" : null
+	            "routingLabelId" : "EXAMPLE_RTNG_LBL"
+            },
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1%3A4%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AANOTHER_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A%3AANOTHER_RTNG_LBL"
+                    }
+                },
+                "id" : "1%3A4%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AANOTHER_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A%3AANOTHER_RTNG_LBL",
+            	"callProcessingElement1Id" : 4,
 	            "callProcessingElement2Id" : null,
 	            "callProcessingElement3Id" : null,
 	            "callProcessingElement4Id" : null,
