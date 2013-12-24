@@ -309,7 +309,7 @@ GET /network-elements/sonus-psx/{ne_id}/number-translations{?sourceDn,attributes
 }
 
 
-Update a number translation.
+Update a number translation. All fields are optional.
 PUT /network-elements/sonus-psx/{ne_id}/number-translations/{+id}
 > Content-Type: application/json
 {
@@ -533,6 +533,44 @@ GET /network-elements/sonus-psx/{ne_id}/subscribers{?subscriberId,countryId,owni
 < 500
 
 
+Update a subscriber. All fields are optional.
+PUT /network-elements/sonus-psx/{ne_id}/subscribers/{+id}
+> Content-Type: application/json
+{
+    "businessGroupId" : null,
+    "interLataCarrierId" : "5000",
+    "intraLataCarrierId" : "5000",
+    "intlCarrierId" : "5000",
+    "assignedCarrierId" : null,
+    "presentationFlag" : 0,
+    "prfdPacketServiceProfileId" : null,
+    "optionType" : 0,
+    "testSubscriber" : 0,
+    "billingPlanId" : "EXAMPLE_PLAN",
+    "localCarrierId" : "5000",
+    "authcodeScriptId" : "EXAMPLE_SCRIPT",
+    "elementAttributes" : 0,
+    "classOfServiceId" : "EXAMPLE_COS",
+    "pseudoCarrierId" : null,
+    "infoDigitId" : null,
+    "scpBusinessServiceGroup" : 0,
+    "authcodeGroupId" : null,
+    "pinDigits" : null,
+    "svcList1" : 0,
+    "svcList2" : 0,
+    "exceptionProfileId" : "EXAMPLE_PROFILE",
+    "isDestination" : 1,
+    "defaultCpc" : null,
+    "homeMobileNetwork" : 0,
+    "origEntityRoutingProfileId" : "EXAMPLE_RTGPROFILE",
+    "callingArea" : "555_EXAMPLE",
+    "businessUnitId" : null,
+    "deviceProfileId" : null,
+    "memberStatus" : -1
+}
+< 204
+
+
 Delete a subscriber.
 DELETE /network-elements/sonus-psx/{ne_id}/subscribers/{+id}
 < 204
@@ -664,6 +702,26 @@ GET /network-elements/sonus-psx/{ne_id}/destinations{?nationalId,countryId}
 < 404
 +++++
 < 500
+
+
+Update a destination. All fields are optional.
+PUT /network-elements/sonus-psx/{ne_id}/destinations/{+id}
+> Content-Type: application/json
+{
+    "destSvcScriptId" : null,
+    "customScriptId" : null,
+    "elementAttributes" : 0,
+    "prfdPacketServiceProfileId" : null,
+    "routingLabelId" : "EXAMPLE_RTNG_LBL",
+    "isSubscriber" : 1,
+    "portedType" : 0,
+    "lnpTransitionFlag" : 0,
+    "homeGateway" : "EXAMPLE_GW",
+    "exceptionProfileId" : null,
+    "businessGroupId" : null,
+    "businessUnitId" : null
+}
+< 204
 
 
 Delete a destination.
@@ -861,6 +919,15 @@ GET /network-elements/sonus-psx/{ne_id}/routes{?...}
 < 404
 +++++
 < 500
+
+
+Update a route. All fields are optional.
+PUT /network-elements/sonus-psx/{ne_id}/routes/{+id}
+> Content-Type: application/json
+{
+    "routingLabelId" : "EXAMPLE_RTNG_LBL"
+}
+< 204
 
 
 Delete a route.
