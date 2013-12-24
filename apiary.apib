@@ -748,10 +748,10 @@ This request supports two modes. In both cases:
 no support for wildcards or partial values).
 * A "null" value can be searched for by explicitly including the parameter with no value,
 e.g. "...&callProcessingElement1Id=".
-* If no match is found, the response will be 404 Not Founr
+* If no match is found, the response will be 404 Not Found
 * When one or more matches or found, they will be included in the embedded array _embedded."ls:routes"[].
 
-To retrieve a single route resource given all elements of the key, include **all** of the following
+To retrieve a single route resource given all elements of the key, include **all** of (and only) the following
 parameters in the request (even if some have null values):
 
 * destinationNationalId
