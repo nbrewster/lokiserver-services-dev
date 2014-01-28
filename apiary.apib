@@ -2308,10 +2308,125 @@ POST /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users
 
 
 Delete a BroadWorks User
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 DELETE /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}
 < 204
 +++++
 < 404
+
+
+***IGNORE ME, WORK IN PROGRESS**
+GET /broadworks/users/{userId}/call-processing-policies
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com/call-processing-policies"
+        }
+    },
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated": true
+        }
+    ],
+    "_embedded": {
+        "ls:voip-users": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com"
+                    }
+                },
+                "userId": "4155551212@example.com"
+            }
+        ]
+    },
+    "callingLineId": {
+        "useUserCLIDSetting": "false",
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": "true",
+        "useGroupName": "false",
+        "allowConfigurableCLIDForRedirectingIdentity": "true",
+        "blockCallingNameForExternalCalls": "false"
+    },
+    "media": {
+        "useUserMediaSetting": "false",
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "tbd_example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": "false",
+        "useMaxSimultaneousCalls": "false",
+        "maxSimultaneousCalls": "10",
+        "useMaxSimultaneousVideoCalls": "false",
+        "maxSimultaneousVideoCalls": "5",
+        "useMaxCallTimeForAnsweredCalls": "false",
+        "maxCallTimeForAnsweredCallsMinutes": "600",
+        "useMaxCallTimeForUnansweredCalls": "false",
+        "maxCallTimeForUnansweredCallsMinutes": "2",
+        "useMaxConcurrentRedirectedCalls": "false",
+        "maxConcurrentRedirectedCalls": "3",
+        "useMaxFindMeFollowMeDepth": "false",
+        "maxFindMeFollowMeDepth": "3",
+        "maxRedirectionDepth": "10",
+        "useMaxConcurrentFindMeFollowMeInvocations": "false",
+        "maxConcurrentFindMeFollowMeInvocations": "3"
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": "false",
+        "enableDialableCallerID": "false"
+    }
+}
+
+
+***IGNORE ME, WORK IN PROGRESS**
+PUT /broadworks/users/{userId}/call-processing-policies
+{
+    "callingLineId": {
+        "useUserCLIDSetting": "false",
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": "true",
+        "useGroupName": "false",
+        "allowConfigurableCLIDForRedirectingIdentity": "true",
+        "blockCallingNameForExternalCalls": "false"
+    },
+    "media": {
+        "useUserMediaSetting": "false",
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "tbd_example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": "false",
+        "useMaxSimultaneousCalls": "false",
+        "maxSimultaneousCalls": "10",
+        "useMaxSimultaneousVideoCalls": "false",
+        "maxSimultaneousVideoCalls": "5",
+        "useMaxCallTimeForAnsweredCalls": "false",
+        "maxCallTimeForAnsweredCallsMinutes": "600",
+        "useMaxCallTimeForUnansweredCalls": "false",
+        "maxCallTimeForUnansweredCallsMinutes": "2",
+        "useMaxConcurrentRedirectedCalls": "false",
+        "maxConcurrentRedirectedCalls": "3",
+        "useMaxFindMeFollowMeDepth": "false",
+        "maxFindMeFollowMeDepth": "3",
+        "maxRedirectionDepth": "10",
+        "useMaxConcurrentFindMeFollowMeInvocations": "false",
+        "maxConcurrentFindMeFollowMeInvocations": "3"
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": "false",
+        "enableDialableCallerID": "false"
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2344,6 +2459,8 @@ Assigning a service which is already assigned, or un-assigning a service which i
 everything except those that are included here with Assigned=true). May make this change, or, add a ?parameter here to.
 As it stands, to update a user to ensure they have only 1 service assigned, you'd have to list **every** other BWKS service
 with "Assigned=false" here.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services
 > Content-Type: application/json
 {
@@ -2373,6 +2490,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 Update settings for Authentication service on a user.
 
 Note: when connecting to BroadWorks as a BroadWorks user (rather than as an admin), if "password" is included then "oldPassword" is also required.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Authentication
 > Content-Type: application/json
 {
@@ -2384,6 +2503,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 
 
 Update settings for Charge Number service on a user.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Charge%20Number 
 > Content-Type: application/json
 {
@@ -2395,6 +2516,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 
 
 Update settings for Third-Party Voice Mail Support (3PVM) service on a user.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Third-Party%20Voice%20Mail%20Support
 > Content-Type: application/json
 {
@@ -2413,6 +2536,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 
 
 Update settings for Call Forwarding No Answer (CFNA) service on a user.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Call%20Forwarding%20No%20Answer
 > Content-Type: application/json
 {
@@ -2424,6 +2549,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 
 
 Update settings for Call Forwarding Not Reachable (CFNR) service on a user.
+
+** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Call%20Forwarding%20Not%20Reachable
 > Content-Type: application/json
 {
