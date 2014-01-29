@@ -2407,9 +2407,7 @@ Assigning a service which is already assigned, or un-assigning a service which i
 everything except those that are included here with Assigned=true). May make this change, or, add a ?parameter here to.
 As it stands, to update a user to ensure they have only 1 service assigned, you'd have to list **every** other BWKS service
 with "Assigned=false" here.
-
-** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
-PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services
+PUT /broadworks/users/{userId}/services
 > Content-Type: application/json
 {
     "servicePacksAssignmentTable" : {
