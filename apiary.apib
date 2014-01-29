@@ -109,29 +109,27 @@ URI Template Variables:
 POST /network-elements/sonus-psx/{ne_id}/number-translations
 > Content-Type: application/json
 {
-    "sourceDn" : "+1-8665554321",
-    "translatedDn" : "+1-5553043000",
-    "extensions" : {
-        "sonusPsx" : {
-            "attributes" : 0,
-            "callProcessingElement1Id" : "978",
-            "callProcessingElement2Id" : null,
-            "callProcessingElement3Id" : null,
-            "callProcessingElement4Id" : null,
-            "callProcessingElementType" : 5,
-            "servicesProvisioned" : 0,
-            "phoneType" : 1,
-            "suspendedFlag" : 0,
-            "directTranslationFlag" : 0,
-            "translationLabelId" : null,
-            "translatedCarrierId" : null,
-            "translatedCalltype" : 0,
-            "translatedNpi" : 0,
-            "translatedNoa" : 13,
-            "useTranslationProfile" : 0,
-            "translationProfileId" : null
-        }
-    }
+    "nationalId" : "8665554321",
+    "countryId" : "1",
+    "translatedNationalId" : "5553043000",
+    "translatedCountryId" : "1",
+    "attributes" : 0,
+    "callProcessingElement1Id" : "978",
+    "callProcessingElement2Id" : null,
+    "callProcessingElement3Id" : null,
+    "callProcessingElement4Id" : null,
+    "callProcessingElementType" : 5,
+    "servicesProvisioned" : 0,
+    "phoneType" : 1,
+    "suspendedFlag" : 0,
+    "directTranslationFlag" : 0,
+    "translationLabelId" : null,
+    "translatedCarrierId" : null,
+    "translatedCalltype" : 0,
+    "translatedNpi" : 0,
+    "translatedNoa" : 13,
+    "useTranslationProfile" : 0,
+    "translationProfileId" : null
 }
 < 201
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5
@@ -144,51 +142,6 @@ HEAD /network-elements/sonus-psx/{ne_id}/number-translations/{+id}
 < 204
 +++++
 < 404
-
-
-Retrieve an individual number translation from a Sonus PSX.
-
-**TODO:**
-
-* **FIXME - out of date, rework it per the above, add links (maybe including a templated link to the GET query?), etc**
-* Include the network-element ID in the response?
-* Include an explcit field for the "id" key, or is the "url" sufficient?
-I think just url; that gives you the URI to access this resource, which is all you need to be able to do
-a PUT or a DELETE or OPTIONS on it.
-GET /INVALID/network-elements/soft-switches/sonus-psx/{ne_id}/number-translations/{+id}
-< 200
-< Content-Type: application/json
-{
-    "number-translation" : {
-        "FIXME_use_HAL": "/network-elements/routing-engines/1/number-translations/3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5"
-        "FIXME" : "fixme; move the loki generic fields out of extensions",
-        "extensions" : {
-            "Sonus PSX" : {
-                "nationalId" : "8665554321",
-                "countryId" : "1",
-                "attributes" : 0,
-                "callProcessingElement1Id" : "978",
-                "callProcessingElement2Id" : null,
-                "callProcessingElement3Id" : null,
-                "callProcessingElement4Id" : null,
-                "callProcessingElementType" : 5,
-                "servicesProvisioned" : 0,
-                "phoneType" : 1,
-                "suspendedFlag" : 0,
-                "directTranslationFlag" : 0,
-                "translationLabelId" : null,
-                "translatedNationalId" : "5553043000",
-                "translatedCountryId" : "1",
-                "translatedCarrierId" : null,
-                "translatedCalltype" : 0,
-                "translatedNpi" : 0,
-                "translatedNoa" : 13,
-                "useTranslationProfile" : 0,
-                "translationProfileId" : null,
-            },
-        }
-    },
-}
 
 
 Query number translations.
@@ -280,29 +233,27 @@ GET /network-elements/sonus-psx/{ne_id}/number-translations{?sourceDn,attributes
                     }
                 },
                 "id" : "3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5",
-                "sourceDn" : "+1-8665554321",
-                "translatedDn" : "+1-5553043000",
-                "extensions" : {
-                    "sonusPsx" : {
-                        "attributes" : 0,
-                        "callProcessingElement1Id" : "978",
-                        "callProcessingElement2Id" : null,
-                        "callProcessingElement3Id" : null,
-                        "callProcessingElement4Id" : null,
-                        "callProcessingElementType" : 5,
-                        "servicesProvisioned" : 0,
-                        "phoneType" : 1,
-                        "suspendedFlag" : 0,
-                        "directTranslationFlag" : 0,
-                        "translationLabelId" : null,
-                        "translatedCarrierId" : null,
-                        "translatedCalltype" : 0,
-                        "translatedNpi" : 0,
-                        "translatedNoa" : 13,
-                        "useTranslationProfile" : 0,
-                        "translationProfileId" : null
-                    }
-                }
+                "nationalId" : "8665554321",
+                "countryId" : "1",
+                "translatedNationalId" : "5553043000",
+                "translatedCountryId" : "1",
+                "attributes" : 0,
+                "callProcessingElement1Id" : "978",
+                "callProcessingElement2Id" : null,
+                "callProcessingElement3Id" : null,
+                "callProcessingElement4Id" : null,
+                "callProcessingElementType" : 5,
+                "servicesProvisioned" : 0,
+                "phoneType" : 1,
+                "suspendedFlag" : 0,
+                "directTranslationFlag" : 0,
+                "translationLabelId" : null,
+                "translatedCarrierId" : null,
+                "translatedCalltype" : 0,
+                "translatedNpi" : 0,
+                "translatedNoa" : 13,
+                "useTranslationProfile" : 0,
+                "translationProfileId" : null
             }
         ]
     }
@@ -313,22 +264,19 @@ Update a number translation. All fields are optional.
 PUT /network-elements/sonus-psx/{ne_id}/number-translations/{+id}
 > Content-Type: application/json
 {
-    "translatedDn" : "+1-5553043000",
-    "extensions" : {
-        "sonusPsx" : {
-            "servicesProvisioned" : 0,
-            "phoneType" : 1,
-            "suspendedFlag" : 0,
-            "directTranslationFlag" : 0,
-            "translationLabelId" : null,
-            "translatedCarrierId" : null,
-            "translatedCalltype" : 0,
-            "translatedNpi" : 0,
-            "translatedNoa" : 13,
-            "useTranslationProfile" : 0,
-            "translationProfileId" : null
-        }
-    }
+    "translatedNationalId" : "5553043000",
+    "translatedCountryId" : "1",
+    "servicesProvisioned" : 0,
+    "phoneType" : 1,
+    "suspendedFlag" : 0,
+    "directTranslationFlag" : 0,
+    "translationLabelId" : null,
+    "translatedCarrierId" : null,
+    "translatedCalltype" : 0,
+    "translatedNpi" : 0,
+    "translatedNoa" : 13,
+    "useTranslationProfile" : 0,
+    "translationProfileId" : null
 }
 < 204
 
