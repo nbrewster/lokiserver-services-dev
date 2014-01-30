@@ -2450,6 +2450,8 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{us
 
 Update settings for Charge Number service on a user.
 
+** FIXME: document that phoneNumber can be null, which means explicitly set the user's Charge Number TN to be empty in BWKS, regardless of its current value.
+
 ** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users/{userId}/services/Charge%20Number 
 > Content-Type: application/json
