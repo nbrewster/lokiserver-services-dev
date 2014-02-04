@@ -1593,7 +1593,7 @@ resources/methods below.
 Retrieve the Service Provider's assigned domains, including it's default domain.
 
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
-GET /broadworks/service-providers/{sericeProviderId}/domains
+GET /broadworks/service-providers/{serviceProviderId}/domains
 < 200
 < Content-Type: application/hal+json
 {
@@ -1626,7 +1626,7 @@ resources/methods below.
 Assign a single phone number (TN) to an Enterprise or Service Provider.
 
 Note that the 424 example is just one example of a possible BroadWorks error.
-POST /broadworks/service-providers/{sericeProviderId}/phone-numbers
+POST /broadworks/service-providers/{serviceProviderId}/phone-numbers
 > Content-Type: application/json
 {
     "phoneNumber" : "+1-2005553001"
@@ -1719,7 +1719,7 @@ resources/methods below.
 --
 
 Retrieve the Service Provider's service authorization detail.
-GET /broadworks/service-providers/{sericeProviderId}/services
+GET /broadworks/service-providers/{serviceProviderId}/services
 < 200
 < Content-Type: application/hal+json
 {
@@ -1784,7 +1784,7 @@ Update the Service Provider's service authorizations. Each of groupServicesAutho
 userServicesAuthorizationTable may contain zero or more entries (or be omitted entirely). Invalid combinations
 (for example, Authorized=false with Limited=Unlimited) may result in an 500 Internal Server Error
 or a 400 Bad Request, depending on the response from the BroadWorks Utility Service.
-PUT /broadworks/service-providers/{sericeProviderId}/services
+PUT /broadworks/service-providers/{serviceProviderId}/services
 > Content-Type: application/json
 {
     "groupServicesAuthorizationTable": {
@@ -1957,7 +1957,7 @@ PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}
 Retrieve the Group's assigned domains, including it's default domain.
 
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
-GET /broadworks/service-providers/{sericeProviderId}/groups/{groupId}/domains
+GET /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/domains
 < 200
 < Content-Type: application/hal+json
 {
@@ -2077,7 +2077,7 @@ resources/methods below.
 --
 
 Retrieve the Group's service authorization detail.
-GET /broadworks/service-providers/{sericeProviderId}/groups/{groupId}/services
+GET /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/services
 < 200
 < Content-Type: application/hal+json
 {
@@ -2166,7 +2166,7 @@ userServicesAuthorizationTable may contain zero or more entries (or be omitted e
 or a 400 Bad Request, depending on the response from the BroadWorks Utility Service.
 
 **Note in future this will likely be used also to assign/unassign Group Services**
-PUT /broadworks/service-providers/{sericeProviderId}/groups/{groupId}/services
+PUT /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/services
 > Content-Type: application/json
 {
     "servicePacksAuthorizationTable" : {
