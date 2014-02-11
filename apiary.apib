@@ -2509,7 +2509,7 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users/{
 
 
 --
-BroadWorks OCI
+BroadWorks Utility - OCI
 
 Network Element: BroadWorks (initially supports only the AS or XSP)
 
@@ -2579,3 +2579,97 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 < 502
 +++++
 < 504
+
+
+--
+BroadWorks Utility - User Call Processing Policlies
+--
+
+***IGNORE ME, WORK IN PROGRESS**
+GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policies
+< 200
+< Content-Type: application/json
+< Transaction-Id: 1380080943120
+{
+    "callingLineId": {
+        "useUserCLIDSetting": false,
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": true,
+        "useGroupName": false,
+        "allowConfigurableCLIDForRedirectingIdentity": true,
+        "blockCallingNameForExternalCalls": false
+    },
+    "media": {
+        "useUserMediaSetting": false,
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "Example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": false,
+        "useMaxSimultaneousCalls": false,
+        "maxSimultaneousCalls": 10,
+        "useMaxSimultaneousVideoCalls": false,
+        "maxSimultaneousVideoCalls": 5,
+        "useMaxCallTimeForAnsweredCalls": false,
+        "maxCallTimeForAnsweredCallsMinutes": 600,
+        "useMaxCallTimeForUnansweredCalls": false,
+        "maxCallTimeForUnansweredCallsMinutes": 2,
+        "useMaxConcurrentRedirectedCalls": false,
+        "maxConcurrentRedirectedCalls": 3,
+        "useMaxFindMeFollowMeDepth": false,
+        "maxFindMeFollowMeDepth": 3,
+        "maxRedirectionDepth": 10,
+        "useMaxConcurrentFindMeFollowMeInvocations": false,
+        "maxConcurrentFindMeFollowMeInvocations": 3
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": false,
+        "enableDialableCallerID": false
+    }
+}
+
+
+***IGNORE ME, WORK IN PROGRESS**
+PUT /network-elements/broadworks/{+ne_id}/call-processing-policies
+{
+    "callingLineId": {
+        "useUserCLIDSetting": false,
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": true,
+        "useGroupName": false,
+        "allowConfigurableCLIDForRedirectingIdentity": true,
+        "blockCallingNameForExternalCalls": false
+    },
+    "media": {
+        "useUserMediaSetting": false,
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "Example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": false,
+        "useMaxSimultaneousCalls": false,
+        "maxSimultaneousCalls": 10,
+        "useMaxSimultaneousVideoCalls": false,
+        "maxSimultaneousVideoCalls": 5,
+        "useMaxCallTimeForAnsweredCalls": false,
+        "maxCallTimeForAnsweredCallsMinutes": 600,
+        "useMaxCallTimeForUnansweredCalls": false,
+        "maxCallTimeForUnansweredCallsMinutes": 2,
+        "useMaxConcurrentRedirectedCalls": false,
+        "maxConcurrentRedirectedCalls": 3,
+        "useMaxFindMeFollowMeDepth": false,
+        "maxFindMeFollowMeDepth": 3,
+        "maxRedirectionDepth": 10,
+        "useMaxConcurrentFindMeFollowMeInvocations": false,
+        "maxConcurrentFindMeFollowMeInvocations": 3
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": false,
+        "enableDialableCallerID": false
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
