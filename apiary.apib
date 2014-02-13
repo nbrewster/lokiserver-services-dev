@@ -1657,7 +1657,7 @@ Retrieve an individual phone number from an Enterprise or Service Provider.
 broadworks-groups resource representations itself, and it would be wasteful to do an actual GET on /groups to
 fetch the group resource.**
 
-***NOT IMPLEMENTED as of 1.3***
+***NOT IMPLEMENTED as of 1.3; note remember to add serviceProviderId in ther body, and fix _embedded to be a service-provider***
 GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2009,7 +2009,7 @@ Retrieve an individual phone number from a Group.
 
 The embedded "ls:broadworks-users" resource is included only when the phone number is assigned to a user.
 
-***NOT IMPLEMENTED as of 1.3***
+***NOT IMPLEMENTED as of 1.3; note remember to add serviceProviderId in ther body***
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2595,6 +2595,8 @@ GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-polici
 < Content-Type: application/json
 < Transaction-Id: 1380080943120
 {
+    "ne_id" : "11",
+    "userId" : "4165551212@example.com",
     "callingLineId": {
         "useUserCLIDSetting": false,
         "clidPolicy": "Use DN",
