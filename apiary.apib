@@ -15,7 +15,7 @@ See also:
 
 *NOT UP TO DATE; still working on this*
 
-**Note: all referencese to <code>loki3.apiary.io</code> are for example purposes only. In a deployed Loki Server
+**Note: all references to <code>loki3.apiary.io</code> are for example purposes only. In a deployed Loki Server
 these will be references to the Loki REST API host.**
 
 **TBD: add HAL notes. Note (at least initially) in the response bodies, the _links.self.href matches the URI submitted by the client, including any query parameters**
@@ -310,27 +310,7 @@ In the initial implementation, any Sonus errors will simply be passed back to th
 URI Template Variables:
 
 * {+ne_id} - The ID of the target network element (i.e. the Sonus PSX instance), as defined in the system configuration.
-
-##Supported URL Parameters
-
-<table border=1>
-    <thead>
-        <th>Parameter</th>
-        <th>Required?</th>
-        <th>Default</th>
-        <th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>mode</td>
-            <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>prevalidate-and-create</td>
-            <td>**see Loki Server documentation for a description of the behaviour (introduced in LokiServer.FD_SonusEntity_SubscriberDestinationRoute_Create).</td>
-        </tr>
-    </tbody>
-</table>
-
-POST /network-elements/sonus-psx/{+ne_id}/subscribers?mode
+POST /network-elements/sonus-psx/{+ne_id}/subscribers
 > Content-Type: application/json
 {
     "subscriberId" : "2005553001",
