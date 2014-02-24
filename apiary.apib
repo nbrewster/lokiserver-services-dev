@@ -1523,6 +1523,13 @@ GET /broadworks/domains
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/domains"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "systemDefaultDomain" : "example.com",
     "domains" : [
         "another.example.com",
@@ -1540,6 +1547,13 @@ GET /broadworks/languages
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/languages"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "defaultLanguage": "English",
     "languageTable": {
         "English": {
@@ -1565,6 +1579,13 @@ GET /broadworks/time-zones
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/time-zones"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "timeZoneTable": {
         "Europe/Bucharest": {
             "Key": "Europe/Bucharest",
@@ -1603,6 +1624,13 @@ GET /broadworks/service-providers/{+serviceProviderId}/domains
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/domains"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "serviceProviderDefaultDomain" : "example.com",
     "domains" : [
         "another.example.com",
@@ -1729,6 +1757,13 @@ GET /broadworks/service-providers/{+serviceProviderId}/services
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/services"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "groupServicesAuthorizationTable": {
         "Account/Authorization Codes": {
             "Service Name": "Account/Authorization Codes",
@@ -1967,6 +2002,13 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth/domains"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "groupDefaultDomain" : "example.com",
     "domains" : [
         "another.example.com",
@@ -2087,6 +2129,13 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
             "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth/services"
         }
     },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
     "servicePacksAuthorizationTable" : {
         "Admin" : {
             "Service Pack Name" : "Admin",
@@ -2265,7 +2314,7 @@ DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/user
 < 404
 
 
-***IGNORE ME, WORK IN PROGRESS**
+***IGNORE ME - FOR FUTURE**
 GET /broadworks/users/{+userId}/call-processing-policies
 < 200
 < Content-Type: application/hal+json
@@ -2531,6 +2580,7 @@ POST /network-elements/broadworks/{+ne_id}/processOci
     "serviceProviderId" : "exampleCom"
 }
 < 200
+< Content-Type: application/json
 {
     "defaultLanguage": "English",
     "languageTable": [
@@ -2590,52 +2640,6 @@ Network Element: BroadWorks (initially supports only the AS or XSP)
 
 Low-level BroadWorks functionality related to USer resources.
 --
-
-***IGNORE ME, WORK IN PROGRESS**
-GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policies
-< 200
-< Content-Type: application/json
-< Transaction-Id: 1380080943120
-{
-    "ne_id" : "11",
-    "userId" : "4165551212@example.com",
-    "callingLineId": {
-        "useUserCLIDSetting": false,
-        "clidPolicy": "Use DN",
-        "emergencyClidPolicy": "Use DN",
-        "allowAlternateNumbersForRedirectingIdentity": true,
-        "useGroupName": false,
-        "allowConfigurableCLIDForRedirectingIdentity": true,
-        "blockCallingNameForExternalCalls": false
-    },
-    "media": {
-        "useUserMediaSetting": false,
-        "mediaPolicySelection": "No Restrictions",
-        "supportedMediaSetName": "Example"
-    },
-    "callLimits": {
-        "useUserCallLimitsSetting": false,
-        "useMaxSimultaneousCalls": false,
-        "maxSimultaneousCalls": 10,
-        "useMaxSimultaneousVideoCalls": false,
-        "maxSimultaneousVideoCalls": 5,
-        "useMaxCallTimeForAnsweredCalls": false,
-        "maxCallTimeForAnsweredCallsMinutes": 600,
-        "useMaxCallTimeForUnansweredCalls": false,
-        "maxCallTimeForUnansweredCallsMinutes": 2,
-        "useMaxConcurrentRedirectedCalls": false,
-        "maxConcurrentRedirectedCalls": 3,
-        "useMaxFindMeFollowMeDepth": false,
-        "maxFindMeFollowMeDepth": 3,
-        "maxRedirectionDepth": 10,
-        "useMaxConcurrentFindMeFollowMeInvocations": false,
-        "maxConcurrentFindMeFollowMeInvocations": 3
-    },
-    "incomingCallerId": {
-        "useUserDCLIDSetting": false,
-        "enableDialableCallerID": false
-    }
-}
 
 
 ***IGNORE ME, WORK IN PROGRESS**
