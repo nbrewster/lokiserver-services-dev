@@ -132,7 +132,7 @@ POST /network-elements/sonus-psx/{+ne_id}/number-translations
     "translationProfileId" : null
 }
 < 201
-< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5
+< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3-1-8665554321-0-978----5
 +++++
 < 500
 
@@ -229,10 +229,11 @@ GET /network-elements/sonus-psx/{+ne_id}/number-translations{?sourceDn,attribute
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5"
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3-1-8665554321-0-978----5"
                     }
                 },
-                "id" : "3%3A1%3A8665554321%3A0%3A978%3A%3A%3A%3A5",
+                "id" : "3-1-8665554321-0-978----5",
+                "ne_id" : "3",
                 "nationalId" : "8665554321",
                 "countryId" : "1",
                 "translatedNationalId" : "5553043000",
@@ -348,7 +349,7 @@ POST /network-elements/sonus-psx/{+ne_id}/subscribers
     "memberStatus" : -1
 }
 < 201
-< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1%3A2005553001%3A1%3A16
+< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1-2005553001-1-16
 +++++
 < 200
 +++++
@@ -414,10 +415,11 @@ GET /network-elements/sonus-psx/{+ne_id}/subscribers{?subscriberId,countryId,own
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1%3A2005553001%3A1%3A16"
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1-2005553001-1-16"
                     }
                 },
-                "id" : "1%3A2005553001%3A1%3A16",
+                "id" : "1-2005553001-1-16",
+                "ne_id" : "1",
                 "subscriberId" : "2005553001",
                 "countryId" : "1",
                 "owningCarrierId" : "16",
@@ -545,7 +547,7 @@ POST /network-elements/sonus-psx/{+ne_id}/destinations
     "businessUnitId" : null
 }
 < 201
-< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1%3A2005553001%3A1
+< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1-2005553001-1
 +++++
 < 500
 
@@ -604,10 +606,11 @@ GET /network-elements/sonus-psx/{+ne_id}/destinations{?nationalId,countryId}
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1%3A2005553001%3A1"
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1-2005553001-1"
                     }
                 },
-                "id" : "1%3A2005553001%3A1",
+                "ne_id" : "1",
+                "id" : "1-2005553001-1",
                 "nationalId" : "2005553001",
                 "countryId" : "1",
                 "destSvcScriptId" : null,
@@ -715,7 +718,7 @@ POST /network-elements/sonus-psx/{+ne_id}/routes
 	"routingLabelId" : "EXAMPLE_RTNG_LBL"
 }
 < 201
-< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1%3A%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AEXAMPLE_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A
+< Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--
 +++++
 < 500
 
@@ -793,10 +796,11 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?...}
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1%3A%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AEXAMPLE_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A"
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--"
                     }
                 },
-                "id" : "1%3A%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AEXAMPLE_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A",
+                "id" : "1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--",
+                "ne_id" : "1",                
             	"callProcessingElement1Id" : null,
 	            "callProcessingElement2Id" : null,
 	            "callProcessingElement3Id" : null,
@@ -818,10 +822,11 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?...}
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1%3A4%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AANOTHER_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A"
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-4----0-3-2005553001-1-ANOTHER_PARTITION-0-0-0-2147483647-ALL--"
                     }
                 },
-                "id" : "1%3A4%3A%3A%3A%3A0%3A3%3A2005553001%3A1%3AANOTHER_PARTITION%3A0%3A0%3A0%3A2147483647%3AALL%3A%3A",
+                "id" : "1-4----0-3-2005553001-1-ANOTHER_PARTITION-0-0-0-2147483647-ALL--",
+                "ne_id" : "1",
             	"callProcessingElement1Id" : 4,
 	            "callProcessingElement2Id" : null,
 	            "callProcessingElement3Id" : null,
