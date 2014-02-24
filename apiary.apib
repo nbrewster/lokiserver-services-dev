@@ -1626,7 +1626,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/domains
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/domains"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/domains"
         }
     },
     "curies" : [
@@ -1636,6 +1636,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/domains
             "templated" : true
         }
     ],
+    "serviceProviderId" : "Example Com",
     "serviceProviderDefaultDomain" : "example.com",
     "domains" : [
         "another.example.com",
@@ -1691,14 +1692,14 @@ Retrieve an individual phone number from an Enterprise or Service Provider.
 broadworks-groups resource representations itself, and it would be wasteful to do an actual GET on /groups to
 fetch the group resource.**
 
-***NOT IMPLEMENTED as of 1.3; note remember to add serviceProviderId in ther body, and fix _embedded to be a service-provider***
+***NOT IMPLEMENTED as of 1.3; decide if _embedded service-provider stays or not***
 GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/phone-numbers/%2B1-2005551212"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/phone-numbers/%2B1-2005551212"
         }
     },
     "curies" : [
@@ -1709,17 +1710,18 @@ GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumb
         }
     ],
     "_embedded" : {
-        "ls:broadworks-groups" : [
+        "ls:broadworks-service-providers" : [
             {
                 "_links" : {
                     "self" : {
                         "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth"
                     }
                 },
-                "groupId" : "exampleComNorth"
+                "serviceProviderId" : "Example Com"
             }
         ]
     },
+    "serviceProviderId" : "Example Com",
     "phoneNumber" : "+1-2005551212",
     "canDelete" : true
 }
@@ -1759,7 +1761,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/services
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/services"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/services"
         }
     },
     "curies" : [
@@ -1769,6 +1771,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/services
             "templated" : true
         }
     ],
+    "serviceProviderId" : "Example Com",
     "groupServicesAuthorizationTable": {
         "Account/Authorization Codes": {
             "Service Name": "Account/Authorization Codes",
@@ -1890,7 +1893,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North"
         }
     },
     "curies" : [
@@ -1905,14 +1908,15 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom"
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com"
                     }
                 },
-                "serviceProviderId" : "exampleCom"
+                "serviceProviderId" : "Example Com"
             }
         ]
     },
-    "groupId" : "exampleComNorth",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
     "defaultDomain": "r19.leonidsystems.com",
     "userLimit": "6",
     "userCount": "6",
@@ -2004,7 +2008,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth/domains"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/domains"
         }
     },
     "curies" : [
@@ -2014,6 +2018,8 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
             "templated" : true
         }
     ],
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
     "groupDefaultDomain" : "example.com",
     "domains" : [
         "another.example.com",
@@ -2064,7 +2070,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-n
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005551212"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005551212"
         }
     },
     "curies" : [
@@ -2079,7 +2085,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-n
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/users/2005553001%40example.com"
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/users/2005553001%40example.com"
                     }
                 },
                 "userId" : "2005553001@example.com",
@@ -2091,6 +2097,8 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-n
             }
         ]
     },
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
     "phoneNumber" : "+1-2005551212",
     "department" : "Sales",
     "activated" : true
@@ -2131,7 +2139,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/exampleCom/groups/exampleComNorth/services"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/services"
         }
     },
     "curies" : [
@@ -2141,6 +2149,8 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
             "templated" : true
         }
     ],
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
     "servicePacksAuthorizationTable" : {
         "Admin" : {
             "Service Pack Name" : "Admin",
@@ -2307,7 +2317,7 @@ POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users
     "trunkGroupName" : "exampleTrunk"
 }
 < 201
-< Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/users/2005553001%40example.com
+< Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/users/2005553001%40example.com
 
 
 Delete a BroadWorks User
