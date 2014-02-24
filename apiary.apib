@@ -1530,7 +1530,6 @@ GET /broadworks/domains
     ]
 }
 
-
 Retrieve the Systems's list of defined languages, including the default language.
 GET /broadworks/languages
 < 200
@@ -1542,18 +1541,40 @@ GET /broadworks/languages
         }
     },
     "defaultLanguage": "English",
-    "languageTable": [
-        {
+    "languageTable": {
+        "English": {
             "Language": "English",
             "Locale": "en_US",
             "Encoding": "ISO-8859-1"
         },
-        {
+        "French" : {
             "Language": "French",
             "Locale": "fr_CA",
             "Encoding": "ISO-8859-1"
         }
-    ]
+    }
+}
+
+Retrieve the Systems's list of defined time zones, including the default time zone.
+GET /broadworks/time-zones
+< 200
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/time-zones"
+        }
+    },
+    "timeZoneTable": {
+        "Europe/Bucharest": {
+            "Key": "Europe/Bucharest",
+            "Display Name": "(GMT+02:00) Europe/Bucharest"
+        },
+        "America/St_Johns": {
+            "Key": "America/St_Johns",
+            "Display Name": "(GMT-03:30) (Canada) Newfoundland"
+        }
+    }
 }
 
 
