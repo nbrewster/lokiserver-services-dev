@@ -2331,7 +2331,7 @@ DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/user
 < 404
 
 
-***IGNORE ME - FOR FUTURE**
+** NOT IMPLEMENTED (as of 1.6) - IGNORE **
 GET /broadworks/users/{+userId}/call-processing-policies
 < 200
 < Content-Type: application/hal+json
@@ -2401,7 +2401,8 @@ GET /broadworks/users/{+userId}/call-processing-policies
 }
 
 
-***IGNORE ME, WORK IN PROGRESS**
+Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
 PUT /broadworks/users/{+userId}/call-processing-policies
 {
     "callingLineId": {
