@@ -729,21 +729,19 @@ Query Routes
 
 Service: Sonus Utility Service (uses the Sonus Insight API)
 
-Query Routes. Responses will include (at a minimum) they fields comprising the unique key for the resource.
-Querying on an extension field for a network element that is not configured will generate an error.
+Query Routes. This request is used only to retrieve a single route resource given all elements of the key.
+Responses will include (at a minimum) they fields comprising the unique key for the resource.
+See also "Query RouteQueries" for a more flexible method of querying routes.
+In this request:
 
-
-This request supports two modes. In both cases:
-
+* All of the URI query parameters (listed below) must be included in the request (even if some have no value).
 * Each parameter is expected to be complete (the match is an "equals" match, with
 no support for wildcards or partial values).
 * A "null" value can be searched for by explicitly including the parameter with no value,
 e.g. "...&callProcessingElement1Id=".
 * If no match is found, the response will be 404 Not Found
-* When one or more matches or found, they will be included in the embedded array _embedded."ls:routes"[].
 
-To retrieve a single route resource given all elements of the key, include **all** of (and only) the following
-parameters in the request (even if some have null values):
+The URI query parameters are as follows:
 
 * destinationNationalId
 * destinationCountryId
@@ -762,22 +760,8 @@ parameters in the request (even if some have null values):
 * callParamFilterProfileId
 * domainName
 
-To retrieve all matching route resources for various search criteria, include one or more of the following
-parameters in the request:
-
-* destinationNationalId
-* destinationCountryId
-* partitionId
-* callProcessingElement1Id
-* callProcessingElement2Id
-* callProcessingElement3Id
-* callProcessingElement4Id
-* routingLabelId
-* callParamFilterProfileId
-* domainName
-
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
-GET /network-elements/sonus-psx/{+ne_id}/routes{?...}
+GET /network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinationCountryId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType,routingType,partitionId,calltype,transmissionMedium,userCallType,digitType,timeRangeProfileId,callParamFilterProfileId,domainName}
 < 200
 < Content-Type: application/hal+json
 {
@@ -820,32 +804,6 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?...}
 	            "callParamFilterProfileId" : null,
 	            "domainName" : null
 	            "routingLabelId" : "EXAMPLE_RTNG_LBL"
-            },
-            {
-                "_links" : {
-                    "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-4----0-3-2005553001-1-ANOTHER_PARTITION-0-0-0-2147483647-ALL--"
-                    }
-                },
-                "id" : "1-4----0-3-2005553001-1-ANOTHER_PARTITION-0-0-0-2147483647-ALL--",
-                "ne_id" : "1",
-            	"callProcessingElement1Id" : 4,
-	            "callProcessingElement2Id" : null,
-	            "callProcessingElement3Id" : null,
-	            "callProcessingElement4Id" : null,
-	            "callProcessingElementType" : 0,
-	            "routingType" : 3,
-	            "destinationNationalId" : "2005553001",
-	            "destinationCountryId" : "1",
-	            "partitionId" : "EXAMPLE_PARTITION",
-	            "calltype" : 0,
-	            "transmissionMedium" : "0",
-	            "userCallType" : 0,
-	            "digitType" : 2147483647,
-	            "timeRangeProfileId" : "ALL",
-	            "callParamFilterProfileId" : null,
-	            "domainName" : null
-	            "routingLabelId" : "EXAMPLE_RTNG_LBL"
             }
         ]
     }
@@ -868,6 +826,131 @@ PUT /network-elements/sonus-psx/{+ne_id}/routes/{+id}
 Delete a route.
 DELETE /network-elements/sonus-psx/{+ne_id}/routes/{+id}
 < 204
+
+
+--
+Sonus PSX Route-Queries
+##Collection
+
+Network Element: Sonus PSX
+
+Keys:
+
+* (none)
+
+This is a meta-entity on Sonus, which provides enhanced search capabilities for Route entities.
+--
+
+Query RouteQueries
+
+Service: Sonus Utility Service (uses the Sonus Insight API)
+
+Provides an alternative way to query Sonus Route entites, via the Sonus RouteQuery meta-entity. See also "Query Routes".
+
+This request is used all matching routes for various search criteria. Responses will include any mathing routes. In this request:
+
+* On or more of the URI query parameters (listed below) must be included, with a value.
+* Each parameter is expected to be complete (the match is an "equals" match, with
+no support for wildcards or partial values).
+* A "null" value can be searched for by explicitly including the parameter with no value,
+e.g. "...&callProcessingElement1Id=".
+* If no match is found, the response will be 404 Not Found
+* When one or more matches or found, they will be included in the embedded array _embedded."ls:routes"[].
+
+The URI query parameters are as follows:
+
+* destinationNationalId
+* destinationCountryId
+* partitionId
+* callProcessingElement1Id
+* callProcessingElement2Id
+* callProcessingElement3Id
+* callProcessingElement4Id
+* routingLabelId
+* callParamFilterProfileId
+* domainName
+
+**NOTE: As of 1.5, there is a defect in _embedded, making it inconsistent with the documentation below:
+it uses ls:route-queries and embeds the resources as route-queries, instead of as routes.**
+
+[future: pagination of results via offset and max; field parameter to specify included/excluded fields]
+GET /network-elements/sonus-psx/{+ne_id}/route-queries{?destinationNationalId,destinationCountryId,partitionId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,routingLabelId,callParamFilterProfileId,domainName}
+< 200
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/44/route-queries?routingLabelId=EXAMPLE_LBL"
+        }
+    },
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost:8340/loki/rels/{rel}",
+            "templated": true
+        }
+    ],
+    "_embedded": {
+        "ls:routes": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/44/routes/44-----0-3-4152141208-1-EXAMPLE_PARTITION-50176-8191-ALL--"
+                    }
+                },
+                "id": "44-----0-3-4152141208-1-EXAMPLE_PARTITION-50176-8191-ALL--",
+                "ne_id" : "44",
+                "callProcessingElement1Id": null,
+                "callProcessingElement2Id": null,
+                "callProcessingElement3Id": null,
+                "callProcessingElement4Id": null,
+                "callProcessingElementType": "0",
+                "routingType": "3",
+                "destinationNationalId": "4152141208",
+                "destinationCountryId": "1",
+                "partitionId": "EXAMPLE_PARTITION",
+                "calltype": "50176",
+                "routingLabelId": "EXAMPLE_LBL",
+                "transmissionMedium": "8191",
+                "userCallType": "0",
+                "digitType": "2147483647",
+                "timeRangeProfileId": "ALL",
+                "callParamFilterProfileId": null,
+                "domainName": null
+            },
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/44/routes/44-----0-3-4165551212-1-EXAMPLE_PARTITION-50176-511-ALL--"
+                    }
+                },
+                "id": "44-----0-3-4165551212-1-EXAMPLE_PARTITION-50176-511-ALL--",
+                "ne_id" : "44",
+                "callProcessingElement1Id": null,
+                "callProcessingElement2Id": null,
+                "callProcessingElement3Id": null,
+                "callProcessingElement4Id": null,
+                "callProcessingElementType": "0",
+                "routingType": "3",
+                "destinationNationalId": "4165551212",
+                "destinationCountryId": "1",
+                "partitionId": "EXAMPLE_PARTITION",
+                "calltype": "50176",
+                "routingLabelId": "EXAMPLE_LBL",
+                "transmissionMedium": "511",
+                "userCallType": "0",
+                "digitType": "2147483647",
+                "timeRangeProfileId": "ALL",
+                "callParamFilterProfileId": null,
+                "domainName": null
+            }
+        ]
+    }
+}
++++++
+< 404
++++++
+< 500
 
 
 --
