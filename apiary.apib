@@ -1777,7 +1777,7 @@ Retrieve an individual phone number from an Enterprise or Service Provider.
 broadworks-groups resource representations itself, and it would be wasteful to do an actual GET on /groups to
 fetch the group resource.**
 
-***NOT IMPLEMENTED as of 1.3; decide if _embedded service-provider stays or not***
+***NOT IMPLEMENTED; also, need decide if _embedded service-provider stays or not***
 GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2148,7 +2148,7 @@ Retrieve an individual phone number from a Group.
 
 The embedded "ls:broadworks-users" resource is included only when the phone number is assigned to a user.
 
-***NOT IMPLEMENTED as of 1.3; note remember to add serviceProviderId in ther body***
+***NOT IMPLEMENTED; note remember to add serviceProviderId in ther body***
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2408,6 +2408,7 @@ POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users
 Delete a BroadWorks User
 
 ** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
+** NOT IMPLEMENTED **
 DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users/{+userId}
 < 204
 +++++
