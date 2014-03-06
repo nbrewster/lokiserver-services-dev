@@ -2488,6 +2488,7 @@ GET /broadworks/users/{+userId}/call-processing-policies
 Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
 PUT /broadworks/users/{+userId}/call-processing-policies
+> Content-Type: application/json
 {
     "callingLineId": {
         "useUserCLIDSetting": false,
@@ -2744,8 +2745,12 @@ Low-level BroadWorks functionality related to USer resources.
 --
 
 
-***IGNORE ME, WORK IN PROGRESS**
+Update a BroadWorks User's Call Processing Policies settings.
+Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
+
+In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policies
+> Content-Type: application/json
 {
     "callingLineId": {
         "useUserCLIDSetting": false,
