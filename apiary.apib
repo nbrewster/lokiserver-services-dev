@@ -2416,14 +2416,14 @@ DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/user
 
 
 ** NOT IMPLEMENTED (as of 1.6) - IGNORE **
-GET /broadworks/users/{+userId}/call-processing-policies
+GET /broadworks/users/{+userId}/call-processing-policy
 < 200
 < Content-Type: application/hal+json
 < Transaction-Id: 1380080943120
 {
     "_links": {
         "self": {
-            "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com/call-processing-policies"
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com/call-processing-policy"
         }
     },
     "curies": [
@@ -2487,7 +2487,7 @@ GET /broadworks/users/{+userId}/call-processing-policies
 
 Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
-PUT /broadworks/users/{+userId}/call-processing-policies
+PUT /broadworks/users/{+userId}/call-processing-policy
 > Content-Type: application/json
 {
     "callingLineId": {
@@ -2749,7 +2749,7 @@ Update a BroadWorks User's Call Processing Policies settings.
 Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
 
 In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
-PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policies
+PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 > Content-Type: application/json
 {
     "callingLineId": {
