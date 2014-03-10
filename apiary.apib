@@ -2767,6 +2767,16 @@ Update a BroadWorks User's Call Processing Policies settings.
 Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
 
 In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
+
+Notes:
+
+* The properties of the request inputs correspond to elements of the same name in BroadWorks OCI UserCallProcessingModifyPolicyRequestX (as of R17SP4),
+with the exception of the convenience grouping objects (callingLineId, media, callLimits, incomingCallerId), which have no BroadWorks equivalent.
+* The mapping is direct – no transformations are performed on the values.
+* If a property is omitted in the request, the corresponding element will be omitted from the OCI request.
+* If a property is present in the request that is not part of the json-schema for this request, it will be ignored.
+
+** TODO: Add json-schema with the URI template variables (all are required) and the list of body properties (all are optional) and data type for each **
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 > Content-Type: application/json
 {
