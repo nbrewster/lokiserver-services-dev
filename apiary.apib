@@ -1589,6 +1589,274 @@ POST /broadworks/configureUserServices
 
 
 --
+BroadWorks Entity - Groups
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Various resources providing general internal services at the Group level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve information about a Group.
+
+Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
+the BroadWorks value will be passed through unaltered in the response.
+
+Some properties are not included by default, unless their name is included as one of the values for the "view" URI query
+parameter (which accepts a comma-separated list of values). These are:
+
+* extension-length
+* rules
+* ...?
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
+< 200
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "_embedded" : {
+        "ls:broadworks-service-providers" : [
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com"
+                    }
+                },
+                "serviceProviderId" : "Example Com"
+            }
+        ]
+    },
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "defaultDomain": "r19.leonidsystems.com",
+    "userLimit": "6",
+    "userCount": "6",
+    "groupName": "exampleCom North",
+    "callingLineIdName": "ExampleCOM North",
+    "callingLineIdPhoneNumber" : "+15552112700",
+    "callingLineIdDisplayPhoneNumber" : "5552112700",
+    "timeZone": "America/St_Johns",
+    "timeZoneDisplayName": "(GMT-03:30) (Canada) Newfoundland",
+    "locationDialingCode": "415",
+    "contact": {
+        "contactName": "Billy",
+        "contactNumber": "Bishop",
+        "contactEmail": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    },
+    "extension-length" : {
+        "minExtensionLength": "2",
+        "maxExtensionLength": "6",
+        "defaultExtensionLength": "4"
+    },
+    "rules" : {
+        "password-rules" : {
+            "disallowUserId": "false",
+            "disallowOldPassword": "false",
+            "disallowReversedOldPassword": "false",
+            "restrictMinDigits": "false",
+            "minDigits": "1",
+            "restrictMinUpperCaseLetters": "false",
+            "minUpperCaseLetters": "1",
+            "restrictMinLowerCaseLetters": "false",
+            "minLowerCaseLetters": "1",
+            "restrictMinNonAlphanumericCharacters": "false",
+            "minNonAlphanumericCharacters": "1",
+            "minLength": "6",
+            "maxFailedLoginAttempts": "5",
+            "passwordExpiresDays": "30",
+            "sendLoginDisabledNotifyEmail": "false",
+            "disallowRulesModification": "false",
+            "disallowPreviousPasswords": "false",
+            "numberOfPreviousPasswords": "1"
+        }
+    }
+}
+
+Modify some or all editable properties of a BroadWorks Group.
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
+> Content-Type: application/json
+{
+    "defaultDomain": "r19.leonidsystems.com",
+    "userLimit": "6",
+    "groupName": "exampleCom North",
+    "callingLineIdName": "ExampleCOM North",
+    "callingLineIdPhoneNumber" : "+1-5553112700",
+    "timeZone": "America/St_Johns",
+    "locationDialingCode": "415",
+    "contact": {
+        "contactName": "Billy",
+        "contactNumber": "Bishop",
+        "contactEmail": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    }
+}
+< 204
++++++
+< 404
+
+
+--
+BroadWorks Entity - Users
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Various resources providing general internal services at the System level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
+
+** NOT IMPLEMENTED **
+GET /broadworks/users/{+userId}/call-processing-policy
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com/call-processing-policy"
+        }
+    },
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated": true
+        }
+    ],
+    "_embedded": {
+        "ls:broadworks-users": [
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com"
+                    }
+                },
+                "userId": "4155551212@example.com"
+            }
+        ]
+    },
+    "userId" : "4155551212@example.com",
+    "callingLineId": {
+        "useUserCLIDSetting": false,
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": true,
+        "useGroupName": false,
+        "allowConfigurableCLIDForRedirectingIdentity": true,
+        "blockCallingNameForExternalCalls": false
+    },
+    "media": {
+        "useUserMediaSetting": false,
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "Example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": false,
+        "useMaxSimultaneousCalls": false,
+        "maxSimultaneousCalls": 10,
+        "useMaxSimultaneousVideoCalls": false,
+        "maxSimultaneousVideoCalls": 5,
+        "useMaxCallTimeForAnsweredCalls": false,
+        "maxCallTimeForAnsweredCallsMinutes": 600,
+        "useMaxCallTimeForUnansweredCalls": false,
+        "maxCallTimeForUnansweredCallsMinutes": 2,
+        "useMaxConcurrentRedirectedCalls": false,
+        "maxConcurrentRedirectedCalls": 3,
+        "useMaxFindMeFollowMeDepth": false,
+        "maxFindMeFollowMeDepth": 3,
+        "maxRedirectionDepth": 10,
+        "useMaxConcurrentFindMeFollowMeInvocations": false,
+        "maxConcurrentFindMeFollowMeInvocations": 3
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": false,
+        "enableDialableCallerID": false
+    }
+}
+
+
+Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
+PUT /broadworks/users/{+userId}/call-processing-policy
+> Content-Type: application/json
+{
+    "callingLineId": {
+        "useUserCLIDSetting": false,
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": true,
+        "useGroupName": false,
+        "allowConfigurableCLIDForRedirectingIdentity": true,
+        "blockCallingNameForExternalCalls": false
+    },
+    "media": {
+        "useUserMediaSetting": false,
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "Example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": false,
+        "useMaxSimultaneousCalls": false,
+        "maxSimultaneousCalls": 10,
+        "useMaxSimultaneousVideoCalls": false,
+        "maxSimultaneousVideoCalls": 5,
+        "useMaxCallTimeForAnsweredCalls": false,
+        "maxCallTimeForAnsweredCallsMinutes": 600,
+        "useMaxCallTimeForUnansweredCalls": false,
+        "maxCallTimeForUnansweredCallsMinutes": 2,
+        "useMaxConcurrentRedirectedCalls": false,
+        "maxConcurrentRedirectedCalls": 3,
+        "useMaxFindMeFollowMeDepth": false,
+        "maxFindMeFollowMeDepth": 3,
+        "maxRedirectionDepth": 10,
+        "useMaxConcurrentFindMeFollowMeInvocations": false,
+        "maxConcurrentFindMeFollowMeInvocations": 3
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": false,
+        "enableDialableCallerID": false
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
+
+--
 BroadWorks System - General
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
@@ -1973,122 +2241,43 @@ Retrieve information about a Group.
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
 
-Some properties are not included by default, unless their name is included as one of the values for the "view" URI query
-parameter (which accepts a comma-separated list of values). These are:
-
-* extension-length
-* rules
-* ...?
-GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
+** NOT IMPLEMENTED **
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 < 200
 < Content-Type: application/hal+json
 {
-    "_links" : {
-        "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North"
-        }
-    },
-    "curies" : [
-        {
-            "name" : "ls",
-            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
-            "templated" : true
-        }
-    ],
-    "_embedded" : {
-        "ls:broadworks-service-providers" : [
-            {
-                "_links" : {
-                    "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com"
-                    }
-                },
-                "serviceProviderId" : "Example Com"
-            }
-        ]
-    },
-    "serviceProviderId" : "Example Com",
-    "groupId" : "Example Com - North",
-    "defaultDomain": "r19.leonidsystems.com",
-    "userLimit": "6",
-    "userCount": "6",
-    "groupName": "exampleCom North",
-    "callingLineIdName": "ExampleCOM North",
-    "callingLineIdPhoneNumber" : "+15552112700",
-    "callingLineIdDisplayPhoneNumber" : "5552112700",
-    "timeZone": "America/St_Johns",
-    "timeZoneDisplayName": "(GMT-03:30) (Canada) Newfoundland",
-    "locationDialingCode": "415",
-    "contact": {
-        "contactName": "Billy",
-        "contactNumber": "Bishop",
-        "contactEmail": "billy@example.com"
-    },
-    "address": {
-        "addressLine1": "415 Sixth Ave",
-        "addressLine2": "Suite 102",
-        "city": "North Seventh",
-        "stateOrProvince": "Alabama",
-        "zipOrPostalCode": "50415",
-        "country": "USA"
-    },
-    "extension-length" : {
-        "minExtensionLength": "2",
-        "maxExtensionLength": "6",
-        "defaultExtensionLength": "4"
-    },
-    "rules" : {
-        "password-rules" : {
-            "disallowUserId": "false",
-            "disallowOldPassword": "false",
-            "disallowReversedOldPassword": "false",
-            "restrictMinDigits": "false",
-            "minDigits": "1",
-            "restrictMinUpperCaseLetters": "false",
-            "minUpperCaseLetters": "1",
-            "restrictMinLowerCaseLetters": "false",
-            "minLowerCaseLetters": "1",
-            "restrictMinNonAlphanumericCharacters": "false",
-            "minNonAlphanumericCharacters": "1",
-            "minLength": "6",
-            "maxFailedLoginAttempts": "5",
-            "passwordExpiresDays": "30",
-            "sendLoginDisabledNotifyEmail": "false",
-            "disallowRulesModification": "false",
-            "disallowPreviousPasswords": "false",
-            "numberOfPreviousPasswords": "1"
-        }
-    }
+    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
 }
 
 Modify some or all editable properties of a BroadWorks Group.
-PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
+
+** NOT IMPLEMENTED **
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 > Content-Type: application/json
 {
-    "defaultDomain": "r19.leonidsystems.com",
-    "userLimit": "6",
-    "groupName": "exampleCom North",
-    "callingLineIdName": "ExampleCOM North",
-    "callingLineIdPhoneNumber" : "+1-5553112700",
-    "timeZone": "America/St_Johns",
-    "locationDialingCode": "415",
-    "contact": {
-        "contactName": "Billy",
-        "contactNumber": "Bishop",
-        "contactEmail": "billy@example.com"
-    },
-    "address": {
-        "addressLine1": "415 Sixth Ave",
-        "addressLine2": "Suite 102",
-        "city": "North Seventh",
-        "stateOrProvince": "Alabama",
-        "zipOrPostalCode": "50415",
-        "country": "USA"
-    }
+    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
 }
 < 204
 +++++
 < 404
+
+
+** NOT IMPLEMENTED **
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/password-rules
+< 200
+< Content-Type: application/hal+json
+{
+    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+}
+
+
+** NOT IMPLEMENTED **
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+< 200
+< Content-Type: application/hal+json
+{
+    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+}
 
 
 Retrieve the Group's assigned domains, including it's default domain.
@@ -2424,125 +2613,6 @@ DELETE /network-elements/broadworks/{+ne_id}/users/{+userId}
 < 404
 
 
-Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
-Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
-
-** NOT IMPLEMENTED **
-GET /broadworks/users/{+userId}/call-processing-policy
-< 200
-< Content-Type: application/hal+json
-< Transaction-Id: 1380080943120
-{
-    "_links": {
-        "self": {
-            "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com/call-processing-policy"
-        }
-    },
-    "curies": [
-        {
-            "name": "ls",
-            "href": "http://loki3services.apiary.io/loki-services/rels/{rel}",
-            "templated": true
-        }
-    ],
-    "_embedded": {
-        "ls:broadworks-users": [
-            {
-                "_links": {
-                    "self": {
-                        "href": "http://loki3services.apiary.io/loki-services/broadworks/users/4155551212%20example.com"
-                    }
-                },
-                "userId": "4155551212@example.com"
-            }
-        ]
-    },
-    "userId" : "4155551212@example.com",
-    "callingLineId": {
-        "useUserCLIDSetting": false,
-        "clidPolicy": "Use DN",
-        "emergencyClidPolicy": "Use DN",
-        "allowAlternateNumbersForRedirectingIdentity": true,
-        "useGroupName": false,
-        "allowConfigurableCLIDForRedirectingIdentity": true,
-        "blockCallingNameForExternalCalls": false
-    },
-    "media": {
-        "useUserMediaSetting": false,
-        "mediaPolicySelection": "No Restrictions",
-        "supportedMediaSetName": "Example"
-    },
-    "callLimits": {
-        "useUserCallLimitsSetting": false,
-        "useMaxSimultaneousCalls": false,
-        "maxSimultaneousCalls": 10,
-        "useMaxSimultaneousVideoCalls": false,
-        "maxSimultaneousVideoCalls": 5,
-        "useMaxCallTimeForAnsweredCalls": false,
-        "maxCallTimeForAnsweredCallsMinutes": 600,
-        "useMaxCallTimeForUnansweredCalls": false,
-        "maxCallTimeForUnansweredCallsMinutes": 2,
-        "useMaxConcurrentRedirectedCalls": false,
-        "maxConcurrentRedirectedCalls": 3,
-        "useMaxFindMeFollowMeDepth": false,
-        "maxFindMeFollowMeDepth": 3,
-        "maxRedirectionDepth": 10,
-        "useMaxConcurrentFindMeFollowMeInvocations": false,
-        "maxConcurrentFindMeFollowMeInvocations": 3
-    },
-    "incomingCallerId": {
-        "useUserDCLIDSetting": false,
-        "enableDialableCallerID": false
-    }
-}
-
-
-Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
-Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
-PUT /broadworks/users/{+userId}/call-processing-policy
-> Content-Type: application/json
-{
-    "callingLineId": {
-        "useUserCLIDSetting": false,
-        "clidPolicy": "Use DN",
-        "emergencyClidPolicy": "Use DN",
-        "allowAlternateNumbersForRedirectingIdentity": true,
-        "useGroupName": false,
-        "allowConfigurableCLIDForRedirectingIdentity": true,
-        "blockCallingNameForExternalCalls": false
-    },
-    "media": {
-        "useUserMediaSetting": false,
-        "mediaPolicySelection": "No Restrictions",
-        "supportedMediaSetName": "Example"
-    },
-    "callLimits": {
-        "useUserCallLimitsSetting": false,
-        "useMaxSimultaneousCalls": false,
-        "maxSimultaneousCalls": 10,
-        "useMaxSimultaneousVideoCalls": false,
-        "maxSimultaneousVideoCalls": 5,
-        "useMaxCallTimeForAnsweredCalls": false,
-        "maxCallTimeForAnsweredCallsMinutes": 600,
-        "useMaxCallTimeForUnansweredCalls": false,
-        "maxCallTimeForUnansweredCallsMinutes": 2,
-        "useMaxConcurrentRedirectedCalls": false,
-        "maxConcurrentRedirectedCalls": 3,
-        "useMaxFindMeFollowMeDepth": false,
-        "maxFindMeFollowMeDepth": 3,
-        "maxRedirectionDepth": 10,
-        "useMaxConcurrentFindMeFollowMeInvocations": false,
-        "maxConcurrentFindMeFollowMeInvocations": 3
-    },
-    "incomingCallerId": {
-        "useUserDCLIDSetting": false,
-        "enableDialableCallerID": false
-    }
-}
-< 204
-< Transaction-Id: 1380080943120
-
-
 --
 BroadWorks Users - Services
 
@@ -2674,6 +2744,82 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < 204
 
 
+Retrieve a BroadWorks User's Call Processing Policies settings.
+Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
+
+In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
+
+** NOT IMPLEMENTED **
+GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links, curies" : "tbd",
+    "userId" : "4155551212@example.com",
+    "ne_id" : "1",
+    "tbd" : "request not implemented; documentation not completed"
+}
+
+
+Update a BroadWorks User's Call Processing Policies settings.
+Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
+
+In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
+
+Notes:
+
+* The properties of the request inputs correspond to elements of the same name in BroadWorks OCI UserCallProcessingModifyPolicyRequestX (as of R17SP4),
+with the exception of the convenience grouping objects (callingLineId, media, callLimits, incomingCallerId), which have no BroadWorks equivalent.
+* The mapping is direct – no transformations are performed on the values.
+* If a property is omitted in the request, the corresponding element will be omitted from the OCI request.
+* If a property is present in the request that is not part of the json-schema for this request, it will be ignored.
+
+** TODO: Add json-schema with the URI template variables (all are required) and the list of body properties (all are optional) and data type for each **
+PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
+> Content-Type: application/json
+{
+    "callingLineId": {
+        "useUserCLIDSetting": false,
+        "clidPolicy": "Use DN",
+        "emergencyClidPolicy": "Use DN",
+        "allowAlternateNumbersForRedirectingIdentity": true,
+        "useGroupName": false,
+        "allowConfigurableCLIDForRedirectingIdentity": true,
+        "blockCallingNameForExternalCalls": false
+    },
+    "media": {
+        "useUserMediaSetting": false,
+        "mediaPolicySelection": "No Restrictions",
+        "supportedMediaSetName": "Example"
+    },
+    "callLimits": {
+        "useUserCallLimitsSetting": false,
+        "useMaxSimultaneousCalls": false,
+        "maxSimultaneousCalls": 10,
+        "useMaxSimultaneousVideoCalls": false,
+        "maxSimultaneousVideoCalls": 5,
+        "useMaxCallTimeForAnsweredCalls": false,
+        "maxCallTimeForAnsweredCallsMinutes": 600,
+        "useMaxCallTimeForUnansweredCalls": false,
+        "maxCallTimeForUnansweredCallsMinutes": 2,
+        "useMaxConcurrentRedirectedCalls": false,
+        "maxConcurrentRedirectedCalls": 3,
+        "useMaxFindMeFollowMeDepth": false,
+        "maxFindMeFollowMeDepth": 3,
+        "maxRedirectionDepth": 10,
+        "useMaxConcurrentFindMeFollowMeInvocations": false,
+        "maxConcurrentFindMeFollowMeInvocations": 3
+    },
+    "incomingCallerId": {
+        "useUserDCLIDSetting": false,
+        "enableDialableCallerID": false
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
+
 --
 BroadWorks Utility - OCI
 
@@ -2747,87 +2893,4 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 +++++
 < 504
 
-
---
-BroadWorks Utility - User
-
-Network Element: BroadWorks (initially supports only the AS or XSP)
-
-Low-level BroadWorks functionality related to User resources.
---
-
-
-Retrieve a BroadWorks User's Call Processing Policies settings.
-Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
-
-In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
-
-** NOT IMPLEMENTED **
-GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
-< 200
-< Transaction-Id: 1380080943120
-< Content-Type: application/hal+json
-{
-    "_links, curies" : "tbd",
-    "userId" : "4155551212@example.com",
-    "ne_id" : "1",
-    "tbd" : "request not implemented; documentation not completed"
-}
-
-Update a BroadWorks User's Call Processing Policies settings.
-Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
-
-In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
-
-Notes:
-
-* The properties of the request inputs correspond to elements of the same name in BroadWorks OCI UserCallProcessingModifyPolicyRequestX (as of R17SP4),
-with the exception of the convenience grouping objects (callingLineId, media, callLimits, incomingCallerId), which have no BroadWorks equivalent.
-* The mapping is direct – no transformations are performed on the values.
-* If a property is omitted in the request, the corresponding element will be omitted from the OCI request.
-* If a property is present in the request that is not part of the json-schema for this request, it will be ignored.
-
-** TODO: Add json-schema with the URI template variables (all are required) and the list of body properties (all are optional) and data type for each **
-PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
-> Content-Type: application/json
-{
-    "callingLineId": {
-        "useUserCLIDSetting": false,
-        "clidPolicy": "Use DN",
-        "emergencyClidPolicy": "Use DN",
-        "allowAlternateNumbersForRedirectingIdentity": true,
-        "useGroupName": false,
-        "allowConfigurableCLIDForRedirectingIdentity": true,
-        "blockCallingNameForExternalCalls": false
-    },
-    "media": {
-        "useUserMediaSetting": false,
-        "mediaPolicySelection": "No Restrictions",
-        "supportedMediaSetName": "Example"
-    },
-    "callLimits": {
-        "useUserCallLimitsSetting": false,
-        "useMaxSimultaneousCalls": false,
-        "maxSimultaneousCalls": 10,
-        "useMaxSimultaneousVideoCalls": false,
-        "maxSimultaneousVideoCalls": 5,
-        "useMaxCallTimeForAnsweredCalls": false,
-        "maxCallTimeForAnsweredCallsMinutes": 600,
-        "useMaxCallTimeForUnansweredCalls": false,
-        "maxCallTimeForUnansweredCallsMinutes": 2,
-        "useMaxConcurrentRedirectedCalls": false,
-        "maxConcurrentRedirectedCalls": 3,
-        "useMaxFindMeFollowMeDepth": false,
-        "maxFindMeFollowMeDepth": 3,
-        "maxRedirectionDepth": 10,
-        "useMaxConcurrentFindMeFollowMeInvocations": false,
-        "maxConcurrentFindMeFollowMeInvocations": 3
-    },
-    "incomingCallerId": {
-        "useUserDCLIDSetting": false,
-        "enableDialableCallerID": false
-    }
-}
-< 204
-< Transaction-Id: 1380080943120
 
