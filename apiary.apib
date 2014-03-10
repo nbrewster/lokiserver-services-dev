@@ -2685,8 +2685,6 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Authenticatio
 Update settings for Charge Number service on a user.
 
 ** FIXME: document that phoneNumber can be null, which means explicitly set the user's Charge Number TN to be empty in BWKS, regardless of its current value.
-
-** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Number
 > Content-Type: application/json
 {
@@ -2698,8 +2696,6 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Numb
 
 
 Update settings for Third-Party Voice Mail Support (3PVM) service on a user.
-
-** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Third-Party%20Voice%20Mail%20Support
 > Content-Type: application/json
 {
@@ -2718,8 +2714,6 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Third-Party%2
 
 
 Update settings for Call Forwarding No Answer (CFNA) service on a user.
-
-** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20No%20Answer
 > Content-Type: application/json
 {
@@ -2731,8 +2725,6 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwar
 
 
 Update settings for Call Forwarding Not Reachable (CFNR) service on a user.
-
-** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20Not%20Reachable
 > Content-Type: application/json
 {
