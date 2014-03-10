@@ -1773,11 +1773,11 @@ HEAD /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNum
 
 Retrieve an individual phone number from an Enterprise or Service Provider.
 
-**NOTE: most likely the embedded groupId should be removed here; this GET shouldn't be attempting to construct
+***NOTE: most likely the embedded groupId should be removed here; this GET shouldn't be attempting to construct
 broadworks-groups resource representations itself, and it would be wasteful to do an actual GET on /groups to
-fetch the group resource.**
+fetch the group resource.***
 
-***NOT IMPLEMENTED; also, need decide if _embedded service-provider stays or not***
+** NOT IMPLEMENTED; also, need decide if _embedded service-provider stays or not **
 GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2148,7 +2148,7 @@ Retrieve an individual phone number from a Group.
 
 The embedded "ls:broadworks-users" resource is included only when the phone number is assigned to a user.
 
-***NOT IMPLEMENTED; note remember to add serviceProviderId in ther body***
+** NOT IMPLEMENTED; note remember to add serviceProviderId in ther body **
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2408,6 +2408,7 @@ POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users
 Delete a BroadWorks User
 
 ** FIXME: remove service-provider and group from URI; they are not necessary when operating on a user.
+
 ** NOT IMPLEMENTED **
 DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users/{+userId}
 < 204
@@ -2415,7 +2416,10 @@ DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/user
 < 404
 
 
-** NOT IMPLEMENTED (as of 1.6) - IGNORE **
+Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
+
+** NOT IMPLEMENTED **
 GET /broadworks/users/{+userId}/call-processing-policy
 < 200
 < Content-Type: application/hal+json
@@ -2741,9 +2745,23 @@ BroadWorks Utility - User
 
 Network Element: BroadWorks (initially supports only the AS or XSP)
 
-Low-level BroadWorks functionality related to USer resources.
+Low-level BroadWorks functionality related to User resources.
 --
 
+
+Retrieve a BroadWorks User's Call Processing Policies settings.
+Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
+
+In addition to the standard error codes, this will return 404 Not Found if the user does not exist in BroadWorks.
+
+** NOT IMPLEMENTED **
+GET /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "tbd" : "request not implemented; documentation not completed"
+}
 
 Update a BroadWorks User's Call Processing Policies settings.
 Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
