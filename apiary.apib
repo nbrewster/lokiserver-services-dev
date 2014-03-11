@@ -1606,12 +1606,27 @@ Retrieve information about a Group.
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
 
-Some properties are not included by default, unless their name is included as one of the values for the "view" URI query
-parameter (which accepts a comma-separated list of values). These are:
-
-* extension-length
-* rules
-* ...?
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>view</td>
+            <td style="text-align: center; font-weight:bold">&#x2717;</td>
+            <td>(empty)</td>
+            <td>Selects the view returned in the response.<br />
+            Allowed values: empty, or a comma-separated list of one or more of the following: [ "extension-length", "rules" ].<br />
+            Each view name corresponds to an object in the response body. If the view is named in the value of ?view, then the corresponding
+            object will be included in the response. <br />
+            When ?view is omitted or empty, none of the extra views will be included.<br />
+            </td>
+        </tr>
+    </tbody>
+</table>
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 < 200
 < Content-Type: application/hal+json
@@ -2884,3 +2899,13 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 < 504
 
 
+-- JSON Schema Validations --
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
+{
+    "request" :
+        {
+        },
+    "response" :
+    { }
+}
