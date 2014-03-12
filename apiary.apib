@@ -985,7 +985,7 @@ POST /process-engine/process
     "phoneNumber" : "+1-2005553001",
     "tnRoutine" : "auto",
     "CLID" : "+1-2005553001",
-    "extension" : "3001",
+    "extension" : 3001,
     "lastName" : "Smith",
     "firstName" : "John",
     "callingLineIdLastName" : "Smith",
@@ -1072,7 +1072,7 @@ POST /process-engine/process
                     }
                 },
                 "phoneNumber" : "+1-2005553001",
-                "extension" : "3001",
+                "extension" : 3001,
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
@@ -1169,7 +1169,7 @@ POST /broadworks/phone-numbers
     "phoneNumber": "+1-2005553001",
     "tnRoutine" : "auto",
     "CLID" : "+1-2005553001",
-    "extension": "3001",
+    "extension": 3001,
     "lastName": "Doe",
     "firstName": "Jane",
     "callingLineIdLastName" : "Smith",
@@ -1300,7 +1300,7 @@ POST /broadworks/users
     "phoneNumber": "+1-2005553001",
     "tnRoutine" : "auto",
     "CLID" : "+1-2005553001",
-    "extension": "3001",
+    "extension": 3001,
     "lastName": "Doe",
     "firstName": "Jane",
     "callingLineIdLastName" : "Smith",
@@ -1371,7 +1371,7 @@ POST /broadworks/users
                     }
                 },
                 "phoneNumber" : "+1-2005553001",
-                "extension" : "3001",
+                "extension" : 3001,
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
@@ -1433,7 +1433,7 @@ POST /broadworks/configureUserServices
     "phoneNumber": "+1-2005553001",
     "tnRoutine" : "auto",
     "CLID" : "+1-2005553001",
-    "extension": "3001",
+    "extension": 3001,
     "lastName": "Doe",
     "firstName": "Jane",
     "callingLineIdLastName" : "Smith",
@@ -1494,7 +1494,7 @@ POST /broadworks/configureUserServices
                     }
                 },
                 "phoneNumber" : "+1-2005553001",
-                "extension" : "3001",
+                "extension" : 3001,
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
@@ -1533,7 +1533,7 @@ POST /broadworks/configureUserServices
                     }
                 },
                 "phoneNumber" : "+1-2005553001",
-                "extension" : "3001",
+                "extension" : 3001,
                 "CLID" : "+1-2005553001",
                 "userId" : "2005553001@example.com",
                 "portalPassword" : "s8F!9ggo",
@@ -2153,50 +2153,50 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     "groupServicesAuthorizationTable": {
         "Account/Authorization Codes": {
             "Service Name": "Account/Authorization Codes",
-            "Authorized": "true",
-            "Assigned": "false",
+            "Authorized": true,
+            "Assigned": false,
             "Limited": "Unlimited",
             "Quantity": null,
-            "Allocated": "1",
-            "Licensed": "true",
-            "Service Pack Allocation": "0"
+            "Allocated": 1,
+            "Licensed": true,
+            "Service Pack Allocation": 0
         },
         "Auto Attendant": {
             "Service Name": "Auto Attendant",
-            "Authorized": "true",
-            "Assigned": "false",
+            "Authorized": true,
+            "Assigned": false,
             "Limited": "Limited",
-            "Quantity": "20",
-            "Allocated": "10",
-            "Licensed": "true",
-            "Service Pack Allocation": "0"
+            "Quantity": 20,
+            "Allocated": 10,
+            "Licensed": true,
+            "Service Pack Allocation": 0
         },
         "etc" : "truncated for brevity"
     },
     "userServicesAuthorizationTable": {
         "3G/4G Continuity" : {
             "Service Name" : "3G/4G Continuity",
-            "Authorized" : "false",
-            "Assigned" : "false",
+            "Authorized" : false,
+            "Assigned" : false,
             "Limited" : "Unlimited",
             "Quantity" : null,
-            "Allocated" : "0",
-            "Licensed" : "false",
-            "Service Pack Allocation" : "0",
-            "User Assignable" : "true",
-            "Service Pack Assignable": "true"
+            "Allocated" : 0,
+            "Licensed" : false,
+            "Service Pack Allocation" : 0,
+            "User Assignable" : true,
+            "Service Pack Assignable": true
         },
         "Advice Of Charge" : {
             "Service Name" : "Advice Of Charge",
-            "Authorized" : "true",
-            "Assigned" : "false",
+            "Authorized" : true,
+            "Assigned" : false,
             "Limited" : "Unlimited",
             "Quantity" : null,
             "Allocated" : "Unlimited",
-            "Licensed" : "true",
-            "Service Pack Allocation" : "0",
-            "User Assignable" : "true",
-            "Service Pack Assignable": "true"
+            "Licensed" : true,
+            "Service Pack Allocation" : 0,
+            "User Assignable" : true,
+            "Service Pack Assignable": true
         },
         "etc" : "truncated for brevity"
     }
@@ -2211,28 +2211,28 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 {
     "groupServicesAuthorizationTable": {
         "Auto Attendant": {
-            "Authorized": "false"
+            "Authorized": false
         },
         "Group Paging": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Unlimited"
         },
         "Hunt Group": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Limited",
             "Quantity": 20
         }
     },
     "userServicesAuthorizationTable": {
         "Remote Office": {
-            "Authorized": "false"
+            "Authorized": false
         },
         "Authentication": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Unlimited"
         },
         "Call Waiting" : {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Limited",
             "Quantity": 20
         }
@@ -2507,7 +2507,7 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
                 "userId" : "2005553001@example.com",
                 "lastName" : "Smith",
                 "firstName" : "John",
-                "extension" : "3001",
+                "extension" : 3001,
                 "email" : "jsmith@example.com",
                 "userType" : "Normal"
             }
@@ -2572,72 +2572,72 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     "servicePacksAuthorizationTable" : {
         "Admin" : {
             "Service Pack Name" : "Admin",
-            "Authorized" : "true",
-            "Assigned" : "false",
+            "Authorized" : true,
+            "Assigned" : false,
             "Limited" : "Limited",
-            "Allocated" : "10",
+            "Allocated" : 10,
             "Allowed" : "Unlimited",
-            "Usage" : "0",
+            "Usage" : 0,
             "Description" : null
         },
         "Standard" : {
             "Service Pack Name" : "Standard",
-            "Authorized" : "true",
-            "Assigned" : "false",
+            "Authorized" : true,
+            "Assigned" : false,
             "Limited" : "Unlimited",
             "Allocated" : null,
             "Allowed" : "Unlimited",
-            "Usage" : "5",
+            "Usage" : 5,
             "Description" : null
         }
     },
     "groupServicesAuthorizationTable": {
         "Account/Authorization Codes": {
             "Service Name": "Account/Authorization Codes",
-            "Authorized": "true",
-            "Assigned": "false",
+            "Authorized": true,
+            "Assigned": false,
             "Limited": "none",
             "Quantity": null,
             "Usage": "1",
-            "Licensed": "true",
+            "Licensed": true,
             "Allowed": "Unlimited"
         },
         "Auto Attendant": {
             "Service Name": "Auto Attendant",
-            "Authorized": "true",
-            "Assigned": "true",
+            "Authorized": true,
+            "Assigned": true,
             "Limited": "Limited",
-            "Quantity": "10",
-            "Usage": "0",
-            "Licensed": "true",
-            "Allowed": "20"
+            "Quantity": 10,
+            "Usage": 0,
+            "Licensed": true,
+            "Allowed": 20
         },
         "etc" : "truncated for brevity"
     },
     "userServicesAuthorizationTable": {
         "3G/4G Continuity" : {
             "Service Name" : "3G/4G Continuity",
-            "Authorized" : "true",
-            "Assigned" : "false",
+            "Authorized" : true,
+            "Assigned" : false,
             "Limited" : "Unlimited",
             "Quantity" : null,
-            "Usage" : "1",
-            "Licensed" : "false",
+            "Usage" : 1,
+            "Licensed" : false,
             "Allowed" : "Unlimited",
-            "User Assignable" : "true",
-            "Group Service Assignable": "true"
+            "User Assignable" : true,
+            "Group Service Assignable": true
         },
         "Advice Of Charge" : {
             "Service Name" : "Advice Of Charge",
-            "Authorized" : "true",
-            "Assigned" : "false",
+            "Authorized" : true,
+            "Assigned" : false,
             "Limited" : "Limited",
-            "Quantity" : "5",
-            "Usage" : "2",
-            "Licensed" : "true",
+            "Quantity" : 5,
+            "Usage" : 2,
+            "Licensed" : true,
             "Allowed" : "Unlimited",
-            "User Assignable" : "true",
-            "Group Service Assignable": "true"
+            "User Assignable" : true,
+            "Group Service Assignable": true
         },
         "etc" : "truncated for brevity"
     }
@@ -2654,39 +2654,39 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 {
     "servicePacksAuthorizationTable" : {
         "Admin" : {
-            "Authorized" : "true",
+            "Authorized" : true,
             "Limited" : "Unlimited",
         },
         "Standard" : {
-            "Authorized" : "true",
+            "Authorized" : true,
             "Limited" : "Limited",
-            "Allocated" : "10"
+            "Allocated" : 10
         }
     },
     "groupServicesAuthorizationTable": {
         "Auto Attendant": {
-            "Authorized": "false"
+            "Authorized": false
         },
         "Group Paging": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Unlimited"
         },
         "Hunt Group": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Limited",
             "Quantity": 20
         }
     },
     "userServicesAuthorizationTable": {
         "Remote Office": {
-            "Authorized": "false"
+            "Authorized": false
         },
         "Authentication": {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Unlimited"
         },
         "Call Waiting" : {
-            "Authorized": "true",
+            "Authorized": true,
             "Limited": "Limited",
             "Quantity": 20
         }
@@ -2719,7 +2719,7 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "phoneNumber": "+1-2005553001",
     "tnRoutine": "auto",
     "CLID": "+1-2005553001",
-    "extension": "3001",
+    "extension": 3001,
     "lastName": "Doe",
     "firstName": "Jane",
     "callingLineIdLastName": "Smith",
@@ -2823,8 +2823,8 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Numb
 > Content-Type: application/json
 {
     "phoneNumber" : "+1-2005554321",
-    "useChargeNumberForEnhancedTranslations" : "false",
-    "sendChargeNumberToNetwork" : "true"
+    "useChargeNumberForEnhancedTranslations" : false,
+    "sendChargeNumberToNetwork" : true
 }
 < 204
 
