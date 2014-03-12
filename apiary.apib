@@ -2254,7 +2254,8 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Retrieve information about a BroadWorks group. Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
+Retrieve information about a BroadWorks group. 
+Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
@@ -2314,12 +2315,30 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 
 
 Modify some or all editable properties of a BroadWorks group.
-
-** NOT IMPLEMENTED **
+Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
 PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 > Content-Type: application/json
 {
-    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+    "defaultDomain": "r19.leonidsystems.com",
+    "userLimit": 6,
+    "groupName": "exampleCom North",
+    "callingLineIdName": "ExampleCOM North",
+    "callingLineIdPhoneNumber" : "+1-5553112700",
+    "timeZone": "America/St_Johns",
+    "locationDialingCode": "415",
+    "contact": {
+        "contactName": "Billy",
+        "contactNumber": "Bishop",
+        "contactEmail": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    }
 }
 < 204
 +++++
