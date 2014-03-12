@@ -2051,11 +2051,11 @@ HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
 
 Retrieve an individual phone number from an Enterprise or Service Provider.
 
-***NOTE: most likely the embedded groupId should be removed here; this GET shouldn't be attempting to construct
+***NOTE: most likely the embedded service-provider should be removed here; this GET shouldn't be attempting to construct
 broadworks-groups resource representations itself, and it would be wasteful to do an actual GET on /groups to
-fetch the group resource.***
+fetch the group resource. really, if we want a link to the service-provider here, use _links. ***
 
-** NOT IMPLEMENTED; also, need decide if _embedded service-provider stays or not **
+** NOT IMPLEMENTED; also, need decide if _embedded service-provider stays, or changes to a _links entry, or just goes away **
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
 < Content-Type: application/hal+json
@@ -2896,6 +2896,114 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-pro
 {
     "request" :
         {
+            "type": "object",
+            "title": "User Call Processing Policy Modify request body schema",
+            "properties": {
+                "callingLineId": {
+                    "type": "object",
+                    "properties": {
+                        "useUserCLIDSetting": {
+                            "type": "boolean"
+                        },
+                        "clidPolicy": {
+                            "type": "string"
+                        },
+                        "emergencyClidPolicy": {
+                            "type": "string"
+                        },
+                        "allowAlternateNumbersForRedirectingIdentity": {
+                            "type": "boolean"
+                        },
+                        "useGroupName": {
+                            "type": "boolean"
+                        },
+                        "allowConfigurableCLIDForRedirectingIdentity": {
+                            "type": "boolean"
+                        },
+                        "blockCallingNameForExternalCalls": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "media": {
+                    "type": "object",
+                    "properties": {
+                        "useUserMediaSetting": {
+                            "type": "boolean"
+                        },
+                        "mediaPolicySelection": {
+                            "type": "string"
+                        },
+                        "supportedMediaSetName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "callLimits": {
+                    "type": "object",
+                    "properties": {
+                        "useUserCallLimitsSetting": {
+                            "type": "boolean"
+                        },
+                        "useMaxSimultaneousCalls": {
+                            "type": "boolean"
+                        },
+                        "maxSimultaneousCalls": {
+                            "type": "integer"
+                        },
+                        "useMaxSimultaneousVideoCalls": {
+                            "type": "boolean"
+                        },
+                        "maxSimultaneousVideoCalls": {
+                            "type": "integer"
+                        },
+                        "useMaxCallTimeForAnsweredCalls": {
+                            "type": "boolean"
+                        },
+                        "maxCallTimeForAnsweredCallsMinutes": {
+                            "type": "integer"
+                        },
+                        "useMaxCallTimeForUnansweredCalls": {
+                            "type": "boolean"
+                        },
+                        "maxCallTimeForUnansweredCallsMinutes": {
+                            "type": "integer"
+                        },
+                        "useMaxConcurrentRedirectedCalls": {
+                            "type": "boolean"
+                        },
+                        "maxConcurrentRedirectedCalls": {
+                            "type": "integer"
+                        },
+                        "useMaxFindMeFollowMeDepth": {
+                            "type": "boolean"
+                        },
+                        "maxFindMeFollowMeDepth": {
+                            "type": "integer"
+                        },
+                        "maxRedirectionDepth": {
+                            "type": "integer"
+                        },
+                        "useMaxConcurrentFindMeFollowMeInvocations": {
+                            "type": "boolean"
+                        },
+                        "maxConcurrentFindMeFollowMeInvocations": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "incomingCallerId": {
+                    "type": "object",
+                    "properties": {
+                        "useUserDCLIDSetting": {
+                            "type": "boolean"
+                        },
+                        "enableDialableCallerID": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
         },
     "response" :
     { }
