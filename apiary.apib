@@ -1597,6 +1597,18 @@ Retrieve information about a Group.
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
 
+The following properties are omitted from the response if they have no value set on the Group in BroadWorks:
+
+* groupName
+* callingLineIdName
+* callingLineIdPhoneNumber
+* callingLineIdDisplayPhoneNumber
+* locationDialingCode
+* contact
+* address
+
+##URI Query Parameters
+
 <table border=1>
     <thead>
     <th>Parameter</th>
@@ -2247,13 +2259,59 @@ Retrieve information about a Group.
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
 
-** NOT IMPLEMENTED **
+The following properties are omitted from the response if they have no value set on the Group in BroadWorks:
+
+* groupName
+* callingLineIdName
+* callingLineIdPhoneNumber
+* callingLineIdDisplayPhoneNumber
+* locationDialingCode
+* contact
+* address
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 < 200
 < Content-Type: application/hal+json
 {
-    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "ne_id" : "1",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "defaultDomain": "r19.leonidsystems.com",
+    "userLimit": 6,
+    "userCount": 4,
+    "groupName": "exampleCom North",
+    "callingLineIdName": "ExampleCOM North",
+    "callingLineIdPhoneNumber" : "+15552112700",
+    "callingLineIdDisplayPhoneNumber" : "5552112700",
+    "timeZone": "America/St_Johns",
+    "timeZoneDisplayName": "(GMT-03:30) (Canada) Newfoundland",
+    "locationDialingCode": "415",
+    "contact": {
+        "contactName": "Billy",
+        "contactNumber": "Bishop",
+        "contactEmail": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    }
 }
+
 
 Modify some or all editable properties of a BroadWorks Group.
 
