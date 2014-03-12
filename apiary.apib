@@ -2254,12 +2254,12 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Retrieve information about a Group. Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
+Retrieve information about a BroadWorks group. Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
 
-The following properties are omitted from the response if they have no value set on the Group in BroadWorks:
+The following properties are omitted from the response if they have no value set on the group in BroadWorks:
 
 * groupName
 * callingLineIdName
@@ -2313,7 +2313,7 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 
 
-Modify some or all editable properties of a BroadWorks Group.
+Modify some or all editable properties of a BroadWorks group.
 
 ** NOT IMPLEMENTED **
 PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
@@ -2368,12 +2368,30 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 
 
-** NOT IMPLEMENTED **
+Retrieve the extension length settings for a group in BroadWorks.
+Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPortal.
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
 < 200
 < Content-Type: application/hal+json
 {
-    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North/password-rules"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "ne_id" : "1",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "minExtensionLength": 2,
+    "maxExtensionLength": 6,
+    "defaultExtensionLength": 4
 }
 
 
