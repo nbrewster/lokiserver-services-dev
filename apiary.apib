@@ -1661,8 +1661,8 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
     "serviceProviderId" : "Example Com",
     "groupId" : "Example Com - North",
     "defaultDomain": "r19.leonidsystems.com",
-    "userLimit": "6",
-    "userCount": "6",
+    "userLimit": 6,
+    "userCount": 6,
     "groupName": "exampleCom North",
     "callingLineIdName": "ExampleCOM North",
     "callingLineIdPhoneNumber" : "+15552112700",
@@ -1684,30 +1684,30 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
         "country": "USA"
     },
     "extension-length" : {
-        "minExtensionLength": "2",
-        "maxExtensionLength": "6",
-        "defaultExtensionLength": "4"
+        "minExtensionLength": 2,
+        "maxExtensionLength": 6,
+        "defaultExtensionLength": 4
     },
     "rules" : {
         "password-rules" : {
-            "disallowUserId": "false",
-            "disallowOldPassword": "false",
-            "disallowReversedOldPassword": "false",
-            "restrictMinDigits": "false",
-            "minDigits": "1",
-            "restrictMinUpperCaseLetters": "false",
-            "minUpperCaseLetters": "1",
-            "restrictMinLowerCaseLetters": "false",
-            "minLowerCaseLetters": "1",
-            "restrictMinNonAlphanumericCharacters": "false",
-            "minNonAlphanumericCharacters": "1",
-            "minLength": "6",
-            "maxFailedLoginAttempts": "5",
-            "passwordExpiresDays": "30",
-            "sendLoginDisabledNotifyEmail": "false",
-            "disallowRulesModification": "false",
-            "disallowPreviousPasswords": "false",
-            "numberOfPreviousPasswords": "1"
+            "disallowUserId": false,
+            "disallowOldPassword": false,
+            "disallowReversedOldPassword": false,
+            "restrictMinDigits": false,
+            "minDigits": 1,
+            "restrictMinUpperCaseLetters": false,
+            "minUpperCaseLetters": 1,
+            "restrictMinLowerCaseLetters": false,
+            "minLowerCaseLetters": 1,
+            "restrictMinNonAlphanumericCharacters": false,
+            "minNonAlphanumericCharacters": 1,
+            "minLength": 6,
+            "maxFailedLoginAttempts": 5,
+            "passwordExpiresDays": 30,
+            "sendLoginDisabledNotifyEmail": false,
+            "disallowRulesModification": false,
+            "disallowPreviousPasswords": false,
+            "numberOfPreviousPasswords": 1
         }
     }
 }
@@ -1717,7 +1717,7 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
 > Content-Type: application/json
 {
     "defaultDomain": "r19.leonidsystems.com",
-    "userLimit": "6",
+    "userLimit": 6,
     "groupName": "exampleCom North",
     "callingLineIdName": "ExampleCOM North",
     "callingLineIdPhoneNumber" : "+1-5553112700",
@@ -1755,7 +1755,7 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the BroadWorks CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
 
 ** NOT IMPLEMENTED **
@@ -1828,7 +1828,7 @@ GET /broadworks/users/{+userId}/call-processing-policy
 }
 
 
-Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the CommPortal.
+Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the BroadWorks CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
 PUT /broadworks/users/{+userId}/call-processing-policy
 > Content-Type: application/json
@@ -2254,7 +2254,7 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Retrieve information about a Group.
+Retrieve information about a Group. Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
 the BroadWorks value will be passed through unaltered in the response.
@@ -2326,12 +2326,45 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < 404
 
 
-** NOT IMPLEMENTED **
+Retrieve the password rules for a group in BroadWorks.
+Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/password-rules
 < 200
 < Content-Type: application/hal+json
 {
-    "tbd" : "pending FD update LokiServer.FD_BroadWorksEntityUtilitySplit"
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North/password-rules"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "ne_id" : "1",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "disallowUserId": false,
+    "disallowOldPassword": false,
+    "disallowReversedOldPassword": false,
+    "restrictMinDigits": false,
+    "minDigits": 1,
+    "restrictMinUpperCaseLetters": false,
+    "minUpperCaseLetters": 1,
+    "restrictMinLowerCaseLetters": false,
+    "minLowerCaseLetters": 1,
+    "restrictMinNonAlphanumericCharacters": false,
+    "minNonAlphanumericCharacters": 1,
+    "minLength": 6,
+    "maxFailedLoginAttempts": 5,
+    "passwordExpiresDays": 30,
+    "sendLoginDisabledNotifyEmail": false,
+    "disallowRulesModification": false,
+    "disallowPreviousPasswords": false,
+    "numberOfPreviousPasswords": 1
 }
 
 
