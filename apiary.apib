@@ -2005,7 +2005,23 @@ General note: any of these requests may return 424 Method Failure in the event o
 or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
+
+URI Template Variables:
+
+* <code>serviceProviderId</code> - Corresponds to the ID of the service provider (or enterprise) in BroadWorks;
+e.g. serviceProviderId in a BroadWorks OCI ServiceProviderGetListRequest.
+* <code>ne_id</code> - Corresponds to the networkElementId of the appropriate cluster in the BroadWorks section of the configuration.
+
 --
+
+Check for existence of an enterprise or service provider.
+HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+< 204
+< Transaction-Id: 1380080943120
++++++
+< 404
+< Transaction-Id: 1380080943120
+
 
 Retrieve the Service Provider's assigned domains, including it's default domain.
 
