@@ -2159,6 +2159,11 @@ resources/methods below.
 --
 
 Retrieve the Service Provider's service authorization detail.
+
+*In the current implementation, some properties can be misleading, please note:*
+
+* *When "Limited" is "Unlimited", then "Quantity" will be null. Otherwise, "Quantity" will be numeric.*
+* *"Allocated" is a string, which may have value "Unlimited" or may have the string representation of a numeric value.*
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/services
 < 200
 < Content-Type: application/hal+json
@@ -2577,6 +2582,11 @@ resources/methods below.
 --
 
 Retrieve the Group's service authorization detail.
+
+*In the current implementation, some properties can be misleading, please note:*
+
+* *When "Limited" is "Unlimited", then "Quantity" will be null. Otherwise, "Quantity" will be numeric.*
+* *"Allocated" is a string, which may have value "Unlimited" or may have the string representation of a numeric value.*
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
 < 200
 < Content-Type: application/hal+json
