@@ -86,10 +86,8 @@ references to 3rd-party documentation.
 
 Keys:
 
-* sourceDn
-
-Extension Keys (Sonus PSX):
-
+* nationalId
+* countryId
 * attributes
 * callProcessingElement1Id
 * callProcessingElement2Id
@@ -162,61 +160,58 @@ will contain at most one match.
     <thead>
     <th>Parameter</th>
     <th>Required?</th>
-    <th>Type</th>
     <th>Mode</th>
     </thead>
     <tbody>
         <tr>
-            <td>sourceDn</td>
+            <td>nationalId</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>core</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>countryId</td>
+            <td style="text-align: center; font-weight:bold">&#x2713;</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>attributes</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement1Id</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement2Id</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement3Id</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement4Id</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElementType</td>
             <td style="text-align: center; font-weight:bold">&#x2713;</td>
-            <td>extension</td>
             <td>Equal To</td>
         </tr>
     </tbody>
 </table>
-GET /network-elements/sonus-psx/{+ne_id}/number-translations{?sourceDn,attributes,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType}
+GET /network-elements/sonus-psx/{+ne_id}/number-translations{?nationalId,countryId,attributes,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType}
 < 200
 < Content-Type: application/hal+json
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations?sourceDn=%2B1-8665554321&attributes=0&callProcessingElement1Id=978&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=5"
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations?nationalId=8665554321&countryId=1&attributes=0&callProcessingElement1Id=978&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=5"
         }
     },
     "curies" : [
