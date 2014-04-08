@@ -365,6 +365,13 @@ POST /network-elements/sonus-psx/{+ne_id}/subscribers
 < 500
 
 
+Check if a subscriber exists.
+HEAD /network-elements/sonus-psx/{+ne_id}/subscribers/{+id}
+< 204
++++++
+< 404
+
+
 Query Subscribers
 
 Service: Sonus Utility Service (uses the Sonus Insight API)
@@ -567,6 +574,13 @@ POST /network-elements/sonus-psx/{+ne_id}/destinations
 < 500
 
 
+Check if a destination exists.
+HEAD /network-elements/sonus-psx/{+ne_id}/destinations/{+id}
+< 204
++++++
+< 404
+
+
 Query Destinations
 
 Service: Sonus Utility Service (uses the Sonus Insight API)
@@ -742,6 +756,13 @@ POST /network-elements/sonus-psx/{+ne_id}/routes
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--
 +++++
 < 500
+
+
+Check if a route exists.
+HEAD /network-elements/sonus-psx/{+ne_id}/routes/{+id}
+< 204
++++++
+< 404
 
 
 Query Routes
