@@ -47,6 +47,7 @@ list all configured network elements (each BroadWorks, each Sonus, each SurgeMai
 * As this is currently specified, there's no way to fetch the list of supported network element types. 
 GET /INVALID/network-elements
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 { "network-elements": [
         { "url": "/network-elements/soft-switches/1", "id" : 1, "platform" : "Sonus PSX", "name": "Sonus East" },
@@ -64,6 +65,7 @@ This section contains resources related to softswitches in your network.
 List softswitches.
 GET /INVALID/network-elements/soft-switches
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 { "routing-engines": [
     "
@@ -138,16 +140,20 @@ POST /network-elements/sonus-psx/{+ne_id}/number-translations
     "translationProfileId" : null
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3-1-8665554321-0-978----5
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Check if a number translation exists.
 HEAD /network-elements/sonus-psx/{+ne_id}/number-translations/{+id}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Query number translations.
@@ -213,6 +219,7 @@ will contain at most one match.
 </table>
 GET /network-elements/sonus-psx/{+ne_id}/number-translations{?nationalId,countryId,attributes,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -291,11 +298,13 @@ PUT /network-elements/sonus-psx/{+ne_id}/number-translations/{+id}
     "translationProfileId" : null
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Delete a number translation.
 DELETE /network-elements/sonus-psx/{+ne_id}/number-translations/{+id}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -366,18 +375,23 @@ POST /network-elements/sonus-psx/{+ne_id}/subscribers
     "memberStatus" : -1
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1-2005553001-1-16
 +++++
 < 200
+< Transaction-Id: 1380080943120
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Check if a subscriber exists.
 HEAD /network-elements/sonus-psx/{+ne_id}/subscribers/{+id}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Query Subscribers
@@ -420,6 +434,7 @@ will contain at most one match.
 </table>
 GET /network-elements/sonus-psx/{+ne_id}/subscribers{?subscriberId,countryId,owningCarrierId}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -491,6 +506,7 @@ GET /network-elements/sonus-psx/{+ne_id}/subscribers{?subscriberId,countryId,own
 }
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Update a subscriber. All fields are optional.
@@ -529,11 +545,13 @@ PUT /network-elements/sonus-psx/{+ne_id}/subscribers/{+id}
     "memberStatus" : -1
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Delete a subscriber.
 DELETE /network-elements/sonus-psx/{+ne_id}/subscribers/{+id}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -583,16 +601,20 @@ POST /network-elements/sonus-psx/{+ne_id}/destinations
     "businessUnitId" : null
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1-2005553001-1
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Check if a destination exists.
 HEAD /network-elements/sonus-psx/{+ne_id}/destinations/{+id}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Query Destinations
@@ -630,6 +652,7 @@ will contain at most one match.
 </table>
 GET /network-elements/sonus-psx/{+ne_id}/destinations{?nationalId,countryId}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -682,6 +705,7 @@ GET /network-elements/sonus-psx/{+ne_id}/destinations{?nationalId,countryId}
 }
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Update a destination. All fields are optional.
@@ -702,11 +726,13 @@ PUT /network-elements/sonus-psx/{+ne_id}/destinations/{+id}
     "businessUnitId" : null
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Delete a destination.
 DELETE /network-elements/sonus-psx/{+ne_id}/destinations/{+id}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -773,16 +799,20 @@ POST /network-elements/sonus-psx/{+ne_id}/routes
 	"routingLabelId" : "EXAMPLE_RTNG_LBL"
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Check if a route exists.
 HEAD /network-elements/sonus-psx/{+ne_id}/routes/{+id}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Query Routes
@@ -823,6 +853,7 @@ The URI query parameters are as follows:
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
 GET /network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinationCountryId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType,routingType,partitionId,calltype,transmissionMedium,userCallType,digitType,timeRangeProfileId,callParamFilterProfileId,domainName}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -878,6 +909,7 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinati
 }
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 Update a route. All fields are optional.
@@ -887,11 +919,13 @@ PUT /network-elements/sonus-psx/{+ne_id}/routes/{+id}
     "routingLabelId" : "EXAMPLE_RTNG_LBL"
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Delete a route.
 DELETE /network-elements/sonus-psx/{+ne_id}/routes/{+id}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -950,6 +984,7 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
 GET /network-elements/sonus-psx/{+ne_id}/route-queries{?destinationNationalId,destinationCountryId,partitionId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,routingLabelId,callParamFilterProfileId,domainName}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links": {
@@ -1023,8 +1058,10 @@ GET /network-elements/sonus-psx/{+ne_id}/route-queries{?destinationNationalId,de
 }
 +++++
 < 404
+< Transaction-Id: 1380080943120
 +++++
 < 500
+< Transaction-Id: 1380080943120
 
 
 --
@@ -1107,6 +1144,7 @@ POST /process-engine/process
     }
 }
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -1189,6 +1227,7 @@ POST /process-engine/process
 }
 +++++
 < 424
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
@@ -1290,6 +1329,7 @@ POST /broadworks/phone-numbers
     }
 }
 < 201
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -1421,6 +1461,7 @@ POST /broadworks/users
     }
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/users/2005553001%40example.com
 < Content-Type: application/hal+json
 {
@@ -1473,6 +1514,7 @@ POST /broadworks/assignUserServices
     "tbd" : "specification incomplete"
 }
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "tbd" : "specification incomplete"
@@ -1600,6 +1642,7 @@ POST /broadworks/configureUserServices
     }
 }
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -1722,6 +1765,7 @@ The following properties are omitted from the response if they have no value set
 </table>
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -1828,8 +1872,10 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
     }
 }
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 --
@@ -1851,8 +1897,8 @@ Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (dat
 ** NOT IMPLEMENTED **
 GET /broadworks/users/{+userId}/call-processing-policy
 < 200
-< Content-Type: application/hal+json
 < Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
 {
     "_links": {
         "self": {
@@ -1982,6 +2028,7 @@ Retrieve the Systems's domains, including the default domain.
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
 GET /network-elements/broadworks/{+ne_id}/domains
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2007,6 +2054,7 @@ GET /network-elements/broadworks/{+ne_id}/domains
 Retrieve the Systems's list of defined languages, including the default language.
 GET /network-elements/broadworks/{+ne_id}/languages
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2040,6 +2088,7 @@ GET /network-elements/broadworks/{+ne_id}/languages
 Retrieve the Systems's list of defined time zones, including the default time zone.
 GET /network-elements/broadworks/{+ne_id}/time-zones
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2102,6 +2151,7 @@ Retrieve the Service Provider's assigned domains, including it's default domain.
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2148,9 +2198,11 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "phoneNumber" : "+1-2005553001"
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001
 +++++
 < 424
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
@@ -2163,8 +2215,10 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
 Check existence of an individual phone number in an Enterprise or Service Provider.
 HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Retrieve an individual phone number from an Enterprise or Service Provider.
@@ -2176,6 +2230,7 @@ fetch the group resource. really, if we want a link to the service-provider here
 ** NOT IMPLEMENTED; also, need decide if _embedded service-provider stays, or changes to a _links entry, or just goes away **
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2210,6 +2265,7 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Unassign a phone number from an Enterprise or a Service Provider.
@@ -2222,6 +2278,7 @@ on the ent/SP, or another 4xx if it's assigned but not allowed to be deleted (e.
 to a Group).
 DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2245,6 +2302,7 @@ Retrieve the Service Provider's service authorization detail.
 * *Both "Allocated" and "Service Pack Allocation" are strings, and may have value "Unlimited" or may have the string representation of a numeric value.*
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/services
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2350,6 +2408,7 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     }
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2382,6 +2441,7 @@ The following properties are omitted from the response if they have no value set
 * address
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2452,14 +2512,14 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     }
 }
 < 204
-+++++
-< 404
+< Transaction-Id: 1380080943120
 
 
 Retrieve the password rules for a group in BroadWorks.
 Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/password-rules
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2502,6 +2562,7 @@ Retrieve the extension length settings for a group in BroadWorks.
 Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPortal.
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2530,6 +2591,7 @@ Retrieve the Group's assigned domains, including it's default domain.
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2576,14 +2638,17 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "phoneNumber" : "+1-2005553001"
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001
 
 
 Check existence of an individual phone number in a Group.
 HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 Retrieve an individual phone number from a Group.
@@ -2593,6 +2658,7 @@ The embedded "ls:broadworks-users" resource is included only when the phone numb
 ** NOT IMPLEMENTED; note link relation may be wrong, distinguish between utility-level and entity-level broadworks-users**
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2631,8 +2697,6 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     "department" : "Sales",
     "activated" : true
 }
-+++++
-< 404
 
 
 Unassign a phone number from a Group.
@@ -2645,6 +2709,7 @@ first check for existence and verify that the TN is allowed to be deleted; in wh
 (e.g. if it's assigned to a (v)User).
 DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2668,6 +2733,7 @@ Retrieve the Group's service authorization detail.
 * *"Allocated" is a string, which may have value "Unlimited" or may have the string representation of a numeric value.*
 GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
@@ -2809,6 +2875,7 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     }
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2851,6 +2918,7 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "trunkGroupName" : "exampleTrunk"
 }
 < 201
+< Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/users/2005553001%40example.com
 
 
@@ -2859,8 +2927,10 @@ Delete a BroadWorks User
 ** NOT IMPLEMENTED **
 DELETE /network-elements/broadworks/{+ne_id}/users/{+userId}
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
 
 
 --
@@ -2917,6 +2987,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services
     }
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Update settings for Authentication service on a user.
@@ -2930,6 +3001,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Authenticatio
     "password" : "230A4u$#%f"
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Update settings for Charge Number service on a user.
@@ -2943,6 +3015,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Numb
     "sendChargeNumberToNetwork" : true
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Update settings for Third-Party Voice Mail Support (3PVM) service on a user.
@@ -2961,6 +3034,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Third-Party%2
     "outOfPrimaryZoneRedirectToVoiceMail" : false
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Update settings for Call Forwarding No Answer (CFNA) service on a user.
@@ -2972,6 +3046,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwar
     "numberOfRings" : 4
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Update settings for Call Forwarding Not Reachable (CFNR) service on a user.
@@ -2982,6 +3057,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwar
     "forwardToPhoneNumber" : "5553120301,
 }
 < 204
+< Transaction-Id: 1380080943120
 
 
 Retrieve a BroadWorks User's Call Processing Policies settings.
@@ -3081,6 +3157,7 @@ POST /network-elements/broadworks/{+ne_id}/processOci
     "serviceProviderId" : "exampleCom"
 }
 < 200
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "defaultLanguage": "English",
@@ -3099,8 +3176,10 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 }
 +++++
 < 204
+< Transaction-Id: 1380080943120
 +++++
 < 401
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_AUTHENTICATION_ERROR",
@@ -3110,6 +3189,7 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 }
 +++++
 < 403
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_FORBIDDEN",
@@ -3119,6 +3199,7 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 }
 +++++
 < 424
+< Transaction-Id: 1380080943120
 < Content-Type: application/json
 {
     "errorCode" : "EXTERNAL_API_ERROR",
@@ -3128,10 +3209,13 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 }
 +++++
 < 500
+< Transaction-Id: 1380080943120
 +++++
 < 502
+< Transaction-Id: 1380080943120
 +++++
 < 504
+< Transaction-Id: 1380080943120
 
 
 -- JSON Schema Validations --
