@@ -30,50 +30,6 @@ use the "{+id}" format - see additional detail at https://tools.ietf.org/html/rf
 
 
 --
-Network Elements
-This section contains resources related to specific network elements.
---
-
-List network elements.
-
-**TODO:**
-
-* This is a collection that contains only collections and no documents; it's unclear whether this should just list the sub-collections (soft-switches, routing-engines, etc) or actually
-list all configured network elements (each BroadWorks, each Sonus, each SurgeMail, etc).
-* Perhaps it should return a list of network-element types, and within each of those there would be a set of *links* to each network-element. It shouldn't be "url" here, it should be links.
-* Returning them all means there are 2 ways to access a network-element, which is not ideal; "/network-elements/2" and "/network-elements/soft-switches/2" point to the same resource.
-* However if we omit the first option, then you have to know what type of element it is before you can retrieve it.
-* We can support both, but remember: report canonical URIs. If you have two different URIs for the same resource, ensure you put the canonical URL in the response.
-* As this is currently specified, there's no way to fetch the list of supported network element types. 
-GET /INVALID/network-elements
-< 200
-< Transaction-Id: 1380080943120
-< Content-Type: application/json
-{ "network-elements": [
-        { "url": "/network-elements/soft-switches/1", "id" : 1, "platform" : "Sonus PSX", "name": "Sonus East" },
-        { "url": "/network-elements/application-servers/appservers/2", "id" : 2, "platform" : "BroadWorks AS", "name": "BroadWorks Cluster 1 AS2" },
-        { "url": "/network-elements/application-servers/webapps/4", "id" : 3, "platform" : "BroadWorks XSP", "name": "BroadWorks Cluster 1 XSP" },
-        { "url": "/network-elements/routing-engines/3", "id" : 3, "type" : "routing-engine", "platform" : "Sonus PSX", "name": "Sonus West" }
-] }
-
-
---
-Network Element: Softswitches
-This section contains resources related to softswitches in your network.
---
-
-List softswitches.
-GET /INVALID/network-elements/soft-switches
-< 200
-< Transaction-Id: 1380080943120
-< Content-Type: application/json
-{ "routing-engines": [
-    "
-    FIXME" : "fixme"
-] }
-
-
---
 Sonus PSX Number Translations
 ##Collection
 
