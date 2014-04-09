@@ -1719,6 +1719,8 @@ The following properties are omitted from the response if they have no value set
         </tr>
     </tbody>
 </table>
+
+**KNOWN ISSUE: Currently the 200 OK response body includes an "ne_id" property which is not part of the specification.**
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 < 200
 < Transaction-Id: 1380080943120
