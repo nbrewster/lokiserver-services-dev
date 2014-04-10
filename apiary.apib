@@ -1459,21 +1459,194 @@ POST /broadworks/users
     }
 }
 
+
 Process Step: Assign BroadWorks User Services (for voip-users input type)
 
 Assigns services on a User in BroadWorks. For use as a step in a process within the Process Customization framework.
 Understands how to complete the necessary provisioning based on various types of input (depending on the process
-in which it's being used). This request specifically supports only the "createVoipUsers" process is supported.
+in which it's being used). This request specifically supports only the "createVoipUsers" process.
+
+Note that this may assign services not included in the inputs, depending on the configuration. For example, for most user
+types, the server will always assign Authentication even if it's missing from the inputs.
+
+Note: the input body may contain additional embedded resources (from previous process steps). Only those explicilty
+required are shown in the example.
+
+##URI Query Parameters
+
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center; font-weight:bold">&#x2717;</td>
+            <td>prevalidate-and-update</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-update", "update-only" ].<br />
+            <b>NOTE: at this time only "create-only" is allowed.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/assignUserServices
 > Content-Type: application/hal+json
 {
-    "tbd" : "specification incomplete"
+    "process" : "createVoipUser",
+    "customerId" : "exampleCom",
+    "siteId" : "exampleComNorth",
+    "userId": "2005553001@example.com",
+    "phoneNumber": "+1-2005553001",
+    "tnRoutine" : "auto",
+    "CLID" : "+1-2005553001",
+    "extension": "3001",
+    "lastName": "Doe",
+    "firstName": "Jane",
+    "callingLineIdLastName" : "Smith",
+    "callingLineIdFirstName" : "John",
+    "email": "jdoe@another.example.com",
+    "timeZone": "America/New_York",
+    "language" : "English",
+    "sharedDeviceName": "iad_exampleCom001",
+    "trunkGroupName" : "exampleTrunk",
+    "servicePacks": {
+        "base": "Standard",
+        "add-on": [
+            "Executive"
+        ]
+    },
+    "services": {
+        "Authentication": {
+            "username": "2005553001",
+            "password": "230A4u$#%f"
+        },
+        "Charge Number": {
+            "phoneNumber": "+1-2005554321",
+            "tnRoutine" : "",
+            "useChargeNumberForEnhancedTranslations": false,
+            "sendChargeNumberToNetwork": true
+        },
+        "Third-Party Voice Mail Support": {
+            "isActive": true,
+            "busyRedirectToVoiceMail": true,
+            "noAnswerRedirectToVoiceMail": true,
+            "noAnswerNumberOfRings": 4,
+            "alwaysRedirectToVoiceMail": false,
+            "outOfPrimaryZoneRedirectToVoiceMail" : false
+        },
+        "Call Forwarding No Answer": {
+            "isActive": true,
+            "forwardToPhoneNumber": "+1-2005553101",
+            "numberOfRings": 4
+        },
+        "Call Forwarding Not Reachable" : {
+            "isActive" : true,
+            "forwardToPhoneNumber" : "+1-2005553101"
+        }
+    },
+        "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "_embedded" : {
+        "ls:broadworks-users" : [
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/users/2005553001%40example.com"
+                    }
+                },
+                "phoneNumber" : "+1-2005553001",
+                "extension" : "3001",
+                "CLID" : "+1-2005553001",
+                "userId" : "2005553001@example.com",
+                "portalPassword" : "s8F!9ggo",
+                "firstName" : "John",
+                "lastName" : "Smith",
+                "callingLineIdLastName" : "Smith",
+                "callingLineIdFirstName" : "John",
+                "timeZone": "America/New_York",
+                "language" : "English",
+            }
+        ],
+        "etc" : "various embedded resources may be present here (phone-number, device, etc)"
+    }
 }
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
-    "tbd" : "specification incomplete"
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/configureUserServices"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "_embedded" : {
+        "ls:broadworks-users" : [
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/users/2005553001%40example.com"
+                    }
+                },
+                "phoneNumber" : "+1-2005553001",
+                "extension" : "3001",
+                "CLID" : "+1-2005553001",
+                "userId" : "2005553001@example.com",
+                "portalPassword" : "s8F!9ggo",
+                "firstName" : "John",
+                "lastName" : "Smith",
+                "callingLineIdLastName" : "Smith",
+                "callingLineIdFirstName" : "John",
+                "timeZone": "America/New_York",
+                "language" : "English",
+                "services" : {
+                    "Authentication": {
+                        "username": "2005553001",
+                        "password": "230A4u$#%f"
+                    },
+                    "Charge Number": {
+                        "phoneNumber": "+1-2005554321",
+                        "tnRoutine" : "",
+                        "useChargeNumberForEnhancedTranslations": false,
+                        "sendChargeNumberToNetwork": true
+                    },
+                    "Third-Party Voice Mail Support": {
+                        "isActive": true,
+                        "busyRedirectToVoiceMail": true,
+                        "noAnswerRedirectToVoiceMail": true,
+                        "noAnswerNumberOfRings": 4,
+                        "alwaysRedirectToVoiceMail": false,
+                        "outOfPrimaryZoneRedirectToVoiceMail" : false
+                    },
+                    "Call Forwarding No Answer": {
+                        "isActive": true,
+                        "forwardToPhoneNumber": "+1-2005553101",
+                        "numberOfRings": 4
+                    },
+                    "Call Forwarding Not Reachable" : {
+                        "isActive" : true,
+                        "forwardToPhoneNumber" : "+1-2005553101"
+                    }
+                }
+            }
+        ],
+        "etc" : "any embedded resources from the request (phone-number, device, etc) will be included here"
+    }
 }
 
 
