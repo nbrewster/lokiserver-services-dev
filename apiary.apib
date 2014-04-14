@@ -864,6 +864,14 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinati
     "detail": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" [^] xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" [^] xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n [^] <soapenv:Body>\n <soapenv:Fault>\n <faultcode>soapenv:Server.generalException</faultcode>\n <faultstring></faultstring>\n <detail>\n <ns1:fault href=\"#id0\" xmlns:ns1=\"http://www.sonusnet.com/ems/emsapi/psx/r07_03_06/intf\"/>\n [^] <ns2:exceptionName xmlns:ns2=\"http://xml.apache.org/axis/\">com.sonus.ems.api.psx.r07_03_06.model.ProvApiException</ns2:exceptionName>\n [^] </detail>\n </soapenv:Fault>\n <multiRef id=\"id0\" soapenc:root=\"0\" soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" [^] xsi:type=\"ns3:ProvApiException\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" [^] xmlns:ns3=\"http://www.sonusnet.com/ems/emsapi/psx/r07_03_06/model\">\n [^] <errorCode xsi:type=\"xsd:string\">ERR_REC_NOT_FOUND</errorCode>\n <message xsi:type=\"xsd:string\">Failed to 'Retrieve' entity.</message>\n <rootCause xsi:type=\"xsd:string\">(ERR_REC_NOT_FOUND) [resource] not found for the given criteria. (rc=17)</rootCause>\n </multiRef>\n </soapenv:Body>\n</soapenv:Envelope>"
 }
 +++++
+< 404
+< Transaction-Id: 1380080943120
+{
+    "errorCode": "ERR_REC_NOT_FOUND",
+    "summary": "Internal Error",
+    "detail": "Query returned no records"
+}
++++++
 < 500
 < Transaction-Id: 1380080943120
 
@@ -1015,6 +1023,11 @@ GET /network-elements/sonus-psx/{+ne_id}/route-queries{?destinationNationalId,de
 +++++
 < 404
 < Transaction-Id: 1380080943120
+{
+    "errorCode": "ERR_REC_NOT_FOUND",
+    "summary": "Internal Error",
+    "detail": "Query returned no records"
+}
 +++++
 < 500
 < Transaction-Id: 1380080943120
