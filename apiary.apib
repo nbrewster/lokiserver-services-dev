@@ -122,7 +122,7 @@ will contain at most one match.
 
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
 
-##URI Query Parameters
+## Parameters
 
 <table border=1>
     <thead>
@@ -133,42 +133,42 @@ will contain at most one match.
     <tbody>
         <tr>
             <td>nationalId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>countryId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>attributes</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement1Id</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement2Id</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement3Id</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElement4Id</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>callProcessingElementType</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
     </tbody>
@@ -373,17 +373,17 @@ will contain at most one match.
     <tbody>
         <tr>
             <td>subscriberId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>countryId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>owningCarrierId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
     </tbody>
@@ -596,12 +596,12 @@ will contain at most one match.
     <tbody>
         <tr>
             <td>nationalId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
         <tr>
             <td>countryId</td>
-            <td style="text-align: center; font-weight:bold">yes</td>
+            <td style="text-align: center">yes</td>
             <td>Equal To</td>
         </tr>
     </tbody>
@@ -1240,7 +1240,7 @@ in which it's being used). This request specifically supports only the "createVo
     <tbody>
         <tr>
             <td>mode</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>prevalidate-and-create</td>
             <td>Controls execution mode as described in **ref general documentation.<br />
             Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
@@ -1367,7 +1367,7 @@ in the request and will be present in the response.
     <tbody>
         <tr>
             <td>mode</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>prevalidate-and-create</td>
             <td>Controls execution mode as described in **ref general documentation.<br />
             Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
@@ -1376,7 +1376,7 @@ in the request and will be present in the response.
         </tr>
         <tr>
             <td>auto-increase</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>always</td>
             <td>Controls whether various BroadWorks limits (Group user limit; service authorizations) are automatically increased when adding users.<br />
             Allowed values: [ "always", "never", "enterprise-only" ].<br />
@@ -1513,7 +1513,7 @@ required are shown in the example.
     <tbody>
         <tr>
             <td>mode</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>prevalidate-and-update</td>
             <td>Controls execution mode as described in **ref general documentation.<br />
             Allowed values: [ "prevalidate-only", "prevalidate-and-update", "update-only" ].<br />
@@ -1708,7 +1708,7 @@ required are shown in the example.
     <tbody>
         <tr>
             <td>mode</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>prevalidate-and-update</td>
             <td>Controls execution mode as described in **ref general documentation.<br />
             Allowed values: [ "prevalidate-only", "prevalidate-and-update", "update-only" ].<br />
@@ -1926,7 +1926,7 @@ The following properties are omitted from the response if they have no value set
     <tbody>
         <tr>
             <td>view</td>
-            <td style="text-align: center; font-weight:bold">no</td>
+            <td style="text-align: center">no</td>
             <td>(empty)</td>
             <td>Selects the view returned in the response.<br />
             Allowed values: empty, or a comma-separated list of one or more of the following: [ "extension-length", "rules" ].<br />
@@ -3317,7 +3317,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 
 
 --
-BroadWorks Utility - OCI
+BroadWorks Utility: Open Client Interface - Provisioning (OCI-P)
 
 Network Element: BroadWorks (initially supports only the AS or XSP)
 
@@ -3396,6 +3396,67 @@ POST /network-elements/broadworks/{+ne_id}/processOci
 +++++
 < 504
 < Transaction-Id: 1380080943120
+
+
+--
+BroadWorks Utility: Network Server Location API Interface
+
+Network Element: BroadWorks Network Server
+
+This is the means by which the BroadWorks Utility Service will expose the information available via the NS-LAPI LocateUser request.
+Currently supports queries for user resources only.
+--
+
+Retrieve the location information (BroadWorks hosting network element information) for a BroadWorks resource.
+
+**NOT IMPLEMENTED**
+
+##URI Query Parameters
+
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Mode</th>
+    <th>Notes</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>userId</td>
+            <td style="text-align: center">no</td>
+            <td>Equal To</td>
+            <td>Full userId (including @domain) of the user to be located</td>
+        </tr>
+        <tr>
+            <td>linePort</td>
+            <td style="text-align: center">no</td>
+            <td>Equal To</td>
+            <td>NOT IMPLEMENTED - will be ignored if included in request</td>
+        </tr>
+        <tr>
+            <td>phoneNumber</td>
+            <td style="text-align: center">no</td>
+            <td>Equal To</td>
+            <td>NOT IMPLEMENTED - will be ignored if included in request</td>
+        </tr>
+        <tr>
+            <td>groupId</td>
+            <td style="text-align: center">no</td>
+            <td>Equal To</td>
+            <td>NOT IMPLEMENTED - will be ignored if included in request</td>
+        </tr>
+    </tbody>
+</table>
+
+**NOT IMPLEMENTED**
+GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links, curies" : "tbd",
+    "tbd" : "request not implemented; documentation not completed"
+}
 
 
 -- JSON Schema Validations --
