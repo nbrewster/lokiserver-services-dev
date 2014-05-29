@@ -3609,3 +3609,142 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-pro
     "response" :
     { }
 }
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+{
+	"request": {
+		"title": "GET Service Provider, body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"isEnterprise": {
+				"type": "boolean"
+			},
+			"useCustomRoutingProfile": {
+				"type": "boolean"
+			},
+			"defaultDomain": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80,
+				"required": true
+			},
+			"serviceProviderName": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80
+			},
+			"supportEmail": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80
+			},
+			"contact": {
+				"type": "object",
+				"properties": {
+					"contactName": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 30
+					},
+					"contactNumber": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 30
+					},
+					"contactEmail": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					}
+				}
+			},
+			"address": {
+				"type": "object",
+				"properties": {
+					"addressLine1": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					},
+					"addressLine2": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					},
+					"city": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"stateOrProvince": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"stateOrProvinceDisplayName": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"zipOrPostalCode": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"country": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					}
+				}
+			},
+			"useServiceProviderLanguages": {
+				"type": "boolean",
+				"required": true
+			},
+			"serviceProviderId": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 30
+			},
+			"ne_id": {
+				"type": "string"
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"href": {
+							"type": "string"
+						},
+						"templated": {
+							"type": "boolean"
+						}
+					}
+				}
+			}
+		}
+	},
+	"response": {}
+}
