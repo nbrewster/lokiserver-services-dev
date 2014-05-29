@@ -2315,15 +2315,47 @@ e.g. serviceProviderId in a BroadWorks OCI ServiceProviderGetListRequest.
 
 --
 
-Check for existence of an enterprise or service provider.
+Retrieve an enterprise or service provider.
 
-**NEW (may not be implemented yet); see LokiServer.FD_BroadWorksUtility_InitialBroadWorksMultiClusterSupport**
-HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
-< 204
+Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the response.
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+< 200
+< Content-Type: application/json
 < Transaction-Id: 1380080943120
-+++++
-< 404
-< Transaction-Id: 1380080943120
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com"
+        }
+    },
+    "isEnterprise": true,
+    "defaultDomain": "example.com",
+    "serviceProviderName": "Example Com",
+    "supportEmail": "jane.doe@example.com",
+    "contact": {
+        "contactName": "John Doe",
+        "contactNumber": "4165554321",
+        "contactEmail": "john.doe@example.com"
+    },
+    "address": {
+        "addressLine1": "1 E ST NE",
+        "addressLine2": "Unit 2",
+        "city": "Washington",
+        "stateOrProvince": "DC",
+        "zipOrPostalCode": "20025",
+        "country": "USA"
+    },
+    "useServiceProviderLanguages": false,
+    "serviceProviderId": "ExampleCom",
+    "ne_id": "1",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
 
 
 Retrieve the Service Provider's assigned domains, including it's default domain.
