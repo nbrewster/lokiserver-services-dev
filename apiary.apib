@@ -1144,7 +1144,7 @@ POST /process-engine/process
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001"
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth//%2B1-2005553001"
                     }
                 }
             }
@@ -1249,7 +1249,7 @@ in which it's being used). This request specifically supports only the "createVo
         </tr>
     </tbody>
 </table>
-POST /broadworks/phone-numbers
+POST /broadworks/
 > Content-Type: application/json
 {
     "process" : "createVoipUser",
@@ -1315,7 +1315,7 @@ POST /broadworks/phone-numbers
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/broadworks/phone-numbers"
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/"
         }
     },
     "curies" : [
@@ -1326,18 +1326,18 @@ POST /broadworks/phone-numbers
         }
     ],
     "_embedded" : {
-        "ls:broadworks-phone-numbers" : [
+        "ls:broadworks-" : [
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001"
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom//%2B1-2005553001"
                     }
                 }
             },
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001"
+                        "href" : "http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/groups/exampleComNorth//%2B1-2005553001"
                     }
                 }
             }
@@ -2404,14 +2404,14 @@ resources/methods below.
 Assign a single phone number (TN) to an Enterprise or Service Provider.
 
 Note that the 424 example is just one example of a possible BroadWorks error.
-POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/
 > Content-Type: application/json
 {
     "phoneNumber" : "+1-2005553001"
 }
 < 201
 < Transaction-Id: 1380080943120
-< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom//%2B1-2005553001
 +++++
 < 424
 < Transaction-Id: 1380080943120
@@ -2425,7 +2425,7 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
 
 
 Check existence of an individual phone number in an Enterprise or Service Provider.
-HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}//{+phoneNumber}
 < 204
 < Transaction-Id: 1380080943120
 +++++
@@ -2440,14 +2440,14 @@ broadworks-groups resource representations itself, and it would be wasteful to d
 fetch the group resource. really, if we want a link to the service-provider here, use _links. ***
 
 ** NOT IMPLEMENTED; also, need decide if _embedded service-provider stays, or changes to a _links entry, or just goes away **
-GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}//{+phoneNumber}
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links" : {
         "self" : {
-            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/phone-numbers/%2B1-2005551212"
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com//%2B1-2005551212"
         }
     },
     "curies" : [
@@ -2484,11 +2484,11 @@ Unassign a phone number from an Enterprise or a Service Provider.
 
 This request makes no attempt to check if the TN is actually assigned on the Enterprise/Service Provider,
 nor does it check to see if the TN allowed to be deleted. In future we may choose to use
-“GET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}” to first check for existence and
+“GET /broadworks/service-providers/{+serviceProviderId}//{+phoneNumber}” to first check for existence and
 verify that the TN is allowed to be deleted; in which case we could return 404 if the TN isn't assigned
 on the ent/SP, or another 4xx if it's assigned but not allowed to be deleted (e.g. if it's assigned
 to a Group).
-DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}//{+phoneNumber}
 < 204
 < Transaction-Id: 1380080943120
 
@@ -2844,18 +2844,18 @@ resources/methods below.
 --
 
 Assign a single phone number (TN) to a Group.
-POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/
 > Content-Type: application/json
 {
     "phoneNumber" : "+1-2005553001"
 }
 < 201
 < Transaction-Id: 1380080943120
-< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/exampleCom/groups/exampleComNorth//%2B1-2005553001
 
 
 Check existence of an individual phone number in a Group.
-HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+HEAD /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}//{+phoneNumber}
 < 204
 < Transaction-Id: 1380080943120
 +++++
@@ -2867,8 +2867,9 @@ Retrieve an individual phone number from a Group.
 
 The embedded "ls:broadworks-users" resource is included only when the phone number is assigned to a user.
 
-** NOT IMPLEMENTED; note link relation may be wrong, distinguish between utility-level and entity-level broadworks-users**
-GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+** NOT IMPLEMENTED; note link relation may be wrong, distinguish between utility-level and entity-level broadworks-users **
+** also note the detailed user information is only available in >=R18! **
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}//{+phoneNumber}
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
