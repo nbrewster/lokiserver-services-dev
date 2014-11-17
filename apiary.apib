@@ -2237,6 +2237,36 @@ GET /network-elements/broadworks/{+ne_id}/domains
     ]
 }
 
+Add a new domain to the System.
+
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /network-elements/broadworks/{+ne_id}/domains
+> Content-Type: application/json
+{
+    "domain" : "example"
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/domains/example
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : "4260",
+    "externalErrorSummary" : "[Error 4260] Cannot add domain with same name as an existing domain.",
+    "ThexternalErrorDetail" : "[Error 4260] Cannot add domain with same name as an existing domain."
+}
+
+Delete a System domain.
+
+This request makes no attempt to check if the domain actually exists in the System,
+nor does it check to see if the domain is allowed to be deleted.
+DELETE /network-elements/broadworks/{+ne_id}/domains/{+domain}
+< 204
+< Transaction-Id: 1380080943120
+
 Retrieve the Systems's list of defined languages, including the default language.
 GET /network-elements/broadworks/{+ne_id}/languages
 < 200
@@ -2395,6 +2425,35 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     ]
 }
 
+Assign a new domain to the Service Provider.
+
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
+> Content-Type: application/json
+{
+    "domain" : "example"
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{+serviceProviderId}/domains/example
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : "4267",
+    "externalErrorSummary" : "[Error 4267] Error assigning domain since the domain is already assigned: example",
+    "ThexternalErrorDetail" : "[Error 4267] Error assigning domain since the domain is already assigned: example"
+}
+
+Unassign a Service Provider domain.
+
+This request makes no attempt to check if the domain actually exists in the Service Provider,
+nor does it check to see if the domain is allowed to be deleted.
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains/{+domain}
+< 204
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Service Providers - Phone Numbers
@@ -2704,6 +2763,46 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     }
 }
 
+Create a new Group.
+
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups
+> Content-Type: application/json
+{
+    "groupId" : "Example Com - North",
+    "defaultDomain": "r19.leonidsystems.com",
+    "userLimit": 6,
+    "groupName": "exampleCom North",
+    "callingLineIdName": "ExampleCOM North",
+    "timeZone": "America/St_Johns",
+    "locationDialingCode": "415",
+    "contact": {
+        "contactName": "Billy",
+        "contactNumber": "Bishop",
+        "contactEmail": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{+serviceProviderId}/groups/Example%20Com%20-%20North
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : "4266",
+    "externalErrorSummary" : "[Error 4266] Domain does not exist or is not available for assignment/unassignment: r19.leonidsystems.com",
+    "ThexternalErrorDetail" : "[Error 4266] Domain does not exist or is not available for assignment/unassignment: r19.leonidsystems.com"
+}
 
 Modify some or all editable properties of a BroadWorks group.
 Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
@@ -2836,6 +2935,35 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     ]
 }
 
+Assign a new domain to the Service Provider.
+
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
+> Content-Type: application/json
+{
+    "domain" : "example"
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/example
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : "4266",
+    "externalErrorSummary" : "[Error 4266] Domain does not exist or is not available for assignment/unassignment: example",
+    "ThexternalErrorDetail" : "[Error 4266] Domain does not exist or is not available for assignment/unassignment: example"
+}
+
+Unassign a Service Provider domain.
+
+This request makes no attempt to check if the domain actually exists in the Group,
+nor does it check to see if the domain is allowed to be deleted.
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}
+< 204
+< Transaction-Id: 1380080943120
 
 
 --
