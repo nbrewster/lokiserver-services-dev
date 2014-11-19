@@ -2833,6 +2833,11 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < 204
 < Transaction-Id: 1380080943120
 
+Delete a Group
+
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
+< 204
+< Transaction-Id: 1380080943120
 
 Retrieve the password rules for a group in BroadWorks.
 Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
@@ -3628,6 +3633,8 @@ GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 
 
 -- JSON Schema Validations --
+
+
 
 PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 {
