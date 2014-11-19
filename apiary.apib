@@ -3634,7 +3634,162 @@ GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 
 -- JSON Schema Validations --
 
+POST /loki-services/network-elements/broadworks/{+ne_id}/domains
+{   
+    "requestURITemplate": {
+        "title": "Add System Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Add System Domain request body schema",
+        "type": "object",
+        "properties": {
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "response": { }
+}
 
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/domains/{+domain}
+{   
+    "requestURITemplate": {
+        "title": "Delete System Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
+{   
+    "requestURITemplate": {
+        "title": "Assign Service Provider Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Service Provider Domain request body schema",
+        "type": "object",
+        "properties": {
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains/{+domain}
+{   
+    "requestURITemplate": {
+        "title": "Unassign Service Provider Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
+{   
+    "requestURITemplate": {
+        "title": "Assign Group Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Group Domain request body schema",
+        "type": "object",
+        "properties": {
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}
+{   
+    "requestURITemplate": {
+        "title": "Unassign Group Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups
+{   
+    "requestURITemplate": {
+        "title": "Create Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Create Group request body schema",
+        "type": "object",
+        "properties": {
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true },
+            "userLimit": { "type": "integer", "minimum": 1, "maximum": 999999, "required": true },
+            "groupName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineIdName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+            "locationDialingCode": { "type": "string", "minLength": 1, "maxLength": 15, "pattern": "^[0-9]+$" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "contactName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
+{   
+    "requestURITemplate": {
+        "title": "Delete Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
 
 PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 {
