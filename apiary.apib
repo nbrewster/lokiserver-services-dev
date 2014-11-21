@@ -2910,6 +2910,19 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 
 
+Modify the extension length settings for a group in BroadWorks.
+Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPortal.
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+> Content-Type: application/json
+{
+    "minExtensionLength": 3,
+    "maxExtensionLength": 6,
+    "defaultExtensionLength": 4
+}
+< 204
+< Transaction-Id: 1380080943120
+
+
 Retrieve the Group's assigned domains, including it's default domain.
 
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
@@ -3230,6 +3243,135 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < 204
 < Transaction-Id: 1380080943120
 
+Retrieve group-level settings of Third-Party Voice Mail user service
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/services/Third-Party%20Voice%20Mail%20Support"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "ne_id" : "1",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "isActive": true,
+    "groupServer": "+1-2005553001"
+}
+
+Update group-level settings of Third-Party Voice Mail user service
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+> Content-Type: application/json
+{
+    "isActive": true,
+    "groupServer": "+1-2005553001"
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Retrieve group-level settings of Voice Portal service
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/services/Voice%20Portal"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "ne_id" : "1",
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "serviceUserId": "170630991_104585901_VMR@exampledomain",
+    "serviceInstanceProfile": {
+        "name": "Voice Portal",
+        "callingLineIdLastName": "Voice Portal",
+        "callingLineIdFirstName": "Voice Portal",
+        "hiraganaLastName": "Voice Portal",
+        "hiraganaFirstName": "Voice Portal",
+        "phoneNumber": "2005553001",
+        "extension": "2456",
+        "countryCode": "USA",
+        "nationalPrefix": "USA",
+        "department": {
+            "serviceProviderId": "Example Com",
+            "groupId": "Example Com - North",
+            "name": "dep"
+        },
+        "language": "English",
+        "timeZone": "America/New_York",
+        "timeZoneDisplayName": "(GMT-05:00) (US) Eastern Time",
+        "alias": "test@example.com",
+        "publicUserIdentity": "test2@example.com",
+        "callingLineIdPhoneNumber": "2005553002"
+    },
+    "isActive": true,
+    "enableExtendedScope": false,
+    "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": false,
+    "useVoicePortalWizard": true,
+    "voicePortalExternalRoutingScope": "System",
+    "useExternalRouting": false,
+    "externalRoutingAddress": "test3@example.com",
+    "homeZoneName": "exampleHomeZone",
+    "networkClassOfService": "exampleNCoS"
+}
+
+Update group-level settings of Voice Portal group service
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+> Content-Type: application/json
+{
+    "serviceInstanceProfile": {
+        "name": "Voice Portal",
+        "callingLineIdLastName": "Voice Portal",
+        "callingLineIdFirstName": "Voice Portal",
+        "hiraganaLastName": "Voice Portal",
+        "hiraganaFirstName": "Voice Portal",
+        "phoneNumber": "2005553001",
+        "extension": "2456",
+        "password": "example",
+        "department": {
+            "serviceProviderId": "Example Com",
+            "groupId": "Example Com - North",
+            "name": "dep"
+        },
+        "language": "English",
+        "timeZone": "America/New_York",
+        "timeZoneDisplayName": "(GMT-05:00) (US) Eastern Time",
+        "sipAliasList": {
+          	"sipAlias" : [ "test@example.com" ]
+        },
+        "publicUserIdentity": "test2@example.com",
+        "callingLineIdPhoneNumber": "2005553002"
+    },
+    "isActive": true,
+    "enableExtendedScope": false,
+    "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": false,
+    "useVoicePortalWizard": true,
+    "voicePortalExternalRoutingScope": "System",
+    "useExternalRouting": false,
+    "externalRoutingAddress": "test3@example.com",
+    "homeZoneName": "exampleHomeZone",
+    "networkClassOfService": "exampleNCoS"
+}
+< 204
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Users - General
@@ -3788,6 +3930,275 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
         }
     },
     "requestBody": { },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+{
+    "requestURITemplate": {
+        "title": "Modify Group Extension Length request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Extension Length request body schema",
+        "type": "object",
+        "properties": {
+            "minExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "maxExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "defaultExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+{   
+    "requestURITemplate": {
+        "title": "Retrieve Group 3PVM service request request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"isActive": { "type": "boolean" },
+			"groupServer": { "type": "string" },
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			}
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+{
+    "requestURITemplate": {
+        "title": "Modify Group 3PVM service settings request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group 3PVM service settings request body schema",
+        "type": "object",
+        "properties": {
+            "isActive": { "type": "boolean" },
+            "groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
+                { 
+                    "id": "E.164 DN",
+                    "type": ["string", "null"],
+                    "description": "A formatted TN.",
+                    "pattern": "^\\+\\d+-\\d+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                {   
+                    "id": "non-E.164 DN", 
+                    "type": "string",
+                    "description": "A non-E.164 formatted TN.",
+                    "pattern": "^[\\d\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                { 
+                    "id": "SIP URI", 
+                    "type": "string",
+                    "description": "SIP URI",
+                    "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 161,
+                    "required": false
+                }
+            ]}
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Voice Portal service request request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceUserId": { "type": "string" },
+            "serviceInstanceProfile": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" },
+                    "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+                    "countryCode": { "type": "string" },
+                    "nationalPrefix": { "type": "string" },
+                    "department": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 50 }
+                        }
+                    },
+                    "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+                    "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "alias": { "type": [ "string", "array" ] },
+                    "publicUserIdentity": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" },
+                    "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" }
+                }
+            },
+            "isActive": { "type": "boolean" },
+            "enableExtendedScope": { "type": "boolean" },
+            "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": { "type": "boolean" },
+            "useVoicePortalWizard": { "type": "boolean" },
+            "voicePortalExternalRoutingScope": { "enum": [ "Group", "System" ] },
+            "useExternalRouting": { "type": "boolean" },
+            "externalRoutingAddress": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" },
+            "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+{
+    "requestURITemplate": {
+        "title": "Modify Group Voice Portal service settings request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Voice Portal service settings request body schema",
+        "type": "object",
+        "properties": {
+            "serviceInstanceProfile": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" },
+                    "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+                    "password": { "type": "string" },
+                    "department": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 50 }
+                        }
+                    },
+                    "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+                    "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "sipAliasList": { 
+                        "type": "object",
+                        "properties": {
+                            "sipAlias": { "type": [ "string", "array" ] }
+                        }
+                    },
+                    "publicUserIdentity": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" },
+                    "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" }
+                }
+            },
+            "isActive": { "type": "boolean" },
+            "enableExtendedScope": { "type": "boolean" },
+            "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": { "type": "boolean" },
+            "useVoicePortalWizard": { "type": "boolean" },
+            "voicePortalExternalRoutingScope": { "enum": [ "Group", "System" ] },
+            "useExternalRouting": { "type": "boolean" },
+            "externalRoutingAddress": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" },
+            "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
+        }
+    },
     "response": { }
 }
 
