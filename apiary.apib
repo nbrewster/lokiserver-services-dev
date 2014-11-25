@@ -1895,6 +1895,101 @@ POST /broadworks/configureUserServices
 
 
 --
+BroadWorks Entity - Service Providers
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Various resources providing general internal services at the Service Provider/Enterprise level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve information about a Service Provider/Enterprise.<br />
+Process name: Retrieve Service Provider/Enterprise (BroadWorks Entity Service)<br />
+Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the response. Also the "useServiceProviderLanguages" will appear only for Service Providers.
+GET /broadworks/service-providers/{+serviceProviderId}
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId": "Example Com",
+    "isEnterprise": true,
+    "useCustomRoutingProfile": "true",
+    "name": "Example Com",
+    "defaultDomain": "example.com",
+    "supportEmail": "email@example.com",
+    "contact": {
+        "name": "John Doe",
+        "number": "+1-555123890",
+        "email": "contact@example.com"
+    },
+    "address": {
+        "addressLine1": "Address Line 1",
+        "addressLine2": "Address Line 1",
+        "city": "My City",
+        "stateOrProvince": "Alberta",
+        "stateOrProvinceDisplayName": "Alberta",
+        "zipOrPostalCode": "5656343",
+        "country": "CA"
+    },
+    "useServiceProviderLanguages": false
+}
+
+Assigns a domain to the Service Provider/Enterprise and it automatically assigns to the System as well if it needs to.<br />
+Process name: Assign Domain to System and Service Provider/Enterprise (BroadWorks Entity)<br />
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /broadworks/service-providers/{+serviceProviderId}/assignDomain
+> Content-Type: application/json
+{
+    "domain" : "example",
+    "autoAssignSystemDomain": true,
+    "autoAssignServiceProviderDomain": true
+}
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com/assignDomain"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "EXTERNAL_API_ERROR",
+    "externalErrorCode": "4990",
+    "externalErrorSummary": "[Error 4990] Invalid IP Address/Host or Domain Name.  The IP Address/Host or Domain Name length must be between 1 and 80 characters long and cannot contain a space or @ character.",
+    "externalErrorDetail": "[Error 4990] Invalid IP Address/Host or Domain Name.  The IP Address/Host or Domain Name length must be between 1 and 80 characters long and cannot contain a space or @ character."
+}
+
+
+--
 BroadWorks Entity - Groups
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
@@ -2030,6 +2125,67 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
     }
 }
 
+Create a new group<br />
+Process name: Create Group (BroadWorks Entity Service)<br />
+Also assigns the default domain to the System and Enterrise/Service Provider if needed and resolves the SIP Domain for the new group.<br />
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /broadworks/service-providers/{+serviceProviderId}/groups{?mode}
+> Content-Type: application/json
+{
+    "groupId": "Example Com - North",
+    "defaultDomain": "example.com",
+    "userLimit": 10,
+    "name": "North Office",
+    "callingLineId": {
+        "name": "ExampleComNorth"
+    },
+    "timeZone": "America/St_Johns",
+    "locationDialingCode": "415",
+    "contact": {
+        "name": "Billy",
+        "number": "Bishop",
+        "email": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    },
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "EXTERNAL_API_ERROR",
+    "externalErrorCode": "4150",
+    "externalErrorSummary": "[Error 4150] The Group already exists, please use a unique Group ID.",
+    "externalErrorDetail": "[Error 4150] The Group already exists, please use a unique Group ID."
+}
+
 Modify some or all editable properties of a BroadWorks Group.
 PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
 > Content-Type: application/json
@@ -2059,6 +2215,185 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
 < Transaction-Id: 1380080943120
 +++++
 < 404
+< Transaction-Id: 1380080943120
+
+Retrieve Extension Dialing settings from a BroadWorks Group.<br />
+Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/extension-length"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId" : "Example Com",
+    "groupId" : "Example Com - North",
+    "min": 2,
+    "max": 6,
+    "default": 4
+}
+
+
+Modify the Extension Dialing settings on a BroadWorks Group.<br />
+Process name: Modify Group Extension Length (BroadWorks Entity Service)<br />
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+> Content-Type: application/json
+{
+    "min": 3,
+    "max": 6,
+    "default": 4
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Retrieve Third-Party Voice Mail support settings from a BroadWorks Group<br />
+Process name: Retrieve Group 3PVM (BroadWorks Entity Service)<br />
+<b>Not Implemented</b>
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com/services/Third-Party%20Voice%20Mail%20Support"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com",
+    "groupServer": "+1-2005553001",
+    "isActive": true
+}
+
+Update group-level settings of Third-Party Voice Mail user service<br />
+Process name: Modify Group 3PVM (BroadWorks Entity Service)<br />
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+> Content-Type: application/json
+{
+    "isActive": true,
+    "groupServer": "+1-2005553001"
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Retrieve Voice Portal service settings from a BroadWorks Group<br />
+Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
+<b>Not Implemented</b>
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com/services/Voice%20Portal"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com",
+    "serviceUserId": "VoicePortalId",
+    "profile": {
+        "name": "Voice Portal",
+        "callingLineId": {
+            "lastName": "Portal",
+            "firstName": "Voice",
+            "phoneNumber": "+1-555123456" 
+        },
+        "hiragana": {
+            "lastName": "Portal",
+            "firstName": "Voice"            
+        },
+        "phoneNumber": "+1-555123456",
+        "countryCode": "1",
+        "nationalPrefix": "+1",
+        "extension": "3456",
+        "department": "Dept #1",
+        "language": "English",
+        "timeZone": "America/New_York",
+        "timeZoneDisplayName": "(GMT-04:00) (US) Eastern Time",
+        "alias": [
+            "voiceportal@example.com"
+        ],
+        "publicUserIdentity": "VoicePortalId"
+    },
+    "isActive": true,
+    "enableExtendedScope": true,
+    "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": false,
+    "useVoicePortalWizard": true,
+    "externalRouting": {
+        "scope": "Group",
+        "useExternal": true,
+        "address": "external@example.com"
+    },
+    "homeZone": "Home Zone #1",
+    "networkClassOfService": "NCoS #1"
+}
+
+
+Modify Voice Portal service settings from a BroadWorks Group<br />
+Process name: Modify Group Voice Portal (BroadWorks Entity Service)<br />
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+> Content-Type: application/json
+{
+    "profile": {
+        "name": "Voice Portal",
+        "callingLineId": {
+            "lastName": "Portal",
+            "firstName": "Voice",
+            "phoneNumber": "+1-555123456”
+        },
+        "hiragana": {
+            "lastName": "Portal",
+            "firstName": "Voice"
+        },
+        "phoneNumber": "+1-555123456",
+        "extension": "3456",
+        "password": "#45aaTy4",
+        "department": "Dept #1",
+        "language": "English",
+        "timeZone": "America/New_York",        
+        "alias": [
+            "voiceportal@example.com"
+        ],
+        "publicUserIdentity": "VoicePortalId"
+    },
+    "isActive": true,
+    "enableExtendedScope": true,
+    "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": false,
+    "useVoicePortalWizard": true,
+    "externalRouting": {
+        "scope": "Group",
+        "useExternal": true,
+        "address": "external@example.com"
+    },
+    "homeZone": "Home Zone #1",
+    "networkClassOfService": "NCoS #1"
+}
+< 204
 < Transaction-Id: 1380080943120
 
 
@@ -4195,6 +4530,593 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
             "voicePortalExternalRoutingScope": { "enum": [ "Group", "System" ] },
             "useExternalRouting": { "type": "boolean" },
             "externalRoutingAddress": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" },
+            "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Service Provider request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "title": "BroadWorks Entity - Retrieve Service Provider response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"isEnterprise": { "type": "boolean"	},
+			"useCustomRoutingProfile": { "type": "boolean" },
+			"defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
+			"name": { "type": "string", "minLength": 1,	"maxLength": 80 },
+			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80 },
+			"contact": {
+			    "type": "object",
+				"properties": {
+					"name": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"number": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"email": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+				}
+			},
+			"address": {
+				"type": "object",
+				"properties": {
+					"addressLine1": { "type": "string", "minLength": 1,	"maxLength": 80	},
+					"addressLine2": { "type": "string",	"minLength": 1,	"maxLength": 80 },
+					"city": { "type": "string",	"minLength": 1,	"maxLength": 50	},
+					"stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"stateOrProvinceDisplayName": {	"type": "string", "minLength": 1, "maxLength": 50 },
+					"zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"country": { "type": "string", "minLength": 1, "maxLength": 50 }
+				}
+			},
+			"useServiceProviderLanguages": { "type": "boolean",	"description": "required for Service Providers"	}
+		}
+    }
+}
+
+POST /broadworks/service-providers/{+serviceProviderId}/assignDomain
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Assign Domain to Service Provider request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "BroadWorks Entity - Assign Domain to Service Provider request body parameters schema",
+        "properties": {
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
+            "autoAssignSystemDomain": { "type": "boolean" },
+            "autoAssignServiceProviderDomain": { "type": "boolean" }
+        }
+    },
+    "response": { 
+        "title": "BroadWorks Entity - Assign Domain to Service Provider response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			}
+		}
+    }
+}
+
+POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups{?mode}
+{   
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Create Group request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestURIQuery": {
+        "title": "BroadWorks Entity - Create Group request URI query parameters schema",
+        "properties": {
+            "mode": { "enum": [ "create-only" ], "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Create Group request body schema",
+        "type": "object",
+        "properties": {
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
+            "userLimit": { "type": "integer", "minimum": 1, "maximum": 999999, "required": true },
+            "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineId": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 80 }
+                }
+            },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+            "locationDialingCode": { "type": "string", "minLength": 1, "maxLength": 15, "pattern": "^[0-9]+$" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "number": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "email": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            }
+        }
+    },
+    "response": {
+        "title": "BroadWorks Entity - Create Group response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
+            "callingLineId": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 80 }
+                }
+            }
+		}
+    }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Group Extension Length request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "title": "BroadWorks Entity - Retrieve Group Extension Length response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "min": { "type": "integer", "minimum": 2, "maximum": 20, "required": true },
+            "max": { "type": "integer", "minimum": 2, "maximum": 20, "required": true },
+            "default": { "type": "integer", "minimum": 2, "maximum": 20, "required": true }
+        }
+    }
+}
+
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group Extension Length request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Modify Group Extension Length request body schema",
+        "type": "object",
+        "properties": {
+            "min": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "max": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "default": { "type": "integer", "minimum": 2, "maximum": 20 }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+{   
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Group 3PVM service request request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"isActive": { "type": "boolean" },
+			"groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
+                { 
+                    "id": "E.164 DN",
+                    "type": ["string", "null"],
+                    "description": "A formatted TN.",
+                    "pattern": "^\\+\\d+-\\d+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                {   
+                    "id": "non-E.164 DN", 
+                    "type": "string",
+                    "description": "A non-E.164 formatted TN.",
+                    "pattern": "^[\\d\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                { 
+                    "id": "SIP URI", 
+                    "type": "string",
+                    "description": "SIP URI",
+                    "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 161,
+                    "required": false
+                }
+            ]},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			}
+        }
+    }
+}
+
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group 3PVM service settings request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Modify Group 3PVM service settings request body schema",
+        "type": "object",
+        "properties": {
+            "isActive": { "type": "boolean" },
+            "groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
+                { 
+                    "id": "E.164 DN",
+                    "type": ["string", "null"],
+                    "description": "A formatted TN.",
+                    "pattern": "^\\+\\d+-\\d+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                {   
+                    "id": "non-E.164 DN", 
+                    "type": "string",
+                    "description": "A non-E.164 formatted TN.",
+                    "pattern": "^[\\d\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 23,
+                    "required": false
+                },
+                { 
+                    "id": "SIP URI", 
+                    "type": "string",
+                    "description": "SIP URI",
+                    "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
+                    "minLength": 1,
+                    "maxLength": 161,
+                    "required": false
+                }
+            ]}
+        }
+    },
+    "response": { }
+}
+
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Group Voice Portal service request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "title": "BroadWorks Entity - Retrieve Group Voice Portal service response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceUserId": { "type": "string" },
+            "profile": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineId": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "firstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" }
+                        }
+                    },
+                    "hiragana": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "firstName": { "type": "string", "minLength": 1, "maxLength": 30 }
+                        }
+                    },
+                    "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" },
+                    "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+                    "countryCode": { "type": "string" },
+                    "nationalPrefix": { "type": "string" },
+                    "department": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 50 }
+                        }
+                    },
+                    "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+                    "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "alias": { "type": [ "string", "array" ] },
+                    "publicUserIdentity": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" }
+                }
+            },
+            "isActive": { "type": "boolean" },
+            "enableExtendedScope": { "type": "boolean" },
+            "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": { "type": "boolean" },
+            "useVoicePortalWizard": { "type": "boolean" },
+            "externalRouting": {
+                "type": "object",
+                "properties": {
+                    "scope": { "enum": [ "Group", "System" ] },
+                    "useExternal": { "type": "boolean" },
+                    "address": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" }
+                }
+            },
+            "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
+        }
+    }
+}
+
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group Voice Portal service settings request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Modify Group Voice Portal service settings request body schema",
+        "type": "object",
+        "properties": {
+            "profile": {
+                "type": "object",
+                "properties": {
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "callingLineId": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "firstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" }
+                        }
+                    },
+                    "hiragana": {
+                        "type": "object",
+                        "properties": {
+                            "lastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "firstName": { "type": "string", "minLength": 1, "maxLength": 30 }
+                        }
+                    },
+                    "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23, "pattern": "^[\\d\\-]+$" },
+                    "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+                    "password": { "type": "string" },
+                    "department": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 50 }
+                        }
+                    },
+                    "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+                    "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "alias": { "type": [ "string", "array" ] },
+                    "publicUserIdentity": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" }
+                }
+            },
+            "isActive": { "type": "boolean" },
+            "enableExtendedScope": { "type": "boolean" },
+            "allowIdentificationByPhoneNumberOrVoiceMailAliasesOnLogin": { "type": "boolean" },
+            "useVoicePortalWizard": { "type": "boolean" },
+            "externalRouting": {
+                "type": "object",
+                "properties": {
+                    "scope": { "enum": [ "Group", "System" ] },
+                    "useExternal": { "type": "boolean" },
+                    "address": { "type": "string", "minLength": 1, "maxLength": 161, "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$" }
+                }
+            },
             "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
             "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
         }
