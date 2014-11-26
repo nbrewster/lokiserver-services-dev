@@ -2217,6 +2217,16 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}
 < 404
 < Transaction-Id: 1380080943120
 
+Applies a template group to an existing group<br />
+Process name: Apply Group Template (BroadWorks Entity)
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/applyTemplate
+> Content-Type: application/json
+{
+    "templateGroupId": "ExampleCOM Template"
+}
+< 204
+< Transaction-Id: 1380080943120
+
 Retrieve Extension Dialing settings from a BroadWorks Group.<br />
 Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
@@ -4739,7 +4749,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}
     }
 }
 
-POST /broadworks/service-providers/{+serviceProviderId}/assignDomain
+POST /loki-services/broadworks/service-providers/{+serviceProviderId}/assignDomain
 {
     "requestURITemplate": {
         "title": "BroadWorks Entity - Assign Domain to Service Provider request URI template parameters schema",
@@ -5084,7 +5094,7 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
     "response": { }
 }
 
-GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
 {
     "requestURITemplate": {
         "title": "BroadWorks Entity - Retrieve Group Voice Portal service request URI template parameters schema",
@@ -5185,7 +5195,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
     }
 }
 
-PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal
 {
     "requestURITemplate": {
         "title": "BroadWorks Entity - Modify Group Voice Portal service settings request URI template parameters schema",
@@ -5254,7 +5264,7 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
     "response": { }
 }
 
-POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices
 {
     "requestURITemplate": {
         "title": "Assign Services to Group request URI template parameters schema",
@@ -5279,7 +5289,7 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "response": { }
 }
 
-POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices
 {
     "requestURITemplate": {
         "title": "Unassign Services from Group request URI template parameters schema",
@@ -5304,7 +5314,7 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
     "response": { }
 }
 
-GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
 {
     "requestURITemplate": {
         "title": "Get group-level Feature Access Codes settings request URI template parameters schema",
@@ -5366,7 +5376,7 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     }
 }
 
-PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
 {
     "requestURITemplate": {
         "title": "Update group-level Feature Access Codes settings request URI template parameters schema",
@@ -5397,7 +5407,7 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
     "response": { }
 }
 
-GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
 {
     "requestURITemplate": {
         "title": "Retrieve Group Speed Dial 100 service request URI template parameters schema",
@@ -5449,7 +5459,7 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 
 
-PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
 {
     "requestURITemplate": {
         "title": "Modify Speed Dial 100 service settings request URI template parameters schema",
@@ -5464,6 +5474,25 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
         "type": "object",
         "properties": {
             "prefix": { "type": "string", "minLength": 1, "maxLength": 2, "pattern": "^[A-D0-9\\*\\#]+$" }
+        }
+    },
+    "response": { }
+}
+
+POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/applyTemplate
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Apply Group Template request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Apply Group Template request body schema",
+        "type": "object",
+        "properties": {
+            "templateGroupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
     "response": { }
