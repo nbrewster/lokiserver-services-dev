@@ -2741,6 +2741,99 @@ GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 }
 
 
+Creates a new Service Provider/Enterprise in BroadWorks.
+
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /network-elements/broadworks/{+ne_id}/service-providers
+> Content-Type: application/json
+{
+    "serviceProviderId": "Example Com",
+    "isEnterprise": true,
+    "defaultDomain": "mydomain.com",
+    "serviceProviderName": "Example Com",
+    "supportEmail": "support@mydomain.com",
+    "contact": {
+        "contactName": "Jane Doe",
+        "contactNumber": "+1-555009056",
+        "contactEmail": "jdoe@mydomain.com"
+    },
+    "address": {
+        "addressLine1": "123 Main Street",
+        "addressLine2": "Building 5",
+        "city": "New York",
+        "stateOrProvince": "New York",
+        "stateOrProvinceDisplayName": "New York",
+        "zipOrPostalCode": "10007",
+        "country": "US"
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com"
+        }
+    },
+    "ne_id": "1",
+    "serviceProviderId": "Example Com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://lokiserver.example/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "EXTERNAL_API_ERROR",
+    "externalErrorCode": "4100",
+    "externalErrorSummary": "[Error 4100] Service Provider or Enterprise with the requested name already exists.",
+    "externalErrorDetail": "[Error 4100] Service Provider or Enterprise with the requested name already exists."
+}
+
+
+Modifies the profile settings for an existing BroadWorks Service Provider/Enterprise.
+
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+> Content-Type: application/json
+{
+    "defaultDomain": "mydomain.com",
+    "serviceProviderName": "Example Com",
+    "supportEmail": "support@mydomain.com",
+    "contact": {
+        "contactName": "Jane Doe",
+        "contactNumber": "+1-555009056",
+        "contactEmail": "jdoe@mydomain.com"
+    },
+    "address": {
+        "addressLine1": "123 Main Street",
+        "addressLine2": "Building 5",
+        "city": "New York",
+        "stateOrProvince": "New York",
+        "stateOrProvinceDisplayName": "New York",
+        "zipOrPostalCode": "10007",
+        "country": "US"
+    },
+    "useServiceProviderLanguages": "true"
+}
+< 204
+< Transaction-Id: 1380080943120
+
+
+Removes an existing Service Provider/Enterprise from BroadWorks.
+
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+< 204
+< Transaction-Id: 1380080943120
+
+
 Retrieve the Service Provider's assigned domains, including it's default domain.
 
 Note the "domains" property, if present, will always be an array (even if it has only one element)  .
@@ -4276,6 +4369,140 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/domains/{+domain}
         "properties": {
             "ne_id": { "type": "string", "required": true },
             "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers
+{
+    "requestURITemplate": {
+        "title": "Creates a new Service Provider/Enterprise in BroadWorks request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Creates a new Service Provider/Enterprise in BroadWorks request body schema",
+        "type": "object",
+        "properties": {
+            "isEnterprise": { "type": "boolean", "required": true, "description": "Valid only when creating an enterprise. Must be omitted when creating a service provider. If present, must have value 'true'." },
+            "useCustomRoutingProfile": { "type": "boolean", "required": true, "description": "Valid only when creating a service provider. Must be omitted when creating an enterprise. If present, must have value 'true'." },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true },
+            "serviceProviderName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "supportEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "contactName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvinceDisplayName": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            }
+        }
+    },
+    "response": { 
+        "title": "Creates a new Service Provider/Enterprise in BroadWorks response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			}
+        }
+    }
+}
+
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+{
+    "requestURITemplate": {
+        "title": "Modifies the profile settings for an existing BroadWorks Service Provider/Enterprise request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modifies the profile settings for an existing BroadWorks Service Provider/Enterprise request body schema",
+        "type": "object",
+        "properties": {
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
+            "serviceProviderName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "supportEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "contactName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvinceDisplayName": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            },
+            "useServiceProviderLanguages": { "type": "boolean", "required": true, "description": "Only available for Service Providers." }
+        }
+    },
+    "response": { }
+}
+
+
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+{   
+    "requestURITemplate": {
+        "title": "Removes an existing Service Provider/Enterprise from BroadWorks",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
     "requestBody": { },
