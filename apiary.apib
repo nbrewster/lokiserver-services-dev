@@ -1950,6 +1950,97 @@ GET /broadworks/service-providers/{+serviceProviderId}
     "useServiceProviderLanguages": false
 }
 
+Creates a new Service Provider or Enterprise<br />
+Process name: Create Service Provider (BroadWorks Entity Service)<br />
+Also assigns the default domain to the System and the defaultSipDomain from configuration to the System 
+and the newly created Service Provider/Enterprise.<br />
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /broadworks/service-providers{?mode}
+> Content-Type: application/json
+{
+    "hostingNe": "1",
+    "serviceProviderId": "Example Com",
+    "name": "Example Com",
+    "defaultDomain": "example.com",
+    "supportEmail": "admin@example.net",
+    "isEnterprise": true,
+    "contact": {
+        "name": "Billy",
+        "number": "Bishop",
+        "email": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com"
+        }
+    },
+    "serviceProviderId": "Example Com"
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "EXTERNAL_API_ERROR",
+    "externalErrorCode": "4100",
+    "externalErrorSummary": "[Error 4100] Service Provider or Enterprise with the requested name already exists.",
+    "externalErrorDetail": "[Error 4100] Service Provider or Enterprise with the requested name already exists."
+}
+
+Modify some or all editable properties of a BroadWorks Service Provider/Enterprise.
+PUT /broadworks/service-providers/{+serviceProviderId}
+> Content-Type: application/json
+{
+    "name": "Example Com",
+    "defaultDomain": "example.com",
+    "supportEmail": "admin@example.net",
+    "contact": {
+        "name": "Billy",
+        "number": "Bishop",
+        "email": "billy@example.com"
+    },
+    "address": {
+        "addressLine1": "415 Sixth Ave",
+        "addressLine2": "Suite 102",
+        "city": "North Seventh",
+        "stateOrProvince": "Alabama",
+        "zipOrPostalCode": "50415",
+        "country": "USA"
+    },
+    "useServiceProviderLanguages": false
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Remove specified Service Provider/Enterprise from BroadWorks.
+
+This request makes no attempt to check if the Service Provider/Enterprise actually exists in the System,
+nor does it check to see if the Service Provider/Enterprise is allowed to be deleted.
+DELETE /broadworks/service-providers/{+serviceProviderId}
+< 204
+< Transaction-Id: 1380080943120
+
 Assigns a domain to the Service Provider/Enterprise and it automatically assigns to the System as well if it needs to.<br />
 Process name: Assign Domain to System and Service Provider/Enterprise (BroadWorks Entity)<br />
 Note that the 424 example is just one example of a possible BroadWorks error.
@@ -2127,7 +2218,7 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 
 Create a new group<br />
 Process name: Create Group (BroadWorks Entity Service)<br />
-Also assigns the default domain to the System and Enterrise/Service Provider if needed and resolves the SIP Domain for the new group.<br />
+Also assigns the default domain to the System and Enterprise/Service Provider if needed and resolves the SIP Domain for the new group.<br />
 Note that the 424 example is just one example of a possible BroadWorks error.
 POST /broadworks/service-providers/{+serviceProviderId}/groups{?mode}
 > Content-Type: application/json
@@ -2153,7 +2244,7 @@ POST /broadworks/service-providers/{+serviceProviderId}/groups{?mode}
         "stateOrProvince": "Alabama",
         "zipOrPostalCode": "50415",
         "country": "USA"
-    },
+    }
 }
 < 201
 < Transaction-Id: 1380080943120
@@ -4946,11 +5037,11 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}
 				}
 			},
 			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-			"isEnterprise": { "type": "boolean"	},
+			"isEnterprise": { "type": "boolean", "required": true },
 			"useCustomRoutingProfile": { "type": "boolean" },
-			"defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
+			"defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true },
 			"name": { "type": "string", "minLength": 1,	"maxLength": 80 },
-			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80 },
+			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80, "format": "email" },
 			"contact": {
 			    "type": "object",
 				"properties": {
@@ -4974,6 +5065,164 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}
 			"useServiceProviderLanguages": { "type": "boolean",	"description": "required for Service Providers"	}
 		}
     }
+}
+
+POST /loki-services/broadworks/service-providers{?mode}
+{
+    "requestURIQuery": {
+        "title": "BroadWorks Entity - Create Service Provider/Enterprise request URI query parameters schema",
+        "properties": {
+            "mode": { "enum": [ "create-only" ], "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "BroadWorks Entity - Create Service Provider/Enterprise request body",
+		"type": "object",
+		"properties": {
+		    "hostingNe": { 
+		        "type": "string", 
+		        "minLength": 1, 
+		        "maxLength": 40,
+		        "description": "Specifies BroadWorks cluster where new entity should be created. If included, must match to one of the configured hostingNe values in config.xml. If omitted, default cluster will be used."
+	        },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"name": { "type": "string", "minLength": 1,	"maxLength": 80 },
+			"isEnterprise": { "type": "boolean", "required": true },
+			"useCustomRoutingProfile": { "type": "boolean", "description": "Required when isEnterprise is false. Will be ignored when isEnterprise is true" },
+			"defaultDomain": { 
+			    "type": "string", 
+			    "minLength": 1, 
+			    "maxLength": 80, 
+			    "pattern": "^[a-zA-Z0-9.-]+$",
+			    "description": "Domain will be added to BroadWorks automatically. If not specified, default system domain will be used as default service provider/enterprise domain."
+		    },
+			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80, "format": "email" },
+			"contact": {
+			    "type": "object",
+				"properties": {
+					"name": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"number": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"email": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+				}
+			},
+			"address": {
+				"type": "object",
+				"properties": {
+					"addressLine1": { "type": "string", "minLength": 1,	"maxLength": 80	},
+					"addressLine2": { "type": "string",	"minLength": 1,	"maxLength": 80 },
+					"city": { "type": "string",	"minLength": 1,	"maxLength": 50	},
+					"stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"country": { "type": "string", "minLength": 1, "maxLength": 50 }
+				}
+			}
+		}
+    },
+    "response": { 
+        "title": "BroadWorks Entity - Create Service Provider/Enterprise response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"defaultDomain": { 
+			    "type": "string", 
+			    "minLength": 1, 
+			    "maxLength": 80, 
+			    "pattern": "^[a-zA-Z0-9.-]+$", 
+			    "description": "Present only if it was not included in the request body (was assigned automatically from the System default domain)." 
+		    },
+			"hostingNe": { 
+		        "type": "string", 
+		        "minLength": 1, 
+		        "maxLength": 40,
+		        "description": "Present only if it was not included in the request body (default cluster was used)."
+	        }
+		}
+    }
+}
+
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Service Provider/Enterprise request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "BroadWorks Entity - Modify Service Provider/Enterprise request body",
+		"type": "object",
+		"properties": {
+		    "name": { "type": "string", "minLength": 1,	"maxLength": 80 },
+			"defaultDomain": { 
+			    "type": "string", 
+			    "minLength": 1, 
+			    "maxLength": 80, 
+			    "pattern": "^[a-zA-Z0-9.-]+$"
+		    },
+			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80, "format": "email" },
+			"contact": {
+			    "type": "object",
+				"properties": {
+					"name": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"number": { "type": "string", "minLength": 1, "maxLength": 30 },
+					"email": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+				}
+			},
+			"address": {
+				"type": "object",
+				"properties": {
+					"addressLine1": { "type": "string", "minLength": 1,	"maxLength": 80	},
+					"addressLine2": { "type": "string",	"minLength": 1,	"maxLength": 80 },
+					"city": { "type": "string",	"minLength": 1,	"maxLength": 50	},
+					"stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"country": { "type": "string", "minLength": 1, "maxLength": 50 }
+				}
+			},
+			"useServiceProviderLanguages": { "type": "boolean" }
+		}
+    },
+    "response": { }
+}
+
+DELETE /loki-services/broadworks/service-providers/{+serviceProviderId}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Delete Service Provider/Enterprise request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
 }
 
 POST /loki-services/broadworks/service-providers/{+serviceProviderId}/assignDomain
