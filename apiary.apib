@@ -4075,6 +4075,53 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
 < Transaction-Id: 1380080943120
 < Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/users/2005553001%40example.com
 
+Retrieve a BroadWorks User.
+
+GET /network-elements/broadworks/{+ne_id}/users/{+userId}
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/users/JohnDoe"
+        }
+    },
+    "serviceProviderId": "EnterpriseID",
+    "groupId": "GroupID",
+    "lastName": "JohnDoe",
+    "firstName": "JohnDoe",
+    "callingLineIdLastName": "JohnDoe",
+    "callingLineIdFirstName": "JohnDoe",
+    "hiraganaLastName": "JohnDoe",
+    "hiraganaFirstName": "JohnDoe",
+    "phoneNumber": "+1-2147483642",
+    "extension": "642",
+    "language": "English",
+    "timeZone": "America/Winnipeg",
+    "timeZoneDisplayName": "(GMT-06:00) (Canada) Central Time",
+    "defaultAlias": "JohnDoe@r19.leonidsystems.com",
+    "accessDeviceEndpoint": {
+        "accessDevice": {
+            "deviceLevel": "Group",
+            "deviceName": "0002"
+        },
+        "linePort": "2147483642@r19.leonidsystems.com",
+        "staticRegistrationCapable": false,
+        "useDomain": true
+    },
+    "countryCode": "1",
+    "userId": "JohnDoe",
+    "ne_id": "1",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://loki3services.apiary.io/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
 
 Delete a BroadWorks User
 
@@ -6093,8 +6140,9 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-pro
 
 GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 {
-	"request": {
-		"title": "GET Service Provider, body",
+	"request": {},
+	"response": {
+	    "title": "GET Service Provider, body",
 		"type": "object",
 		"properties": {
 			"_links": {
@@ -6226,6 +6274,113 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 				}
 			}
 		}
-	},
-	"response": {}
+	}
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Utility - Retrieve User request URI template parameters schema",
+        "type": "object",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+	"response": {
+	    "title": "GET Service Provider, body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+    		"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "userId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "lastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "firstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
+            "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30},
+            "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30},
+            "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23 },
+            "extension": { "type": "string", "minLength": 2, "maxLength": 6},
+            "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23},
+            "department": { 
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            },
+            "departmentFullPath": { "type": "string", "minLength": 1},
+            "language": { "type": "string", "minLength": 1, "maxLength": 40, "required": true},
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127, "required": true},
+            "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127, "required": true},
+            "defaultAlias": { "type": "string", "minLength": 1, "maxLength": 161, "required": true },
+            "alias": {
+                "type": "array",
+                "minItems": 0,
+                "maxItems": 3,
+                "items": { "type": "string", "minLength": 1, "maxLength": 161},
+                "required": true
+            },
+            "title": { "type": "string", "minLength": 1, "maxLength": 50},
+            "pagerPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30},
+            "mobilePhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30},
+            "emailAddress": { "type": "string", "minLength": 1, "maxLength": 80},
+            "yahooId": { "type": "string", "minLength": 1, "maxLength": 50},
+            "addressLocation": { "type": "string", "minLength": 1, "maxLength": 80},
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": ["string", "null"], "minLength": 1, "maxLength": 80},
+                    "addressLine2": { "type": ["string", "null"], "minLength": 1, "maxLength": 80},
+                    "city": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
+                    "stateOrProvince": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
+                    "stateOrProvinceDisplayName": { "type": "string", "minLength": 1, "maxLength": 50},
+                    "zipOrPostalCode": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
+                    "country": { "type": ["string", "null"], "minLength": 1, "maxLength": 50}
+                }
+            },
+            "countryCode": { "type": "string", "maxLength": 3, "pattern": "[ 0-9]|[ 1-9][ 0-9]{ 1, 2}"},
+            "nationalPrefix": { "type": "string", "minLength": 1, "maxLength": 2},
+        	"ne_id": {
+    			"type": "string"
+    		},
+    		"curies": {
+    			"type": "array",
+    			"required": true,
+    			"items": {
+    				"type": "object",
+    				"properties": {
+    					"name": {
+    						"type": "string"
+    					},
+    					"href": {
+    						"type": "string"
+    					},
+    					"templated": {
+    						"type": "boolean"
+    					}
+    				}
+    			}
+			}
+		}
+	}
 }
