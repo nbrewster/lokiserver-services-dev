@@ -2497,6 +2497,161 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
 < 204
 < Transaction-Id: 1380080943120
 
+--
+BroadWorks Entity - Group Devices
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve information about a BroadWorks Group Device.<br />
+Process name: Retrieve BroadWorks Group Device (BroadWorks Entity Service)<br />
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/devices/ExampleCom_AD3001"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North ",
+    "deviceName": "ExampleCom_AD3001",
+    "deviceType": "AdTran TA908",
+    "protocol": "SIP 2.0",
+    "netAddress": "10.0.0.5",
+    "port": 8080,
+    "outboundProxyServerNetAddress": "proxy1.example.com",
+    "stunServerNetAddress": "192.168.100.100",
+    "macAddress": "AABBCC112233",
+    "serialNumber": "A101-263",
+    "description": "Device for Trunk 3001",
+    "ports" : {
+        "unlimited" : false,
+        "quantity" : 10,
+        "assigned" : 4
+    },
+    "status" : "Online",
+    "configurationFile" : {
+        "mode" : "Custom",
+        "filename" : "/var/broadworks/IpDeviceConfig/1/7767/177670294/Custom_ExampleCom_PolyTemplate_ExampleComPoly1901.template"
+    },
+    "physicalLocation": "202 Main Street Nowhere, FR",
+    "transportProtocol": "TCP",
+    "accessDeviceCredentials": {
+        "enabled" : true,
+        "username": "4165551212",
+        "password": "4D0fj$&zJ"
+    }
+}
+
+Creates a new BroadWorks Group Device<br />
+Process name: Create BroadWorks Group Device (BroadWorks Entity Service)<br />
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices{?mode}
+> Content-Type: application/json
+{
+    "deviceName": "ExampleCom_AD3001",
+    "deviceType": "AdTran TA908",
+    "protocol": "SIP 2.0",
+    "netAddress": "10.0.0.5",
+    "port": 8080,
+    "outboundProxyServerNetAddress": "proxy1.example.com",
+    "stunServerNetAddress": "192.168.100.100",
+    "macAddress": "AABBCC112233",
+    "serialNumber": "A101-263",
+    "description": "Device for Trunk 3001",
+    "physicalLocation": "202 Main Street Nowhere, FR",
+    "transportProtocol": "TCP",
+    "accessDeviceCredentials": {
+        "enabled" : true,
+        "username": "4165551212",
+        "password": "4D0fj$&zJ"
+    },
+    "mobilityManager": {
+        "provisioningURL": "example.com",
+        "provisioningUserName": "example",
+        "provisioningPassword": "example",
+        "defaultOriginatingServiceKey": 123,
+        "defaultTerminatingServiceKey": 123
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com
+{
+    "_links" : {
+        "self" : {
+            "href" : "http://lokiserver.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/devices/ExampleCom_AD3001"
+        }
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North ",
+    "deviceName": "ExampleCom_AD3001"
+}
+
+Modify some or all editable properties of a BroadWorks Group Device.<br />
+Process name: Update BroadWorks Group Device (BroadWorks Entity Service)<br />
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+> Content-Type: application/json
+{
+    "protocol": "SIP 2.0",
+    "netAddress": "10.0.0.5",
+    "port": 8080,
+    "outboundProxyServerNetAddress": "proxy1.example.com",
+    "stunServerNetAddress": "192.168.100.100",
+    "macAddress": "AABBCC112233",
+    "serialNumber": "A101-263",
+    "description": "Device for Trunk 3001",
+    "configurationFile" : {
+        "mode" : "Custom",
+        "content" : "TG9yZW0gaXBzdW0=",
+    },
+    "physicalLocation": "202 Main Street Nowhere, FR",
+    "transportProtocol": "TCP",
+    "accessDeviceCredentials": {
+        "enabled" : true,
+        "username": "4165551212",
+        "password": "4D0fj$&zJ"
+    },
+    "mobilityManager": {
+        "provisioningURL": "example.com",
+        "provisioningUserName": "example",
+        "provisioningPassword": "example",
+        "defaultOriginatingServiceKey": 123,
+        "defaultTerminatingServiceKey": 123
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Remove specified Group Device from BroadWorks.<br />
+Process name: Delete BroadWorks Group Device (BroadWorks Entity Service)<br />
+This request makes no attempt to check if the Group Device actually exists in the System,
+nor does it check to see if the Group Device is allowed to be deleted.
+DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+< 204
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Entity - Users
@@ -6555,4 +6710,253 @@ GET /loki-services/broadworks/users/{+userId}
 			}
 		}
 	}
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Group Device request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { 
+        "title": "BroadWorks Entity - Retrieve Group Device response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+			"deviceType": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 1, "maxLength": 12 },
+            "serialNumber": { "type": "string", "minLength": 1,  "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "ports": { 
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "unlimited": { "type": "boolean", "required": true },
+                    "quantity": { "type": "integer", "minimum": 1 },
+                    "assigned": { "type": "integer", "required": true }
+                }
+            },
+            "status": { "enum": ["Online", "Offline", "Unavailable", "Unknown"] },
+            "configurationFile": { 
+                "type": "object",
+                "properties": {
+                    "mode": { "enum": ["Default", "Manual", "Custom"] },
+                    "filename": { "type": "string", "minLength": 1, "maxLength": 256 }
+                }
+            },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "accessDeviceCredentials": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "username": { "type": "string", "minLength": 1, "maxLength": 161 }
+                }
+            }
+		}
+    }
+}
+
+POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices{?mode}
+{
+    "requestURIQuery": {
+        "title": "BroadWorks Entity - Create Group Device request URI query parameters schema",
+        "properties": {
+            "mode": { "enum": [ "create-only" ] }
+        }
+    },
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Create Group Device request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "BroadWorks Entity - Create Group Device request body",
+		"type": "object",
+		"properties": {
+		    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+			"deviceType": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 1, "maxLength": 12 },
+            "serialNumber": { "type": "string", "minLength": 1,  "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "mobilityManager": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "provisioningURL": { "type": "string", "minLength": 1, "maxLength": 256 },
+                    "provisioningUserName": { "type": "string", "minLength": 1, "maxLength": 15 },
+                    "provisioningPassword": { "type": "string", "minLength": 1, "maxLength": 15 },
+                    "defaultOriginatingServiceKey": { "type": "integer", "minimum": 1, "maximum": 999 },
+                    "defaultTerminatingServiceKey": { "type": "integer", "minimum": 1, "maximum": 999 }
+                }
+            },
+            "accessDeviceCredentials": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "username": { "type": "string", "minLength": 1, "maxLength": 161 },
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60 }
+                }
+            }
+		}
+    },
+    "response": { 
+        "title": "BroadWorks Entity - Create Group Device response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+		}
+    }
+}
+
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group Device request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "BroadWorks Entity - Modify Group Device request body",
+		"type": "object",
+		"properties": {
+		    "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 1, "maxLength": 12 },
+            "serialNumber": { "type": "string", "minLength": 1,  "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "configurationFile": { 
+                "type": "object",
+                "properties": {
+                    "mode": { "enum": ["Default", "Manual", "Custom"] },
+                    "filename": { "type": "string", "minLength": 1, "maxLength": 256 },
+                    "content": { "type": "string" }
+                }
+            },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "mobilityManager": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "provisioningURL": { "type": "string", "minLength": 1, "maxLength": 256 },
+                    "provisioningUserName": { "type": "string", "minLength": 1, "maxLength": 15 },
+                    "provisioningPassword": { "type": "string", "minLength": 1, "maxLength": 15 },
+                    "defaultOriginatingServiceKey": { "type": "integer", "minimum": 1, "maximum": 999 },
+                    "defaultTerminatingServiceKey": { "type": "integer", "minimum": 1, "maximum": 999 }
+                }
+            },
+            "accessDeviceCredentials": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "username": { "type": "string", "minLength": 1, "maxLength": 161 },
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60 }
+                }
+            }
+		}
+    },
+    "response": { }
+}
+
+DELETE /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group Device request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
 }
