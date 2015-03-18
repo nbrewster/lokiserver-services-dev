@@ -4602,7 +4602,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 {
     "_links": {
         "self": {
-            "href:"http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
         }
     },
     "name": "Trunk Group",
@@ -4765,6 +4765,143 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
 < Transaction-Id: 1380080943120
 
 --
+BroadWorks Groups - Devices
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to Group Devices.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Create a device.
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices
+> Content-Type: application/json
+{
+	"deviceName": "AccessDeviceTest",
+    "deviceType": "Polycom Soundpoint IP 500",
+    "protocol": "SIP 2.0",
+    "netAddress": "AddressTest",
+    "port": 2000,
+    "outboundProxyServerNetAddress": "opAddressTest",
+    "stunServerNetAddress": "ssAddressTest",
+    "macAddress": "A0B1C2d3e4F6",
+    "serialNumber": "sNumberTest",
+    "description": "description",
+    "physicalLocation": "location",
+    "transportProtocol": "TCP",    
+    "useCustomUserNamePassword": true,
+    "accessDeviceCredentials": {
+        "userName": "AccessDeviceUserName",
+        "password": "pass#$g56"
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/access-devices/AccessDeviceTest"
+        }
+    },
+    "ne_id": "asp1_r21",
+	"serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+    "deviceName": "AccessDeviceTest",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Retrieve profile settings of a BroadWorks Group device.
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/access-devices/AccessDeviceTest"
+        }
+    },
+	"deviceType": "Polycom Soundpoint IP 500",
+    "protocol": "SIP 2.0",
+    "netAddress": "addresstest",
+    "port": 2000,
+    "outboundProxyServerNetAddress": "opAddressTest",
+    "stunServerNetAddress": "ssAddressTest",
+    "macAddress": "A0B1C2D3E4F6",
+    "serialNumber": "sNumberTest",
+    "description": "description",
+    "numberOfPorts": {
+        "quantity": 3
+    },
+    "numberOfAssignedPorts": 0,
+    "status": "Online",
+    "configurationMode": "Default",
+    "physicalLocation": "location",
+    "transportProtocol": "TCP",
+    "useCustomUserNamePassword": true,
+    "userName": "AccessDeviceUserName",
+    "ne_id": "asp1_r21",
+	"serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+    "deviceName": "AccessDeviceTest",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Update the profile settings of an device.
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+> Content-Type: application/json
+{
+	"protocol": "SIP 2.0",
+    "netAddress": "AddressTest",
+    "port": 2001,
+    "outboundProxyServerNetAddress": "opAddressTest",
+    "stunServerNetAddress": "ssAddressTest",
+    "macAddress": "A0B1C2d3e4F9",
+    "serialNumber": "sNumberTest",
+    "description": "description",
+  	"configurationMode": "Default",
+  	"configurationFile": {
+      	"sourceFileName": "fileName"
+    },
+    "physicalLocation": "location",
+    "transportProtocol": "TCP",
+    "amobilityManagerProvisioningURL": "mmpurl",
+    "amobilityManagerProvisioningUserName": "mmpUser",
+    "amobilityManagerProvisioningPassword": "passwew#$",
+    "amobilityManagerDefaultOriginatingServiceKey": "100",
+    "amobilityManagerDefaultTerminatingServiceKey": "100",
+    "useCustomUserNamePassword": true,
+    "accessDeviceCredentials": {
+        "userName": "AccessDeviceUserName",
+        "password": "CL@r1soft"
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Deletes a Group Device from BroadWorks.
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+< 204
+< Transaction-Id: 1380080943120
+
+--
 BroadWorks Users - General
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
@@ -4856,14 +4993,19 @@ GET /network-elements/broadworks/{+ne_id}/users/{+userId}
 
 
 Delete a BroadWorks User
-
-** NOT IMPLEMENTED **
 DELETE /network-elements/broadworks/{+ne_id}/users/{+userId}
 < 204
 < Transaction-Id: 1380080943120
 +++++
 < 404
 < Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "NOT_FOUND",
+    "externalErrorCode": "4008",
+    "externalErrorSummary": "[Error 4008] User not found: 6502342109",
+    "externalErrorDetail": "[Error 4008] User not found: 6502342109"
+}
 
 
 --
@@ -5076,7 +5218,7 @@ Network Element: BroadWorks (initially supports only the AS or XSP)
 
 Provides communication with the OCI API on BroadWorks network elements, including authentication, session management, and basic error handling.
 --
-
+** This request is disabled.**<br />
 Process an OCI request. **Note, this request is intended to be consumed by the BroadWorks Utility Service only, and at this
 time no other service should be consuming this request.**
 
@@ -5162,8 +5304,6 @@ Currently supports queries for user resources only.
 
 Retrieve the location information (BroadWorks hosting network element information) for a BroadWorks resource.
 
-**NOT IMPLEMENTED**
-
 ##URI Query Parameters
 
 <table border=1>
@@ -5201,16 +5341,26 @@ Retrieve the location information (BroadWorks hosting network element informatio
     </tbody>
 </table>
 
-**NOT IMPLEMENTED**
 GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
-    "_links, curies" : "tbd",
-    "tbd" : "request not implemented; documentation not completed"
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/locations"
+        }
+    },
+    "ne_id": "asp1_r21",
+    "userId": "6502342177@r21.clarisoft.com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://loki3services.apiary.io/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
 }
-
 
 -- JSON Schema Validations --
 
@@ -7478,4 +7628,67 @@ DELETE /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{
     },
     "requestBody": { },
     "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/locations
+{
+    "requestURIQuery": {
+        "title": "BroadWorks Utility: Network Server Location API Interface request URI query parameters schema",
+        "properties": {
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {    },
+    "response": {
+        "title": "BroadWorks Utility: Network Server Location API Interface response body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+		    "userId": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+			    "required": true
+			},
+			"ne_id": {
+		        "type": "string",
+		        "required": "true",
+		        "minLength": 1,
+		        "description": "Hosting NE name of the Application Server cluster."
+	        }
+		}
+    }
 }
