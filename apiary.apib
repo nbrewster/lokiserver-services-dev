@@ -5364,6 +5364,68 @@ GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 
 -- JSON Schema Validations --
 
+GET /loki-services/network-elements/broadworks/{+ne_id}/domains
+{
+    "requestURITemplate": {
+        "title": "Retrieve System Domains request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve System Domains response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "systemDefaultDomain": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 80, 
+                "pattern": "^[a-zA-Z0-9.-]+$", 
+                "required": true 
+            },
+            "domains": {
+				"type": "array",
+				"required": true,
+				"items": {
+    				"type": "string", 
+                    "minLength": 1, 
+                    "maxLength": 80, 
+                    "pattern": "^[a-zA-Z0-9.-]+$"
+				}
+			}
+        }
+    }
+}
+
 POST /loki-services/network-elements/broadworks/{+ne_id}/domains
 {
     "requestURITemplate": {
@@ -5393,6 +5455,306 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/domains/{+domain}
     },
     "requestBody": { },
     "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/languages
+{
+    "requestURITemplate": {
+        "title": "Retrieve System Languages request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve System Languages response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "defaultLanguage": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 40,
+                "required": true
+            },
+            "languageTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+				            "Language": { 
+                                "type": "string", 
+                                "minLength": 1, 
+                                "maxLength": 40,
+                                "required": true
+                            },
+                            "Locale": { 
+                                "type": "string", 
+                                "minLength": 1, 
+                                "maxLength": 5,
+                                "required": true
+                            },
+                            "Encoding": { 
+                                "type": "string", 
+                                "minLength": 1, 
+                                "maxLength": 40,
+                                "required": true
+                            }           
+				        }
+					}
+				}
+            }
+        }
+    }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/time-zones
+{
+    "requestURITemplate": {
+        "title": "Retrieve System Time-zones request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve System Time-zones response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serverTimeZone": { 
+                "type": "string",
+                "description": "Added in R20",
+                "minLength": 1, 
+                "maxLength": 127,
+                "required": true 
+            },
+            "timeZoneTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+				            "Key": { 
+                                "type": "string", 
+                                "minLength": 1, 
+                                "maxLength": 127,
+                                "required": true
+                            },
+                            "Display Name": { 
+                                "type": "string", 
+                                "minLength": 1,
+                                "required": true
+                            }           
+				        }
+					}
+				}
+            }
+        }
+    }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
+{
+    "requestURITemplate": {
+        "title": "Retrieve the profile settings for an existing BroadWorks Service Provider/Enterprise request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+	"requestBody": {},
+	"response": {
+	    "title": "GET Service Provider, body",
+		"type": "object",
+		"properties": {
+			"_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"isEnterprise": {
+				"type": "boolean"
+			},
+			"useCustomRoutingProfile": {
+				"type": "boolean"
+			},
+			"defaultDomain": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80,
+				"required": true
+			},
+			"serviceProviderName": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80
+			},
+			"supportEmail": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 80
+			},
+			"contact": {
+				"type": "object",
+				"properties": {
+					"contactName": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 30
+					},
+					"contactNumber": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 30
+					},
+					"contactEmail": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					}
+				}
+			},
+			"address": {
+				"type": "object",
+				"properties": {
+					"addressLine1": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					},
+					"addressLine2": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 80
+					},
+					"city": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"stateOrProvince": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"stateOrProvinceDisplayName": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"zipOrPostalCode": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					},
+					"country": {
+						"type": "string",
+						"minLength": 1,
+						"maxLength": 50
+					}
+				}
+			},
+			"useServiceProviderLanguages": {
+				"type": "boolean",
+				"required": true
+			},
+			"serviceProviderId": {
+				"type": "string",
+				"minLength": 1,
+				"maxLength": 30
+			},
+			"ne_id": {
+				"type": "string"
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"href": {
+							"type": "string"
+						},
+						"templated": {
+							"type": "boolean"
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers
@@ -5529,6 +5891,70 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
     "response": { }
 }
 
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
+{
+    "requestURITemplate": {
+        "title": "Retrieve Service Provider Domains request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Service Provider Domains response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "serviceProviderDefaultDomain": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 80, 
+                "pattern": "^[a-zA-Z0-9.-]+$", 
+                "required": true 
+            },
+            "domains": {
+				"type": "array",
+				"required": true,
+				"items": {
+    				"type": "string", 
+                    "minLength": 1, 
+                    "maxLength": 80, 
+                    "pattern": "^[a-zA-Z0-9.-]+$"
+				}
+			}
+        }
+    }
+}
+
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
 {
     "requestURITemplate": {
@@ -5559,6 +5985,198 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
         }
     },
     "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers
+{
+    "requestURITemplate": {
+        "title": "Assign Service Provider Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Service Provider Phone Number request body schema",
+        "type": "object",
+        "properties": {
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            }
+        }
+    },
+    "response": { }
+}
+
+HEAD /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+{
+    "requestURITemplate": {
+        "title": "Check Service Provider Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+{
+    "requestURITemplate": {
+        "title": "Delete Service Provider Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/services
+{
+    "requestURITemplate": {
+        "title": "Retrieve Service Provider Services Authorizations request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Service Provider Services Authorizations response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupServicesAuthorizationTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Service Name": { "type": "string", "minLength": 1, "required": true },
+                            "Authorized": { "type": "boolean", "required": true },
+                            "Assigned": { "type": "boolean", "required": true },
+                            "Limited": { "enum": ["Unlimited", "Limited"], "required": true },
+                            "Quantity": { "type": ["null", "integer"], "required": true },
+                            "Allocated": { "type": ["string", "integer"], "required": true },
+                            "Licensed": { "type": "boolean", "required": true },
+                            "Service Pack Allocation": { "type": ["string", "integer"], "required": true }
+				        }
+					}
+				}
+            },
+            "userServicesAuthorizationTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Service Name": { "type": "string", "minLength": 1, "required": true },
+                            "Authorized": { "type": "boolean", "required": true },
+                            "Assigned": { "type": "boolean", "required": true },
+                            "Limited": { "enum": ["Unlimited", "Limited"], "required": true },
+                            "Quantity": { "type": ["null", "integer"], "required": true },
+                            "Allocated": { "type": ["string", "integer"], "required": true },
+                            "Licensed": { "type": "boolean", "required": true },
+                            "Service Pack Allocation": { "type": ["string", "integer"], "required": true },
+                            "User Assignable" : { "type": "boolean", "required": true },
+                            "Service Pack Assignable": { "type": "boolean", "required": true }
+				        }
+					}
+				}
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/services
+{
+    "requestURITemplate": {
+        "title": "Modify Service Provider Services Authorizations request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Service Provider Services Authorizations request body schema",
+        "properties": {
+            "groupServicesAuthorizationTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Authorized": { "type": "boolean" },
+                            "Limited": { "enum": ["Unlimited", "Limited"] },
+                            "Quantity": { "type": "integer" }
+				        }
+					}
+				}
+            },
+            "userServicesAuthorizationTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Authorized": { "type": "boolean" },
+                            "Limited": { "enum": ["Unlimited", "Limited"] },
+                            "Quantity": { "type": "integer" }
+				        }
+					}
+				}
+            }
+        }
+    },
     "response": { }
 }
 
@@ -7016,147 +7634,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-pro
                 }
             }
         },
-    "response" :
-    { }
-}
-
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
-{
-	"request": {},
-	"response": {
-	    "title": "GET Service Provider, body",
-		"type": "object",
-		"properties": {
-			"_links": {
-				"type": "object",
-				"required": true,
-				"properties": {
-					"self": {
-						"type": "object",
-						"required": true,
-						"properties": {
-							"href": {
-								"type": "string",
-								"required": true
-							}
-						}
-					}
-				}
-			},
-			"isEnterprise": {
-				"type": "boolean"
-			},
-			"useCustomRoutingProfile": {
-				"type": "boolean"
-			},
-			"defaultDomain": {
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 80,
-				"required": true
-			},
-			"serviceProviderName": {
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 80
-			},
-			"supportEmail": {
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 80
-			},
-			"contact": {
-				"type": "object",
-				"properties": {
-					"contactName": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 30
-					},
-					"contactNumber": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 30
-					},
-					"contactEmail": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 80
-					}
-				}
-			},
-			"address": {
-				"type": "object",
-				"properties": {
-					"addressLine1": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 80
-					},
-					"addressLine2": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 80
-					},
-					"city": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 50
-					},
-					"stateOrProvince": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 50
-					},
-					"stateOrProvinceDisplayName": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 50
-					},
-					"zipOrPostalCode": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 50
-					},
-					"country": {
-						"type": "string",
-						"minLength": 1,
-						"maxLength": 50
-					}
-				}
-			},
-			"useServiceProviderLanguages": {
-				"type": "boolean",
-				"required": true
-			},
-			"serviceProviderId": {
-				"type": "string",
-				"minLength": 1,
-				"maxLength": 30
-			},
-			"ne_id": {
-				"type": "string"
-			},
-			"curies": {
-				"type": "array",
-				"required": true,
-				"items": {
-					"type": "object",
-					"properties": {
-						"name": {
-							"type": "string"
-						},
-						"href": {
-							"type": "string"
-						},
-						"templated": {
-							"type": "boolean"
-						}
-					}
-				}
-			}
-		}
-	}
+    "response" : { }
 }
 
 GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
