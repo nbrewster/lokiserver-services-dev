@@ -4435,7 +4435,9 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
     "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
 }
 
--- BroadWorks Groups - Trunk Groups
+--
+BroadWorks Groups - Trunk Groups
+
 Network Element: BroadWorks (initially only supports XSP or AS resources)
 
 Provides all internal services related to Group Trunk Groups.
@@ -4443,7 +4445,7 @@ Provides all internal services related to Group Trunk Groups.
 General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
 or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
-
+resources/methods below.
 --
 
 Retrieve Trunk Groups list from a Group.
