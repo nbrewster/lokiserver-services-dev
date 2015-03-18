@@ -3445,7 +3445,7 @@ resources/methods below.
 --
 
 Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -3483,7 +3483,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 Update the Trunking Call Capacity settings to an Enterprise/Service Provider.
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
 > Content-Type: application/json
 {
 	"maxActiveCalls": {
@@ -6180,39 +6180,187 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
     "response": { }
 }
 
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
 {
     "requestURITemplate": {
-        "title": "Assign Group Domain request URI template parameters schema",
+        "title": "Retrieve Service Provider Trunking Call Capacity request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Service Provider Trunking Call Capacity response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "maxActiveCalls": {
+                "type": "object",
+                "required": true,
+				"properties": {
+					"quantity": { "type": "integer" },
+					"unlimited": { "type": "boolean" }
+				}
+            },
+            "burstingMaxActiveCalls": {
+                "type": "object",
+                "required": true,
+				"properties": {
+					"quantity": { "type": "integer" },
+					"unlimited": { "type": "boolean" }
+				}
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
+{
+    "requestURITemplate": {
+        "title": "Modify Service Provider Trunking Call Capacity request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Service Provider Trunking Call Capacity request body schema",
+        "properties": {
+            "maxActiveCalls": {
+                "type": "object",
+                "properties": {
+					"quantity": { "type": "integer" },
+					"unlimited": { "type": "boolean" }
+				}
+            },
+            "burstingMaxActiveCalls": {
+                "type": "object",
+                "properties": {
+					"quantity": { "type": "integer" },
+					"unlimited": { "type": "boolean" }
+				}
+            }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group request URI template parameters schema",
         "properties": {
             "ne_id": { "type": "string", "required": true },
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
             "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
-    "requestBody": {
-        "title": "Assign Group Domain request body schema",
+    "requestBody": { },
+    "response": {
         "type": "object",
+        "title": "Retrieve Group response body schema",
         "properties": {
-            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
-        }
-    },
-    "response": { }
-}
-
-DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}
-{
-    "requestURITemplate": {
-        "title": "Unassign Group Domain request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
             "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true },
+            "userLimit": { "type": "integer", "required": true },
+            "userCount": { "type": "integer", "required": true },
+            "groupName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineIdName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineIdPhoneNumber" : { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            },
+            "callingLineIdDisplayPhoneNumber" : { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127, "required": true },
+            "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127, "required": true },
+            "locationDialingCode": { "type": "string", "minLength": 1, "maxLength": 15, "pattern": "^[0-9]+$" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "contactName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            }
         }
-    },
-    "requestBody": { },
-    "response": { }
+    }
 }
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups
@@ -6259,6 +6407,56 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
     "response": { }
 }
 
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
+{
+    "requestURITemplate": {
+        "title": "Modify Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group request body schema",
+        "type": "object",
+        "properties": {
+            "defaultDomain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
+            "userLimit": { "type": "integer", "minimum": 1, "maximum": 999999 },
+            "groupName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineIdName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "callingLineIdPhoneNumber" : { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+            "locationDialingCode": { "type": "string", "minLength": 1, "maxLength": 15, "pattern": "^[0-9]+$" },
+            "contact": {
+                "type": "object",
+                "properties": {
+                    "contactName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "contactEmail": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+                }
+            },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "addressLine2": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "city": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+                    "country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            }
+        }
+    },
+    "response": { }
+}
+
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
 {
     "requestURITemplate": {
@@ -6267,6 +6465,41 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
             "ne_id": { "type": "string", "required": true },
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
             "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
+{
+    "requestURITemplate": {
+        "title": "Assign Group Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Group Domain request body schema",
+        "type": "object",
+        "properties": {
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}
+{
+    "requestURITemplate": {
+        "title": "Unassign Group Domain request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$", "required": true }
         }
     },
     "requestBody": { },
