@@ -122,7 +122,7 @@ will contain at most one match.
 
 [future: pagination of results via offset and max; field parameter to specify included/excluded fields]
 
-## Parameters
+## URI Query Parameters
 
 <table border=1>
     <thead>
@@ -833,7 +833,7 @@ GET /network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinati
                     }
                 },
                 "id" : "1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--",
-                "ne_id" : "1",                
+                "ne_id" : "1",
             	"callProcessingElement1Id" : null,
 	            "callProcessingElement2Id" : null,
 	            "callProcessingElement3Id" : null,
@@ -1952,7 +1952,7 @@ GET /broadworks/service-providers/{+serviceProviderId}
 
 Creates a new Service Provider or Enterprise<br />
 Process name: Create Service Provider (BroadWorks Entity Service)<br />
-Also assigns the default domain to the System and the defaultSipDomain from configuration to the System 
+Also assigns the default domain to the System and the defaultSipDomain from configuration to the System
 and the newly created Service Provider/Enterprise.<br />
 Note that the 424 example is just one example of a possible BroadWorks error.
 POST /broadworks/service-providers{?mode}
@@ -2422,11 +2422,11 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
         "callingLineId": {
             "lastName": "Portal",
             "firstName": "Voice",
-            "phoneNumber": "+1-555123456" 
+            "phoneNumber": "+1-555123456"
         },
         "hiragana": {
             "lastName": "Portal",
-            "firstName": "Voice"            
+            "firstName": "Voice"
         },
         "phoneNumber": "+1-555123456",
         "countryCode": "1",
@@ -2476,7 +2476,7 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
         "password": "#45aaTy4",
         "department": "Dept #1",
         "language": "English",
-        "timeZone": "America/New_York",        
+        "timeZone": "America/New_York",
         "alias": [
             "voiceportal@example.com"
         ],
@@ -3431,6 +3431,72 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < 204
 < Transaction-Id: 1380080943120
 
+--
+BroadWorks Service Providers - Trunking Call Capacity
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to Trunking Call Capacity settings, Max Active Calls and Bursting Max Active Calls, at the Enterprise/Service Provider level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/trunking-call-capacity"
+        }
+    },
+    "maxActiveCalls": {
+        "quantity": 0
+    },
+    "burstingMaxActiveCalls": {
+        "quantity": 0
+    },
+    "serviceProviderId": "Example Com",
+    "ne_id": "asp1_r21",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+}
++++++
+< 404
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "NOT_FOUND",
+    "externalErrorCode": "4151",
+    "externalErrorSummary": "[Error 4151] Service Provider or Enterprise not found: Bogus Enterprise",
+    "externalErrorDetail": "[Error 4151] Service Provider or Enterprise not found: Bogus Enterprise"
+}
+
+Update the Trunking Call Capacity settings to an Enterprise/Service Provider.
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity
+> Content-Type: application/json
+{
+	"maxActiveCalls": {
+        "unlimited": true,
+        "quantity": 4
+    },
+    "burstingMaxActiveCalls": {
+        "unlimited": true,
+        "quantity": 4
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Groups - General
@@ -3445,7 +3511,7 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Retrieve information about a BroadWorks group. 
+Retrieve information about a BroadWorks group.
 Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
@@ -3885,6 +3951,51 @@ DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProvider
 < 204
 < Transaction-Id: 1380080943120
 
+Activates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate
+> Content-Type: application/json
+{
+    "phoneNumber": [
+        "+1-5553101001",
+        "+1-5553101002",
+        "+1-2225557777"
+    ],
+    "dnRange": [
+        {
+            "minPhoneNumber": "+1-5553101002",
+            "maxPhoneNumber": "+1-5553101003"
+        },
+        {
+            "minPhoneNumber": "+1-5553102000",
+            "maxPhoneNumber": "+1-5553102010"
+        }
+    ]
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Deactivates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate
+> Content-Type: application/json
+{
+    "phoneNumber": [
+        "+1-5553101001",
+        "+1-5553101002",
+        "+1-2225557777"
+    ],
+    "dnRange": [
+        {
+            "minPhoneNumber": "+1-5553101002",
+            "maxPhoneNumber": "+1-5553101003"
+        },
+        {
+            "minPhoneNumber": "+1-5553102000",
+            "maxPhoneNumber": "+1-5553102010"
+        }
+    ]
+}
+< 204
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Groups - Services
@@ -4051,8 +4162,8 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 < Transaction-Id: 1380080943120
 
 Assign Group service(s) on Group <br />
-Note: Assigning multiple services is not an atomic operation in BroadWorks. 
-If some service(s) in the specified list cannot be assigned to group, BroadWorks does not rollback services from the same request that were assigned successfully. 
+Note: Assigning multiple services is not an atomic operation in BroadWorks.
+If some service(s) in the specified list cannot be assigned to group, BroadWorks does not rollback services from the same request that were assigned successfully.
 If at least one service has failed during assignment, failure response is returned, however this does not mean no services were assigned.
 
 POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices
@@ -4067,8 +4178,8 @@ POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId
 < Transaction-Id: 1380080943120
 
 Unassign Group service(s) from Group <br />
-Note: Unassigning multiple services is not an atomic operation in BroadWorks. 
-If some service(s) in the specified list cannot be unassigned from group, BroadWorks does not rollback services from the same request that were unassigned successfully. 
+Note: Unassigning multiple services is not an atomic operation in BroadWorks.
+If some service(s) in the specified list cannot be unassigned from group, BroadWorks does not rollback services from the same request that were unassigned successfully.
 If at least one service has failed during unassignment, failure response is returned, however this does not mean no services were unassigned.
 
 POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices
@@ -4242,6 +4353,412 @@ PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
 {
     "prefix": "#"
 }
+< 204
+< Transaction-Id: 1380080943120
+
+--
+BroadWorks Groups - Trunking Call Capacity
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to Trunking Call Capacity settings, Max Active Calls and Bursting Max Active Calls, at the Group level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Retrieve Trunking Call Capacity settings for a Group.
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunking-call-capacity"
+        }
+    },
+    "maxActiveCalls": 0,
+    "maxAvailableActiveCalls": {
+        "quantity": 4
+    },
+    "burstingMaxActiveCalls": {
+        "quantity": 0
+    },
+    "burstingMaxAvailableActiveCalls": {
+        "quantity": 3
+    },
+    "serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+    "ne_id": "asp1_r21",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ],
+}
++++++
+< 404
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "NOT_FOUND",
+    "externalErrorCode": "4152",
+    "externalErrorSummary": "[Error 4152] Group not found: Example Com:Bogus Group",
+    "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
+}
+
+Update the Trunking Call Capacity settings to Group.
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+> Content-Type: application/json
+{
+	"maxActiveCalls": 10,
+    "burstingMaxActiveCalls": {
+      	"unlimited": true
+        "quantity": 20
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
++++++
+< 404
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "NOT_FOUND",
+    "externalErrorCode": "4152",
+    "externalErrorSummary": "[Error 4152] Group not found: Example Com:Bogus Group",
+    "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
+}
+
+-- BroadWorks Groups - Trunk Groups
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to Group Trunk Groups.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+
+--
+
+Retrieve Trunk Groups list from a Group.
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups"
+        }
+    },
+    "trunkGroupTable": {
+        "6502342177": {
+            "Name": "6502342177",
+            "Department": "",
+            "Device Name": "TrunkGroup_2177",
+            "Device Level": "Group",
+            "Group Id": "Example Com - North"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+    "ne_id": "asp1_r21",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
++++++
+< 404
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode": "NOT_FOUND",
+    "externalErrorCode": "4152",
+    "externalErrorSummary": "[Error 4152] Group not found: Example Com:Bogus Group",
+    "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
+}
+
+Create a Trunk Group.
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+> Content-Type: application/json
+{
+	"name": "Trunk Group",
+	"pilotUser": {
+		"userId": "trunkgroupuser@example.com",
+		"lastName": "ln",
+		"firstName": "fn",
+		"callingLineIdLastName": "clidln",
+		"callingLineIdFirstName": "clidfn",
+		"hiraganaLastName": "hln",
+		"hiraganaFirstName": "hfn",
+		"password": "CL@r1soft",
+      	"department": {
+          	"serviceProviderId": "Example Com",
+          	"groupId": "Example Com - North",
+          	"name": "Sales"
+        },
+		"language": "English",
+		"timeZone": "America/New_York",
+		"linePort": "lineport@example.com",
+		"contact": [
+          	"C1",
+            "C2",
+            "C3",
+            "C4",
+            "C5"
+        ]
+	},
+	"department": {
+        "serviceProviderId": "Example Com",
+        "groupId": "Example Com - North",
+        "name": "Sales"
+    },
+	"accessDevice": {
+		"deviceLevel": "Group",
+		"deviceName": "AdtranTest"
+	},
+	"maxActiveCalls": 10,
+	"maxIncomingCalls": 5,
+	"maxOutgoingCalls": 5,
+	"enableBursting": true,
+	"burstingMaxActiveCalls": 10,
+	"burstingMaxIncomingCalls": 5,
+	"burstingMaxOutgoingCalls": 5,
+	"capacityExceededAction": "Forward",
+	"capacityExceededForwardAddress": "cefa@test.com",
+	"capacityExceededRerouteTrunkGroupKey": {
+		"serviceProviderId": "Example Com",
+        "groupId": "Example Com - North",
+		"name": "6123456789"
+	},
+	"capacityExceededTrapInitialCalls": 5,
+	"capacityExceededTrapOffsetCalls": 5,
+	"unreachableDestinationAction": "Forward",
+	"unreachableDestinationForwardAddress": "udfa@test.com",
+	"unreachableDestinationRerouteTrunkGroupKey": {
+		"serviceProviderId": "Example Com",
+        "groupId": "Example Com - North",
+		"name": "6123456789"
+	},
+	"invitationTimeout": 10,
+	"requireAuthentication": true,
+	"sipAuthenticationUserName": "trunkGroupTest",
+	"sipAuthenticationPassword": "CL@r1soft",
+	"hostedUserId": [
+        "5500000001@example.com",
+        "5500000002@example.com"
+	],
+	"trunkGroupIdentity": "TrunkGroupTest@example.com",
+	"otgDtgIdentity": "otgDtgIdentityTest",
+	"allowTerminationToTrunkGroupIdentity": true,
+	"allowTerminationToDtgIdentity": true,
+	"includeTrunkGroupIdentity": true,
+	"includeDtgIdentity": true,
+	"includeTrunkGroupIdentityForNetworkCalls": true,
+	"includeOtgIdentityForNetworkCalls": false,
+	"enableNetworkAddressIdentity": false,
+	"allowUnscreenedCalls": true,
+	"allowUnscreenedEmergencyCalls": true,
+	"pilotUserCallingLineIdentityPolicy": "All Originating Calls",
+	"pilotUserChargeNumberPolicy": "All Originating Calls",
+	"callForwardingAlwaysAction": "Forward",
+	"callForwardingAlwaysForwardAddress": "cfafa@test.com",
+	"callForwardingAlwaysRerouteTrunkGroupKey": {
+		"serviceProviderId": "Example Com",
+        "groupId": "Example Com - North",
+		"name": "6123456789"
+	},
+	"peeringDomain": "example.com",
+	"routeToPeeringDomain": true,
+	"prefixEnabled": false,
+	"prefix": "1234",
+	"statefulReroutingEnabled": true,
+	"sendContinuousOptionsMessage": true,
+	"continuousOptionsSendingIntervalSeconds": 30,
+	"failureOptionsSendingIntervalSeconds": 30,
+	"failureThresholdCounter": 5,
+	"successThresholdCounter": 5,
+	"inviteFailureThresholdCounter": 5,
+	"inviteFailureThresholdWindowSeconds": 30,
+	"pilotUserCallingLineAssertedIdentityPolicy": "All Originating Calls",
+	"useSystemCallingLineAssertedIdentityPolicy": true
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group
+{
+    "_links": {
+        "self": {
+            "href:"http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
+        }
+    },
+    "name": "Trunk Group",
+    "serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+    "ne_id": "asp1_r21",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Retrieve a Trunk Group.
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href:"http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
+        }
+    },
+	"maxActiveCalls": 1,
+    "enableBursting": false,
+    "capacityExceededTrapInitialCalls": 5,
+    "capacityExceededTrapOffsetCalls": 5,
+    "invitationTimeout": 10,
+    "requireAuthentication": false,
+    "hostedUserTable": [],
+    "allowTerminationToTrunkGroupIdentity": true,
+    "allowTerminationToDtgIdentity": true,
+    "includeTrunkGroupIdentity": true,
+    "includeDtgIdentity": true,
+    "includeTrunkGroupIdentityForNetworkCalls": true,
+    "includeOtgIdentityForNetworkCalls": false,
+    "enableNetworkAddressIdentity": false,
+    "allowUnscreenedCalls": true,
+    "allowUnscreenedEmergencyCalls": true,
+    "pilotUserChargeNumberPolicy": "All Originating Calls",
+    "routeToPeeringDomain": true,
+    "prefixEnabled": false,
+    "statefulReroutingEnabled": true,
+    "sendContinuousOptionsMessage": true,
+    "continuousOptionsSendingIntervalSeconds": 30,
+    "failureOptionsSendingIntervalSeconds": 30,
+    "failureThresholdCounter": 5,
+    "successThresholdCounter": 5,
+    "inviteFailureThresholdCounter": 5,
+    "inviteFailureThresholdWindowSeconds": 30,
+    "trunkGroupState": "Available",
+    "pilotUserCallingLineAssertedIdentityPolicy": "All Originating Calls",
+    "useSystemCallingLineAssertedIdentityPolicy": true,
+    "pilotUserCallingLineIdentityPolicy": "All Originating Calls",    
+    "serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+	"name": "Trunk Group",
+    "ne_id": "asp1_r21",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Modify a Trunk Group.
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+> Content-Type: application/json
+{
+	"newName": "New Trunk Group",
+	"pilotUserId": "TrunkGroupTestUser@example.com",
+	"department": {
+        "serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+        "name": "dep1"
+    },
+	"accessDevice": {
+		"deviceLevel": "Group",
+		"deviceName": "AdtranTest"
+	},
+	"maxActiveCalls": 10,
+	"maxIncomingCalls": 5,
+	"maxOutgoingCalls": 5,
+	"enableBursting": true,
+	"burstingMaxActiveCalls": 10,
+	"burstingMaxIncomingCalls": 5,
+	"burstingMaxOutgoingCalls": 5,
+	"capacityExceededAction": "Forward",
+	"capacityExceededForwardAddress": "cefa@test.com",
+	"capacityExceededRerouteTrunkGroupKey": {
+		"serviceProviderId": "Example Com",
+    "groupId" : "Example Com - North",
+		"name": "6123456789"
+	},
+	"capacityExceededTrapInitialCalls": 5,
+	"capacityExceededTrapOffsetCalls": 5,
+	"unreachableDestinationAction": "Forward",
+	"unreachableDestinationForwardAddress": "udfa@test.com",
+	"unreachableDestinationRerouteTrunkGroupKey": {
+		"serviceProviderId": "Example Com",
+		"groupId" : "Example Com - North",
+		"name": "6123456789"
+	},
+	"invitationTimeout": 10,
+	"requireAuthentication": true,
+	"sipAuthenticationUserName": "newtrunkGroup",
+	"sipAuthenticationPassword": "pass@#!",
+  	"hostedUserIdList": {
+      	"userId" :[
+            "5500000001@example.com",
+            "5500000002@example.com"
+		]
+    },
+	"trunkGroupIdentity": "TrunkGroupTest@r21.clarisoft.com",
+	"otgDtgIdentity": "otgDtgIdentityTest",
+	"allowTerminationToTrunkGroupIdentity": true,
+	"allowTerminationToDtgIdentity": true,
+	"includeTrunkGroupIdentity": true,
+	"includeDtgIdentity": true,
+	"includeTrunkGroupIdentityForNetworkCalls": true,
+	"includeOtgIdentityForNetworkCalls": false,
+	"enableNetworkAddressIdentity": false,
+	"allowUnscreenedCalls": true,
+	"allowUnscreenedEmergencyCalls": true,
+	"pilotUserCallingLineIdentityPolicy": "All Originating Calls",
+	"pilotUserChargeNumberPolicy": "All Originating Calls",
+	"callForwardingAlwaysAction": "Forward",
+	"callForwardingAlwaysForwardAddress": "cfafa@test.com",
+	"callForwardingAlwaysRerouteTrunkGroupKey": {
+		"serviceProviderId": "ATEntTest",
+		"groupId": "ATGroupTest",
+		"name": "6123456789"
+	},
+	"peeringDomain": "example.com",
+	"routeToPeeringDomain": true,
+	"prefixEnabled": false,
+	"prefix": "1234",
+	"statefulReroutingEnabled": true,
+	"sendContinuousOptionsMessage": true,
+	"continuousOptionsSendingIntervalSeconds": 30,
+	"failureOptionsSendingIntervalSeconds": 30,
+	"failureThresholdCounter": 5,
+	"successThresholdCounter": 5,
+	"inviteFailureThresholdCounter": 5,
+	"inviteFailureThresholdWindowSeconds": 30,
+	"pilotUserCallingLineAssertedIdentityPolicy": "All Originating Calls",
+	"useSystemCallingLineAssertedIdentityPolicy": true
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Delete a Trunk Group.
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
 < 204
 < Transaction-Id: 1380080943120
 
@@ -4696,7 +5213,7 @@ GET /network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 -- JSON Schema Validations --
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/domains
-{   
+{
     "requestURITemplate": {
         "title": "Add System Domain request URI template parameters schema",
         "properties": {
@@ -4714,7 +5231,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/domains
 }
 
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/domains/{+domain}
-{   
+{
     "requestURITemplate": {
         "title": "Delete System Domain request URI template parameters schema",
         "properties": {
@@ -4766,7 +5283,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers
             }
         }
     },
-    "response": { 
+    "response": {
         "title": "Creates a new Service Provider/Enterprise in BroadWorks response body schema",
         "type": "object",
         "properties": {
@@ -4848,7 +5365,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 
 
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}
-{   
+{
     "requestURITemplate": {
         "title": "Removes an existing Service Provider/Enterprise from BroadWorks",
         "properties": {
@@ -4861,7 +5378,7 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
 }
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains
-{   
+{
     "requestURITemplate": {
         "title": "Assign Service Provider Domain request URI template parameters schema",
         "properties": {
@@ -4880,7 +5397,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 }
 
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains/{+domain}
-{   
+{
     "requestURITemplate": {
         "title": "Unassign Service Provider Domain request URI template parameters schema",
         "properties": {
@@ -4894,7 +5411,7 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
 }
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
-{   
+{
     "requestURITemplate": {
         "title": "Assign Group Domain request URI template parameters schema",
         "properties": {
@@ -4914,7 +5431,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 }
 
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}
-{   
+{
     "requestURITemplate": {
         "title": "Unassign Group Domain request URI template parameters schema",
         "properties": {
@@ -4929,7 +5446,7 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
 }
 
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups
-{   
+{
     "requestURITemplate": {
         "title": "Create Group request URI template parameters schema",
         "properties": {
@@ -4973,7 +5490,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 }
 
 DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}
-{   
+{
     "requestURITemplate": {
         "title": "Delete Group request URI template parameters schema",
         "properties": {
@@ -5009,7 +5526,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
-{   
+{
     "requestURITemplate": {
         "title": "Retrieve Group 3PVM service request request URI template parameters schema",
         "properties": {
@@ -5019,7 +5536,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "type": "object",
         "properties": {
             "_links": {
@@ -5075,7 +5592,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         "properties": {
             "isActive": { "type": "boolean" },
             "groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
-                { 
+                {
                     "id": "E.164 DN",
                     "type": ["string", "null"],
                     "description": "A formatted TN.",
@@ -5084,8 +5601,8 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
                     "maxLength": 23,
                     "required": false
                 },
-                {   
-                    "id": "non-E.164 DN", 
+                {
+                    "id": "non-E.164 DN",
                     "type": "string",
                     "description": "A non-E.164 formatted TN.",
                     "pattern": "^[\\d\\-]+$",
@@ -5093,8 +5610,8 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
                     "maxLength": 23,
                     "required": false
                 },
-                { 
-                    "id": "SIP URI", 
+                {
+                    "id": "SIP URI",
                     "type": "string",
                     "description": "SIP URI",
                     "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
@@ -5119,7 +5636,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "type": "object",
         "properties": {
             "_links": {
@@ -5231,7 +5748,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
                     "language": { "type": "string", "minLength": 1, "maxLength": 40 },
                     "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
                     "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127 },
-                    "sipAliasList": { 
+                    "sipAliasList": {
                         "type": "object",
                         "properties": {
                             "sipAlias": { "type": [ "string", "array" ] }
@@ -5264,7 +5781,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Retrieve Service Provider response body",
 		"type": "object",
 		"properties": {
@@ -5335,13 +5852,13 @@ POST /loki-services/broadworks/service-providers{?mode}
             "mode": { "enum": [ "create-only" ], "required": true }
         }
     },
-    "requestBody": { 
+    "requestBody": {
         "title": "BroadWorks Entity - Create Service Provider/Enterprise request body",
 		"type": "object",
 		"properties": {
-		    "hostingNe": { 
-		        "type": "string", 
-		        "minLength": 1, 
+		    "hostingNe": {
+		        "type": "string",
+		        "minLength": 1,
 		        "maxLength": 40,
 		        "description": "Specifies BroadWorks cluster where new entity should be created. If included, must match to one of the configured hostingNe values in config.xml. If omitted, default cluster will be used."
 	        },
@@ -5349,10 +5866,10 @@ POST /loki-services/broadworks/service-providers{?mode}
 			"name": { "type": "string", "minLength": 1,	"maxLength": 80 },
 			"isEnterprise": { "type": "boolean", "required": true },
 			"useCustomRoutingProfile": { "type": "boolean", "description": "Required when isEnterprise is false. Will be ignored when isEnterprise is true" },
-			"defaultDomain": { 
-			    "type": "string", 
-			    "minLength": 1, 
-			    "maxLength": 80, 
+			"defaultDomain": {
+			    "type": "string",
+			    "minLength": 1,
+			    "maxLength": 80,
 			    "pattern": "^[a-zA-Z0-9.-]+$",
 			    "description": "Domain will be added to BroadWorks automatically. If not specified, default system domain will be used as default service provider/enterprise domain."
 		    },
@@ -5378,7 +5895,7 @@ POST /loki-services/broadworks/service-providers{?mode}
 			}
 		}
     },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Create Service Provider/Enterprise response body",
 		"type": "object",
 		"properties": {
@@ -5411,16 +5928,16 @@ POST /loki-services/broadworks/service-providers{?mode}
 				}
 			},
 			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-			"defaultDomain": { 
-			    "type": "string", 
-			    "minLength": 1, 
-			    "maxLength": 80, 
-			    "pattern": "^[a-zA-Z0-9.-]+$", 
-			    "description": "Present only if it was not included in the request body (was assigned automatically from the System default domain)." 
+			"defaultDomain": {
+			    "type": "string",
+			    "minLength": 1,
+			    "maxLength": 80,
+			    "pattern": "^[a-zA-Z0-9.-]+$",
+			    "description": "Present only if it was not included in the request body (was assigned automatically from the System default domain)."
 		    },
-			"hostingNe": { 
-		        "type": "string", 
-		        "minLength": 1, 
+			"hostingNe": {
+		        "type": "string",
+		        "minLength": 1,
 		        "maxLength": 40,
 		        "description": "Present only if it was not included in the request body (default cluster was used)."
 	        }
@@ -5436,15 +5953,15 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
-    "requestBody": { 
+    "requestBody": {
         "title": "BroadWorks Entity - Modify Service Provider/Enterprise request body",
 		"type": "object",
 		"properties": {
 		    "name": { "type": "string", "minLength": 1,	"maxLength": 80 },
-			"defaultDomain": { 
-			    "type": "string", 
-			    "minLength": 1, 
-			    "maxLength": 80, 
+			"defaultDomain": {
+			    "type": "string",
+			    "minLength": 1,
+			    "maxLength": 80,
 			    "pattern": "^[a-zA-Z0-9.-]+$"
 		    },
 			"supportEmail": { "type": "string", "minLength": 1,	"maxLength": 80, "format": "email" },
@@ -5493,7 +6010,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/assignDoma
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
-    "requestBody": { 
+    "requestBody": {
         "title": "BroadWorks Entity - Assign Domain to Service Provider request body parameters schema",
         "properties": {
             "domain": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "^[a-zA-Z0-9.-]+$" },
@@ -5501,7 +6018,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/assignDoma
             "autoAssignServiceProviderDomain": { "type": "boolean" }
         }
     },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Assign Domain to Service Provider response body",
 		"type": "object",
 		"properties": {
@@ -5538,7 +6055,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/assignDoma
 }
 
 POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups{?mode}
-{   
+{
     "requestURITemplate": {
         "title": "BroadWorks Entity - Create Group request URI template parameters schema",
         "properties": {
@@ -5643,7 +6160,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Retrieve Group Extension Length response body schema",
         "type": "object",
         "properties": {
@@ -5706,7 +6223,7 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
 }
 
 GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support
-{   
+{
     "requestURITemplate": {
         "title": "BroadWorks Entity - Retrieve Group 3PVM service request request URI template parameters schema",
         "properties": {
@@ -5715,7 +6232,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "type": "object",
         "properties": {
             "_links": {
@@ -5736,7 +6253,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
 			},
 			"isActive": { "type": "boolean" },
 			"groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
-                { 
+                {
                     "id": "E.164 DN",
                     "type": ["string", "null"],
                     "description": "A formatted TN.",
@@ -5745,8 +6262,8 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
                     "maxLength": 23,
                     "required": false
                 },
-                {   
-                    "id": "non-E.164 DN", 
+                {
+                    "id": "non-E.164 DN",
                     "type": "string",
                     "description": "A non-E.164 formatted TN.",
                     "pattern": "^[\\d\\-]+$",
@@ -5754,8 +6271,8 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
                     "maxLength": 23,
                     "required": false
                 },
-                { 
-                    "id": "SIP URI", 
+                {
+                    "id": "SIP URI",
                     "type": "string",
                     "description": "SIP URI",
                     "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
@@ -5797,7 +6314,7 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
         "properties": {
             "isActive": { "type": "boolean" },
             "groupServer": { "id": "OutgoingDNorSIPURI", "anyOf": [
-                { 
+                {
                     "id": "E.164 DN",
                     "type": ["string", "null"],
                     "description": "A formatted TN.",
@@ -5806,8 +6323,8 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
                     "maxLength": 23,
                     "required": false
                 },
-                {   
-                    "id": "non-E.164 DN", 
+                {
+                    "id": "non-E.164 DN",
                     "type": "string",
                     "description": "A non-E.164 formatted TN.",
                     "pattern": "^[\\d\\-]+$",
@@ -5815,8 +6332,8 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
                     "maxLength": 23,
                     "required": false
                 },
-                { 
-                    "id": "SIP URI", 
+                {
+                    "id": "SIP URI",
                     "type": "string",
                     "description": "SIP URI",
                     "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
@@ -5840,7 +6357,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Retrieve Group Voice Portal service response body schema",
         "type": "object",
         "properties": {
@@ -6014,11 +6531,11 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
         "title": "Assign Services to Group request body schema",
         "type": "object",
         "properties": {
-            "serviceName": { 
-                "type": "array", 
-                "minItems": 1, 
-                "required": true, 
-                "items": { "type": "string", "minLength": 1, "maxLength": 80 } 
+            "serviceName": {
+                "type": "array",
+                "minItems": 1,
+                "required": true,
+                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
             }
         }
     },
@@ -6039,11 +6556,11 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
         "title": "Unassign Services from Group request body schema",
         "type": "object",
         "properties": {
-            "serviceName": { 
-                "type": "array", 
-                "minItems": 1, 
-                "required": true, 
-                "items": { "type": "string", "minLength": 1, "maxLength": 80 } 
+            "serviceName": {
+                "type": "array",
+                "minItems": 1,
+                "required": true,
+                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
             }
         }
     },
@@ -6061,7 +6578,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "Get group-level Feature Access Codes settings response body schema",
         "type": "object",
         "properties": {
@@ -6097,8 +6614,8 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 				}
 			},
             "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ], "required": true },
-            "featureAccessCode": { 
-                "type": "array", 
+            "featureAccessCode": {
+                "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
@@ -6127,8 +6644,8 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         "type": "object",
         "properties": {
             "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ] },
-            "featureAccessCode": { 
-                "type": "array", 
+            "featureAccessCode": {
+                "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
@@ -6154,7 +6671,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "Retrieve Group Speed Dial 100 service response body schema",
         "type": "object",
         "properties": {
@@ -6533,7 +7050,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
             "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23 },
             "extension": { "type": "string", "minLength": 2, "maxLength": 6},
             "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23},
-            "department": { 
+            "department": {
                 "type": "object",
                 "properties": {
                     "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
@@ -6637,17 +7154,17 @@ GET /loki-services/broadworks/users/{+userId}
             "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
             "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30},
             "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30},
-            "phoneNumber": { 
+            "phoneNumber": {
                 "id": "E.164 DN",
-                "description": "A formatted TN.", 
-                "type": ["string"], 
-                "minLength": 1, 
-                "maxLength": 23, 
-                "pattern": "^\\+\\d+-\\d+$" 
+                "description": "A formatted TN.",
+                "type": ["string"],
+                "minLength": 1,
+                "maxLength": 23,
+                "pattern": "^\\+\\d+-\\d+$"
             },
             "extension": { "type": "string", "minLength": 2, "maxLength": 6},
             "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23},
-            "department": { 
+            "department": {
                 "type": "object",
                 "properties": {
                     "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
@@ -6723,7 +7240,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
         }
     },
     "requestBody": { },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Retrieve Group Device response body",
 		"type": "object",
 		"properties": {
@@ -6767,8 +7284,8 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
             "macAddress": { "type": "string", "minLength": 1, "maxLength": 12 },
             "serialNumber": { "type": "string", "minLength": 1,  "maxLength": 80 },
             "description": { "type": "string", "minLength": 1, "maxLength": 80 },
-            "ports": { 
-                "type": "object", 
+            "ports": {
+                "type": "object",
                 "required": true,
                 "properties": {
                     "unlimited": { "type": "boolean", "required": true },
@@ -6777,7 +7294,7 @@ GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
                 }
             },
             "status": { "enum": ["Online", "Offline", "Unavailable", "Unknown"] },
-            "configurationFile": { 
+            "configurationFile": {
                 "type": "object",
                 "properties": {
                     "mode": { "enum": ["Default", "Manual", "Custom"] },
@@ -6813,7 +7330,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
             "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
         }
     },
-    "requestBody": { 
+    "requestBody": {
         "title": "BroadWorks Entity - Create Group Device request body",
 		"type": "object",
 		"properties": {
@@ -6851,7 +7368,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
             }
 		}
     },
-    "response": { 
+    "response": {
         "title": "BroadWorks Entity - Create Group Device response body",
 		"type": "object",
 		"properties": {
@@ -6900,7 +7417,7 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
             "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
         }
     },
-    "requestBody": { 
+    "requestBody": {
         "title": "BroadWorks Entity - Modify Group Device request body",
 		"type": "object",
 		"properties": {
@@ -6912,7 +7429,7 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
             "macAddress": { "type": "string", "minLength": 1, "maxLength": 12 },
             "serialNumber": { "type": "string", "minLength": 1,  "maxLength": 80 },
             "description": { "type": "string", "minLength": 1, "maxLength": 80 },
-            "configurationFile": { 
+            "configurationFile": {
                 "type": "object",
                 "properties": {
                     "mode": { "enum": ["Default", "Manual", "Custom"] },
