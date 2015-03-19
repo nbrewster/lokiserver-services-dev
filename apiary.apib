@@ -3200,6 +3200,7 @@ Cluster resolution method: Group
 DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
 < 204
 < Transaction-Id: 1380080943120
+
 --
 BroadWorks Entity - Group Devices
 
@@ -8164,6 +8165,557 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
     "response": { }
 }
 
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Speed Dial 100 service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Speed Dial 100 service response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"prefix": { "type": "string", "minLength": 1, "maxLength": 2, "pattern": "^[A-D0-9\\*\\#]+$" }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
+{
+    "requestURITemplate": {
+        "title": "Modify Speed Dial 100 service settings request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Speed Dial 100 service settings request body schema",
+        "type": "object",
+        "properties": {
+            "prefix": { "type": "string", "minLength": 1, "maxLength": 2, "pattern": "^[A-D0-9\\*\\#]+$" }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Trunking Call Capacity request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Trunking Call Capacity response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "maxActiveCalls": { "type": "integer" },
+            "maxAvailableActiveCalls": {
+                "type": "object",
+                "required": true,
+				"properties": {
+					"quantity": { "type": "integer", "minimum": 0 },
+					"unlimited": { "type": "boolean" }
+				}
+            },
+            "burstingMaxActiveCalls": {
+                "type": "object",
+                "required": true,
+				"properties": {
+					"quantity": { "type": "integer", "minimum": 0 },
+					"unlimited": { "type": "boolean" }
+				}
+            },
+            "burstingMaxAvailableActiveCalls": {
+                "type": "object",
+                "required": true,
+				"properties": {
+					"quantity": { "type": "integer", "minimum": 0 },
+					"unlimited": { "type": "boolean" }
+				}
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+{
+    "requestURITemplate": {
+        "title": "Modify Group Trunking Call Capacity request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Trunking Call Capacity request body schema",
+        "properties": {
+            "maxActiveCalls": { "type": "integer" },
+            "burstingMaxActiveCalls": {
+                "type": "object",
+                "properties": {
+					"quantity": { "type": "integer", "minimum": 0 },
+					"unlimited": { "type": "boolean" }
+				}
+            }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Trunk Groups request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Trunk Groups response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupTable": {
+                "type": "object",
+                "required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "Department": { "type": "string", "minLength": 1, "maxLength": 50 },
+                            "Device Name": { "type": "string", "minLength": 1, "maxLength": 40 },
+                            "Device Level": { "enum": ["System", "Service Provider", "Group"] },
+                            "Group Id": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+				        }
+					}
+				}
+            }
+        }
+    }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+{
+    "requestURITemplate": {
+        "title": "Create Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Create Group Trunk Group request body schema",
+        "type": "object",
+        "properties": {
+            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "pilotUser": {
+                "properties": {
+                    "userId": {
+        				"minLength": 1,
+        				"maxLength": 161,
+        				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+        				"required": true
+        			},
+                    "lastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "firstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60 },
+                    "department": {
+                        "type": "object",
+				        "properties": {
+			                "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 50, "required": true }
+                        }
+                    },
+                    "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+                    "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+                    "linePort": { "type": "string", "minLength": 1, "maxLength": 161, "required": true },
+                    "contact": {
+                        "type": "array",
+                        "minItems": 0,
+                        "maxItems": 5,
+                        "items": { 
+                            "type": "string", 
+                            "minLength": 1,
+                            "maxLength": 1020
+                        }
+                    }
+                }
+            },
+            "department": { 
+                "type": "object",
+		        "properties": {
+	                "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 50, "required": true }
+                }
+            },
+            "accessDevice": {
+                "type": "object",
+                "properties": {
+                    "deviceLevel": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "maxActiveCalls": { "type": "integer", "minimum": 1, "required": true },
+            "maxIncomingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "maxOutgoingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "enableBursting": { "type": "boolean", "required": true },
+            "burstingMaxActiveCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxIncomingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxOutgoingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "capacityExceededAction": { "enum": ["Forward", "Reroute"] },
+            "capacityExceededForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "capacityExceededRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "capacityExceededTrapInitialCalls": { "type": "integer", "minimum": 0, "required": true },
+            "capacityExceededTrapOffsetCalls": { "type": "integer", "minimum": 0, "required": true },
+            "unreachableDestinationAction": { "enum": ["Forward", "Reroute"] },
+            "unreachableDestinationForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "unreachableDestinationRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "invitationTimeout": { 
+                "required": true,
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 15 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 255 
+                    }
+                ]
+            },
+            "requireAuthentication": { "type": "boolean", "required": true },
+            "sipAuthenticationUserName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "sipAuthenticationPassword": { "type": "string", "minLength": 1, "maxLength": 60 },
+            "hostedUserId": {
+                "type": "array",
+                "minItems": 0,
+                "items": {
+    				"minLength": 1,
+    				"maxLength": 161,
+    				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+    			}
+            },
+            "trunkGroupIdentity": {
+                "description": "SIP URI",
+                "type": "string",
+                "minLength": 1, 
+                "maxLength": 161,
+                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+            },
+            "otgDtgIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "allowTerminationToTrunkGroupIdentity": { "type": "boolean" },
+            "allowTerminationToDtgIdentity": { "type": "boolean" },
+            "includeTrunkGroupIdentity": { "type": "boolean" },
+            "includeDtgIdentity": { "type": "boolean" },
+            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean" },
+            "includeOtgIdentityForNetworkCalls": { "type": "boolean" },
+            "enableNetworkAddressIdentity": { "type": "boolean" },
+            "allowUnscreenedCalls": { "type": "boolean" },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean" },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "callForwardingAlwaysAction": { "enum": ["Forward", "Reroute"] },
+            "callForwardingAlwaysForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "callForwardingAlwaysRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "peeringDomain": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "routeToPeeringDomain": { "type": "boolean" },
+            "prefixEnabled": { "type": "boolean" },
+            "prefix": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "statefulReroutingEnabled": { "type": "boolean" },
+            "sendContinuousOptionsMessage": { "type": "boolean" },
+            "continuousOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 30, "maximum": 86400 },
+            "failureOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 10, "maximum": 86400 },
+            "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "inviteFailureThresholdWindowSeconds": { "type": "integer", "minimum": 30, "maximum": 240 },
+            "pilotUserCallingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"] },
+            "useSystemCallingLineAssertedIdentityPolicy": { "type": "boolean" }
+        }
+    },
+    "response": {
+        "title": "Create Group Trunk Group response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    }
+}
+
+
+
 GET /loki-services/broadworks/service-providers/{+serviceProviderId}
 {
     "requestURITemplate": {
@@ -8904,78 +9456,6 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
             },
             "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
             "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
-        }
-    },
-    "response": { }
-}
-
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
-{
-    "requestURITemplate": {
-        "title": "Retrieve Group Speed Dial 100 service request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": { },
-    "response": {
-        "title": "Retrieve Group Speed Dial 100 service response body schema",
-        "type": "object",
-        "properties": {
-            "_links": {
-				"type": "object",
-				"required": true,
-				"properties": {
-					"self": {
-						"type": "object",
-						"required": true,
-						"properties": {
-							"href": {
-								"type": "string",
-								"required": true
-							}
-						}
-					}
-				}
-			},
-			"ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "curies": {
-				"type": "array",
-				"required": true,
-				"items": {
-					"type": "object",
-					"properties": {
-						"name": { "type": "string", "required": true },
-						"href": { "type": "string", "required": true },
-						"templated": { "type": "boolean", "required": true }
-					}
-				}
-			},
-			"prefix": { "type": "string", "minLength": 1, "maxLength": 2, "pattern": "^[A-D0-9\\*\\#]+$" }
-        }
-    }
-}
-
-
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100
-{
-    "requestURITemplate": {
-        "title": "Modify Speed Dial 100 service settings request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": {
-        "title": "Modify Speed Dial 100 service settings request body schema",
-        "type": "object",
-        "properties": {
-            "prefix": { "type": "string", "minLength": 1, "maxLength": 2, "pattern": "^[A-D0-9\\*\\#]+$" }
         }
     },
     "response": { }
