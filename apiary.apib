@@ -2079,6 +2079,85 @@ POST /broadworks/service-providers/{+serviceProviderId}/assignDomain
     "externalErrorDetail": "[Error 4990] Invalid IP Address/Host or Domain Name.  The IP Address/Host or Domain Name length must be between 1 and 80 characters long and cannot contain a space or @ character."
 }
 
+--
+BroadWorks Service Providers - Phone Numbers
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to BroadWorks phone number (TN) resources at the Enterprise/Service Provider level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Assign a single phone number (TN) to an Enterprise or Service Provider.
+Process name : Assign BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: Yes<br />
+Cluster resolution method: Service Provider
+Note that the 424 example is just one example of a possible BroadWorks error.
+POST /broadworks/service-providers/{+serviceProviderId}/phone-numbers{?mode}
+> Content-Type: application/json
+{
+    "phoneNumber" : "+1-2005553001"
+}
+< 201
+< Transaction-Id: 1380080943120
+< Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/phone-numbers/%2B1-2005553001
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/phone-numbers/%2B1-2005553001"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North",
+    "phoneNumber": "+1-2005553001",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
++++++
+< 424
+< Transaction-Id: 1380080943120
+< Content-Type: application/json
+{
+    "errorCode" : "EXTERNAL_API_ERROR",
+    "externalErrorCode" : "4250",
+    "externalErrorSummary" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned.",
+    "ThexternalErrorDetail" : "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
+}
+
+
+Check existence of an individual phone number in an Enterprise or Service Provider.
+Process name : Check BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster resolution method: Service Provider
+HEAD /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+< 204
+< Transaction-Id: 1380080943120
++++++
+< 404
+< Transaction-Id: 1380080943120
+
+Unassign a phone number from an Enterprise or a Service Provider.
+Process name : Delete  BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster resolution method: Service Provider
+DELETE /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}
+< 204
+< Transaction-Id: 1380080943120
++++++
+< 404
+< Transaction-Id: 1380080943120
 
 --
 BroadWorks Entity - Groups
@@ -2498,6 +2577,547 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/service
 < Transaction-Id: 1380080943120
 
 --
+BroadWorks Entity - Group Phone Numbers
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Assign a single phone number (TN) to a Group.
+Process name: Assign BroadWorks Group TN<br />
+Process-backed: Yes<br />
+Rollback-enabled: Yes<br />
+Cluster resolution method: Group
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers{?mode}
+> Content-Type: application/json
+{
+    "phoneNumber" : "+1-2005553001"
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/broadworks/serviceProviders/exampleCom/groups/exampleComNorth/phone-numbers/%2B1-2005553001
+{
+    "_links": {
+        "self": {
+            "href": ""http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005553001"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Check existence of an individual phone number in a Group.
+Process name : Check BroadWorks Group TN (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster resolution method: Group
+HEAD /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+< 204
+< Transaction-Id: 1380080943120
++++++
+< 404
+< Transaction-Id: 1380080943120
+
+
+Unassign a phone number from a Group.
+Process name: Delete BroadWorks Group TN (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster resolution method: Group
+DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+< 204
+< Transaction-Id: 1380080943120
+
+Activates one or more phone numbers and/or ranges of phone numbers in BroadWorks
+Process Name : Activate TNs (BroadWorks Entity)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster Resolution Method: Group
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate
+> Content-Type: application/json
+{
+    "phoneNumbers" : [
+        "+1-5553070900",
+        "+1-5553070910",
+        {
+            "start" : "+1-5553071000",
+            "end" : "+1-5553071009"
+        },
+        "+1-5553070876",
+        {
+            "start" : "+1-5553072000",
+            "end" : "+1-5553072003"
+        }
+    ]
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Deactivates one or more phone numbers and/or ranges of phone numbers in BroadWorks.
+Process Name: Deactivate TNs (BroadWorks Entity)<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster Resolution Method: Group
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate
+> Content-Type: application/json
+{
+    "phoneNumbers" : [
+        "+1-5553070900",
+        "+1-5553070910",
+        {
+            "start" : "+1-5553071000",
+            "end" : "+1-5553071009"
+        },
+        "+1-5553070876",
+        {
+            "start" : "+1-5553072000",
+            "end" : "+1-5553072003"
+        }
+    ]
+}
+< 204
+< Transaction-Id: 1380080943120
+
+--
+BroadWorks Entity - Group Trunk Groups
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+Creates a new BroadWorks Group Trunk Group<br />
+Process name: Create BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: Yes<br />
+Cluster resolution method: Group
+##Request URI Query Parameters
+<table>
+    <thead>
+        <th>Parameter</th>
+        <th>Required</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td>no</td>
+            <td>create-only</td>
+            <td>
+                Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+                Initially, “mode” will always be ignored, and the behavior will always be “create-only”.
+             </td>
+        </tr>
+        <tr>
+            <td>auto-increase</td>
+            <td>no</td>
+            <td>always</td>
+            <td>
+                The following table describes behavior depending on values for this parameter.
+                <table>
+                    <thead>
+                        <th>Value</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>always</td>
+                            <td>Always apply the auto-increase logic described below.</td>
+                        </tr>
+                        <tr>
+                            <td>never</td>
+                            <td>Never apply the auto-increase logic described below (simply return success).</td>
+                        </tr>
+                        <tr>
+                            <td>enterprise-only</td>
+                            <td>Apply the auto-increase logic described below only when serviceProviderId identifies an Enterprise.
+                            If serviceProviderId identifies a Service Provider, do not apply the auto-increase logic described below (simply return success).
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                The auto increase logic to suffice Trunk Call Capacity for a new Group Trunk Group is as follows:<br />
+                1. For maxActiveCalls all we need to do:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;a. Check that the value requested in the request (capacityManagement.maxActiveCalls.total) is equal or smaller than the value on the Group (maxActiveCalls).<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;b. If we need to increase the Group then check to see if we need to increase for Service Provider as well.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;c. Group Setting (maxAvailableActiveCalls.quantity) holds the value from the Enterprise. If this value is smaller than the value requested by Trunk Group then set the same value as set on the Group.<br />
+                2. For burstActiveCalls we need to:<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;a. If Group setting is not unlimited then get the burstActiveCalls value from all trunk group's in the group ( will refer to value as burstingMaxActiveCallsAllocatedToTrunkGroups).<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;b. Get the burstActiveCalls available on the Group (will refer to values as availableBurstMaxActiveCallsInGroup). This is current Group Call Capacity setting (burstingMaxActiveCalls.quantity) minus the burst Active Calls used by Trunk Groups (burstingMaxActiveCallsAllocatedToTrunkGroups).<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;c. Then if the available burstActiveCalls value on the Group (availableBurstMaxActiveCallsInGroup) is smaller then the requested value then increase the Group with the difference of the 2 quantities.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;d. Group Setting (burstingMaxAvailableActiveCalls) holds the available quantity to increase to the Group. If it is unlimited then no need to increase Service Provider value.<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;e. If available quantity is fixed (burstingMaxAvailableActiveCalls.quantity) then:
+                calculate the available amount on the Service Provider which is [burstingMaxAvailableActiveCalls.quantity] - [burstingMaxActiveCalls.quantity] (will refer to value as availableBurstMaxActiveCallsInServiceProvider)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;f. If the value which is being increased to the Group is bigger than what is available from the SP\Ent then increase the SP\Ent burstMaxActive calls with that difference [quantity increased to Group] - [quantity available in SP].
+            </td>
+        </tr>
+    </tbody>
+</table>
+POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups{?mode, auto-increase}
+> Content-Type: application/json
+{
+    "trunkGroupName" : "ExampleCom Trunk 3001",
+    "department" : {
+        "name" : "Sales",
+        "level" : "Group"
+    },
+    "accessDevice" : {
+        "level" : "Group",
+        "deviceName" : "ExampleCom_AD3001"
+    },
+    "capacityManagement" : {
+        "maxActiveCalls" : {
+            "total" : 10,
+            "incoming" : 4,
+            "outgoing" : 3
+        },
+        "burstingMaxActiveCalls" : {
+            "enabled" : false,
+            "total" : 12,
+            "incoming" : 7,
+            "outgoing" : 9
+        },
+        "incomingCapacityExceeded" : {
+            "action" : "Forward",
+            "forwardAddress" : "4165551212",
+            "rerouteTrunkGroup" : {
+                "groupId" : "Example Com - North",
+                "trunkGroupName" : "ExampleCom Trunk 1212"
+            },
+            "initialCalls" : 2,
+            "offsetCalls" : 3
+        }
+    },
+    "unreachableDestination" : {
+        "timeout" : 10,
+        "action" : "Reroute",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "authentication" : {
+        "enabled" : true,
+        "username" : "2005553001@sip.example.com",
+        "password" : "230A4u$#%f"
+    },
+    "identity" : {
+        "trunkGroupIdentity" : {
+            "identity" : "2005553001@sip.example.com",
+            "allowTerminationToTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentityForNetworkCalls" : false
+        },
+        "otgDtgIdentity" : {
+            "identity" : "2005553001",
+            "allowTerminationToDtgIdentity" : false,
+            "includeDtgIdentity" : false,
+            "includeOtgIdentityForNetworkCalls" : false
+        },
+        "enableNetworkAddressIdentity" : false
+    },
+    "allowUnscreenedCalls" : true,
+    "allowUnscreenedEmergencyCalls" : false,
+    "pilotUserCallingLineIdentityPolicy" : "No Calls",
+    "pilotUserChargeNumberPolicy" : "No Calls",
+    "callForwardingAlways" : {
+        "action" : "Forward",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "peeringDomain" : {
+        "domainName" : "two.example.com",
+        "routeToPeeringDomain" : false
+    },
+    "trunkGroupPrefix" : {
+        "enabled" : false,
+        "prefix" : "1234"
+    },
+    "advancedReroute" : {
+        "enabled" : false,
+        "sendContinuousOptionsMessage" : false,
+        "continuousOptionsSendingInterval" : 30,
+        "failureOptionsSendingInterval" : 10,
+        "failureThresholdCounter" : 1,
+        "successThresholdCounter" : 1,
+        "inviteFailureThresholdCounter" : 1,
+        "inviteFailureThresholdWindow" : 30
+    },
+    "pilotUserCallingLineAssertedIdentityPolicy" : {
+        "useTrunkGroupCallingLineAssertedIdentityPolicy" : false,
+        "callingLineAssertedIdentityPolicy" : "Unscreened Originating Calls"
+    }
+}
+< 201
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+< Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/ExampleCom%20Trunk%203001
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/ExampleCom%20Trunk%203001"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North",
+    "trunkGroupName": "ExampleCom Trunk 3001",
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://loki3services.apiary.io/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Retrieve the profile settings of a BroadWorks Group Trunk Group<br />
+Process name: Retrieve BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+< 200
+< Content-Type: application/hal+json
+< Transaction-Id: 1380080943120
+{
+    "_links": {
+        "self": {
+            "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/ExampleCom%20Trunk%203001"
+        }
+    },
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com - North",
+    "trunkGroupName": "ExampleCom Trunk 3001",
+	"pilotUserId" : "4165552200@example.com",
+    "accessDevice" : {
+        "level" : "Group",
+        "deviceName" : "ExampleCom_AD3001"
+    },
+    "department" : "Sales",
+    "capacityManagement" : {
+        "maxActiveCalls" : {
+            "total" : 10,
+            "incoming" : 4,
+            "outgoing" : 3
+        },
+        "burstingMaxActiveCalls" : {
+            "enabled" : false,
+            "total" : 12,
+            "incoming" : 7,
+            "outgoing" : 9
+        },
+        "incomingCapacityExceeded" : {
+            "action" : "Forward",
+            "forwardAddress" : "4165551212",
+            "rerouteTrunkGroup" : {
+                "groupId" : "Example Com - North",
+                "trunkGroupName" : "ExampleCom Trunk 1212"
+            },
+            "initialCalls" : 2,
+            "offsetCalls" : 3
+        }
+    },
+    "unreachableDestination" : {
+        "timeout" : 10,
+        "action" : "Reroute",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "authentication" : {
+        "enabled" : true,
+        "username" : "2005553001@sip.example.com"
+    },
+    "identity" : {
+        "trunkGroupIdentity" : {
+            "identity" : "2005553001@sip.example.com",
+            "allowTerminationToTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentityForNetworkCalls" : false
+        },
+        "otgDtgIdentity" : {
+            "identity" : "2005553001",
+            "allowTerminationToDtgIdentity" : false,
+            "includeDtgIdentity" : false,
+            "includeOtgIdentityForNetworkCalls" : false
+        },
+        "enableNetworkAddressIdentity" : false
+    },
+    "allowUnscreenedCalls" : true,
+    "allowUnscreenedEmergencyCalls" : false,
+    "pilotUserCallingLineIdentityPolicy" : "No Calls",
+    "pilotUserChargeNumberPolicy" : "No Calls",
+    "callForwardingAlways" : {
+        "action" : "Forward",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "peeringDomain" : {
+        "domainName" : "two.example.com",
+        "routeToPeeringDomain" : false
+    },
+    "trunkGroupPrefix" : {
+        "enabled" : false,
+        "prefix" : "1234"
+    },
+    "advancedReroute" : {
+        "enabled" : false,
+        "sendContinuousOptionsMessage" : false,
+        "continuousOptionsSendingInterval" : 30,
+        "failureOptionsSendingInterval" : 10,
+        "failureThresholdCounter" : 1,
+        "successThresholdCounter" : 1,
+        "inviteFailureThresholdCounter" : 1,
+        "inviteFailureThresholdWindow" : 30
+    },
+    "pilotUserCallingLineAssertedIdentityPolicy" : {
+        "useTrunkGroupCallingLineAssertedIdentityPolicy" : false,
+        "callingLineAssertedIdentityPolicy" : "Unscreened Originating Calls"
+    },
+    "curies" : [
+        {
+            "name" : "ls",
+            "href" : "http://lokiserver.example.com/loki-services/rels/{rel}",
+            "templated" : true
+        }
+    ]
+}
+
+Update the profile settings of a BroadWorks Group Trunk Group<br />
+Process name: Update BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group
+PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+> Content-Type: application/json
+{
+    "pilotUserId" : "4165552200@example.com",
+    "accessDevice" : {
+        "level" : "Group",
+        "deviceName" : "ExampleCom_AD3001"
+    },
+    "department" : "Sales",
+    "capacityManagement" : {
+        "maxActiveCalls" : {
+            "total" : 10,
+            "incoming" : 4,
+            "outgoing" : 3
+        },
+        "burstingMaxActiveCalls" : {
+            "enabled" : false,
+            "total" : 12,
+            "incoming" : 7,
+            "outgoing" : 9
+        },
+        "incomingCapacityExceeded" : {
+            "action" : "Forward",
+            "forwardAddress" : "4165551212",
+            "rerouteTrunkGroup" : {
+                "groupId" : "Example Com - North",
+                "trunkGroupName" : "ExampleCom Trunk 1212"
+            },
+            "initialCalls" : 2,
+            "offsetCalls" : 3
+        }
+    },
+    "unreachableDestination" : {
+        "timeout" : 10,
+        "action" : "Reroute",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "authentication" : {
+        "enabled" : true,
+        "username" : "2005553001@sip.example.com",
+        "password" : "230A4u$#%f"
+    },
+    "identity" : {
+        "trunkGroupIdentity" : {
+            "identity" : "2005553001@sip.example.com",
+            "allowTerminationToTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentity" : false,
+            "includeTrunkGroupIdentityForNetworkCalls" : false
+        },
+        "otgDtgIdentity" : {
+            "identity" : "2005553001",
+            "allowTerminationToDtgIdentity" : false,
+            "includeDtgIdentity" : false,
+            "includeOtgIdentityForNetworkCalls" : false
+        },
+        "enableNetworkAddressIdentity" : false
+    },
+    "allowUnscreenedCalls" : true,
+    "allowUnscreenedEmergencyCalls" : false,
+    "pilotUserCallingLineIdentityPolicy" : "No Calls",
+    "pilotUserChargeNumberPolicy" : "No Calls",
+    "callForwardingAlways" : {
+        "action" : "Forward",
+        "forwardAddress" : "4165551212",
+        "rerouteTrunkGroup" : {
+            "groupId" : "Example Com - North",
+            "trunkGroupName" : "ExampleCom Trunk 1212"
+        }
+    },
+    "peeringDomain" : {
+        "domainName" : "two.example.com",
+        "routeToPeeringDomain" : false
+    },
+    "trunkGroupPrefix" : {
+        "enabled" : false,
+        "prefix" : "1234"
+    },
+    "advancedReroute" : {
+        "enabled" : false,
+        "sendContinuousOptionsMessage" : false,
+        "continuousOptionsSendingInterval" : 30,
+        "failureOptionsSendingInterval" : 10,
+        "failureThresholdCounter" : 1,
+        "successThresholdCounter" : 1,
+        "inviteFailureThresholdCounter" : 1,
+        "inviteFailureThresholdWindow" : 30
+    },
+    "pilotUserCallingLineAssertedIdentityPolicy" : {
+        "useTrunkGroupCallingLineAssertedIdentityPolicy" : false,
+        "callingLineAssertedIdentityPolicy" : "Unscreened Originating Calls"
+    }
+}
+< 204
+< Transaction-Id: 1380080943120
+
+Delete a BroadWorks Group Trunk Group<br />
+Process name: Delete BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group
+DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+< 204
+< Transaction-Id: 1380080943120
+--
 BroadWorks Entity - Group Devices
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
@@ -2510,6 +3130,8 @@ resources/methods below.
 
 Retrieve information about a BroadWorks Group Device.<br />
 Process name: Retrieve BroadWorks Group Device (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group
 GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
 < 200
 < Content-Type: application/hal+json
@@ -2560,6 +3182,9 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices
 
 Creates a new BroadWorks Group Device<br />
 Process name: Create BroadWorks Group Device (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: Yes<br />
+Cluster resolution method: Group
 POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices{?mode}
 > Content-Type: application/json
 {
@@ -2612,6 +3237,8 @@ POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/device
 
 Modify some or all editable properties of a BroadWorks Group Device.<br />
 Process name: Update BroadWorks Group Device (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group
 PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
 > Content-Type: application/json
 {
@@ -2647,6 +3274,8 @@ PUT /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices
 
 Remove specified Group Device from BroadWorks.<br />
 Process name: Delete BroadWorks Group Device (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Cluster resolution method: Group<br />
 This request makes no attempt to check if the Group Device actually exists in the System,
 nor does it check to see if the Group Device is allowed to be deleted.
 DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
@@ -3301,7 +3930,6 @@ DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProvider
 < 204
 < Transaction-Id: 1380080943120
 
-
 --
 BroadWorks Service Providers - Services
 
@@ -3952,7 +4580,7 @@ DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProvider
 < Transaction-Id: 1380080943120
 
 Activates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate
 > Content-Type: application/json
 {
     "phoneNumber": [
@@ -3975,7 +4603,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 < Transaction-Id: 1380080943120
 
 Deactivates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate
 > Content-Type: application/json
 {
     "phoneNumber": [
@@ -4370,7 +4998,7 @@ resources/methods below.
 --
 
 Retrieve Trunking Call Capacity settings for a Group.
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -4413,7 +5041,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 Update the Trunking Call Capacity settings to Group.
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity
 > Content-Type: application/json
 {
 	"maxActiveCalls": 10,
@@ -4449,7 +5077,7 @@ resources/methods below.
 --
 
 Retrieve Trunk Groups list from a Group.
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -4491,7 +5119,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 Create a Trunk Group.
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups
 > Content-Type: application/json
 {
 	"name": "Trunk Group",
@@ -4619,14 +5247,14 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 }
 
 Retrieve a Trunk Group.
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
 {
     "_links": {
         "self": {
-            "href:"http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
+            "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group"
         }
     },
 	"maxActiveCalls": 1,
@@ -4674,7 +5302,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 Modify a Trunk Group.
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
 > Content-Type: application/json
 {
 	"newName": "New Trunk Group",
@@ -4760,7 +5388,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 < Transaction-Id: 1380080943120
 
 Delete a Trunk Group.
-DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
 < 204
 < Transaction-Id: 1380080943120
 
@@ -4778,7 +5406,7 @@ resources/methods below.
 --
 
 Create a device.
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices
+POST /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices
 > Content-Type: application/json
 {
 	"deviceName": "AccessDeviceTest",
@@ -4822,7 +5450,7 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
 }
 
 Retrieve profile settings of a BroadWorks Group device.
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+GET /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
 < 201
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -4865,7 +5493,7 @@ GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 }
 
 Update the profile settings of an device.
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+PUT /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
 > Content-Type: application/json
 {
 	"protocol": "SIP 2.0",
@@ -4897,7 +5525,7 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
 < Transaction-Id: 1380080943120
 
 Deletes a Group Device from BroadWorks.
-DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+DELETE /network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
 < 204
 < Transaction-Id: 1380080943120
 
