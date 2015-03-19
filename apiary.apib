@@ -7201,6 +7201,216 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
     "response": { }
 }
 
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/password-rules
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Password Rules request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "type": "object",
+        "title": "Retrieve Group Password Rules response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "disallowUserId": { "type": "boolean", "required": true },
+            "disallowOldPassword": { "type": "boolean", "required": true },
+            "disallowReversedOldPassword": { "type": "boolean", "required": true },
+            "restrictMinDigits": { "type": "boolean", "required": true },
+            "minDigits": { "type": "integer", "minimum": 1, "maximum": 10, "required": true },
+            "restrictMinUpperCaseLetters": { "type": "boolean", "required": true },
+            "minUpperCaseLetters": { "type": "integer", "minimum": 1, "maximum": 10, "required": true },
+            "restrictMinLowerCaseLetters": { "type": "boolean", "required": true },
+            "minLowerCaseLetters": { "type": "integer", "minimum": 1, "maximum": 10, "required": true },
+            "restrictMinNonAlphanumericCharacters": { "type": "boolean", "required": true },
+            "minNonAlphanumericCharacters": { "type": "integer", "minimum": 1, "maximum": 10, "required": true },
+            "minLength": { "type": "integer", "minimum": 3, "maximum": 40, "required": true },
+            "maxFailedLoginAttempts": { "type": "integer", "minimum": 0, "maximum": 10, "required": true },
+            "passwordExpiresDays": { "type": "integer", "minimum": 1, "maximum": 199, "required": true },
+            "sendLoginDisabledNotifyEmail": { "type": "boolean", "required": true },
+            "disallowRulesModification": { "type": "boolean", "required": true },
+            "disallowPreviousPasswords": { "type": "boolean", "required": true },
+            "numberOfPreviousPasswords": { "type": "integer", "minimum": 1, "maximum": 10, "required": true }
+        }
+    }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Extension Length request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "type": "object",
+        "title": "Retrieve Group Extension Length response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "minExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20, "required": true },
+            "maxExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20, "required": true },
+            "defaultExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20, "required": true }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+{
+    "requestURITemplate": {
+        "title": "Modify Group Extension Length request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Extension Length request body schema",
+        "type": "object",
+        "properties": {
+            "minExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "maxExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
+            "defaultExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 }
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Domains request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "type": "object",
+        "title": "Retrieve Group Domains response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupDefaultDomain": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 80, 
+                "pattern": "^[a-zA-Z0-9.-]+$", 
+                "required": true 
+            },
+            "domains": {
+				"type": "array",
+				"required": true,
+				"items": {
+    				"type": "string", 
+                    "minLength": 1, 
+                    "maxLength": 80, 
+                    "pattern": "^[a-zA-Z0-9.-]+$"
+				}
+			}
+        }
+    }
+}
+
 POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains
 {
     "requestURITemplate": {
@@ -7236,10 +7446,72 @@ DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+s
     "response": { }
 }
 
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
 {
     "requestURITemplate": {
-        "title": "Modify Group Extension Length request URI template parameters schema",
+        "title": "Get group-level Feature Access Codes settings request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Get group-level Feature Access Codes settings response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+            "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ], "required": true },
+            "featureAccessCode": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "featureAccessCodeName": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
+                        "mainCode": { "type": "string", "minLength": 1, "maxLength": 5, "required": true, "pattern": "^[A-D0-9\\#\\*]+$" },
+                        "alternateCode": { "type": "string", "minLength": 1, "maxLength": 5, "pattern": "^[A-D0-9\\#\\*]+$" }
+                    }
+                }
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
+{
+    "requestURITemplate": {
+        "title": "Update group-level Feature Access Codes settings request URI template parameters schema",
         "properties": {
             "ne_id": { "type": "string", "required": true },
             "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
@@ -7247,12 +7519,399 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serv
         }
     },
     "requestBody": {
-        "title": "Modify Group Extension Length request body schema",
+        "title": "Update group-level Feature Access Codes settings request body schema",
         "type": "object",
         "properties": {
-            "minExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
-            "maxExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 },
-            "defaultExtensionLength": { "type": "integer", "minimum": 2, "maximum": 20 }
+            "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ] },
+            "featureAccessCode": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "featureAccessCodeName": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
+                        "mainCode": { "type": "string", "minLength": 1, "maxLength": 5, "required": true, "pattern": "^[A-D0-9\\#\\*]+$" },
+                        "alternateCode": { "type": "string", "minLength": 1, "maxLength": 5, "pattern": "^[A-D0-9\\#\\*]+$" }
+                    }
+                }
+            }
+        }
+    },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers
+{
+    "requestURITemplate": {
+        "title": "Assign Group Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Group Phone Number request body schema",
+        "type": "object",
+        "properties": {
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$"
+            }
+        }
+    },
+    "response": { }
+}
+
+HEAD /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+{
+    "requestURITemplate": {
+        "title": "Check Group Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$",
+                "required": true
+            }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}
+{
+    "requestURITemplate": {
+        "title": "Delete Group Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "phoneNumber": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 23, 
+                "pattern": "^\\+\\d+-\\d+$",
+                "required": true
+            }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate
+{
+    "requestURITemplate": {
+        "title": "Activate Group Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Activate Group Phone Number request body schema",
+        "type": "object",
+        "properties": {
+            "phoneNumber": {
+                "type": "array",
+				"items": {
+					"type": "string", 
+                    "minLength": 1, 
+                    "maxLength": 23, 
+                    "pattern": "^\\+\\d+-\\d+$"
+				}
+			},
+            "dnRange": {
+                "type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+					    "minPhoneNumber": {
+        					"type": "string", 
+                            "minLength": 1, 
+                            "maxLength": 23, 
+                            "pattern": "^\\+\\d+-\\d+$"
+        				},
+                        "maxPhoneNumber": {
+        					"type": "string", 
+                            "minLength": 1, 
+                            "maxLength": 23, 
+                            "pattern": "^\\+\\d+-\\d+$"
+        				}
+					}
+				}
+			}
+        }
+    },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate
+{
+    "requestURITemplate": {
+        "title": "Deactivate Group Phone Number request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Deactivate Group Phone Number request body schema",
+        "type": "object",
+        "properties": {
+            "phoneNumber": {
+                "type": "array",
+				"items": {
+					"type": "string", 
+                    "minLength": 1, 
+                    "maxLength": 23, 
+                    "pattern": "^\\+\\d+-\\d+$"
+				}
+			},
+            "dnRange": {
+                "type": "array",
+				"items": {
+					"type": "object",
+					"properties": {
+					    "minPhoneNumber": {
+        					"type": "string", 
+                            "minLength": 1, 
+                            "maxLength": 23, 
+                            "pattern": "^\\+\\d+-\\d+$"
+        				},
+                        "maxPhoneNumber": {
+        					"type": "string", 
+                            "minLength": 1, 
+                            "maxLength": 23, 
+                            "pattern": "^\\+\\d+-\\d+$"
+        				}
+					}
+				}
+			}
+        }
+    },
+    "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Services Authorizations request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Services Authorizations response body schema",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+			"servicePacksAuthorizationTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Service Pack Name": { "type": "string", "minLength": 1, "required": true },
+                            "Authorized": { "type": "boolean", "required": true },
+                            "Assigned": { "type": "boolean", "required": true },
+                            "Limited": { "enum": ["Unlimited", "Limited"], "required": true },
+                            "Allocated": { "type": ["string", "integer", "null"], "required": true },
+                            "Allowed": { "type": ["string", "integer"], "required": true },
+                            "Usage": { "type": "integer" },
+                            "Description": { "type": ["string", "null"], "required": true }
+				        }
+					}
+				}
+            },
+            "groupServicesAuthorizationTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Service Name": { "type": "string", "minLength": 1, "required": true },
+                            "Authorized": { "type": "boolean", "required": true },
+                            "Assigned": { "type": "boolean", "required": true },
+                            "Limited": { "enum": ["Unlimited", "Limited", "none"], "required": true },
+                            "Quantity": { "type": ["null", "integer"], "required": true },
+                            "Usage": { "type": ["string", "integer"], "required": true },
+                            "Licensed": { "type": "boolean", "required": true },
+                            "Allowed": { "type": ["string", "integer"], "required": true }
+				        }
+					}
+				}
+            },
+            "userServicesAuthorizationTable": {
+                "type": "object",
+				"required": true,
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Service Name": { "type": "string", "minLength": 1, "required": true },
+                            "Authorized": { "type": "boolean", "required": true },
+                            "Assigned": { "type": "boolean", "required": true },
+                            "Limited": { "enum": ["Unlimited", "Limited"], "required": true },
+                            "Quantity": { "type": ["null", "integer"], "required": true },
+                            "Usage": { "type": ["string", "integer"], "required": true },
+                            "Licensed": { "type": "boolean", "required": true },
+                            "Allowed": { "type": ["string", "integer"], "required": true },
+                            "User Assignable" : { "type": "boolean", "required": true },
+                            "Group Service Assignable": { "type": "boolean", "required": true }
+				        }
+					}
+				}
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
+{
+    "requestURITemplate": {
+        "title": "Modify Group Services Authorizations request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Services Authorizations request body schema",
+        "properties": {
+            "servicePacksAuthorizationTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Authorized": { "type": "boolean" },
+                            "Limited": { "enum": ["Unlimited", "Limited"] },
+                            "Allocated": { "type": "integer" }
+				        }
+					}
+				}
+            },
+            "groupServicesAuthorizationTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Authorized": { "type": "boolean" },
+                            "Limited": { "enum": ["Unlimited", "Limited"] },
+                            "Quantity": { "type": "integer" }
+				        }
+					}
+				}
+            },
+            "userServicesAuthorizationTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Authorized": { "type": "boolean" },
+                            "Limited": { "enum": ["Unlimited", "Limited"] },
+                            "Quantity": { "type": "integer" }
+				        }
+					}
+				}
+            }
+        }
+    },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices
+{
+    "requestURITemplate": {
+        "title": "Assign Services to Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Assign Services to Group request body schema",
+        "type": "object",
+        "properties": {
+            "serviceName": {
+                "type": "array",
+                "minItems": 1,
+                "required": true,
+                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+            }
+        }
+    },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices
+{
+    "requestURITemplate": {
+        "title": "Unassign Services from Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Unassign Services from Group request body schema",
+        "type": "object",
+        "properties": {
+            "serviceName": {
+                "type": "array",
+                "minItems": 1,
+                "required": true,
+                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+            }
         }
     },
     "response": { }
@@ -8245,149 +8904,6 @@ PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+gr
             },
             "homeZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
             "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 }
-        }
-    },
-    "response": { }
-}
-
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices
-{
-    "requestURITemplate": {
-        "title": "Assign Services to Group request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": {
-        "title": "Assign Services to Group request body schema",
-        "type": "object",
-        "properties": {
-            "serviceName": {
-                "type": "array",
-                "minItems": 1,
-                "required": true,
-                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
-            }
-        }
-    },
-    "response": { }
-}
-
-POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices
-{
-    "requestURITemplate": {
-        "title": "Unassign Services from Group request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": {
-        "title": "Unassign Services from Group request body schema",
-        "type": "object",
-        "properties": {
-            "serviceName": {
-                "type": "array",
-                "minItems": 1,
-                "required": true,
-                "items": { "type": "string", "minLength": 1, "maxLength": 80 }
-            }
-        }
-    },
-    "response": { }
-}
-
-GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
-{
-    "requestURITemplate": {
-        "title": "Get group-level Feature Access Codes settings request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": { },
-    "response": {
-        "title": "Get group-level Feature Access Codes settings response body schema",
-        "type": "object",
-        "properties": {
-            "_links": {
-				"type": "object",
-				"required": true,
-				"properties": {
-					"self": {
-						"type": "object",
-						"required": true,
-						"properties": {
-							"href": {
-								"type": "string",
-								"required": true
-							}
-						}
-					}
-				}
-			},
-			"ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "curies": {
-				"type": "array",
-				"required": true,
-				"items": {
-					"type": "object",
-					"properties": {
-						"name": { "type": "string", "required": true },
-						"href": { "type": "string", "required": true },
-						"templated": { "type": "boolean", "required": true }
-					}
-				}
-			},
-            "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ], "required": true },
-            "featureAccessCode": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "featureAccessCodeName": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
-                        "mainCode": { "type": "string", "minLength": 1, "maxLength": 5, "required": true, "pattern": "^[A-D0-9\\#\\*]+$" },
-                        "alternateCode": { "type": "string", "minLength": 1, "maxLength": 5, "pattern": "^[A-D0-9\\#\\*]+$" }
-                    }
-                }
-            }
-        }
-    }
-}
-
-PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes
-{
-    "requestURITemplate": {
-        "title": "Update group-level Feature Access Codes settings request URI template parameters schema",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": {
-        "title": "Update group-level Feature Access Codes settings request body schema",
-        "type": "object",
-        "properties": {
-            "useFeatureAccessCodeLevel": { "enum": [ "Service Provider", "Group" ] },
-            "featureAccessCode": {
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "featureAccessCodeName": { "type": "string", "minLength": 1, "maxLength": 80, "required": true },
-                        "mainCode": { "type": "string", "minLength": 1, "maxLength": 5, "required": true, "pattern": "^[A-D0-9\\#\\*]+$" },
-                        "alternateCode": { "type": "string", "minLength": 1, "maxLength": 5, "pattern": "^[A-D0-9\\#\\*]+$" }
-                    }
-                }
-            }
         }
     },
     "response": { }
