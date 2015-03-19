@@ -1231,7 +1231,6 @@ Understands how to complete the necessary provisioning based on various types of
 in which it's being used). This request specifically supports only the "createVoipUsers" process is supported.
 
 ##URI Query Parameters
-
 <table border=1>
     <thead>
     <th>Parameter</th>
@@ -1954,7 +1953,27 @@ Creates a new Service Provider or Enterprise<br />
 Process name: Create Service Provider (BroadWorks Entity Service)<br />
 Also assigns the default domain to the System and the defaultSipDomain from configuration to the System
 and the newly created Service Provider/Enterprise.<br />
-Note that the 424 example is just one example of a possible BroadWorks error.
+Note that the 424 example is just one example of a possible BroadWorks error.<br />
+##URI Query Parameters
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center">no</td>
+            <td>create-only</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+            <b>NOTE: at this time this property is ignored.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/service-providers{?mode}
 > Content-Type: application/json
 {
@@ -2009,6 +2028,7 @@ POST /broadworks/service-providers{?mode}
 }
 
 Modify some or all editable properties of a BroadWorks Service Provider/Enterprise.
+Process name: Modify Service Provider (BroadWorks Entity Service)
 PUT /broadworks/service-providers/{+serviceProviderId}
 > Content-Type: application/json
 {
@@ -2034,7 +2054,7 @@ PUT /broadworks/service-providers/{+serviceProviderId}
 < Transaction-Id: 1380080943120
 
 Remove specified Service Provider/Enterprise from BroadWorks.
-
+Process name: Delete Service Provider (BroadWorks Entity Service)
 This request makes no attempt to check if the Service Provider/Enterprise actually exists in the System,
 nor does it check to see if the Service Provider/Enterprise is allowed to be deleted.
 DELETE /broadworks/service-providers/{+serviceProviderId}
@@ -2096,8 +2116,28 @@ Assign a single phone number (TN) to an Enterprise or Service Provider.
 Process name : Assign BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
 Process-backed: Yes<br />
 Rollback-enabled: Yes<br />
-Cluster resolution method: Service Provider
+Cluster resolution method: Service Provider<br />
 Note that the 424 example is just one example of a possible BroadWorks error.
+##URI Query Parameters
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center">no</td>
+            <td>create-only</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+            <b>NOTE: at this time this property is ignored.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/service-providers/{+serviceProviderId}/phone-numbers{?mode}
 > Content-Type: application/json
 {
@@ -2296,9 +2336,32 @@ GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}
 }
 
 Create a new group<br />
-Process name: Create Group (BroadWorks Entity Service)<br />
 Also assigns the default domain to the System and Enterprise/Service Provider if needed and resolves the SIP Domain for the new group.<br />
-Note that the 424 example is just one example of a possible BroadWorks error.
+Process name: Create Group (BroadWorks Entity Service)<br />
+Process-backed: Yes<br />
+Rollback-enabled: Yes<br />
+Cluster resolution method: Service Provider<br />
+Note that the 424 example is just one example of a possible BroadWorks error.<br />
+##URI Query Parameters
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center">no</td>
+            <td>create-only</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+            <b>NOTE: at this time this property is ignored.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/service-providers/{+serviceProviderId}/groups{?mode}
 > Content-Type: application/json
 {
@@ -2587,11 +2650,31 @@ Server Error for unhandled errors. However, for brevity, examples of these respo
 resources/methods below.
 --
 
-Assign a single phone number (TN) to a Group.
+Assign a single phone number (TN) to a Group.<br />
 Process name: Assign BroadWorks Group TN<br />
 Process-backed: Yes<br />
 Rollback-enabled: Yes<br />
 Cluster resolution method: Group
+##URI Query Parameters
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center">no</td>
+            <td>create-only</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+            <b>NOTE: at this time this property is ignored.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers{?mode}
 > Content-Type: application/json
 {
@@ -2707,7 +2790,7 @@ Process-backed: Yes<br />
 Rollback-enabled: Yes<br />
 Cluster resolution method: Group
 ##Request URI Query Parameters
-<table>
+<table border="1">
     <thead>
         <th>Parameter</th>
         <th>Required</th>
@@ -2730,7 +2813,7 @@ Cluster resolution method: Group
             <td>always</td>
             <td>
                 The following table describes behavior depending on values for this parameter.
-                <table>
+                <table border="1">
                     <thead>
                         <th>Value</th>
                         <th>Action</th>
@@ -3185,6 +3268,25 @@ Process name: Create BroadWorks Group Device (BroadWorks Entity Service)<br />
 Process-backed: Yes<br />
 Rollback-enabled: Yes<br />
 Cluster resolution method: Group
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Default</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mode</td>
+            <td style="text-align: center">no</td>
+            <td>create-only</td>
+            <td>Controls execution mode as described in **ref general documentation.<br />
+            Allowed values: [ "prevalidate-only", "prevalidate-and-create", "create-only" ].<br />
+            <b>NOTE: at this time this property is ignored.</b>
+            </td>
+        </tr>
+    </tbody>
+</table>
 POST /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices{?mode}
 > Content-Type: application/json
 {
@@ -3416,8 +3518,8 @@ PUT /broadworks/users/{+userId}/call-processing-policy
 < Transaction-Id: 1380080943120
 
 
-Retrieve BroadWorks User
-
+Retrieve BroadWorks User<nr />
+Process name: Retrieve BroadWorks User (BroadWorks Entity)
 GET /broadworks/users/{+userId}
 < 200
 < Transaction-Id: 1380080943120
