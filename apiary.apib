@@ -2100,7 +2100,7 @@ POST /broadworks/service-providers/{+serviceProviderId}/assignDomain
 }
 
 --
-BroadWorks Service Providers - Phone Numbers
+BroadWorks Entity Service Providers - Phone Numbers
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
 
@@ -5897,7 +5897,6 @@ with the exception of the convenience grouping objects (callingLineId, media, ca
 * If a property is omitted in the request, the corresponding element will be omitted from the OCI request.
 * If a property is present in the request that is not part of the json-schema for this request, it will be ignored.
 
-** TODO: Add json-schema with the URI template variables (all are required) and the list of body properties (all are optional) and data type for each **
 PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
 > Content-Type: application/json
 {
@@ -10063,6 +10062,184 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services
     "response": { }
 }
 
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
+{
+    "requestURITemplate": {
+        "title": "Update User Call Processing Policy request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Call Processing Policy request body schema",
+        "type": "object",
+        "properties": {
+            "callingLineId": {
+                "type": "object",
+                "properties": {
+                    "useUserCLIDSetting": { "type": "boolean" },
+                    "clidPolicy": { "enum": ["Use DN", "User Configurable CLID", "Use Group CLID"] },
+                    "emergencyClidPolicy": { "enum": ["Use DN", "User Configurable CLID", "Use Group CLID"] },
+                    "allowAlternateNumbersForRedirectingIdentity": { "type": "boolean" },
+                    "useGroupName": { "type": "boolean" },
+                    "allowConfigurableCLIDForRedirectingIdentity": { "type": "boolean" },
+                    "blockCallingNameForExternalCalls": { "type": "boolean" }
+                }
+            },
+            "media": {
+                "type": "object",
+                "properties": {
+                    "useUserMediaSetting": { "type": "boolean" },
+                    "mediaPolicySelection": { 
+                        "enum": ["Use Uncompressed Codec", "Use Supported Media Set", "No Restrictions"] 
+                    },
+                    "supportedMediaSetName": { "type": "string", "minLength": 1, "maxLength": 80 }
+                }
+            },
+            "callLimits": {
+                "type": "object",
+                "properties": {
+                    "useUserCallLimitsSetting": { "type": "boolean" },
+                    "useMaxSimultaneousCalls": { "type": "boolean" },
+                    "maxSimultaneousCalls": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 500, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 999999, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "useMaxSimultaneousVideoCalls": { "type": "boolean" },
+                    "maxSimultaneousVideoCalls": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 500, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 999999, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "useMaxCallTimeForAnsweredCalls": { "type": "boolean" },
+                    "maxCallTimeForAnsweredCallsMinutes": { "type": "integer", "minimum": 3, "maximum": 2880 },
+                    "useMaxCallTimeForUnansweredCalls": { "type": "boolean" },
+                    "maxCallTimeForUnansweredCallsMinutes": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 60, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 2880, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "useMaxConcurrentRedirectedCalls": { "type": "boolean" },
+                    "maxConcurrentRedirectedCalls": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 32, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 999999, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "useMaxFindMeFollowMeDepth": { "type": "boolean" },
+                    "maxFindMeFollowMeDepth": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 10, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 100, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "maxRedirectionDepth": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 15, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 100, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    },
+                    "useMaxConcurrentFindMeFollowMeInvocations": { "type": "boolean" },
+                    "maxConcurrentFindMeFollowMeInvocations": {
+                        "anyOf": [
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 32, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            },
+                            { 
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 999999, 
+                                "description": "Schema for BroadWorks version < R20" 
+                            }
+                        ]
+                    }
+                }
+            },
+            "incomingCallerId": {
+                "type": "object",
+                "properties": {
+                    "useUserDCLIDSetting": { "type": "boolean" },
+                    "enableDialableCallerID": { "type": "boolean" }
+                }
+            }
+        }
+    },
+    "response": { }
+}
+
 GET /loki-services/broadworks/service-providers/{+serviceProviderId}
 {
     "requestURITemplate": {
@@ -10827,230 +11004,6 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
     "response": { }
 }
 
-PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy
-{
-    "request" :
-        {
-            "type": "object",
-            "title": "User Call Processing Policy Modify request body schema",
-            "properties": {
-                "callingLineId": {
-                    "type": "object",
-                    "properties": {
-                        "useUserCLIDSetting": {
-                            "type": "boolean"
-                        },
-                        "clidPolicy": {
-                            "type": "string"
-                        },
-                        "emergencyClidPolicy": {
-                            "type": "string"
-                        },
-                        "allowAlternateNumbersForRedirectingIdentity": {
-                            "type": "boolean"
-                        },
-                        "useGroupName": {
-                            "type": "boolean"
-                        },
-                        "allowConfigurableCLIDForRedirectingIdentity": {
-                            "type": "boolean"
-                        },
-                        "blockCallingNameForExternalCalls": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "media": {
-                    "type": "object",
-                    "properties": {
-                        "useUserMediaSetting": {
-                            "type": "boolean"
-                        },
-                        "mediaPolicySelection": {
-                            "type": "string"
-                        },
-                        "supportedMediaSetName": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "callLimits": {
-                    "type": "object",
-                    "properties": {
-                        "useUserCallLimitsSetting": {
-                            "type": "boolean"
-                        },
-                        "useMaxSimultaneousCalls": {
-                            "type": "boolean"
-                        },
-                        "maxSimultaneousCalls": {
-                            "type": "integer"
-                        },
-                        "useMaxSimultaneousVideoCalls": {
-                            "type": "boolean"
-                        },
-                        "maxSimultaneousVideoCalls": {
-                            "type": "integer"
-                        },
-                        "useMaxCallTimeForAnsweredCalls": {
-                            "type": "boolean"
-                        },
-                        "maxCallTimeForAnsweredCallsMinutes": {
-                            "type": "integer"
-                        },
-                        "useMaxCallTimeForUnansweredCalls": {
-                            "type": "boolean"
-                        },
-                        "maxCallTimeForUnansweredCallsMinutes": {
-                            "type": "integer"
-                        },
-                        "useMaxConcurrentRedirectedCalls": {
-                            "type": "boolean"
-                        },
-                        "maxConcurrentRedirectedCalls": {
-                            "type": "integer"
-                        },
-                        "useMaxFindMeFollowMeDepth": {
-                            "type": "boolean"
-                        },
-                        "maxFindMeFollowMeDepth": {
-                            "type": "integer"
-                        },
-                        "maxRedirectionDepth": {
-                            "type": "integer"
-                        },
-                        "useMaxConcurrentFindMeFollowMeInvocations": {
-                            "type": "boolean"
-                        },
-                        "maxConcurrentFindMeFollowMeInvocations": {
-                            "type": "integer"
-                        }
-                    }
-                },
-                "incomingCallerId": {
-                    "type": "object",
-                    "properties": {
-                        "useUserDCLIDSetting": {
-                            "type": "boolean"
-                        },
-                        "enableDialableCallerID": {
-                            "type": "boolean"
-                        }
-                    }
-                }
-            }
-        },
-    "response" : { }
-}
-
-GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
-{
-    "requestURITemplate": {
-        "title": "BroadWorks Utility - Retrieve User request URI template parameters schema",
-        "type": "object",
-        "properties": {
-            "ne_id": { "type": "string", "required": true },
-            "userId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
-        }
-    },
-    "requestBody": { },
-	"response": {
-	    "title": "GET User, body",
-		"type": "object",
-		"properties": {
-			"_links": {
-				"type": "object",
-				"required": true,
-				"properties": {
-					"self": {
-						"type": "object",
-						"required": true,
-						"properties": {
-							"href": {
-								"type": "string",
-								"required": true
-							}
-						}
-					}
-				}
-			},
-    		"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "userId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "lastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "firstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true},
-            "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30},
-            "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30},
-            "phoneNumber": { "type": "string", "minLength": 1, "maxLength": 23 },
-            "extension": { "type": "string", "minLength": 2, "maxLength": 6},
-            "callingLineIdPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 23},
-            "department": {
-                "type": "object",
-                "properties": {
-                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30 },
-                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30 },
-                    "name": { "type": "string", "minLength": 1, "maxLength": 50 }
-                }
-            },
-            "departmentFullPath": { "type": "string", "minLength": 1},
-            "language": { "type": "string", "minLength": 1, "maxLength": 40, "required": true},
-            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127, "required": true},
-            "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127, "required": true},
-            "defaultAlias": { "type": "string", "minLength": 1, "maxLength": 161, "required": true },
-            "alias": {
-                "type": "array",
-                "minItems": 0,
-                "maxItems": 3,
-                "items": { "type": "string", "minLength": 1, "maxLength": 161},
-                "required": true
-            },
-            "title": { "type": "string", "minLength": 1, "maxLength": 50},
-            "pagerPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30},
-            "mobilePhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30},
-            "emailAddress": { "type": "string", "minLength": 1, "maxLength": 80},
-            "yahooId": { "type": "string", "minLength": 1, "maxLength": 50},
-            "addressLocation": { "type": "string", "minLength": 1, "maxLength": 80},
-            "address": {
-                "type": "object",
-                "properties": {
-                    "addressLine1": { "type": ["string", "null"], "minLength": 1, "maxLength": 80},
-                    "addressLine2": { "type": ["string", "null"], "minLength": 1, "maxLength": 80},
-                    "city": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
-                    "stateOrProvince": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
-                    "stateOrProvinceDisplayName": { "type": "string", "minLength": 1, "maxLength": 50},
-                    "zipOrPostalCode": { "type": ["string", "null"], "minLength": 1, "maxLength": 50},
-                    "country": { "type": ["string", "null"], "minLength": 1, "maxLength": 50}
-                }
-            },
-            "countryCode": { "type": "string", "maxLength": 3, "pattern": "[ 0-9]|[ 1-9][ 0-9]{ 1, 2}"},
-            "nationalPrefix": { "type": "string", "minLength": 1, "maxLength": 2},
-        	"ne_id": {
-    			"type": "string"
-    		},
-    		"curies": {
-    			"type": "array",
-    			"required": true,
-    			"items": {
-    				"type": "object",
-    				"properties": {
-    					"name": {
-    						"type": "string"
-    					},
-    					"href": {
-    						"type": "string"
-    					},
-    					"templated": {
-    						"type": "boolean"
-    					}
-    				}
-    			}
-			}
-		}
-	}
-}
-
 GET /loki-services/broadworks/users/{+userId}
 {
     "requestURITemplate": {
@@ -11414,7 +11367,7 @@ DELETE /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{
     "response": { }
 }
 
-GET /loki-services/network-elements/broadworks/locations
+GET /loki-services/network-elements/broadworks/locations{?userId,linePort,phoneNumber,groupId}
 {
     "requestURIQuery": {
         "title": "BroadWorks Utility: Network Server Location API Interface request URI query parameters schema",
