@@ -8714,7 +8714,1354 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
     }
 }
 
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName" : { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Trunk Group response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "pilotUserId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+			},
+            "department": { 
+                "type": "object",
+		        "properties": {
+	                "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 50, "required": true }
+                }
+            },
+            "accessDevice": {
+                "type": "object",
+                "properties": {
+                    "deviceLevel": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "maxActiveCalls": { "type": "integer", "minimum": 1, "required": true },
+            "maxIncomingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "maxOutgoingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "enableBursting": { "type": "boolean", "required": true },
+            "burstingMaxActiveCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxIncomingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxOutgoingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "capacityExceededAction": { "enum": ["Forward", "Reroute"] },
+            "capacityExceededForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "capacityExceededRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "capacityExceededTrapInitialCalls": { "type": "integer", "minimum": 0, "required": true },
+            "capacityExceededTrapOffsetCalls": { "type": "integer", "minimum": 0, "required": true },
+            "unreachableDestinationAction": { "enum": ["Forward", "Reroute"] },
+            "unreachableDestinationForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "unreachableDestinationRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "invitationTimeout": { 
+                "required": true,
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 15 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 255 
+                    }
+                ]
+            },
+            "requireAuthentication": { "type": "boolean", "required": true },
+            "sipAuthenticationUserName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "sipAuthenticationPassword": { "type": "string", "minLength": 1, "maxLength": 60 },
+            "hostedUserTable": {
+                "type": "array",
+                "minItems": 0
+            },
+            "trunkGroupIdentity": {
+                "description": "SIP URI",
+                "type": "string",
+                "minLength": 1, 
+                "maxLength": 161,
+                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+            },
+            "otgDtgIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "allowTerminationToTrunkGroupIdentity": { "type": "boolean", "required": true },
+            "allowTerminationToDtgIdentity": { "type": "boolean", "required": true },
+            "includeTrunkGroupIdentity": { "type": "boolean", "required": true },
+            "includeDtgIdentity": { "type": "boolean", "required": true },
+            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean", "required": true },
+            "includeOtgIdentityForNetworkCalls": { "type": "boolean", "required": true },
+            "enableNetworkAddressIdentity": { "type": "boolean", "required": true },
+            "allowUnscreenedCalls": { "type": "boolean", "required": true },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean", "required": true },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
+            "callForwardingAlwaysAction": { "enum": ["Forward", "Reroute"] },
+            "callForwardingAlwaysForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "callForwardingAlwaysRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "peeringDomain": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "routeToPeeringDomain": { "type": "boolean", "required": true },
+            "prefixEnabled": { "type": "boolean", "required": true },
+            "prefix": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "statefulReroutingEnabled": { "type": "boolean", "required": true },
+            "sendContinuousOptionsMessage": { "type": "boolean", "required": true },
+            "continuousOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 30, "maximum": 86400, "required": true },
+            "failureOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 10, "maximum": 86400, "required": true },
+            "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "inviteFailureThresholdWindowSeconds": { "type": "integer", "minimum": 30, "maximum": 240, "required": true },
+            "pilotUserCallingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"], "required": true },
+            "useSystemCallingLineAssertedIdentityPolicy": { "type": "boolean", "required": true }
+        }
+    }
+}
 
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "Modify Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Modify Group Trunk Group request body schema",
+        "type": "object",
+        "properties": {
+            "newName": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "pilotUserId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+			},
+            "department": { 
+                "type": "object",
+		        "properties": {
+	                "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 50, "required": true }
+                }
+            },
+            "accessDevice": {
+                "type": "object",
+                "properties": {
+                    "deviceLevel": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "maxActiveCalls": { "type": "integer", "minimum": 1 },
+            "maxIncomingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "maxOutgoingCalls": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 999999 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 0, 
+                        "maximum": 999999 
+                    }
+                ]
+            },
+            "enableBursting": { "type": "boolean" },
+            "burstingMaxActiveCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxIncomingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "burstingMaxOutgoingCalls": { "type": "integer", "minimum": 0, "maximum": 999999 },
+            "capacityExceededAction": { "enum": ["Forward", "Reroute"] },
+            "capacityExceededForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "capacityExceededRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "capacityExceededTrapInitialCalls": { "type": "integer", "minimum": 0 },
+            "capacityExceededTrapOffsetCalls": { "type": "integer", "minimum": 0 },
+            "unreachableDestinationAction": { "enum": ["Forward", "Reroute"] },
+            "unreachableDestinationForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "unreachableDestinationRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "invitationTimeout": { 
+                "anyOf": [
+                    {
+                        "description": "Schema for BroadWorks version < R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 15 
+                    },
+                    {
+                        "description": "Schema for BroadWorks version R21",
+                        "type": "integer", 
+                        "minimum": 1, 
+                        "maximum": 255 
+                    }
+                ]
+            },
+            "requireAuthentication": { "type": "boolean" },
+            "sipAuthenticationUserName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "sipAuthenticationPassword": { "type": "string", "minLength": 1, "maxLength": 60 },
+            "hostedUserIdList": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "array",
+                        "minItems": 0,
+                        "items": {
+            				"minLength": 1,
+            				"maxLength": 161,
+            				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+            			}
+        			}
+    			}
+            },
+            "trunkGroupIdentity": {
+                "description": "SIP URI",
+                "type": "string",
+                "minLength": 1, 
+                "maxLength": 161,
+                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+            },
+            "otgDtgIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "allowTerminationToTrunkGroupIdentity": { "type": "boolean" },
+            "allowTerminationToDtgIdentity": { "type": "boolean" },
+            "includeTrunkGroupIdentity": { "type": "boolean" },
+            "includeDtgIdentity": { "type": "boolean" },
+            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean" },
+            "includeOtgIdentityForNetworkCalls": { "type": "boolean" },
+            "enableNetworkAddressIdentity": { "type": "boolean" },
+            "allowUnscreenedCalls": { "type": "boolean" },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean" },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "callForwardingAlwaysAction": { "enum": ["Forward", "Reroute"] },
+            "callForwardingAlwaysForwardAddress": { 
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "callForwardingAlwaysRerouteTrunkGroupKey": {
+                "type": "object",
+                "properties": {
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                }
+            },
+            "peeringDomain": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "routeToPeeringDomain": { "type": "boolean" },
+            "prefixEnabled": { "type": "boolean" },
+            "prefix": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "statefulReroutingEnabled": { "type": "boolean" },
+            "sendContinuousOptionsMessage": { "type": "boolean" },
+            "continuousOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 30, "maximum": 86400 },
+            "failureOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 10, "maximum": 86400 },
+            "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+            "inviteFailureThresholdWindowSeconds": { "type": "integer", "minimum": 30, "maximum": 240 },
+            "pilotUserCallingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"] },
+            "useSystemCallingLineAssertedIdentityPolicy": { "type": "boolean" }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "Delete Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices
+{
+    "requestURITemplate": {
+        "title": "Create Group Access Device request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Create Group Access Device request body schema",
+        "type": "object",
+        "properties": {
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "deviceType": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 12, "maxLength": 12, "pattern": "^[0-9A-Fa-f]{12}$" },
+            "serialNumber": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "mobilityManagerProvisioningURL": { "type": "string", "minLength": 1, "maxLength": 256 },
+            "mobilityManagerProvisioningUserName": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "mobilityManagerProvisioningPassword": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "mobilityManagerDefaultOriginatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "mobilityManagerDefaultTerminatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "useCustomUserNamePassword": { "type": "boolean" },
+            "accessDeviceCredentials": {
+                "type": "object",
+                "properties": {
+                    "userName": {
+        				"minLength": 1,
+        				"maxLength": 161,
+        				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+        				"required": true
+        			},
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60, "required": true }
+                }
+            }
+        }
+    },
+    "response": {
+        "title": "Create Group Access Device response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "Retrieve Group Access Device request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve Group Access Device response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "deviceType": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 12, "maxLength": 12, "pattern": "^[0-9A-Fa-f]{12}$" },
+            "serialNumber": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "numberOfPorts": { "type": "integer", "minimum": 1, "required": true },
+            "numberOfAssignedPorts": { "type": "integer", "required": true },
+            "status": { "enum": ["Online", "Offline", "Unavailable", "Unknown"], "required": true },
+            "configurationMode": { "enum": ["Default", "Manual", "Custom"] },
+            "configurationFileName": { "type": "string", "minLength": 1, "maxLength": 256 },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "mobilityManagerProvisioningURL": { "type": "string", "minLength": 1, "maxLength": 256 },
+            "mobilityManagerProvisioningUserName": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "mobilityManagerDefaultOriginatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "mobilityManagerDefaultTerminatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "useCustomUserNamePassword": { "type": "boolean" },
+            "userName": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+            }
+        }
+    }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "Modify Group Access Device request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { 
+        "title": "Modify Group Access Device request body schema",
+        "type": "object",
+        "properties": {
+            "protocol": { "type": "string", "minLength": 1, "maxLength": 20 },
+            "netAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "port": { "type": "integer", "minimum": 1025, "maximum": 65535 },
+            "outboundProxyServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "stunServerNetAddress": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "macAddress": { "type": "string", "minLength": 12, "maxLength": 12, "pattern": "^[0-9A-Fa-f]{12}$" },
+            "serialNumber": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "description": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "configurationMode": { "enum": ["Default", "Manual", "Custom"] },
+            "configurationFile": {  
+                "type": "object",
+                "properties": {
+                    "sourceFileName": { "type": "string", "minLength": 1 },
+                    "fileContent": { "type": "string" }
+                }
+            },
+            "physicalLocation": { "type": "string", "minLength": 1, "maxLength": 1024 },
+            "transportProtocol": { "enum": ["UDP", "TCP", "Unspecified"] },
+            "mobilityManagerProvisioningURL": { "type": "string", "minLength": 1, "maxLength": 256 },
+            "mobilityManagerProvisioningUserName": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "mobilityManagerProvisioningPassword": { "type": "string", "minLength": 1, "maxLength": 15 },
+            "mobilityManagerDefaultOriginatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "mobilityManagerDefaultTerminatingServiceKey": { "type": "integer", "minimum": 0, "maximum": 999 },
+            "useCustomUserNamePassword": { "type": "boolean" },
+            "accessDeviceCredentials": {
+                "type": "object",
+                "properties": {
+                    "userName": {
+        				"minLength": 1,
+        				"maxLength": 161,
+        				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+        				"required": true
+        			},
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60, "required": true }
+                }
+            }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}
+{
+    "requestURITemplate": {
+        "title": "Delete Group Access Device request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/users
+{
+    "requestURITemplate": {
+        "title": "Create User request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "Create User request body schema",
+        "type": "object",
+        "properties": {
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			},
+            "lastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "firstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "phoneNumber": {
+                "type": "string",
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 23
+            },
+            "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+            "callingLineIdPhoneNumber": {
+                "type": "string",
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 23
+            },
+            "password": { "type": "string", "minLength": 1, "maxLength": 60 },
+            "language": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127 },
+            "device": {
+                "type": "object",
+                "properties": {
+                    "level": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "email": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" }
+        }
+    },
+    "response": {
+        "title": "Create User response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
+{
+    "requestURITemplate": {
+        "title": "Retrieve User request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "Retrieve User response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"ne_id": { "type": "string", "required": true },
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			},
+			"lastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "firstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "callingLineIdLastName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "callingLineIdFirstName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "hiraganaLastName": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "hiraganaFirstName": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "phoneNumber": {
+                "type": "string",
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 23
+            },
+            "extension": { "type": "string", "minLength": 1, "maxLength": 20, "pattern": "^[\\d\\-]+$" },
+            "callingLineIdPhoneNumber": {
+                "type": "string",
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 23
+            },
+            "department": { 
+                "type": "object",
+		        "properties": {
+	                "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "name": { "type": "string", "minLength": 1, "maxLength": 50, "required": true }
+                }
+            },
+            "departmentFullPath": { "type": "string", "minLength": 1 },
+            "language": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+            "timeZone": { "type": "string", "minLength": 1, "maxLength": 127, "required": true },
+            "timeZoneDisplayName": { "type": "string", "minLength": 1, "maxLength": 127, "required": true },
+            "defaultAlias": {
+                "type": "string",
+                "minLength": 1, 
+                "maxLength": 161,
+                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+            },
+            "alias": {
+                "type": "array",
+                "maxItems": 3,
+                "items": {
+    				"type": "string",
+                    "minLength": 1, 
+                    "maxLength": 161,
+                    "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+    			}
+			},
+			"accessDeviceEndpoint": {
+			    "type": "object",
+			    "properties": {
+			        "accessDevice": {
+                        "type": "object", 
+                        "required": true,
+                        "properties": {
+                            "deviceLevel": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                            "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                        }
+                    },
+                    "linePort": { 
+                        "type": "string", 
+                        "minLength": 1, 
+                        "maxLength": 161, 
+                        "pattern": "^(\\+|[\\w\\-\\.\\!~\\*\\'\\(\\)])[\\w\\-\\.\\!~\\*\\'\\(\\)]{0,79}(@[a-zA-Z\\d\\.\\-]{1,80})?$",
+                        "required": true 
+                    },
+                    "contact": {
+                        "type": "array",
+                        "minItems": 0,
+                        "maxItems": 5,
+                        "items": { 
+                            "type": "string", 
+                            "minLength": 1,
+                            "maxLength": 1020
+                        }
+                    },
+                    "staticRegistrationCapable": { "type": "boolean", "required": true },
+                    "useDomain": { "type": "boolean", "required": true }
+			    }
+			},
+			"trunkAddressing": {
+			    "type": "object",
+			    "properties": {
+			        "trunkGroupDeviceEndpoint": {
+                        "type": "object", 
+                        "required": true,
+                        "properties": {
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "linePort": { 
+                                "type": "string", 
+                                "minLength": 1, 
+                                "maxLength": 161, 
+                                "pattern": "^(\\+|[\\w\\-\\.\\!~\\*\\'\\(\\)])[\\w\\-\\.\\!~\\*\\'\\(\\)]{0,79}(@[a-zA-Z\\d\\.\\-]{1,80})?$",
+                                "required": true 
+                            },
+                            "contact": {
+                                "type": "array",
+                                "minItems": 0,
+                                "maxItems": 5,
+                                "items": { 
+                                    "type": "string", 
+                                    "minLength": 1,
+                                    "maxLength": 1020
+                                }
+                            },
+                            "staticRegistrationCapable": { "type": "boolean", "required": true },
+                            "useDomain": { "type": "boolean", "required": true },
+                            "isPilotUser": { "type": "boolean", "required": true }
+                        }
+                    },
+                    "enterpriseTrunkName": { "type": "string", "minLength": 1, "maxLength": 30 },
+                    "alternateTrunkIdentity": { "type": "string", "minLength": 1, "maxLength": 80 }
+			    }
+			},
+			"title": { "type": "string", "minLength": 1, "maxLength": 50 },
+            "pagerPhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "mobilePhoneNumber": { "type": "string", "minLength": 1, "maxLength": 30 },
+            "emailAddress": { "type": "string", "minLength": 1, "maxLength": 80, "format": "email" },
+            "yahooId": { "type": "string", "minLength": 1, "maxLength": 50 },
+            "addressLocation": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "address": {
+                "type": "object",
+                "properties": {
+                    "addressLine1": { "type": "string", "minLength": 1,	"maxLength": 80	},
+					"addressLine2": { "type": "string",	"minLength": 1,	"maxLength": 80 },
+					"city": { "type": "string",	"minLength": 1,	"maxLength": 50	},
+					"stateOrProvince": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"stateOrProvinceDisplayName": {	"type": "string", "minLength": 1, "maxLength": 50 },
+					"zipOrPostalCode": { "type": "string", "minLength": 1, "maxLength": 50 },
+					"country": { "type": "string", "minLength": 1, "maxLength": 50 }
+                }
+            },
+            "countryCode": { 
+                "type": "string", 
+                "minLength": 1, 
+                "maxLength": 3, 
+                "pattern": "^[0-9]|[1-9][0-9]{1, 2}$", 
+                "required": true 
+            },
+            "nationalPrefix": { "type": "string", "minLength": 1, "maxLength": 2 },
+            "networkClassOfService": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "officeZoneName": { "type": "string", "minLength": 1, "maxLength": 40 },
+            "primaryZoneName": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "impId": { "type": "string", "minLength": 1, "maxLength": 196 }
+        }
+    }
+}
+
+DELETE /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}
+{
+    "requestURITemplate": {
+        "title": "Delete User request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services
+{
+    "requestURITemplate": {
+        "title": "Update User Service Assignments request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Service Assignments request body schema",
+        "type": "object",
+        "properties": {
+            "servicePacksAssignmentTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Assigned": { "type": "boolean", "required": true }
+				        }
+					}
+				}
+            },
+            "userServicesAssignmentTable": {
+                "type": "object",
+				"patternProperties": {
+					"^.+$": {
+						"type": "object",
+				        "properties": {
+			                "Assigned": { "type": "boolean", "required": true }
+				        }
+					}
+				}
+            }
+        }
+    },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Authentication
+{
+    "requestURITemplate": {
+        "title": "Update User Authentication Service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Authentication Service request body schema",
+        "type": "object",
+        "properties": {
+            "username": { "type": "string", "minLength": 1, "maxLength": 80},
+            "oldPassword": { "type": "string", "minLength": 1, "maxLength": 60},
+            "password": { "type": "string", "minLength": 1, "maxLength": 60}
+        }
+    },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Number
+{
+    "requestURITemplate": {
+        "title": "Update User Charge Number Service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Charge Number Service request body schema",
+        "type": "object",
+        "properties": {
+            "phoneNumber": {
+                "type": ["string", "null"],
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 23
+            },
+			"useChargeNumberForEnhancedTranslations": { "type": "boolean" },
+			"sendChargeNumberToNetwork": { "type": "boolean" }
+        }
+    },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Third-Party%20Voice%20Mail%20Support
+{
+    "requestURITemplate": {
+        "title": "Update User Third-Party Voice Mail Support Service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Third-Party Voice Mail Support Service request body schema",
+        "type": "object",
+        "properties": {
+            "isActive": { "type": "boolean" },
+            "busyRedirectToVoiceMail": { "type": "boolean" },
+            "noAnswerRedirectToVoiceMail": { "type": "boolean" },
+            "noAnswerNumberOfRings": { "enum": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] },
+            "alwaysRedirectToVoiceMail": { "type": "boolean" },
+            "outOfPrimaryZoneRedirectToVoiceMail": { "type": "boolean" },
+            "serverSelection": { "enum": ["Group Mail Server", "User Specific Mail Server"] },
+            "userServer": {
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "mailboxIdType": { "enum": ["User Or Group Phone Number", "URL"] },
+            "mailboxURL": {
+                "description": "SIP URI",
+                "type": ["string", "null"],
+                "minLength": 1, 
+                "maxLength": 161,
+                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+            }
+        }
+    },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20No%20Answer
+{
+    "requestURITemplate": {
+        "title": "Update User Call Forwarding No Answer Service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Call Forwarding No Answer Service request body schema",
+        "type": "object",
+        "properties": {
+            "isActive": { "type": "boolean" },
+            "forwardToPhoneNumber": {
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            },
+            "numberOfRings": { "enum": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] }
+        }
+    },
+    "response": { }
+}
+
+PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20Not%20Reachable
+{
+    "requestURITemplate": {
+        "title": "Update User Call Forwarding Not Reachable Service request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+				"required": true
+			}
+        }
+    },
+    "requestBody": {
+        "title": "Update User Call Forwarding Not Reachable Service request body schema",
+        "type": "object",
+        "properties": {
+            "isActive": { "type": "boolean" },
+            "forwardToPhoneNumber": {
+                "anyOf": [
+                    { 
+                        "description": "E.164 TN",
+                        "type": ["string", "null"], 
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    },
+                    { 
+                        "description": "non-E.164 TN",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 23,
+                        "pattern": "^[\\d\\-]+$"
+                    },
+                    {
+                        "description": "SIP URI",
+                        "type": "string",
+                        "minLength": 1, 
+                        "maxLength": 161,
+                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                    }
+                ]
+            }
+        }
+    },
+    "response": { }
+}
 
 GET /loki-services/broadworks/service-providers/{+serviceProviderId}
 {
