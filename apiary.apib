@@ -7332,7 +7332,7 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
         "type": "object",
         "properties": {
             "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
-            "department": { "type": "string", "minLength": 1, "maxLength": 50, "required": true },
+            "department": { "type": "string", "minLength": 1, "maxLength": 50 },
             "accessDevice": {
                 "type": "object",
                 "properties": {
@@ -7440,7 +7440,59 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
             "unreachableDestination": {
                 "type": "object",
                 "required": true,
-                "properties": {}
+                "properties": {
+                    "timeout": { 
+                        "required": true,
+                        "anyOf": [
+                            {
+                                "description": "Schema for BroadWorks version < R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 15 
+                            },
+                            {
+                                "description": "Schema for BroadWorks version R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 255 
+                            }
+                        ]
+                    },
+                    "action": { "enum": ["Forward", "Reroute"] },
+                    "forwardAddress": { 
+                        "anyOf": [
+                            { 
+                                "description": "E.164 TN",
+                                "type": ["string", "null"], 
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^\\+\\d+-\\d+$"
+                            },
+                            { 
+                                "description": "non-E.164 TN",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^[\\d\\-]+$"
+                            },
+                            {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            }
+                        ]
+                    },
+                    "rerouteTrunkGroup": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                        }
+                    }
+                }
             },
             "authentication": {
                 "type": "object",
@@ -7525,41 +7577,46 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
             },
             "peeringDomain":{
                 "type": "object",
+                "required": true,
                 "properties": {
                     "domainName": { "type": "string", "minLength": 1, "maxLength": 80 },
-                    "routeToPeeringDomain": { "type": "boolean" }
+                    "routeToPeeringDomain": { "type": "boolean", "required": true }
                 }
             },
             "trunkGroupPrefix": {
-                "type": "object",
+                "type": "object", 
+                "required": true,
                 "properties": {
-                    "enabled": { "type": "boolean" },
+                    "enabled": { "type": "boolean", "required": true },
                     "prefix": { "type": "string", "minLength": 1, "maxLength": 15 }
                 }
             },
             "advancedReroute": {
-                "type": "object",
+                "type": "object", 
+                "required": true,
                 "properties": {
-                    "enabled": { "type": "boolean" },
-                    "sendContinuousOptionsMessage": { "type": "boolean" },
-                    "continuousOptionsSendingInterval": { "type": "integer", "minimum": 30, "maximum": 86400 },
-                    "failureOptionsSendingInterval": { "type": "integer", "minimum": 10, "maximum": 86400 },
-                    "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-                    "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-                    "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-                    "inviteFailureThresholdWindow": { "type": "integer", "minimum": 30, "maximum": 240 }
+                    "enabled": { "type": "boolean", "required": true },
+                    "sendContinuousOptionsMessage": { "type": "boolean", "required": true },
+                    "continuousOptionsSendingInterval": { "type": "integer", "minimum": 30, "maximum": 86400, "required": true },
+                    "failureOptionsSendingInterval": { "type": "integer", "minimum": 10, "maximum": 86400, "required": true },
+                    "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true},
+                    "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true},
+                    "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+                    "inviteFailureThresholdWindow": { "type": "integer", "minimum": 30, "maximum": 240, "required": true }
                 }
             },
             "pilotUserCallingLineAssertedIdentityPolicy": {
-                "type": "object",
+                "type": "object", 
+                "required": true,
                 "properties": {
-                    "callingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"] }
+                    "useTrunkGroupCallingLineAssertedIdentityPolicy": { "type": "boolean", "required": true },
+                    "callingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"], "required": true }
                 }
             },
-            "allowUnscreenedCalls": { "type": "boolean" },
-            "allowUnscreenedEmergencyCalls": { "type": "boolean" },
-            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
-            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] }
+            "allowUnscreenedCalls": { "type": "boolean", "required": true },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean", "required": true },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true }
         }
     },
     "response": {
@@ -7601,7 +7658,656 @@ POST /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+g
     }
 }
 
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Retrieve Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": {
+        "title": "BroadWorks Entity - Retrieve Group Trunk Group response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+				"type": "object",
+				"required": true,
+				"properties": {
+					"self": {
+						"type": "object",
+						"required": true,
+						"properties": {
+							"href": {
+								"type": "string",
+								"required": true
+							}
+						}
+					}
+				}
+			},
+			"curies": {
+				"type": "array",
+				"required": true,
+				"items": {
+					"type": "object",
+					"properties": {
+						"name": { "type": "string", "required": true },
+						"href": { "type": "string", "required": true },
+						"templated": { "type": "boolean", "required": true }
+					}
+				}
+			},
+			"serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "pilotUserId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+			},
+            "department": { "type": "string", "minLength": 1, "maxLength": 50 },
+            "accessDevice": {
+                "type": "object",
+                "properties": {
+                    "level": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "capacityManagement": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "maxActiveCalls": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "total": { "type": "integer", "minimum": 1, "required": true },
+                            "incoming": { 
+                                "anyOf": [
+                                    {
+                                        "description": "Schema for BroadWorks version < R21",
+                                        "type": "integer", 
+                                        "minimum": 1, 
+                                        "maximum": 999999 
+                                    },
+                                    {
+                                        "description": "Schema for BroadWorks version R21",
+                                        "type": "integer", 
+                                        "minimum": 0, 
+                                        "maximum": 999999 
+                                    }
+                                ]
+                            },
+                            "outgoing": { 
+                                "anyOf": [
+                                    {
+                                        "description": "Schema for BroadWorks version < R21",
+                                        "type": "integer", 
+                                        "minimum": 1, 
+                                        "maximum": 999999 
+                                    },
+                                    {
+                                        "description": "Schema for BroadWorks version R21",
+                                        "type": "integer", 
+                                        "minimum": 0, 
+                                        "maximum": 999999 
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "burstingMaxActiveCalls": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "enabled": { "type": "boolean", "required": true },
+                            "total": { "type": "integer", "minimum": 0, "maximum": 999999 },
+                            "incoming": { "type": "integer", "minimum": 0, "maximum": 999999 },
+                            "outgoing": { "type": "integer", "minimum": 0, "maximum": 999999 }
+                        }
+                    },
+                    "incomingCapacityExceeded": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "action": { "enum": ["Forward", "Reroute"] },
+                            "forwardAddress": { 
+                                "anyOf": [
+                                    { 
+                                        "description": "E.164 TN",
+                                        "type": ["string", "null"], 
+                                        "minLength": 1, 
+                                        "maxLength": 23,
+                                        "pattern": "^\\+\\d+-\\d+$"
+                                    },
+                                    { 
+                                        "description": "non-E.164 TN",
+                                        "type": "string",
+                                        "minLength": 1, 
+                                        "maxLength": 23,
+                                        "pattern": "^[\\d\\-]+$"
+                                    },
+                                    {
+                                        "description": "SIP URI",
+                                        "type": "string",
+                                        "minLength": 1, 
+                                        "maxLength": 161,
+                                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                                    }
+                                ]
+                            },
+                            "rerouteTrunkGroup": {
+                                "type": "object",
+                                "properties": {
+                                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                                }
+                            },
+                            "initialCalls": { "type": "integer", "minimum": 0, "required": true },
+                            "offsetCalls": { "type": "integer", "minimum": 0, "required": true }
+                        }
+                    }
+                }
+            },
+            "unreachableDestination": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "timeout": { 
+                        "required": true,
+                        "anyOf": [
+                            {
+                                "description": "Schema for BroadWorks version < R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 15 
+                            },
+                            {
+                                "description": "Schema for BroadWorks version R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 255 
+                            }
+                        ]
+                    },
+                    "action": { "enum": ["Forward", "Reroute"] },
+                    "forwardAddress": { 
+                        "anyOf": [
+                            { 
+                                "description": "E.164 TN",
+                                "type": ["string", "null"], 
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^\\+\\d+-\\d+$"
+                            },
+                            { 
+                                "description": "non-E.164 TN",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^[\\d\\-]+$"
+                            },
+                            {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            }
+                        ]
+                    },
+                    "rerouteTrunkGroup": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                        }
+                    }
+                }
+            },
+            "authentication": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "enabled": { "type": "boolean", "required": true },
+                    "username": { "type": "string", "minLength": 1, "maxLength": 80 }
+                }
+            },
+            "identity": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "enableNetworkAddressIdentity": { "type": "boolean" },
+                    "trunkGroupIdentity": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "identity": {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            },
+                            "allowTerminationToTrunkGroupIdentity": { "type": "boolean", "required": true },
+                            "includeTrunkGroupIdentity": { "type": "boolean", "required": true },
+                            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean", "required": true }
+                        }
+                    },
+                    "otgDtgIdentity": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "identity": { "type": "string", "minLength": 1, "maxLength": 80 },
+                            "allowTerminationToDtgIdentity": { "type": "boolean", "required": true },
+                            "includeDtgIdentity": { "type": "boolean", "required": true },
+                            "includeOtgIdentityForNetworkCalls": { "type": "boolean", "required": true }
+                        }
+                    }
+                }
+            },
+            "callForwardingAlways": {
+                "type": "object",
+                "properties": {
+                    "action": { "enum": ["Forward", "Reroute"] },
+                    "forwardAddress": { 
+                        "anyOf": [
+                            { 
+                                "description": "E.164 TN",
+                                "type": ["string", "null"], 
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^\\+\\d+-\\d+$"
+                            },
+                            { 
+                                "description": "non-E.164 TN",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^[\\d\\-]+$"
+                            },
+                            {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            }
+                        ]
+                    },
+                    "rerouteTrunkGroup": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                        }
+                    }
+                }
+            },
+            "peeringDomain":{
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "domainName": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "routeToPeeringDomain": { "type": "boolean", "required": true }
+                }
+            },
+            "trunkGroupPrefix": {
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "enabled": { "type": "boolean", "required": true },
+                    "prefix": { "type": "string", "minLength": 1, "maxLength": 15 }
+                }
+            },
+            "advancedReroute": {
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "enabled": { "type": "boolean", "required": true },
+                    "sendContinuousOptionsMessage": { "type": "boolean", "required": true },
+                    "continuousOptionsSendingInterval": { "type": "integer", "minimum": 30, "maximum": 86400, "required": true },
+                    "failureOptionsSendingInterval": { "type": "integer", "minimum": 10, "maximum": 86400, "required": true },
+                    "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+                    "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+                    "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+                    "inviteFailureThresholdWindow": { "type": "integer", "minimum": 30, "maximum": 240, "required": true}
+                }
+            },
+            "pilotUserCallingLineAssertedIdentityPolicy": {
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "useTrunkGroupCallingLineAssertedIdentityPolicy": { "type": "boolean", "required": true },
+                    "callingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"], "required": true }
+                }
+            },
+            "allowUnscreenedCalls": { "type": "boolean", "required": true },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean", "required": true },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true }
+        }
+    }
+}
 
+PUT /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Modify Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": {
+        "title": "BroadWorks Entity - Modify Group Trunk Group response body schema",
+        "type": "object",
+        "properties": {
+            "pilotUserId": {
+				"minLength": 1,
+				"maxLength": 161,
+				"pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+			},
+            "department": { "type": "string", "minLength": 1, "maxLength": 50 },
+            "accessDevice": {
+                "type": "object",
+                "properties": {
+                    "level": { "enum": ["System", "Service Provider", "Group"], "required": true },
+                    "deviceName": { "type": "string", "minLength": 1, "maxLength": 40, "required": true }
+                }
+            },
+            "capacityManagement": {
+                "type": "object",
+                "properties": {
+                    "maxActiveCalls": {
+                        "type": "object",
+                        "properties": {
+                            "total": { "type": "integer", "minimum": 1 },
+                            "incoming": { 
+                                "anyOf": [
+                                    {
+                                        "description": "Schema for BroadWorks version < R21",
+                                        "type": "integer", 
+                                        "minimum": 1, 
+                                        "maximum": 999999 
+                                    },
+                                    {
+                                        "description": "Schema for BroadWorks version R21",
+                                        "type": "integer", 
+                                        "minimum": 0, 
+                                        "maximum": 999999 
+                                    }
+                                ]
+                            },
+                            "outgoing": { 
+                                "anyOf": [
+                                    {
+                                        "description": "Schema for BroadWorks version < R21",
+                                        "type": "integer", 
+                                        "minimum": 1, 
+                                        "maximum": 999999 
+                                    },
+                                    {
+                                        "description": "Schema for BroadWorks version R21",
+                                        "type": "integer", 
+                                        "minimum": 0, 
+                                        "maximum": 999999 
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "burstingMaxActiveCalls": {
+                        "type": "object",
+                        "properties": {
+                            "enabled": { "type": "boolean" },
+                            "total": { "type": "integer", "minimum": 0, "maximum": 999999 },
+                            "incoming": { "type": "integer", "minimum": 0, "maximum": 999999 },
+                            "outgoing": { "type": "integer", "minimum": 0, "maximum": 999999 }
+                        }
+                    },
+                    "incomingCapacityExceeded": {
+                        "type": "object",
+                        "properties": {
+                            "action": { "enum": ["Forward", "Reroute"] },
+                            "forwardAddress": { 
+                                "anyOf": [
+                                    { 
+                                        "description": "E.164 TN",
+                                        "type": ["string", "null"], 
+                                        "minLength": 1, 
+                                        "maxLength": 23,
+                                        "pattern": "^\\+\\d+-\\d+$"
+                                    },
+                                    { 
+                                        "description": "non-E.164 TN",
+                                        "type": "string",
+                                        "minLength": 1, 
+                                        "maxLength": 23,
+                                        "pattern": "^[\\d\\-]+$"
+                                    },
+                                    {
+                                        "description": "SIP URI",
+                                        "type": "string",
+                                        "minLength": 1, 
+                                        "maxLength": 161,
+                                        "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                                    }
+                                ]
+                            },
+                            "rerouteTrunkGroup": {
+                                "type": "object",
+                                "properties": {
+                                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                                    "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                                }
+                            },
+                            "initialCalls": { "type": "integer", "minimum": 0 },
+                            "offsetCalls": { "type": "integer", "minimum": 0 }
+                        }
+                    }
+                }
+            },
+            "unreachableDestination": {
+                "type": "object",
+                "properties": {
+                    "timeout": { 
+                        "anyOf": [
+                            {
+                                "description": "Schema for BroadWorks version < R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 15 
+                            },
+                            {
+                                "description": "Schema for BroadWorks version R21",
+                                "type": "integer", 
+                                "minimum": 1, 
+                                "maximum": 255 
+                            }
+                        ]
+                    },
+                    "action": { "enum": ["Forward", "Reroute"] },
+                    "forwardAddress": { 
+                        "anyOf": [
+                            { 
+                                "description": "E.164 TN",
+                                "type": ["string", "null"], 
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^\\+\\d+-\\d+$"
+                            },
+                            { 
+                                "description": "non-E.164 TN",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^[\\d\\-]+$"
+                            },
+                            {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            }
+                        ]
+                    },
+                    "rerouteTrunkGroup": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                        }
+                    }
+                }
+            },
+            "authentication": {
+                "type": "object",
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "username": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "password": { "type": "string", "minLength": 1, "maxLength": 60 }
+                }
+            },
+            "identity": {
+                "type": "object",
+                "properties": {
+                    "enableNetworkAddressIdentity": { "type": "boolean" },
+                    "trunkGroupIdentity": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "identity": {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            },
+                            "allowTerminationToTrunkGroupIdentity": { "type": "boolean" },
+                            "includeTrunkGroupIdentity": { "type": "boolean" },
+                            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean" }
+                        }
+                    },
+                    "otgDtgIdentity": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "identity": { "type": "string", "minLength": 1, "maxLength": 80 },
+                            "allowTerminationToDtgIdentity": { "type": "boolean" },
+                            "includeDtgIdentity": { "type": "boolean" },
+                            "includeOtgIdentityForNetworkCalls": { "type": "boolean" }
+                        }
+                    }
+                }
+            },
+            "callForwardingAlways": {
+                "type": "object",
+                "properties": {
+                    "action": { "enum": ["Forward", "Reroute"] },
+                    "forwardAddress": { 
+                        "anyOf": [
+                            { 
+                                "description": "E.164 TN",
+                                "type": ["string", "null"], 
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^\\+\\d+-\\d+$"
+                            },
+                            { 
+                                "description": "non-E.164 TN",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 23,
+                                "pattern": "^[\\d\\-]+$"
+                            },
+                            {
+                                "description": "SIP URI",
+                                "type": "string",
+                                "minLength": 1, 
+                                "maxLength": 161,
+                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
+                            }
+                        ]
+                    },
+                    "rerouteTrunkGroup": {
+                        "type": "object",
+                        "properties": {
+                            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                            "name": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+                        }
+                    }
+                }
+            },
+            "peeringDomain":{
+                "type": "object", 
+                "properties": {
+                    "domainName": { "type": "string", "minLength": 1, "maxLength": 80 },
+                    "routeToPeeringDomain": { "type": "boolean" }
+                }
+            },
+            "trunkGroupPrefix": {
+                "type": "object", 
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "prefix": { "type": "string", "minLength": 1, "maxLength": 15 }
+                }
+            },
+            "advancedReroute": {
+                "type": "object", 
+                "required": true,
+                "properties": {
+                    "enabled": { "type": "boolean" },
+                    "sendContinuousOptionsMessage": { "type": "boolean" },
+                    "continuousOptionsSendingInterval": { "type": "integer", "minimum": 30, "maximum": 86400 },
+                    "failureOptionsSendingInterval": { "type": "integer", "minimum": 10, "maximum": 86400 },
+                    "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+                    "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+                    "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
+                    "inviteFailureThresholdWindow": { "type": "integer", "minimum": 30, "maximum": 240 }
+                }
+            },
+            "pilotUserCallingLineAssertedIdentityPolicy": {
+                "type": "object", 
+                "properties": {
+                    "useTrunkGroupCallingLineAssertedIdentityPolicy": { "type": "boolean" },
+                    "callingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"] }
+                }
+            },
+            "allowUnscreenedCalls": { "type": "boolean" },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean" },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] }
+        }
+    },
+    "response": { }
+}
+
+DELETE /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}
+{
+    "requestURITemplate": {
+        "title": "BroadWorks Entity - Delete Group Trunk Group request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "trunkGroupName": { "type": "string", "minLength": 1, "maxLength": 30, "required": true }
+        }
+    },
+    "requestBody": { },
+    "response": { }
+}
 
 GET /loki-services/network-elements/broadworks/{+ne_id}/domains
 {
@@ -10121,17 +10827,17 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
                 "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*\\'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$"
             },
             "otgDtgIdentity": { "type": "string", "minLength": 1, "maxLength": 80 },
-            "allowTerminationToTrunkGroupIdentity": { "type": "boolean" },
-            "allowTerminationToDtgIdentity": { "type": "boolean" },
-            "includeTrunkGroupIdentity": { "type": "boolean" },
-            "includeDtgIdentity": { "type": "boolean" },
-            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean" },
-            "includeOtgIdentityForNetworkCalls": { "type": "boolean" },
-            "enableNetworkAddressIdentity": { "type": "boolean" },
-            "allowUnscreenedCalls": { "type": "boolean" },
-            "allowUnscreenedEmergencyCalls": { "type": "boolean" },
-            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
-            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"] },
+            "allowTerminationToTrunkGroupIdentity": { "type": "boolean", "required": true },
+            "allowTerminationToDtgIdentity": { "type": "boolean", "required": true },
+            "includeTrunkGroupIdentity": { "type": "boolean", "required": true },
+            "includeDtgIdentity": { "type": "boolean", "required": true },
+            "includeTrunkGroupIdentityForNetworkCalls": { "type": "boolean", "required": true },
+            "includeOtgIdentityForNetworkCalls": { "type": "boolean", "required": true },
+            "enableNetworkAddressIdentity": { "type": "boolean", "required": true },
+            "allowUnscreenedCalls": { "type": "boolean", "required": true },
+            "allowUnscreenedEmergencyCalls": { "type": "boolean", "required": true },
+            "pilotUserCallingLineIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
+            "pilotUserChargeNumberPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls", "No Calls"], "required": true },
             "callForwardingAlwaysAction": { "enum": ["Forward", "Reroute"] },
             "callForwardingAlwaysForwardAddress": { 
                 "anyOf": [
@@ -10167,19 +10873,19 @@ POST /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+ser
                 }
             },
             "peeringDomain": { "type": "string", "minLength": 1, "maxLength": 80 },
-            "routeToPeeringDomain": { "type": "boolean" },
-            "prefixEnabled": { "type": "boolean" },
+            "routeToPeeringDomain": { "type": "boolean", "required": true },
+            "prefixEnabled": { "type": "boolean", "required": true },
             "prefix": { "type": "string", "minLength": 1, "maxLength": 15 },
-            "statefulReroutingEnabled": { "type": "boolean" },
-            "sendContinuousOptionsMessage": { "type": "boolean" },
-            "continuousOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 30, "maximum": 86400 },
-            "failureOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 10, "maximum": 86400 },
-            "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-            "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-            "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60 },
-            "inviteFailureThresholdWindowSeconds": { "type": "integer", "minimum": 30, "maximum": 240 },
-            "pilotUserCallingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"] },
-            "useSystemCallingLineAssertedIdentityPolicy": { "type": "boolean" }
+            "statefulReroutingEnabled": { "type": "boolean", "required": true },
+            "sendContinuousOptionsMessage": { "type": "boolean", "required": true },
+            "continuousOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 30, "maximum": 86400, "required": true },
+            "failureOptionsSendingIntervalSeconds": { "type": "integer", "minimum": 10, "maximum": 86400, "required": true },
+            "failureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "successThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "inviteFailureThresholdCounter": { "type": "integer", "minimum": 1, "maximum": 60, "required": true },
+            "inviteFailureThresholdWindowSeconds": { "type": "integer", "minimum": 30, "maximum": 240, "required": true },
+            "pilotUserCallingLineAssertedIdentityPolicy": { "enum": ["All Originating Calls", "Unscreened Originating Calls"], "required": true },
+            "useSystemCallingLineAssertedIdentityPolicy": { "type": "boolean", "required": true }
         }
     },
     "response": {
