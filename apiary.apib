@@ -3387,6 +3387,162 @@ DELETE /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devi
 < Transaction-Id: 1380080943120
 
 --
+BroadWorks Entity - Auto Attendants
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+This request will retrieve the assigned services of an Auto Attendant.<br />
+Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks Entity Service)<br />
+<b>Note</b>:  Initial implementation does not actually check that the Auto Attendant belongs in the provided Enterpriser and Group.
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://lokiserver.example.com:8340/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20North/auto-attendants/6502342108%40example.com/services/assigned-services"
+        }
+    },
+    "servicePacks": [],
+    "services": ["Anonymous Call Rejection", " Call Forwarding Always", "Alternate Numbers"],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com North",
+    "userId": "6502342108@example.com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
+--
+BroadWorks Entity - Hunt Groups
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+This request will retrieve the assigned services of a Hunt Group.<br />
+Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entity Service)<br />
+<b>Note</b>: Initial implementation does not actually check that the Hunt Group belongs in the provided Enterpriser and Group.
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/hunt-groups/{+huntGroupId}/services/assigned-services
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://lokiserver.example.com:8340/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20North/hunt-groups/6502342108%40example.com/services/assigned-services"
+        }
+    },
+    "servicePacks": [],
+    "services": ["Anonymous Call Rejection", " Call Forwarding Always", "Alternate Numbers"],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com North",
+    "huntGroupId": "6502342108@example.com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
+--
+BroadWorks Entity - Call Centers
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+This request will retrieve the assigned services of a Call Center.<br />
+Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Entity Service)<br />
+<b>Note</b>: Initial implementation does not actually check that the Call Center belongs in the provided Enterpriser and Group.
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+callCenterId}/services/assigned-services
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://lokiserver.example.com:8340/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20North/call-centers/6502342108%40example.com/services/assigned-services"
+        }
+    },
+    "servicePacks": [],
+    "services": ["Anonymous Call Rejection", " Call Forwarding Always", "Alternate Numbers"],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com North",
+    "callCenterId": "6502342108@example.com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
+--
+BroadWorks Entity - Instant Group Calls
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+--
+
+This request will retrieve the assigned services of a Instant Group Call.<br />
+Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWorks Entity Service)<br />
+<b>Note</b>: Initial implementation does not actually check that the Instant Group Call belongs in the provided Enterpriser and Group.
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+instantGroupCallId}/services/assigned-services
+< 200
+< Transaction-Id: 1380080943120
+< Content-Type: application/hal+json
+{
+    "_links": {
+        "self": {
+            "href": "http://lokiserver.example.com:8340/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20North/instant-group-calls/6502342108%40example.com/services/assigned-services"
+        }
+    },
+    "servicePacks": [],
+    "services": ["Anonymous Call Rejection", " Call Forwarding Always", "Alternate Numbers"],
+    "serviceProviderId": "Example Com",
+    "groupId": "Example Com North",
+    "instantGroupCallId": "6502342108@example.com",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
+--
 BroadWorks Entity - Users
 
 Network Element: BroadWorks (initially only supports XSP or AS resources)
@@ -3470,7 +3626,6 @@ GET /broadworks/users/{+userId}/call-processing-policy
         "enableDialableCallerID": false
     }
 }
-
 
 Update a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the BroadWorks CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
@@ -13537,6 +13692,314 @@ GET /loki-services/broadworks/users/{+userId}
 			}
 		}
 	}
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
+{
+    "requestURITemplate": {
+    "title": "request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "autoAttendantId": {
+                "minLength": 1,
+                    "maxLength": 161,
+                    "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                    "required": true
+            }
+        }
+    },
+    "requestBody": {},
+    "response": {
+        "title": "Retrieve user services assignment status response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            },
+            "autoAttendantId": { "type": "string", "minLength": 1, "maxLength": 161, "required": true},
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "servicePacks": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "services": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "curies": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "type": "string"
+                        },
+                        "templated": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/hunt-groups/{+huntGroupId}/services/assigned-services
+{
+    "requestURITemplate": {
+    "title": "request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "huntGroupId": {
+                "minLength": 1,
+                    "maxLength": 161,
+                    "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                    "required": true
+            }
+        }
+    },
+    "requestBody": {},
+    "response": {
+        "title": "Retrieve user services assignment status response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            },
+            "huntGroupId": { "type": "string", "minLength": 1, "maxLength": 161, "required": true},
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "servicePacks": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "services": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "curies": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "type": "string"
+                        },
+                        "templated": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+callCenterId}/services/assigned-services
+{
+    "requestURITemplate": {
+    "title": "request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "callCenterId": {
+                "minLength": 1,
+                    "maxLength": 161,
+                    "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                    "required": true
+            }
+        }
+    },
+    "requestBody": {},
+    "response": {
+        "title": "Retrieve user services assignment status response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            },
+            "callCenterId": { "type": "string", "minLength": 1, "maxLength": 161, "required": true},
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "servicePacks": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "services": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "curies": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "type": "string"
+                        },
+                        "templated": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+instantGroupCallId}/services/assigned-services
+{
+    "requestURITemplate": {
+    "title": "request URI template parameters schema",
+        "properties": {
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "instantGroupCallId": {
+                "minLength": 1,
+                    "maxLength": 161,
+                    "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                    "required": true
+            }
+        }
+    },
+    "requestBody": {},
+    "response": {
+        "title": "Retrieve user services assignment status response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            },
+            "instantGroupCallId": { "type": "string", "minLength": 1, "maxLength": 161, "required": true},
+            "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+            "servicePacks": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "services": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "string",
+                    "minLength": 1
+                }
+            },
+            "curies": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "type": "string"
+                        },
+                        "templated": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}
