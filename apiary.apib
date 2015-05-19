@@ -5926,6 +5926,151 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services
 < Transaction-Id: 1380080943120
 
 
+This request will retrieve the services assignment status for Service Packs and User Services for regular and virtual users.
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services
+< 200
+< Transaction-Id: 1380080943120
+{
+    "_links": {
+        "self": {
+            "href": "http://lokiservicesdev.apiary.io:8340/loki-services/network-elements/broadworks/asp1_r21/users/6502342108@example.com/services/assigned-services"
+        }
+    },
+    "servicePacksAssignmentTable": {},
+    "userServicesAssignmentTable": {
+        "Anonymous Call Rejection": {
+            "Service Name": "Anonymous Call Rejection",
+            "Assigned": false
+        },
+        "Call Forwarding Always": {
+            "Service Name": "Call Forwarding Always",
+            "Assigned": false
+        },
+        "Call Forwarding Busy": {
+            "Service Name": "Call Forwarding Busy",
+            "Assigned": false
+        },
+        "Call Notify": {
+            "Service Name": "Call Notify",
+            "Assigned": false
+        },
+        "Calling Line ID Delivery Blocking": {
+            "Service Name": "Calling Line ID Delivery Blocking",
+            "Assigned": false
+        },
+        "Do Not Disturb": {
+            "Service Name": "Do Not Disturb",
+            "Assigned": false
+        },
+        "Priority Alert": {
+            "Service Name": "Priority Alert",
+            "Assigned": false
+        },
+        "Selective Call Acceptance": {
+            "Service Name": "Selective Call Acceptance",
+            "Assigned": false
+        },
+        "Call Forwarding Selective": {
+            "Service Name": "Call Forwarding Selective",
+            "Assigned": false
+        },
+        "Selective Call Rejection": {
+            "Service Name": "Selective Call Rejection",
+            "Assigned": false
+        },
+        "Voice Messaging User": {
+            "Service Name": "Voice Messaging User",
+            "Assigned": false
+        },
+        "Alternate Numbers": {
+            "Service Name": "Alternate Numbers",
+            "Assigned": false
+        },
+        "Third-Party Voice Mail Support": {
+            "Service Name": "Third-Party Voice Mail Support",
+            "Assigned": false
+        },
+        "Basic Call Logs": {
+            "Service Name": "Basic Call Logs",
+            "Assigned": true
+        },
+        "Enhanced Call Logs": {
+            "Service Name": "Enhanced Call Logs",
+            "Assigned": false
+        },
+        "Voice Messaging User - Video": {
+            "Service Name": "Voice Messaging User - Video",
+            "Assigned": false
+        },
+        "Diversion Inhibitor": {
+            "Service Name": "Diversion Inhibitor",
+            "Assigned": false
+        },
+        "Custom Ringback User": {
+            "Service Name": "Custom Ringback User",
+            "Assigned": false
+        },
+        "Custom Ringback User - Video": {
+            "Service Name": "Custom Ringback User - Video",
+            "Assigned": false
+        },
+        "Privacy": {
+            "Service Name": "Privacy",
+            "Assigned": false
+        },
+        "Fax Messaging": {
+            "Service Name": "Fax Messaging",
+            "Assigned": false
+        },
+        "Charge Number": {
+            "Service Name": "Charge Number",
+            "Assigned": false
+        },
+        "External Custom Ringback": {
+            "Service Name": "External Custom Ringback",
+            "Assigned": false
+        },
+        "Connected Line Identification Restriction": {
+            "Service Name": "Connected Line Identification Restriction",
+            "Assigned": false
+        },
+        "Zone Calling Restrictions": {
+            "Service Name": "Zone Calling Restrictions",
+            "Assigned": false
+        },
+        "Communication Barring User-Control": {
+            "Service Name": "Communication Barring User-Control",
+            "Assigned": false
+        },
+        "Pre-alerting Announcement": {
+            "Service Name": "Pre-alerting Announcement",
+            "Assigned": false
+        },
+        "Call Me Now": {
+            "Service Name": "Call Me Now",
+            "Assigned": true
+        },
+        "Call Recording": {
+            "Service Name": "Call Recording",
+            "Assigned": false
+        },
+        "Group Night Forwarding": {
+            "Service Name": "Group Night Forwarding",
+            "Assigned": false
+        }
+    },
+    "userId": "6502342108@example.com",
+    "ne_id": "asp1_r21",
+    "curies": [
+        {
+            "name": "ls",
+            "href": "http://localhost/loki/rels/{rel}",
+            "templated": true
+        }
+    ]
+}
+
 Update settings for Authentication service on a user.
 
 Note: when connecting to BroadWorks as a BroadWorks user (rather than as an admin), if "password" is included then "oldPassword" is also required.
@@ -12796,6 +12941,91 @@ PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services
         }
     },
     "response": { }
+}
+
+GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services
+{
+    "requestURITemplate": {
+    "title": "User request URI template parameters schema",
+        "properties": {
+            "ne_id": { "type": "string", "required": true },
+            "userId": {
+                "minLength": 1,
+                    "maxLength": 161,
+                    "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                    "required": true
+            }
+        }
+    },
+    "requestBody": {},
+    "response": {
+        "title": "Retrieve user services assignment status response body schema",
+        "type": "object",
+        "properties": {
+            "_links": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "required": true
+                            }
+                        }
+                    }
+                }
+            },
+            "userId": { "type": "string", "minLength": 1, "maxLength": 161, "required": true},
+            "ne_id": {
+                "type": "string"
+            },
+            "servicePacksAssignmentTable": {
+                "type": "object",
+                "patternProperties": {
+                    "^.+$": {
+                        "type": "object",
+                        "properties": {
+                            "Service Pack Name": { "type": "string", "minLength": 1, "required": true },
+                            "Assigned": { "type": "boolean", "required": true }
+                        }
+                    }
+                }
+            },
+            "userServicesAssignmentTable": {
+                "type": "object",
+                "patternProperties": {
+                    "^.+$": {
+                        "type": "object",
+                        "properties": {
+                            "Service Name": { "type": "string", "minLength": 1, "required": true },
+                            "Assigned": { "type": "boolean", "required": true }
+                        }
+                    }
+                }
+            },
+            "curies": {
+                "type": "array",
+                "required": true,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "type": "string"
+                        },
+                        "templated": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 PUT /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Authentication
