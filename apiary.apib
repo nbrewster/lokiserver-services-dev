@@ -3401,7 +3401,7 @@ This request will retrieve the assigned services of an Auto Attendant.<br />
 Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks Entity Service)<br />
 <b>Note</b>:  Initial implementation does not actually check that the Auto Attendant belongs in the provided Enterpriser and Group.
 
-GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -3440,7 +3440,7 @@ This request will retrieve the assigned services of a Hunt Group.<br />
 Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entity Service)<br />
 <b>Note</b>: Initial implementation does not actually check that the Hunt Group belongs in the provided Enterpriser and Group.
 
-GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/hunt-groups/{+huntGroupId}/services/assigned-services
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/hunt-groups/{+huntGroupId}/services/assigned-services
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -3479,7 +3479,7 @@ This request will retrieve the assigned services of a Call Center.<br />
 Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Entity Service)<br />
 <b>Note</b>: Initial implementation does not actually check that the Call Center belongs in the provided Enterpriser and Group.
 
-GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+callCenterId}/services/assigned-services
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+callCenterId}/services/assigned-services
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -3518,7 +3518,7 @@ This request will retrieve the assigned services of a Instant Group Call.<br />
 Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWorks Entity Service)<br />
 <b>Note</b>: Initial implementation does not actually check that the Instant Group Call belongs in the provided Enterpriser and Group.
 
-GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+instantGroupCallId}/services/assigned-services
+GET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+instantGroupCallId}/services/assigned-services
 < 200
 < Transaction-Id: 1380080943120
 < Content-Type: application/hal+json
@@ -6083,7 +6083,7 @@ PUT /network-elements/broadworks/{+ne_id}/users/{+userId}/services
 
 This request will retrieve the services assignment status for Service Packs and User Services for regular and virtual users.
 
-GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services
+GET /network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services
 < 200
 < Transaction-Id: 1380080943120
 {
