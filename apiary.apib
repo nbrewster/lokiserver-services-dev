@@ -9336,12 +9336,12 @@ Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks E
                 "servicePacks": [],
                 "services": [
                     "Anonymous Call Rejection",
-                    " Call Forwarding Always",
+                    "Call Forwarding Always",
                     "Alternate Numbers"
                 ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com North",
-                "userId": "6502342108@example.com",
+                "autoAttendantId": "6502342108@example.com",
                 "curies": [
                     {
                         "name": "ls",
@@ -9459,7 +9459,7 @@ Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entit
                 "servicePacks": [],
                 "services": [
                     "Anonymous Call Rejection",
-                    " Call Forwarding Always",
+                    "Call Forwarding Always",
                     "Alternate Numbers"
                 ],
                 "serviceProviderId": "Example Com",
@@ -9582,7 +9582,7 @@ Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Enti
                 "servicePacks": [],
                 "services": [
                     "Anonymous Call Rejection",
-                    " Call Forwarding Always",
+                    "Call Forwarding Always",
                     "Alternate Numbers"
                 ],
                 "serviceProviderId": "Example Com",
@@ -9705,7 +9705,7 @@ Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWor
                 "servicePacks": [],
                 "services": [
                     "Anonymous Call Rejection",
-                    " Call Forwarding Always",
+                    "Call Forwarding Always",
                     "Alternate Numbers"
                 ],
                 "serviceProviderId": "Example Com",
@@ -10533,6 +10533,105 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
                     },
                     "ne_id": {
                         "type": "string"
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "href": {
+                                    "type": "string"
+                                },
+                                "templated": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+## /loki-services/broadworks/users/{+userId}/services/assigned-services
+### GET
+This request will retrieve the assigned services of a User.<br />
+Process name: Retrieve BroadWorks User Assigned Services (BroadWorks Entity Service)<br />
+
++ Response 200 (application/hal+json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+
+    + Body
+
+            {
+                "_links": {
+                    "self": {
+                        "href": "http:\/\/lokiserver.example.com:8340\/loki-services\/broadworks\/users\/6502342108%40example.com\/services\/assigned-services"
+                    }
+                },
+                "servicePacks": [],
+                "services": [
+                    "Anonymous Call Rejection",
+                    "Call Forwarding Always",
+                    "Alternate Numbers"
+                ],
+                "userId": "6502342108@example.com",
+                "curies": [
+                    {
+                        "name": "ls",
+                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
+                        "templated": true
+                    }
+                ]
+            }
+
+    + Schema
+
+            {
+                "title": "Retrieve user services assignment status response body schema",
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "userId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 161,
+                        "required": true
+                    }
+                    "servicePacks": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        }
+                    },
+                    "services": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "string",
+                            "minLength": 1
+                        }
                     },
                     "curies": {
                         "type": "array",
