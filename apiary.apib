@@ -6048,6 +6048,70 @@ Cluster resolution method: Group
                 ]
             }
 
+    + Schema
+
+            {
+                "title": "BroadWorks Entity - Assign Group Phone Number response body schema"
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "groupId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    }
+                }
+            }
+
 ## Group's Phone Number [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}]
 ### Check if a Phone Number Exists [HEAD]
 Check existence of an individual phone number in a Group.
@@ -10754,6 +10818,63 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "domain": "example"
             }
 
+    + Schema
+
+            {
+                "title": "Add System Domain response body schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "ne_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "domain": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80,
+                        "pattern": "^[a-zA-Z0-9.-]+$",
+                        "required": true
+                    }
+                }
+            }
+
+
 + Response 424 (application/json)
     + Headers
 
@@ -11891,6 +12012,68 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "domain": "example"
             }
 
+    + Schema
+
+            {
+                "title": "Assign Service Provider Domain response body schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "ne_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "domain": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80,
+                        "pattern": "^[a-zA-Z0-9.-]+$",
+                        "required": true
+                    }
+                }
+            }
+
 + Response 424 (application/json)
     + Headers
 
@@ -12025,6 +12208,64 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "phoneNumber": "+1-2005553001"
+            }
+
+    + Schema
+
+            {
+                "title": "Assign Group Phone Number response body schema"
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    }
+                }
             }
 
 + Response 424 (application/json)
@@ -13455,6 +13696,67 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "groupId": "Example Com - North"
             }
 
+    + Schema
+
+            {
+                "title": "Create Group response body schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "ne_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "groupId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    }
+                }
+            }
+
 + Response 424 (application/json)
     + Headers
 
@@ -14112,6 +14414,75 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "domain": "example"
             }
 
+    + Schema
+
+            {
+                "type": "object",
+                "title": "Assign Group Domain response body schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "ne_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "groupId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "domain": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 80,
+                        "pattern": "^[a-zA-Z0-9.-]+$",
+                        "required": true
+                    }
+                }
+            }
+
 + Response 424 (application/json)
     + Headers
 
@@ -14522,6 +14893,73 @@ Assign a single phone number (TN) to a Group.
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
                 "phoneNumber": "+1-2005553001"
+            }
+
+    + Schema
+
+            {
+                "title": "Assign Group Phone Number response body schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "curies": {
+                        "type": "array",
+                        "required": true,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "href": {
+                                    "type": "string",
+                                    "required": true
+                                },
+                                "templated": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "ne_id": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "groupId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    }
+                }
             }
 
 ## BroadWorks Group's Phone Number [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}]
