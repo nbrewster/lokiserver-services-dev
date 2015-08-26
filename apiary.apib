@@ -14805,6 +14805,472 @@ Update group-level Feature Access Codes settings
 
             Transaction-Id: 1380080943120
 
+<!-- --------------------------------- Group's Users ----------------------------- -->
+
+# Group BroadWorks Groups - Users
+
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+Provides all internal services related to BroadWorks users collection at the Group level.
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+
+## BroadWorks Group's Users Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/users/search]
+### Retrieve the list of users in a BroadWorks Group [POST]
+Search for users in a BroadWorks Group
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "required": true
+            },
+            "serviceProviderId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30,
+                "required": true
+            },
+            "groupId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30,
+                "required": true
+            }
+        }
+    }
+
++ Request (application/json)
+    + Body
+
+            {
+                "responseSizeLimit": 10,
+                "searchCriteriaUserLastName": [
+                    {
+                        "mode": "Equal To",
+                        "value": "Smith",
+                        "isCaseInsensitive": true
+                    }
+                ],
+                "searchCriteriaUserFirstName": [
+                    {
+                        "mode": "Starts With",
+                        "value": "Jo",
+                        "isCaseInsensitive": true
+                    },
+                    {
+                        "mode": "Contains",
+                        "value": "John",
+                        "isCaseInsensitive": false
+                    }
+                ],
+                "searchCriteriaDn": [
+                    {
+                        "mode": "Contains",
+                        "value": "0030",
+                        "isCaseInsensitive": true
+                    }
+                ],
+                "searchCriteriaEmailAddress": [
+                    {
+                        "mode": "Starts With",
+                        "value": "jsmith",
+                        "isCaseInsensitive": false
+                    }
+                ],
+                "searchCriteriaExactUserDepartment": {
+                    "departmentKey": {
+                        "serviceProviderId": "Example Com",
+                        "groupId": "Example Com - North",
+                        "name": "Department Example"
+                    }
+                },
+                "searchCriteriaExactUserInTrunkGroup": {
+                    "userInTrunkGroup": false
+                },
+                "searchCriteriaUserId": [
+                    {
+                        "mode": "Contains",
+                        "value": "0030",
+                        "isCaseInsensitive": false
+                    }
+                ],
+                "searchCriteriaExtension": [
+                    {
+                        "mode": "Contains",
+                        "value": "30",
+                        "isCaseInsensitive": false
+                    }
+                ]
+            }
+
+    + Schema
+
+            {
+                "title": "Request Body Parameters Schema",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "responseSizeLimit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "required": false
+                    },
+                    "searchCriteriaUserLastName": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 30,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaUserFirstName": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 30,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaDn": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 23,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaEmailAddress": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 80,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaExactUserDepartment": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": false,
+                        "properties": {
+                            "departmentKey": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": true,
+                                "properties": {
+                                    "serviceProviderId": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 30,
+                                        "required": true
+                                    },
+                                    "groupId": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 30,
+                                        "required": true
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 50,
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaExactUserInTrunkGroup": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": false,
+                        "properties": {
+                            "userInTrunkGroup": {
+                                "type": "boolean",
+                                "required": true
+                            }
+                        }
+                    },
+                    "searchCriteriaUserId": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 161,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    },
+                    "searchCriteriaExtension": {
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "mode": {
+                                    "enum": ["Starts With", "Contains", "Equal To"],
+                                    "required": true
+                                },
+                                "value": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 20,
+                                    "required": true
+                                },
+                                "isCaseInsensitive": {
+                                    "type": "boolean",
+                                    "required": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
++ Response 200 (application/hal+json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+
+    + Body
+
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users/search"
+                    }
+                },
+                "userTable": {
+                    "5003000001@example.com": {
+                        "User Id": "5003000001@example.com",
+                        "Last Name": "Smith",
+                        "First Name": "John",
+                        "Department": "Department Example (Example Com - North)",
+                        "Phone Number": "+1-5003000002",
+                        "Phone Number Activated": true,
+                        "Email Address": "jsmith@example.com",
+                        "Hiragana Last Name": "Smith",
+                        "Hiragana First Name": "John",
+                        "In Trunk Group": true,
+                        "Extension": "5301"
+                    },
+                    "5003000002 ": {
+                        "User Id": "5003000002 ",
+                        "Last Name": "Smith",
+                        "First Name": "Johnnie",
+                        "Department": "Department Example (Example Com - North)",
+                        "Phone Number": "+1-5003000002",
+                        "Phone Number Activated": true,
+                        "Email Address": "jsmith@example.com",
+                        "Hiragana Last Name": "Smith",
+                        "Hiragana First Name": "Johnnie",
+                        "In Trunk Group": false,
+                        "Extension": "5302"
+                    }
+                },
+                "serviceProviderId": "Example Com",
+                "groupId": "Example Com - North",
+                "ne_id": "1
+            }
+
+    + Schema
+
+            {
+                "title": "Response Body Parameters Schema",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                              }
+                            }
+                        }
+                    },
+                    "ne_id": { "type": "string", "minLength": 1, "maxLength": 40, "required": true },
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "userTable": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": true,
+                        "patternProperties": {
+                            "^[\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "required": false,
+                                "properties": {
+                                    "User Id": {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 161,
+                                        "pattern": "^[\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                                        "required": true
+                                    },
+                                    "Last Name": { 
+                                        "type": "string", 
+                                        "minLength": 1, 
+                                        "maxLength": 30, 
+                                        "required": true 
+                                    },
+                                    "First Name": { 
+                                        "type": "string", 
+                                        "minLength": 1, 
+                                        "maxLength": 30, 
+                                        "required": true 
+                                    },
+                                    "Department": { 
+                                        "type": ["string", "null"],
+                                        "minLength": 1, 
+                                        "maxLength": 50, 
+                                        "required": true 
+                                    },
+                                    "Phone Number": { 
+                                        "type": ["string", "null"], 
+                                        "minLength": 1, 
+                                        "maxLength": 23, 
+                                        "pattern": "^\\+\\d+-\\d+$", 
+                                        "required": true 
+                                    },
+                                    "Phone Number Activated": { 
+                                        "type": "boolean", 
+                                        "required": true 
+                                    },
+                                    "Email Address": { 
+                                        "type": ["string", "null"], 
+                                        "minLength": 1, 
+                                        "maxLength": 80, 
+                                        "format": "email", 
+                                        "required": true 
+                                    },
+                                    "Hiragana Last Name": { 
+                                        "type": "string", 
+                                        "minLength": 1, 
+                                        "maxLength": 30, 
+                                        "required": true 
+                                    },
+                                    "Hiragana First Name": { 
+                                        "type": "string", 
+                                        "minLength": 1, 
+                                        "maxLength": 30, 
+                                        "required": true 
+                                    },
+                                    "In Trunk Group": { 
+                                        "type": "boolean",
+                                        "required": true 
+                                    },
+                                    "Extension": { 
+                                        "type": ["string", "null"], 
+                                        "minLength": 2, 
+                                        "maxLength": 20, 
+                                        "pattern": "^[0-9]+$", 
+                                        "required": true 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
 <!-- --------------------------------- Group's Phone Numbers ----------------------------- -->
 
 # Group BroadWorks Groups - Phone Numbers
