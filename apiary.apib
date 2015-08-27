@@ -5928,6 +5928,244 @@ Process name: Modify Group Voice Portal (BroadWorks Entity Service)<br />
 
             Transaction-Id: 1380080943120
 
+<!-- ----------------------------------- Group Users ----------------------------- -->
+
+# Group BroadWorks Entity - Group Users
+Network Element: BroadWorks (initially only supports XSP or AS resources)
+
+General note: any of these requests may return 424 Method Failure in the event of an error response from BroadWorks,
+or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
+Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
+resources/methods below.
+
+## Group's Users Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users]
+### Retrieve list of Users [GET]
+Retrieves the list of Users in a Group.<br />
+Process name: Retrieve List of Users in Group<br />
+Process-backed: Yes<br />
+Rollback-enabled: No<br />
+Cluster resolution method: Group
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "URI Template Parameters Schema",
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "serviceProviderId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30,
+                "required": true
+            },
+            "groupId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30,
+                "required": true
+            }
+        }
+    }
+
++ Response 200 (application/hal+json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+
+    + Body
+
+            {
+                "_links": {
+                    "self": {
+                        "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users"
+                    }
+                },
+                "_embedded": {
+                    "ls:users": [
+                        {
+                            "_links" : {
+                                "self" : {
+                                    "href" : "http://loki3services.apiary.io/loki-services/broadworks/users/5003000001@example.com"
+                                }
+                            }, 
+                            "userId": "5003000001@example.com",
+                            "lastName": "Smith",
+                            "firstName": "John",
+                            "department": "Department Example (Example Com - North)",
+                            "phoneNumber": "+1-5003000001",
+                            "phoneNumberActivated": true,
+                            "email": "jsmith@example.com",
+                            "hiraganaLastName": "Smith",
+                            "hiraganaFirstName": "John",
+                            "inTrunkGroup": true,
+                            "extension": "5301"
+                        },
+                        {
+                            "_links" : {
+                                "self" : {
+                                    "href" : "http://loki3services.apiary.io/loki-services/broadworks/users/5003000002@example.com"
+                                }
+                            }, 
+                            "userId": "5003000002@example.com",
+                            "lastName": "Smith",
+                            "firstName": "Johnnie",
+                            "department": "Department Example (Example Com - North)",
+                            "phoneNumber": "+1-5003000002",
+                            "phoneNumberActivated": false,
+                            "email": "jsmith@example.com",
+                            "hiraganaLastName": "Smith",
+                            "hiraganaFirstName": "Johnnie",
+                            "inTrunkGroup": false,
+                            "extension": "5302"
+                        }
+                    ]
+                },
+                "serviceProviderId": "Example Com",
+                "groupId": "Example Com - North"
+            }
+
+
+    + Schema
+
+            {
+                "title": "Response Body Parameters Schema",
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "serviceProviderId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "groupId": { "type": "string", "minLength": 1, "maxLength": 30, "required": true },
+                    "_embedded": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": true,
+                        "properties": {
+                            "ls:users": {
+                                "type": "array",
+                                "required": true,
+                                "items": {
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "_links": {
+                                            "type": "object",
+                                            "required": true,
+                                            "properties": {
+                                                "self": {
+                                                    "type": "object",
+                                                    "required": true,
+                                                    "properties": {
+                                                        "href": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "userId": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 161,
+                                            "pattern": "^[\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w'#\\$\\%&\\-\\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$",
+                                            "required": true
+                                        },
+                                        "lastName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 30,
+                                            "required": true
+                                        },
+                                        "firstName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 30,
+                                            "required": true
+                                        },
+                                        "department": {
+                                            "type": ["string", "null"],
+                                            "minLength": 1,
+                                            "maxLength": 50,
+                                            "required": true
+                                        },
+                                        "phoneNumber": {
+                                            "type": ["string", "null"],
+                                            "minLength": 1,
+                                            "maxLength": 23,
+                                            "pattern": "^\\+\\d+-\\d+$",
+                                            "required": true
+                                        },
+                                        "phoneNumberActivated": {
+                                            "type": ["boolean", "null"],
+                                            "required": true
+                                        },
+                                        "email": {
+                                            "type": ["string", "null"],
+                                            "minLength": 1,
+                                            "maxLength": 80,
+                                            "format": "email",
+                                            "required": true
+                                        },
+                                        "hiraganaLastName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 30,
+                                            "required": true
+                                        },
+                                        "hiraganaFirstName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 30,
+                                            "required": true
+                                        },
+                                        "inTrunkGroup": {
+                                            "type": "boolean",
+                                            "required": true
+                                        },
+                                        "extension": {
+                                            "type": ["string", "null"],
+                                            "minLength": 2,
+                                            "maxLength": 20,
+                                            "pattern": "^[0-9]+$",
+                                            "required": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
++ Response 500
+    + Headers
+
+            Transaction-Id: 1380080943120
+            
+    + Body
+
+            {
+                "errorCode": "INTERNAL_ERROR",
+                "summary": "An internal error has occurred.",
+                "detail": "Unable to convert phone number(s) to the E.164 format."
+            }
+            
 <!-- ----------------------------------- Group Phone Numbers ----------------------------- -->
 
 # Group BroadWorks Entity - Group Phone Numbers
