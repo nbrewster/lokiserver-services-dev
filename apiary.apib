@@ -20,6 +20,8 @@ these will be references to the Loki REST API host.**
 
 **TBD: add HAL notes. Note (at least initially) in the response bodies, the _links.self.href matches the URI submitted by the client, including any query parameters**
 
+**Note: Curies will be added in the responses in a future release.**
+
 ## URI Templates
 Refer to https://tools.ietf.org/html/rfc6570 for details on URI Templates. Not that Loki REST
 uses reserved characters (i.e. ":") in some URI Template variables, thus the request templates
@@ -180,13 +182,6 @@ will contain at most one match.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/number-translations?nationalId=8665554321&countryId=1&attributes=0&callProcessingElement1Id=978&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=5"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:number-translations": [
                         {
@@ -421,13 +416,6 @@ will contain at most one match.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/subscribers?subscriberId=2005553001&countryId=1&owningCarrierId=16"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:subscribers": [
                         {
@@ -666,13 +654,6 @@ will contain at most one match.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/destinations?nationalId=2005553001&countryId=1"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:destinations": [
                         {
@@ -892,13 +873,6 @@ The URI query parameters are as follows:
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/routes?callProcessingElement1Id=&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=0&routingType=3&destinationNationalId=2005553001&destinationCountryId=1&partitionId=EXAMPLE_PARTITION&calltype=0&transmissionMedium=0&userCallType=0&digitType=2147483647&timeRangeProfileId=ALL&callParamFilterProfileId=&domainName="
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:routes": [
                         {
@@ -1066,13 +1040,6 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/44\/route-queries?routingLabelId=EXAMPLE_LBL"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost:8340\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:routes": [
                         {
@@ -1676,13 +1643,6 @@ password, name, etc).
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-phone-numbers": [
                         {
@@ -1773,27 +1733,6 @@ password, name, etc).
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -2371,13 +2310,6 @@ in which it's being used). This request specifically supports only the "createVo
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/phone-numbers"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-phone-numbers": [
                         {
@@ -2516,13 +2448,6 @@ in the request and will be present in the response.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-users": [
                         {
@@ -2645,13 +2570,6 @@ required are shown in the example.
                 },
                 "Remote Office": []
             },
-            "curies": [
-                {
-                    "name": "ls",
-                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                    "templated": true
-                }
-            ],
             "_embedded": {
                 "ls:broadworks-users": [
                     {
@@ -2690,13 +2608,6 @@ required are shown in the example.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/configureUserServices"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-users": [
                         {
@@ -2853,13 +2764,6 @@ same setting on the user in BroadWorks.</i>
                 },
                 "Remote Office": []
             },
-            "curies": [
-                {
-                    "name": "ls",
-                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                    "templated": true
-                }
-            ],
             "_embedded": {
                 "ls:broadworks-users": [
                     {
@@ -2898,13 +2802,6 @@ same setting on the user in BroadWorks.</i>
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/configureUserServices"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-users": [
                         {
@@ -3010,13 +2907,6 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "isEnterprise": true,
                 "useCustomRoutingProfile": "true",
@@ -3058,27 +2948,6 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -3523,14 +3392,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com"
                     }
                 },
-                "serviceProviderId": "Example Com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "serviceProviderId": "Example Com"
             }
 
     + Schema
@@ -3551,27 +3413,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -3673,14 +3514,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                     "self": {
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/assignDomain"
                     }
-                },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                }
             }
 
     + Schema
@@ -3701,27 +3535,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -3852,14 +3665,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                     }
                 },
                 "serviceProviderId": "Example Com",
-                "phoneNumber": "+1-2005553001",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "phoneNumber": "+1-2005553001"
             }
 
     + Schema
@@ -4060,13 +3866,6 @@ The following properties are omitted from the response if they have no value set
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-service-providers": [
                         {
@@ -4151,27 +3950,6 @@ The following properties are omitted from the response if they have no value set
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -4830,14 +4608,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                     }
                 },
                 "serviceProviderId": "Example Com",
-                "groupId": "Example Com - North",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "groupId": "Example Com - North"
             }
 
     + Schema
@@ -4858,27 +4629,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -5018,13 +4768,6 @@ Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
                 "min": 2,
@@ -5050,27 +4793,6 @@ Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -5209,13 +4931,6 @@ Process name: Retrieve Group 3PVM (BroadWorks Entity Service)<br />
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com\/services\/Third-Party%20Voice%20Mail%20Support"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com",
                 "groupServer": "+1-2005553001",
@@ -5292,27 +5007,6 @@ Process name: Retrieve Group 3PVM (BroadWorks Entity Service)<br />
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -5440,13 +5134,6 @@ Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com\/services\/Voice%20Portal"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com",
                 "serviceUserId": "VoicePortalId",
@@ -5520,27 +5207,6 @@ Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     },
                     "serviceUserId": {
                         "type": "string"
@@ -6276,14 +5942,7 @@ Cluster resolution method: Group
                 },
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "phoneNumber": "+1-2005553001",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "phoneNumber": "+1-2005553001"
             }
 
     + Schema
@@ -6304,27 +5963,6 @@ Cluster resolution method: Group
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -7396,14 +7034,7 @@ Cluster resolution method: Group
                 },
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "trunkGroupName": "ExampleCom Trunk 3001",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "trunkGroupName": "ExampleCom Trunk 3001"
             }
 
     + Schema
@@ -7424,27 +7055,6 @@ Cluster resolution method: Group
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -7609,14 +7219,7 @@ Cluster resolution method: Group
                 "pilotUserCallingLineAssertedIdentityPolicy": {
                     "useTrunkGroupCallingLineAssertedIdentityPolicy": false,
                     "callingLineAssertedIdentityPolicy": "Unscreened Originating Calls"
-                },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                }
             }
 
     + Schema
@@ -7637,27 +7240,6 @@ Cluster resolution method: Group
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -8909,13 +8491,6 @@ Cluster resolution method: Group
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/devices\/ExampleCom_AD3001"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North ",
                 "deviceName": "ExampleCom_AD3001",
@@ -8965,27 +8540,6 @@ Cluster resolution method: Group
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -9593,13 +9147,6 @@ Cluster resolution method: Group
                         "href": "http:\/\/lokiserver.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/devices\/ExampleCom_AD3001"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example.com\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North ",
                 "deviceName": "ExampleCom_AD3001"
@@ -9623,27 +9170,6 @@ Cluster resolution method: Group
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -9732,14 +9258,7 @@ Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks E
                 ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com North",
-                "autoAttendantId": "6502342108@example.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "autoAttendantId": "6502342108@example.com"
             }
 
     + Schema
@@ -9796,24 +9315,6 @@ Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks E
                         "items": {
                             "type": "string",
                             "minLength": 1
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
                         }
                     }
                 }
@@ -9882,14 +9383,7 @@ Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entit
                 ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com North",
-                "huntGroupId": "6502342108@example.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "huntGroupId": "6502342108@example.com"
             }
 
     + Schema
@@ -9946,24 +9440,6 @@ Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entit
                         "items": {
                             "type": "string",
                             "minLength": 1
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
                         }
                     }
                 }
@@ -10032,14 +9508,7 @@ Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Enti
                 ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com North",
-                "callCenterId": "6502342108@example.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "callCenterId": "6502342108@example.com"
             }
 
     + Schema
@@ -10096,24 +9565,6 @@ Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Enti
                         "items": {
                             "type": "string",
                             "minLength": 1
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
                         }
                     }
                 }
@@ -10182,14 +9633,7 @@ Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWor
                 ],
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com North",
-                "instantGroupCallId": "6502342108@example.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "instantGroupCallId": "6502342108@example.com"
             }
 
     + Schema
@@ -10247,24 +9691,6 @@ Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWor
                             "type": "string",
                             "minLength": 1
                         }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -10301,13 +9727,6 @@ Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (dat
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users\/4155551212%20example.com\/call-processing-policy"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-users": [
                         {
@@ -10469,14 +9888,7 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
                 },
                 "countryCode": "1",
                 "userId": "JohnDoe",
-                "ne_id": "1",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "1"
             }
 
     + Schema
@@ -10732,24 +10144,6 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
                     },
                     "ne_id": {
                         "type": "string"
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -10792,14 +10186,7 @@ Process name: Retrieve BroadWorks User Assigned Services (BroadWorks Entity Serv
                     "Call Forwarding Always",
                     "Alternate Numbers"
                 ],
-                "userId": "6502342108@example.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "userId": "6502342108@example.com"
             }
 
     + Schema
@@ -10844,24 +10231,6 @@ Process name: Retrieve BroadWorks User Assigned Services (BroadWorks Entity Serv
                         "items": {
                             "type": "string",
                             "minLength": 1
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
                         }
                     }
                 }
@@ -10910,13 +10279,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/domains"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "systemDefaultDomain": "example.com",
                 "domains": [
@@ -10942,27 +10304,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -11045,13 +10386,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/domains\/example"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "domain": "example"
             }
@@ -11073,27 +10407,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -11187,13 +10500,6 @@ Retrieve the Systems's list of defined languages, including the default language
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/languages"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "defaultLanguage": "English",
                 "languageTable": {
@@ -11227,27 +10533,6 @@ Retrieve the Systems's list of defined languages, including the default language
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -11323,13 +10608,6 @@ Retrieve the Systems's list of defined time zones, including the default time zo
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/time-zones"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "timeZoneTable": {
                     "Europe\/Bucharest": {
@@ -11360,27 +10638,6 @@ Retrieve the Systems's list of defined time zones, including the default time zo
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -11496,14 +10753,7 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
                 },
                 "useServiceProviderLanguages": false,
                 "serviceProviderId": "ExampleCom",
-                "ne_id": "1",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "1"
             }
 
     + Schema
@@ -11621,24 +10871,6 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
                     },
                     "ne_id": {
                         "type": "string"
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -11973,14 +11205,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                     }
                 },
                 "ne_id": "1",
-                "serviceProviderId": "Example Com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/lokiserver.example\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "serviceProviderId": "Example Com"
             }
 
     + Schema
@@ -12014,27 +11239,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -12090,13 +11294,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "serviceProviderDefaultDomain": "example.com",
@@ -12123,27 +11320,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -12238,13 +11414,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains\/example"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "domain": "example"
@@ -12267,27 +11436,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -12436,13 +11584,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005553001"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "phoneNumber": "+1-2005553001"
@@ -12466,27 +11607,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -12580,13 +11700,6 @@ fetch the group resource. really, if we want a link to the service-provider here
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005551212"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-service-providers": [
                         {
@@ -12702,13 +11815,6 @@ Retrieve the Service Provider's service authorization detail.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/services"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupServicesAuthorizationTable": {
@@ -12780,27 +11886,6 @@ Retrieve the Service Provider's service authorization detail.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -13108,14 +12193,7 @@ Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
                     "quantity": 0
                 },
                 "serviceProviderId": "Example Com",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -13135,27 +12213,6 @@ Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -13351,13 +12408,6 @@ The following properties are omitted from the response if they have no value set
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -13404,27 +12454,6 @@ The following properties are omitted from the response if they have no value set
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -13922,13 +12951,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North"
@@ -13951,27 +12973,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -14051,13 +13052,6 @@ Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/password-rules"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -14099,27 +13093,6 @@ Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -14273,13 +13246,6 @@ Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPorta
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -14306,27 +13272,6 @@ Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPorta
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -14477,13 +13422,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -14512,27 +13450,6 @@ Note the "domains" property, if present, will always be an array (even if it has
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -14639,13 +13556,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains\/example"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -14670,27 +13580,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -14819,13 +13708,6 @@ Get group-level Feature Access Codes settings
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/feature-access-codes"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "useFeatureAccessCodeLevel": "Service Provider",
                 "featureAccessCode": [
                     {
@@ -14886,27 +13768,6 @@ Get group-level Feature Access Codes settings
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     },
                     "useFeatureAccessCodeLevel": {
                         "enum": [
@@ -15586,13 +14447,6 @@ Assign a single phone number (TN) to a Group.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005553001"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -15616,27 +14470,6 @@ Assign a single phone number (TN) to a Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -15731,13 +14564,6 @@ The embedded "ls:broadworks-users" resource is included only when the phone numb
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005551212"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "_embedded": {
                     "ls:broadworks-users": [
                         {
@@ -16053,13 +14879,6 @@ Retrieve the Group's service authorization detail.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -16154,27 +14973,6 @@ Retrieve the Group's service authorization detail.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -16702,13 +15500,6 @@ Retrieve group-level settings of Third-Party Voice Mail user service.
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Third-Party%20Voice%20Mail%20Support"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -16758,27 +15549,6 @@ Retrieve group-level settings of Third-Party Voice Mail user service.
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -16911,13 +15681,6 @@ Retrieve group-level settings of Voice Portal service
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Voice%20Portal"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -16991,27 +15754,6 @@ Retrieve group-level settings of Voice Portal service
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     },
                     "serviceUserId": {
                         "type": "string"
@@ -17420,13 +16162,6 @@ Retrieve group-level settings of Speed Dial 100 service
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Speed%20Dial%20100"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -17470,27 +16205,6 @@ Retrieve group-level settings of Speed Dial 100 service
                         "minLength": 1,
                         "maxLength": 30,
                         "required": true
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
-                                }
-                            }
-                        }
                     },
                     "prefix": {
                         "type": "string",
@@ -17621,14 +16335,7 @@ Retrieve Trunking Call Capacity settings for a Group.
                 },
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -17648,27 +16355,6 @@ Retrieve Trunking Call Capacity settings for a Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -17765,27 +16451,6 @@ Retrieve Trunking Call Capacity settings for a Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -17996,14 +16661,7 @@ Retrieve Trunk Groups list from a Group.
                 },
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -18023,27 +16681,6 @@ Retrieve Trunk Groups list from a Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -18138,27 +16775,6 @@ Retrieve Trunk Groups list from a Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -18941,14 +17557,7 @@ Create a Trunk Group.
                 "name": "Trunk Group",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -18969,27 +17578,6 @@ Create a Trunk Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -19100,14 +17688,7 @@ Retrieve a Trunk Group.
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
                 "name": "Trunk Group",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -19128,27 +17709,6 @@ Retrieve a Trunk Group.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -20445,14 +19005,7 @@ Create a device.
                 "ne_id": "asp1_r21",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "deviceName": "AccessDeviceTest",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "deviceName": "AccessDeviceTest"
             }
 
     + Schema
@@ -20473,27 +19026,6 @@ Create a device.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -20592,14 +19124,7 @@ Retrieve profile settings of a BroadWorks Group device.
                 "ne_id": "asp1_r21",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "deviceName": "AccessDeviceTest",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "deviceName": "AccessDeviceTest"
             }
 
     + Schema
@@ -20620,27 +19145,6 @@ Retrieve profile settings of a BroadWorks Group device.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -21203,13 +19707,6 @@ Actual requests should include only one or the other (or neither, for users with
                         "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/users\/2005553001%40example.com"
                     }
                 },
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ],
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
@@ -21234,27 +19731,6 @@ Actual requests should include only one or the other (or neither, for users with
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -21344,14 +19820,7 @@ Retrieve a BroadWorks User.
                 },
                 "countryCode": "1",
                 "userId": "JohnDoe",
-                "ne_id": "1",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "1"
             }
 
     + Schema
@@ -21372,27 +19841,6 @@ Retrieve a BroadWorks User.
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
@@ -22061,14 +20509,7 @@ This request will retrieve the services assignment status for Service Packs and 
                     }
                 },
                 "userId": "6502342108@example.com",
-                "ne_id": "asp1_r21",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/localhost\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "ne_id": "asp1_r21"
             }
 
     + Schema
@@ -22136,24 +20577,6 @@ This request will retrieve the services assignment status for Service Packs and 
                                         "type": "boolean",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string"
-                                },
-                                "href": {
-                                    "type": "string"
-                                },
-                                "templated": {
-                                    "type": "boolean"
                                 }
                             }
                         }
@@ -22619,7 +21042,7 @@ In addition to the standard error codes, this will return 404 Not Found if the u
     + Body
 
             {
-                "_links, curies": "tbd",
+                "_links": "tbd",
                 "userId": "4155551212@example.com",
                 "ne_id": "1",
                 "tbd": "request not implemented; documentation not completed"
@@ -23112,14 +21535,7 @@ Retrieve the location information (BroadWorks hosting network element informatio
                     }
                 },
                 "ne_id": "asp1_r21",
-                "userId": "6502342177@r21.clarisoft.com",
-                "curies": [
-                    {
-                        "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki\/rels\/{rel}",
-                        "templated": true
-                    }
-                ]
+                "userId": "6502342177@r21.clarisoft.com"
             }
 
     + Schema
@@ -23140,27 +21556,6 @@ Retrieve the location information (BroadWorks hosting network element informatio
                                         "type": "string",
                                         "required": true
                                     }
-                                }
-                            }
-                        }
-                    },
-                    "curies": {
-                        "type": "array",
-                        "required": true,
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "name": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "href": {
-                                    "type": "string",
-                                    "required": true
-                                },
-                                "templated": {
-                                    "type": "boolean",
-                                    "required": true
                                 }
                             }
                         }
