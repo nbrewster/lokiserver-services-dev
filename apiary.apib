@@ -21732,9 +21732,945 @@ Send a LWS-SOAP request.
             }
 
 
+<!-- ------------------------------- Wit eFax API Interface ---------------------------- -->
+
+# Group Wit eFax Utility Service
+
+Network Element: Wit-eFax
+
+Provides communication with Wit eFax API.
+
+## Wit eFax Users [/loki-services/network-elements/wit-efax/{+ne_id}/users]
+### Create Wit eFax User [POST]
+This is an internal request which creates an eFax user. It will send a Wit eFax Create Fax User request and provide a response.
+
+### URI Template Parameters
+<table border=1>
+    <thead>
+        <th>Parameter</th>
+        <th>Required?</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <td>ne_id</td>
+        <td>yes</td>
+        <td>n/a</td>
+        <td>Internal network element Id for the Wit eFax network element.</td>
+    </tbody>
+</table>
+
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Create Wit eFax User request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            }
+        }
+    }
+
++ Request (application/json)
+    + Body
+
+            {
+                "bwId": "142662607499832343@example.com",
+                "faxNumber": "+1-6544353455",
+                "email": "jsmith@example.com",
+                "firstName": "John",
+                "lastName": "Smith"
+            }
+            
+    + Schema
+
+            {
+                "title": "Create Wit eFax User request body schema",
+                "type": "object",
+                "properties": {
+                    "bwId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256,
+                        "required": true
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 1,
+                        "required": false
+                    },
+                    "faxNumber": {
+                        "type": "string",
+                        "description": "A formatted TN.",
+                        "pattern": "^\\+\\d+-\\d+$",
+                        "minLength": 1,
+                        "maxLength": 46
+                        "required": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "minLength": 1,
+                        "format": "email"
+                        "required": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": true
+                    },
+                    "useCoverPage": {
+                        "type": "boolean",
+                        "required": false
+                    },
+                    "deliveryNotifications": {
+                        "type": "boolean",
+                        "required": false
+                    },
+                    "preferredLanguage": {
+                        "enum": ["de", "en-GB"],
+                        "required": false
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "required": false
+                    }
+                }
+            }
+
++ Response 201 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+            Location: http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com
+
+    + Body
+
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                    }
+                },
+                "ne_id" : "1",
+                "bwId": "142662607499832343@example.com"
+            }
+
+    + Schema
+
+            {
+                "title": "Create Wit eFax User",
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    "ne_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "required": true
+                    },
+                    "bwId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256,
+                        "required": true
+                    }
+                }
+            }
+
++ Response 400 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "FORMAT_ERROR",
+                "summary": "Input validation failure",
+                "detail": "At least one of the sent body parameters is invalid"
+            }
+
++ Response 409 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "CONFLICT",
+                "externalErrorCode": "201",
+                "externalErrorSummary": "Already exist user with this email",
+                "externalErrorDetail": "Already exist user with this email"
+            }
+            
+            
+### Search Wit eFax Users [GET]
+This is an internal request which retrieves an eFax user’s information. It will send a Wit eFax Read Fax User request and provide a response.
+
+### URI Template Parameters
+<table border=1>
+    <thead>
+        <th>Parameter</th>
+        <th>Required?</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ne_id</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>Internal network element Id for the Wit eFax network element.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+### URI Query Parameters
+
+<table border=1>
+    <thead>
+    <th>Parameter</th>
+    <th>Required?</th>
+    <th>Mode</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>bwId</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>faxNumber</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>firstName</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>lastName</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>username</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>sort</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>offset</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+        <tr>
+            <td>limit</td>
+            <td style="text-align: center">yes</td>
+            <td>Equal To</td>
+        </tr>
+    </tbody>
+</table>
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Search Wit eFax User request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            }
+        }
+    }
+
+### JSON Schema for URI Query Parameters
+
+    {
+        "title": "Search Wit eFax User request URI query parameters schema",
+        "properties": {
+            "bwId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256,
+                "required": false
+            }
+            "faxNumber": {
+                "type": "string",
+                "description": "A formatted TN.",
+                "pattern": "^\\+\\d+-\\d+$",
+                "minLength": 1,
+                "maxLength": 46
+                "required": false
+            },
+            "email": {
+                "type": "string",
+                "minLength": 1,
+                "format": "email"
+                "required": false
+            },
+            "firstName": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+                "required": false
+            },
+            "lastName": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+                "required": false
+            },
+            "username": {
+                "type": "string",
+                "minLength": 1,
+                "required": false
+            },
+            "sort": {
+                "enum": ["-bwId", "+bwId", "-firstName", "+firstName", "-lastName", "+lastName", "-username", "+username", "-email", "+email", "-faxNumber", "+faxNumber"],
+                "required": false
+            },
+            "offset": {
+                "type": "integer",
+                "minValue": 0,
+                "required": false
+            },
+            "limit": {
+                "type": "integer",
+                "minValue": 1,
+                "required": false
+            }
+        }
+    }
+
++ Response 200 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+
+    + Body
+
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users"
+                    }
+                },
+                "ne_id" : "1",
+                "_embedded": {
+                    "ls:efax-users": [
+                        {
+                            "_links" : {
+                                "self" : {
+                                    "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                                }
+                            },
+                            "active": true,
+                            "bwId": "142662607499832343@example.com",
+                            "deliveryNotifications": false,
+                            "email": "jsmith@example.com",
+                            "faxNumber": "+1-6544353455",
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "preferredLanguage": "en-GB",
+                            "useCoverPage": true,
+                            "username": "jsmith@example.com"
+                        },
+                        {
+                            "_links" : {
+                                "self" : {
+                                    "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607687932343@example.com"
+                                }
+                            },
+                            "active": true,
+                            "bwId": "142662607687932343@example.com",
+                            "deliveryNotifications": false,
+                            "email": "johndoe@example.com",
+                            "faxNumber": "+1-6544353456",
+                            "firstName": "John",
+                            "lastName": "Doe",
+                            "preferredLanguage": "en-GB",
+                            "useCoverPage": true,
+                            "username": "johndoe@example.com"
+                        }
+                    ]
+                }
+            }
+
+    + Schema
+
+            {
+                "title": "Search Wit eFax Users",
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "_embedded": {
+                        "type": "object",
+                        "properties": {
+                            "ls:broadworks-users": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "_links": {
+                                            "type": "object",
+                                            "required": true,
+                                            "properties": {
+                                                "self": {
+                                                    "type": "object",
+                                                    "required": true,
+                                                    "properties": {
+                                                        "href": {
+                                                            "type": "string",
+                                                            "required": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "ne_id": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "required": true
+                                        },
+                                        "bwId": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 256,
+                                            "required": true
+                                        }
+                                        "faxNumber": {
+                                            "type": "string",
+                                            "description": "A formatted TN.",
+                                            "pattern": "^\\+\\d+-\\d+$",
+                                            "minLength": 1,
+                                            "maxLength": 46
+                                            "required": true
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "format": "email"
+                                            "required": true
+                                        },
+                                        "firstName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 256
+                                            "required": true
+                                        },
+                                        "lastName": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "maxLength": 256
+                                            "required": true
+                                        },
+                                        "useCoverPage": {
+                                            "type": "boolean",
+                                            "required": true
+                                        },
+                                        "deliveryNotifications": {
+                                            "type": "boolean",
+                                            "required": true
+                                        },
+                                        "preferredLanguage": {
+                                            "type": "string",
+                                            "required": true
+                                        },
+                                        "active": {
+                                            "type": "boolean",
+                                            "required": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
++ Response 500 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "EXTERNAL_API_SERVER_ERROR",
+                "summary": "Unexpected response from remote API",
+                "detail": "Wit eFax: Property \"faxNumber\" couldn't be converted. The supplied value (+491) could not be converted to E.164 format"
+            }
+
+
+## Wit eFax User [/loki-services/network-elements/wit-efax/{+ne_id}/users/{+bwId}]
+### Retrieve Wit eFax User [GET]
+This is an internal request which retrieves an eFax user’s information. It will send a Wit eFax Read Fax User request and provide a response.
+
+### URI Template Parameters
+<table border=1>
+    <thead>
+        <th>Parameter</th>
+        <th>Required?</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ne_id</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>Internal network element Id for the Wit eFax network element.</td>
+        </tr>
+        <tr>
+            <td>bwId</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>BroadWorks User ID.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Retrieve Wit eFax User request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            },
+            "bwId": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            }
+        }
+    }
+
++ Response 200 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+
+    + Body
+
+            {
+                "_links" : {
+                    "self" : {
+                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                    }
+                },
+                "ne_id" : "1",
+                "active": true,
+                "bwId": "142662607499832343@example.com",
+                "deliveryNotifications": false,
+                "email": "jsmith@example.com",
+                "faxNumber": "+1-6544353455",
+                "firstName": "John",
+                "lastName": "Smith",
+                "preferredLanguage": "en-GB",
+                "useCoverPage": true,
+                "username": "jsmith@example.com"
+            }
+
+    + Schema
+
+            {
+                "title": "Retrieve Wit eFax User",
+                "type": "object",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    "ne_id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "required": true
+                    },
+                    "bwId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256,
+                        "required": true
+                    }
+                    "faxNumber": {
+                        "type": "string",
+                        "description": "A formatted TN.",
+                        "pattern": "^\\+\\d+-\\d+$",
+                        "minLength": 1,
+                        "maxLength": 46
+                        "required": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "minLength": 1,
+                        "format": "email"
+                        "required": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": true
+                    },
+                    "useCoverPage": {
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "deliveryNotifications": {
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "preferredLanguage": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "required": true
+                    }
+                }
+            }
+
++ Response 404 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "NOT_FOUND",
+                "externalErrorCode": "101",
+                "externalErrorSummary": "Fax User Not Found",
+                "externalErrorDetail": "Fax User Not Found"
+            }
+
++ Response 500 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "EXTERNAL_API_SERVER_ERROR",
+                "summary": "Unexpected response from remote API",
+                "detail": "Wit eFax: Property \"faxNumber\" couldn't be converted. The supplied value (+491) could not be converted to E.164 format"
+            }
+
+### Modify Wit eFax User [PUT]
+This is an internal request which updates the properties of an existing eFax user. It will send a Wit eFax Update Fax User request and provide a response.
+
+### URI Template Parameters
+<table border=1>
+    <thead>
+        <th>Parameter</th>
+        <th>Required?</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ne_id</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>Internal network element Id for the Wit eFax network element.</td>
+        </tr>
+        <tr>
+            <td>bwId</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>BroadWorks User ID.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Modify Wit eFax User request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            },
+            "bwId": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            }
+        }
+    }
+
++ Request (application/json)
+    + Body
+
+            {
+                "faxNumber": "+1-6544353455",
+                "email": "jsmith@example.com",
+                "firstName": "John",
+                "lastName": "Smith"
+            }
+            
+    + Schema
+
+            {
+                "title": "Modify Wit eFax User request body schema",
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "minLength": 1,
+                        "required": false
+                    },
+                    "faxNumber": {
+                        "type": "string",
+                        "description": "A formatted TN.",
+                        "pattern": "^\\+\\d+-\\d+$",
+                        "minLength": 1,
+                        "maxLength": 46
+                        "required": false
+                    },
+                    "email": {
+                        "type": "string",
+                        "minLength": 1,
+                        "format": "email"
+                        "required": false
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": false
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 256
+                        "required": false
+                    },
+                    "useCoverPage": {
+                        "type": "boolean",
+                        "required": false
+                    },
+                    "deliveryNotifications": {
+                        "type": "boolean",
+                        "required": false
+                    },
+                    "preferredLanguage": {
+                        "enum": ["de", "en-GB"],
+                        "required": false
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "required": false
+                    }
+                }
+            }
+
++ Response 204
+    + Headers
+
+            Transaction-Id: 1380080943120
+            
+
++ Response 400 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "FORMAT_ERROR",
+                "summary": "Input validation failure",
+                "detail": "At least one of the sent body parameters is invalid"
+            }
+
++ Response 404 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "NOT_FOUND",
+                "externalErrorCode": "101",
+                "externalErrorSummary": "Fax User Not Found",
+                "externalErrorDetail": "Fax User Not Found"
+            }
+
++ Response 409 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "CONFLICT",
+                "externalErrorCode": "201",
+                "externalErrorSummary": "Already exist user with this email",
+                "externalErrorDetail": "Already exist user with this email"
+            }
+            
+
+### Delete Wit eFax User [DELETE]
+This is an internal request which updates the properties of an existing eFax user. It will send a Wit eFax Update Fax User request and provide a response.
+
+### URI Template Parameters
+<table border=1>
+    <thead>
+        <th>Parameter</th>
+        <th>Required?</th>
+        <th>Default</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ne_id</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>Internal network element Id for the Wit eFax network element.</td>
+        </tr>
+        <tr>
+            <td>bwId</td>
+            <td>yes</td>
+            <td>n/a</td>
+            <td>BroadWorks User ID.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+### JSON Schema for URI Template Parameters
+
+    {
+        "title": "Modify Wit eFax User request URI template parameters schema",
+        "properties": {
+            "ne_id": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            },
+            "bwId": {
+                "type": "string",
+                "minLength": 1,
+                "required": true
+            }
+        }
+    }
+
++ Response 204
+    + Headers
+
+            Transaction-Id: 1380080943120
+            
+
++ Response 404 (application/json)
+    + Headers
+
+            Transaction-Id: 1380080943120
+    
+    + Body
+    
+            {
+                "errorCode": "NOT_FOUND",
+                "externalErrorCode": "101",
+                "externalErrorSummary": "Fax User Not Found",
+                "externalErrorDetail": "Fax User Not Found"
+            }
+
+
 <!-- ======================================== FOOTER ===================================== -->
 
 # Group CHANGELOG
+2.43
+New Wit eFax Utility requests:
+
+* POST /loki-services/network-elements/wit-efax/{+ne_id}/users
+* GET /loki-services/network-elements/wit-efax/{+ne_id}/users
+* GET /loki-services/network-elements/wit-efax/{+ne_id}/users/{+bwId}
+* PUT /loki-services/network-elements/wit-efax/{+ne_id}/users/{+bwId}
+* DELETE /loki-services/network-elements/wit-efax/{+ne_id}/users/{+bwId}
 
 2.42
 New BroadWorks Entity requests:
