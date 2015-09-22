@@ -3671,7 +3671,37 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Schema
 
             {
-                missing: true
+                "title": "BroadWorks Entity - Assign Service Provider Phone Number response schema",
+                "properties": {
+                    "_links": {
+                        "type": "object",
+                        "required": true,
+                        "properties": {
+                            "self": {
+                                "type": "object",
+                                "required": true,
+                                "properties": {
+                                    "href": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "serviceProviderId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 30,
+                        "required": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 23,
+                        "pattern": "^\\+\\d+-\\d+$"
+                    }
+                }
             }
 
 + Response 424 (application/json)
@@ -5948,7 +5978,7 @@ Cluster resolution method: Group
     + Schema
 
             {
-                "title": "BroadWorks Entity - Assign Group Phone Number response body schema"
+                "title": "BroadWorks Entity - Assign Group Phone Number response body schema",
                 "type": "object",
                 "properties": {
                     "_links": {
@@ -10216,7 +10246,7 @@ Process name: Retrieve BroadWorks User Assigned Services (BroadWorks Entity Serv
                         "minLength": 1,
                         "maxLength": 161,
                         "required": true
-                    }
+                    },
                     "servicePacks": {
                         "type": "array",
                         "required": true,
@@ -11592,7 +11622,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Schema
 
             {
-                "title": "Assign Group Phone Number response body schema"
+                "title": "Assign Group Phone Number response body schema",
                 "type": "object",
                 "properties": {
                     "_links": {
@@ -21569,7 +21599,7 @@ Retrieve the location information (BroadWorks hosting network element informatio
                     },
                     "ne_id": {
                         "type": "string",
-                        "required": "true",
+                        "required": true,
                         "minLength": 1,
                         "description": "Hosting NE name of the Application Server cluster."
                     }
@@ -21807,25 +21837,25 @@ This is an internal request which creates an eFax user. It will send a Wit eFax 
                         "description": "A formatted TN.",
                         "pattern": "^\\+\\d+-\\d+$",
                         "minLength": 1,
-                        "maxLength": 46
+                        "maxLength": 46,
                         "required": true
                     },
                     "email": {
                         "type": "string",
                         "minLength": 1,
-                        "format": "email"
+                        "format": "email",
                         "required": true
                     },
                     "firstName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": true
                     },
                     "lastName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": true
                     },
                     "useCoverPage": {
@@ -21886,7 +21916,7 @@ This is an internal request which creates an eFax user. It will send a Wit eFax 
                                 }
                             }
                         }
-                    }
+                    },
                     "ne_id": {
                         "type": "string",
                         "minLength": 1,
@@ -22031,31 +22061,31 @@ This is an internal request which retrieves an eFax user’s information. It wil
                 "minLength": 1,
                 "maxLength": 256,
                 "required": false
-            }
+            },
             "faxNumber": {
                 "type": "string",
                 "description": "A formatted TN.",
                 "pattern": "^\\+\\d+-\\d+$",
                 "minLength": 1,
-                "maxLength": 46
+                "maxLength": 46,
                 "required": false
             },
             "email": {
                 "type": "string",
                 "minLength": 1,
-                "format": "email"
+                "format": "email",
                 "required": false
             },
             "firstName": {
                 "type": "string",
                 "minLength": 1,
-                "maxLength": 256
+                "maxLength": 256,
                 "required": false
             },
             "lastName": {
                 "type": "string",
                 "minLength": 1,
-                "maxLength": 256
+                "maxLength": 256,
                 "required": false
             },
             "username": {
@@ -22190,31 +22220,31 @@ This is an internal request which retrieves an eFax user’s information. It wil
                                             "minLength": 1,
                                             "maxLength": 256,
                                             "required": true
-                                        }
+                                        },
                                         "faxNumber": {
                                             "type": "string",
                                             "description": "A formatted TN.",
                                             "pattern": "^\\+\\d+-\\d+$",
                                             "minLength": 1,
-                                            "maxLength": 46
+                                            "maxLength": 46,
                                             "required": true
                                         },
                                         "email": {
                                             "type": "string",
                                             "minLength": 1,
-                                            "format": "email"
+                                            "format": "email",
                                             "required": true
                                         },
                                         "firstName": {
                                             "type": "string",
                                             "minLength": 1,
-                                            "maxLength": 256
+                                            "maxLength": 256,
                                             "required": true
                                         },
                                         "lastName": {
                                             "type": "string",
                                             "minLength": 1,
-                                            "maxLength": 256
+                                            "maxLength": 256,
                                             "required": true
                                         },
                                         "useCoverPage": {
@@ -22349,7 +22379,7 @@ This is an internal request which retrieves an eFax user’s information. It wil
                                 }
                             }
                         }
-                    }
+                    },
                     "ne_id": {
                         "type": "string",
                         "minLength": 1,
@@ -22360,31 +22390,31 @@ This is an internal request which retrieves an eFax user’s information. It wil
                         "minLength": 1,
                         "maxLength": 256,
                         "required": true
-                    }
+                    },
                     "faxNumber": {
                         "type": "string",
                         "description": "A formatted TN.",
                         "pattern": "^\\+\\d+-\\d+$",
                         "minLength": 1,
-                        "maxLength": 46
+                        "maxLength": 46,
                         "required": true
                     },
                     "email": {
                         "type": "string",
                         "minLength": 1,
-                        "format": "email"
+                        "format": "email",
                         "required": true
                     },
                     "firstName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": true
                     },
                     "lastName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": true
                     },
                     "useCoverPage": {
@@ -22505,25 +22535,25 @@ This is an internal request which updates the properties of an existing eFax use
                         "description": "A formatted TN.",
                         "pattern": "^\\+\\d+-\\d+$",
                         "minLength": 1,
-                        "maxLength": 46
+                        "maxLength": 46,
                         "required": false
                     },
                     "email": {
                         "type": "string",
                         "minLength": 1,
-                        "format": "email"
+                        "format": "email",
                         "required": false
                     },
                     "firstName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": false
                     },
                     "lastName": {
                         "type": "string",
                         "minLength": 1,
-                        "maxLength": 256
+                        "maxLength": 256,
                         "required": false
                     },
                     "useCoverPage": {
