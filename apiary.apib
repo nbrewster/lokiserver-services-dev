@@ -1155,1075 +1155,6 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
 
             Transaction-Id: 1380080943120
 
-<!-- =============================== Process Engine ================================= -->
-
-# Group Process Engine
-
-**details pending**
-
-A "process" consists of a series of "steps", each of which implements provisioning business logic. They also perform data mappings into the 3rd-party data models.
-
-The POST /loki-services/process-engine/process controller triggers a process. Each step in a
-process is implemented in the appropriate Entity Services, which generally uses the Utility
-Services to communicate with network elements.
-
-General note: any of these requests may return 424 Method Failure in the event of an error response from the network element,
-or 400 Bad Request for validation failure on the body, uri query parameters, or uri template variables, or 500 Internal
-Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
-resources/methods below.
-
-## Trigger a Process Action [/loki-services/process-engine/process]
-### Trigger a Process [POST]
-Trigger a process in the Process Engine - createVoipUser example. Triggers the createVoipUser process,
-with voip-user data as the inputs. The response includes embedded representations of any resources created
-as a result of the process (e.g. phone numbers assigned in BroadWorks, user created in BroadWorks, etc). These
-include any properties of those resources that may need to be reported back to the client (e.g. auto-generated
-password, name, etc).
-
-+ Request (application/json)
-    + Body
-
-            {
-                "customerId": "exampleCom",
-                "siteId": "exampleComNorth",
-                "process": "createVoipUser",
-                "userId": "2005553001@example.com",
-                "phoneNumber": "+1-2005553001",
-                "tnRoutine": "auto",
-                "CLID": "+1-2005553001",
-                "extension": "3001",
-                "lastName": "Smith",
-                "firstName": "John",
-                "callingLineIdLastName": "Smith",
-                "callingLineIdFirstName": "John",
-                "email": "jsmith@example.com",
-                "timeZone": "America\/New_York",
-                "language": "English",
-                "sharedDeviceName": "exampleComIad001",
-                "trunkGroupName": null,
-                "servicePacks": {
-                    "base": "Standard",
-                    "add-on": [
-                        "Executive"
-                    ]
-                },
-                "role": "Executive",
-                "services": {
-                    "Authentication": {
-                        "username": "2005553001@sip.example.com",
-                        "password": "230A4u$#%f"
-                    },
-                    "Charge Number": {
-                        "phoneNumber": "+1-2005554321",
-                        "tnRoutine": "",
-                        "useChargeNumberForEnhancedTranslations": false,
-                        "sendChargeNumberToNetwork": true
-                    },
-                    "Third-Party Voice Mail Support": {
-                        "isActive": true,
-                        "busyRedirectToVoiceMail": true,
-                        "noAnswerRedirectToVoiceMail": true,
-                        "serverSelection": "User Specific Mail Server",
-                        "userServer": "4165557000",
-                        "mailboxIdType": "URL",
-                        "mailboxURL": "2005553001@sip.example.com",
-                        "noAnswerNumberOfRings": 4,
-                        "alwaysRedirectToVoiceMail": false,
-                        "outOfPrimaryZoneRedirectToVoiceMail": false
-                    },
-                    "Call Forwarding No Answer": {
-                        "isActive": true,
-                        "forwardToPhoneNumber": "+1-2005553101",
-                        "numberOfRings": 4
-                    },
-                    "Call Forwarding Not Reachable": {
-                        "isActive": true,
-                        "forwardToPhoneNumber": "+1-2005553101"
-                    },
-                    "Remote Office": []
-                }
-            }
-
-    + Schema
-
-            {
-               "title": "Legacy VoIP User request body",
-               "description": "The same JSON Schema applies for all the requests in the BroadWorks Process Steps section",
-               "type": "object",
-               "additionalProperties": false,
-               "properties": {
-                  "customerId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "siteId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "userId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 161,
-                     "pattern": "^[\\w'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
-                  },
-                  "phoneNumber": {
-                     "type": "string",
-                     "description": "A formatted TN.",
-                     "pattern": "^\\+\\d+-\\d+$",
-                     "minLength": 1,
-                     "maxLength": 23
-                  },
-                  "tnRoutine": {
-                     "enum": [
-                        null,
-                        "",
-                        "port-no-temp",
-                        "auto",
-                        "no-number"
-                     ]
-                  },
-                  "extension": {
-                     "type": [
-                        "string",
-                        "null"
-                     ],
-                     "minLength": 2,
-                     "maxLength": 20,
-                     "pattern": "^[0-9]+$"
-                  },
-                  "CLID": {
-                     "type": "string",
-                     "description": "A formatted TN.",
-                     "pattern": "^\\+\\d+-\\d+$",
-                     "minLength": 1,
-                     "maxLength": 23
-                  },
-                  "lastName": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "firstName": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "callingLineIdLastName": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30,
-                     "pattern": "^[\\x20-\\x21\\x23-\\x24\\x26-\\x2A\\x2C-\\x2E\\x30-\\x7F]+$"
-                  },
-                  "callingLineIdFirstName": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30,
-                     "pattern": "^[\\x20-\\x21\\x23-\\x24\\x26-\\x2A\\x2C-\\x2E\\x30-\\x7F]+$"
-                  },
-                  "email": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 80,
-                     "format": "email"
-                  },
-                  "timeZone": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 127
-                  },
-                  "language": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 40
-                  },
-                  "role": {},
-                  "userType": {
-                     "enum": [
-                        "trunking",
-                        "ATA",
-                        "businessLine",
-                        "hostedPbx",
-                        "noDevice"
-                     ]
-                  },
-                  "accessDevice": {
-                     "type": "object",
-                     "additionalProperties": false,
-                     "description": "Details of the user's device, for Business Line, IP Centrex, and System Device users.",
-                     "properties": {
-                        "deviceManagementRoutine": {},
-                        "name": {
-                           "type": "string",
-                           "minLength": 1,
-                           "maxLength": 40
-                        },
-                        "type": {},
-                        "model": {},
-                        "macAddress": {},
-                        "linePort": {}
-                     },
-                     "required": [
-                        "name"
-                     ]
-                  },
-                  "trunkGroup": {
-                     "type": "object",
-                     "additionalProperties": false,
-                     "description": "Details of the user's trunk group(s), for Trunking users.",
-                     "properties": {
-                        "name": {
-                           "type": "string",
-                           "minLength": 1,
-                           "maxLength": 30
-                        },
-                        "linePort": {}
-                     }
-                  },
-                  "servicePacks": {
-                     "type": "object",
-                     "additionalProperties": false,
-                     "description": "Service Packs that will be assigned to User",
-                     "properties": {
-                        "base": {
-                           "type": "string",
-                           "minLength": 1,
-                           "maxLength": 80
-                        },
-                        "add-on": {
-                           "type": "array",
-                           "items": {
-                              "type": "string",
-                              "minLength": 1,
-                              "maxLength": 80
-                           }
-                        }
-                     }
-                  },
-                  "services": {
-                     "type": "object",
-                     "properties": {
-                        "Authentication": {
-                           "type": "object",
-                           "additionalProperties": false,
-                           "properties": {
-                              "username": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 80
-                              },
-                              "password": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 60
-                              }
-                           }
-                        },
-                        "Charge Number": {
-                           "type": "object",
-                           "additionalProperties": false,
-                           "properties": {
-                              "phoneNumber": {
-                                 "type": [
-                                    "string",
-                                    "null"
-                                 ],
-                                 "description": "A formatted TN.",
-                                 "pattern": "^\\+\\d+-\\d+$",
-                                 "minLength": 1,
-                                 "maxLength": 23
-                              },
-                              "useChargeNumberForEnhancedTranslations": {
-                                 "type": "boolean"
-                              },
-                              "sendChargeNumberToNetwork": {
-                                 "type": "boolean"
-                              },
-                              "tnRoutine": {
-                                 "enum": [
-                                    null,
-                                    "",
-                                    "port-no-temp",
-                                    "auto"
-                                 ]
-                              }
-                           }
-                        },
-                        "Third-Party Voice Mail Support": {
-                           "type": "object",
-                           "additionalProperties": false,
-                           "properties": {
-                              "isActive": {
-                                 "type": "boolean"
-                              },
-                              "busyRedirectToVoiceMail": {
-                                 "type": "boolean"
-                              },
-                              "noAnswerRedirectToVoiceMail": {
-                                 "type": "boolean"
-                              },
-                              "noAnswerNumberOfRings": {
-                                 "enum": [
-                                    0,
-                                    2,
-                                    3,
-                                    4,
-                                    5,
-                                    6,
-                                    7,
-                                    8,
-                                    9,
-                                    10,
-                                    11,
-                                    12,
-                                    13,
-                                    14,
-                                    15,
-                                    16,
-                                    17,
-                                    18,
-                                    19,
-                                    20
-                                 ]
-                              },
-                              "alwaysRedirectToVoiceMail": {
-                                 "type": "boolean"
-                              },
-                              "outOfPrimaryZoneRedirectToVoiceMail": {
-                                 "type": "boolean"
-                              },
-                              "serverSelection": {
-                                 "enum": [
-                                    "Group Mail Server",
-                                    "User Specific Mail Server"
-                                 ]
-                              },
-                              "userServer": {
-                                 "anyOf": [
-                                    {
-                                       "id": "E.164 DN",
-                                       "type": [
-                                          "string",
-                                          "null"
-                                       ],
-                                       "description": "A formatted TN.",
-                                       "pattern": "^\\+\\d+-\\d+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "Non formated DN",
-                                       "type": "string",
-                                       "description": "A non-E.164 formatted TN.",
-                                       "pattern": "^[\\d\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "SIP URI",
-                                       "type": "string",
-                                       "description": "SIP URI",
-                                       "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 161
-                                    }
-                                 ]
-                              },
-                              "mailboxIdType": {
-                                 "enum": [
-                                    "User Or Group Phone Number",
-                                    "URL"
-                                 ]
-                              },
-                              "mailboxURL": {
-                                 "type": [
-                                    "string",
-                                    "null"
-                                 ],
-                                 "description": "SIP URI",
-                                 "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                 "minLength": 1,
-                                 "maxLength": 161
-                              }
-                           }
-                        },
-                        "Call Forwarding No Answer": {
-                           "type": "object",
-                           "additionalProperties": false,
-                           "properties": {
-                              "isActive": {
-                                 "type": "boolean"
-                              },
-                              "forwardToPhoneNumber": {
-                                 "anyOf": [
-                                    {
-                                       "id": "E.164 DN",
-                                       "type": [
-                                          "string",
-                                          "null"
-                                       ],
-                                       "description": "A formatted TN.",
-                                       "pattern": "^\\+\\d+-\\d+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "Non formated DN",
-                                       "type": "string",
-                                       "description": "A non-E.164 formatted TN.",
-                                       "pattern": "^[\\d\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "SIP URI",
-                                       "type": "string",
-                                       "description": "SIP URI",
-                                       "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 161
-                                    }
-                                 ]
-                              },
-                              "numberOfRings": {
-                                 "enum": [
-                                    0,
-                                    2,
-                                    3,
-                                    4,
-                                    5,
-                                    6,
-                                    7,
-                                    8,
-                                    9,
-                                    10,
-                                    11,
-                                    12,
-                                    13,
-                                    14,
-                                    15,
-                                    16,
-                                    17,
-                                    18,
-                                    19,
-                                    20
-                                 ]
-                              }
-                           }
-                        },
-                        "Call Forwarding Not Reachable": {
-                           "type": "object",
-                           "additionalProperties": false,
-                           "properties": {
-                              "isActive": {
-                                 "type": "boolean"
-                              },
-                              "forwardToPhoneNumber": {
-                                 "anyOf": [
-                                    {
-                                       "id": "E.164 DN",
-                                       "type": [
-                                          "string",
-                                          "null"
-                                       ],
-                                       "description": "A formatted TN.",
-                                       "pattern": "^\\+\\d+-\\d+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "Non formated DN",
-                                       "type": "string",
-                                       "description": "A non-E.164 formatted TN.",
-                                       "pattern": "^[\\d\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 23
-                                    },
-                                    {
-                                       "id": "SIP URI",
-                                       "type": "string",
-                                       "description": "SIP URI",
-                                       "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                       "minLength": 1,
-                                       "maxLength": 161
-                                    }
-                                 ]
-                              }
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-
-+ Response 200 (application/hal+json)
-    + Headers
-
-            Transaction-Id: 1380080943120
-
-    + Body
-
-            {
-                "_links": {
-                    "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users"
-                    }
-                },
-                "_embedded": {
-                    "ls:broadworks-phone-numbers": [
-                        {
-                            "_links": {
-                                "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/phone-numbers\/%2B1-2005553001"
-                                }
-                            }
-                        },
-                        {
-                            "_links": {
-                                "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/groups\/exampleComNorth\/phone-numbers\/%2B1-2005553001"
-                                }
-                            }
-                        }
-                    ],
-                    "ls:broadworks-users": [
-                        {
-                            "_links": {
-                                "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
-                                }
-                            },
-                            "phoneNumber": "+1-2005553001",
-                            "extension": "3001",
-                            "CLID": "+1-2005553001",
-                            "userId": "2005553001@example.com",
-                            "portalPassword": "s8F!9ggo",
-                            "firstName": "John",
-                            "lastName": "Smith",
-                            "callingLineIdLastName": "Smith",
-                            "callingLineIdFirstName": "John",
-                            "services": {
-                                "Authentication": {
-                                    "username": "2005553001",
-                                    "password": "230A4u$#%f"
-                                },
-                                "Charge Number": {
-                                    "phoneNumber": "+1-2005554321",
-                                    "tnRoutine": "",
-                                    "useChargeNumberForEnhancedTranslations": false,
-                                    "sendChargeNumberToNetwork": true
-                                },
-                                "Third-Party Voice Mail Support": {
-                                    "isActive": true,
-                                    "busyRedirectToVoiceMail": true,
-                                    "noAnswerRedirectToVoiceMail": true,
-                                    "serverSelection": "User Specific Mail Server",
-                                    "userServer": "4165557000",
-                                    "mailboxIdType": "URL",
-                                    "mailboxURL": "2005553001@sip.example.com",
-                                    "noAnswerNumberOfRings": 4,
-                                    "alwaysRedirectToVoiceMail": false,
-                                    "outOfPrimaryZoneRedirectToVoiceMail": false
-                                },
-                                "Call Forwarding No Answer": {
-                                    "isActive": true,
-                                    "forwardToPhoneNumber": "+1-2005553101",
-                                    "numberOfRings": 4
-                                },
-                                "Call Forwarding Not Reachable": {
-                                    "isActive": true,
-                                    "forwardToPhoneNumber": "+1-2005553101"
-                                },
-                                "Remote Office": []
-                            }
-                        }
-                    ]
-                }
-            }
-
-    + Schema
-
-            {
-               "title": "Process steps response body parameters schema",
-               "type": "object",
-               "properties": {
-                  "_links": {
-                     "type": "object",
-                     "properties": {
-                        "self": {
-                           "type": "object",
-                           "properties": {
-                              "href": {
-                                 "type": "string"
-                              }
-                           },
-                           "required": [
-                              "href"
-                           ]
-                        }
-                     },
-                     "required": [
-                        "self"
-                     ]
-                  },
-                  "_embedded": {
-                     "type": "object",
-                     "properties": {
-                        "ls:broadworks-users": {
-                           "type": "array",
-                           "items": {
-                              "type": "object",
-                              "properties": {
-                                 "_links": {
-                                    "type": "object",
-                                    "properties": {
-                                       "self": {
-                                          "type": "object",
-                                          "properties": {
-                                             "href": {
-                                                "type": "string"
-                                             }
-                                          },
-                                          "required": [
-                                             "href"
-                                          ]
-                                       }
-                                    },
-                                    "required": [
-                                       "self"
-                                    ]
-                                 },
-                                 "customerId": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30
-                                 },
-                                 "siteId": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30
-                                 },
-                                 "userId": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 161,
-                                    "pattern": "^[\\w'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
-                                 },
-                                 "phoneNumber": {
-                                    "type": "string",
-                                    "description": "A formatted TN.",
-                                    "pattern": "^\\+\\d+-\\d+$",
-                                    "minLength": 1,
-                                    "maxLength": 23
-                                 },
-                                 "tnRoutine": {
-                                    "enum": [
-                                       null,
-                                       "",
-                                       "port-no-temp",
-                                       "auto",
-                                       "no-number"
-                                    ]
-                                 },
-                                 "extension": {
-                                    "type": [
-                                       "string",
-                                       "null"
-                                    ],
-                                    "minLength": 2,
-                                    "maxLength": 20,
-                                    "pattern": "^[0-9]+$"
-                                 },
-                                 "CLID": {
-                                    "type": "string",
-                                    "description": "A formatted TN.",
-                                    "pattern": "^\\+\\d+-\\d+$",
-                                    "minLength": 1,
-                                    "maxLength": 23
-                                 },
-                                 "lastName": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30
-                                 },
-                                 "firstName": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30
-                                 },
-                                 "callingLineIdLastName": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30,
-                                    "pattern": "^[\\x20-\\x21\\x23-\\x24\\x26-\\x2A\\x2C-\\x2E\\x30-\\x7F]+$"
-                                 },
-                                 "callingLineIdFirstName": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 30,
-                                    "pattern": "^[\\x20-\\x21\\x23-\\x24\\x26-\\x2A\\x2C-\\x2E\\x30-\\x7F]+$"
-                                 },
-                                 "email": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 80,
-                                    "format": "email"
-                                 },
-                                 "timeZone": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 127
-                                 },
-                                 "language": {
-                                    "type": "string",
-                                    "minLength": 1,
-                                    "maxLength": 40
-                                 },
-                                 "role": {},
-                                 "userType": {
-                                    "enum": [
-                                       "trunking",
-                                       "ATA",
-                                       "businessLine",
-                                       "hostedPbx",
-                                       "noDevice"
-                                    ]
-                                 },
-                                 "accessDevice": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "description": "Details of the user's device, for Business Line, IP Centrex, and System Device users.",
-                                    "properties": {
-                                       "deviceManagementRoutine": {},
-                                       "name": {
-                                          "type": "string",
-                                          "minLength": 1,
-                                          "maxLength": 40
-                                       },
-                                       "type": {},
-                                       "model": {},
-                                       "macAddress": {},
-                                       "linePort": {}
-                                    },
-                                    "required": [
-                                       "name"
-                                    ]
-                                 },
-                                 "trunkGroup": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "description": "Details of the user's trunk group(s), for Trunking users.",
-                                    "properties": {
-                                       "name": {
-                                          "type": "string",
-                                          "minLength": 1,
-                                          "maxLength": 30
-                                       },
-                                       "linePort": {}
-                                    }
-                                 },
-                                 "servicePacks": {
-                                    "type": "object",
-                                    "additionalProperties": false,
-                                    "description": "Service Packs that will be assigned to User",
-                                    "properties": {
-                                       "base": {
-                                          "type": "string",
-                                          "minLength": 1,
-                                          "maxLength": 80
-                                       },
-                                       "add-on": {
-                                          "type": "array",
-                                          "items": {
-                                             "type": "string",
-                                             "minLength": 1,
-                                             "maxLength": 80
-                                          }
-                                       }
-                                    }
-                                 },
-                                 "services": {
-                                    "type": "object",
-                                    "properties": {
-                                       "Authentication": {
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                             "username": {
-                                                "type": "string",
-                                                "minLength": 1,
-                                                "maxLength": 80
-                                             },
-                                             "password": {
-                                                "type": "string",
-                                                "minLength": 1,
-                                                "maxLength": 60
-                                             }
-                                          }
-                                       },
-                                       "Charge Number": {
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                             "phoneNumber": {
-                                                "type": [
-                                                   "string",
-                                                   "null"
-                                                ],
-                                                "description": "A formatted TN.",
-                                                "pattern": "^\\+\\d+-\\d+$",
-                                                "minLength": 1,
-                                                "maxLength": 23
-                                             },
-                                             "useChargeNumberForEnhancedTranslations": {
-                                                "type": "boolean"
-                                             },
-                                             "sendChargeNumberToNetwork": {
-                                                "type": "boolean"
-                                             },
-                                             "tnRoutine": {
-                                                "enum": [
-                                                   null,
-                                                   "",
-                                                   "port-no-temp",
-                                                   "auto"
-                                                ]
-                                             }
-                                          }
-                                       },
-                                       "Third-Party Voice Mail Support": {
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                             "isActive": {
-                                                "type": "boolean"
-                                             },
-                                             "busyRedirectToVoiceMail": {
-                                                "type": "boolean"
-                                             },
-                                             "noAnswerRedirectToVoiceMail": {
-                                                "type": "boolean"
-                                             },
-                                             "noAnswerNumberOfRings": {
-                                                "enum": [
-                                                   0,
-                                                   2,
-                                                   3,
-                                                   4,
-                                                   5,
-                                                   6,
-                                                   7,
-                                                   8,
-                                                   9,
-                                                   10,
-                                                   11,
-                                                   12,
-                                                   13,
-                                                   14,
-                                                   15,
-                                                   16,
-                                                   17,
-                                                   18,
-                                                   19,
-                                                   20
-                                                ]
-                                             },
-                                             "alwaysRedirectToVoiceMail": {
-                                                "type": "boolean"
-                                             },
-                                             "outOfPrimaryZoneRedirectToVoiceMail": {
-                                                "type": "boolean"
-                                             },
-                                             "serverSelection": {
-                                                "enum": [
-                                                   "Group Mail Server",
-                                                   "User Specific Mail Server"
-                                                ]
-                                             },
-                                             "userServer": {
-                                                "anyOf": [
-                                                   {
-                                                      "id": "E.164 DN",
-                                                      "type": [
-                                                         "string",
-                                                         "null"
-                                                      ],
-                                                      "description": "A formatted TN.",
-                                                      "pattern": "^\\+\\d+-\\d+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "Non formated DN",
-                                                      "type": "string",
-                                                      "description": "A non-E.164 formatted TN.",
-                                                      "pattern": "^[\\d\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "SIP URI",
-                                                      "type": "string",
-                                                      "description": "SIP URI",
-                                                      "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 161
-                                                   }
-                                                ]
-                                             },
-                                             "mailboxIdType": {
-                                                "enum": [
-                                                   "User Or Group Phone Number",
-                                                   "URL"
-                                                ]
-                                             },
-                                             "mailboxURL": {
-                                                "type": [
-                                                   "string",
-                                                   "null"
-                                                ],
-                                                "description": "SIP URI",
-                                                "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                                "minLength": 1,
-                                                "maxLength": 161
-                                             }
-                                          }
-                                       },
-                                       "Call Forwarding No Answer": {
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                             "isActive": {
-                                                "type": "boolean"
-                                             },
-                                             "forwardToPhoneNumber": {
-                                                "anyOf": [
-                                                   {
-                                                      "id": "E.164 DN",
-                                                      "type": [
-                                                         "string",
-                                                         "null"
-                                                      ],
-                                                      "description": "A formatted TN.",
-                                                      "pattern": "^\\+\\d+-\\d+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "Non formated DN",
-                                                      "type": "string",
-                                                      "description": "A non-E.164 formatted TN.",
-                                                      "pattern": "^[\\d\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "SIP URI",
-                                                      "type": "string",
-                                                      "description": "SIP URI",
-                                                      "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 161
-                                                   }
-                                                ]
-                                             },
-                                             "numberOfRings": {
-                                                "enum": [
-                                                   0,
-                                                   2,
-                                                   3,
-                                                   4,
-                                                   5,
-                                                   6,
-                                                   7,
-                                                   8,
-                                                   9,
-                                                   10,
-                                                   11,
-                                                   12,
-                                                   13,
-                                                   14,
-                                                   15,
-                                                   16,
-                                                   17,
-                                                   18,
-                                                   19,
-                                                   20
-                                                ]
-                                             }
-                                          }
-                                       },
-                                       "Call Forwarding Not Reachable": {
-                                          "type": "object",
-                                          "additionalProperties": false,
-                                          "properties": {
-                                             "isActive": {
-                                                "type": "boolean"
-                                             },
-                                             "forwardToPhoneNumber": {
-                                                "anyOf": [
-                                                   {
-                                                      "id": "E.164 DN",
-                                                      "type": [
-                                                         "string",
-                                                         "null"
-                                                      ],
-                                                      "description": "A formatted TN.",
-                                                      "pattern": "^\\+\\d+-\\d+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "Non formated DN",
-                                                      "type": "string",
-                                                      "description": "A non-E.164 formatted TN.",
-                                                      "pattern": "^[\\d\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 23
-                                                   },
-                                                   {
-                                                      "id": "SIP URI",
-                                                      "type": "string",
-                                                      "description": "SIP URI",
-                                                      "pattern": "^[\\+]?[\\w\\-\\.\\!~\\*'\\(\\)]+@[a-zA-Z\\d\\.\\-]+$",
-                                                      "minLength": 1,
-                                                      "maxLength": 161
-                                                   }
-                                                ]
-                                             }
-                                          }
-                                       }
-                                    }
-                                 }
-                              },
-                              "required": [
-                                 "_links"
-                              ]
-                           }
-                        }
-                     }
-                  }
-               },
-               "required": [
-                  "_links"
-               ]
-            }
-
-+ Response 424 (application/json)
-    + Headers
-
-            Transaction-Id: 1380080943120
-
-    + Body
-
-            {
-                "errorCode": "EXTERNAL_API_ERROR",
-                "externalErrorCode": "4250",
-                "externalErrorSummary": "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned.",
-                "externalErrorDetail": "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
-            }
-
 <!-- =================================== Process Steps ================================== -->
 
 # Group BroadWorks Process Steps
@@ -2938,7 +1869,7 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
                 },
                 "serviceProviderId": "Example Com",
                 "isEnterprise": true,
-                "useCustomRoutingProfile": "true",
+                "useCustomRoutingProfile": true,
                 "name": "Example Com",
                 "defaultDomain": "example.com",
                 "supportEmail": "email@example.com",
@@ -5305,14 +4236,18 @@ Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
                     "countryCode": "1",
                     "nationalPrefix": "+1",
                     "extension": "3456",
-                    "department": "Dept #1",
+                    "department": {
+                        "serviceProviderId": "Example Com",
+                        "groupId": "Example Com",
+                        "name": "Dept #1"
+                    },
                     "language": "English",
                     "timeZone": "America\/New_York",
                     "timeZoneDisplayName": "(GMT-04:00) (US) Eastern Time",
                     "alias": [
                         "voiceportal@example.com"
                     ],
-                    "publicUserIdentity": "VoicePortalId"
+                    "publicUserIdentity": "VoicePortalId@example.com"
                 },
                 "isActive": true,
                 "enableExtendedScope": true,
@@ -5390,7 +4325,7 @@ Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 23,
-                                 "pattern": "^[\\d\\-]+$"
+                                 "pattern": "^[\\d\\+\\-]+$"
                               }
                            }
                         },
@@ -5413,13 +4348,13 @@ Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
                            "type": "string",
                            "minLength": 1,
                            "maxLength": 23,
-                           "pattern": "^[\\d\\-]+$"
+                           "pattern": "^\\+\\d+-\\d+$"
                         },
                         "extension": {
                            "type": "string",
                            "minLength": 1,
                            "maxLength": 20,
-                           "pattern": "^[\\d\\-]+$"
+                           "pattern": "^[0-9]+$"
                         },
                         "countryCode": {
                            "type": "string"
@@ -5570,13 +4505,17 @@ Process name: Modify Group Voice Portal (BroadWorks Entity Service)<br />
                     "phoneNumber": "+1-555123456",
                     "extension": "3456",
                     "password": "#45aaTy4",
-                    "department": "Dept #1",
+                    "department": {
+                        "serviceProviderId": "Example Code",
+                        "groupId": "Example Com",
+                        "name": "Dept #1"
+                    },
                     "language": "English",
                     "timeZone": "America\/New_York",
                     "alias": [
                         "voiceportal@example.com"
                     ],
-                    "publicUserIdentity": "VoicePortalId"
+                    "publicUserIdentity": "VoicePortalId@example.com"
                 },
                 "isActive": true,
                 "enableExtendedScope": true,
@@ -5622,7 +4561,7 @@ Process name: Modify Group Voice Portal (BroadWorks Entity Service)<br />
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 23,
-                                 "pattern": "^[\\d\\-]+$"
+                                 "pattern": "^[\\+\\d\\-]+$"
                               }
                            }
                         },
@@ -5645,13 +4584,13 @@ Process name: Modify Group Voice Portal (BroadWorks Entity Service)<br />
                            "type": "string",
                            "minLength": 1,
                            "maxLength": 23,
-                           "pattern": "^[\\d\\-]+$"
+                           "pattern": "^\\+\\d+-\\d+$"
                         },
                         "extension": {
                            "type": "string",
                            "minLength": 1,
                            "maxLength": 20,
-                           "pattern": "^[\\d\\-]+$"
+                           "pattern": "^[0-9]+$"
                         },
                         "password": {
                            "type": "string"
@@ -6612,10 +5551,7 @@ Cluster resolution method: Group
 
             {
                 "trunkGroupName": "ExampleCom Trunk 3001",
-                "department": {
-                    "name": "Sales",
-                    "level": "Group"
-                },
+                "department": "Dept #1",
                 "accessDevice": {
                     "level": "Group",
                     "deviceName": "ExampleCom_AD3001"
@@ -6858,26 +5794,20 @@ Cluster resolution method: Group
                               "rerouteTrunkGroup": {
                                  "type": "object",
                                  "properties": {
-                                    "serviceProviderId": {
-                                       "type": "string",
-                                       "minLength": 1,
-                                       "maxLength": 30
-                                    },
                                     "groupId": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     },
-                                    "name": {
+                                    "trunkGroupName": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     }
                                  },
                                  "required": [
-                                    "serviceProviderId",
                                     "groupId",
-                                    "name"
+                                    "trunkGroupName"
                                  ]
                               },
                               "initialCalls": {
@@ -6957,26 +5887,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      },
@@ -7107,26 +6031,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      }
@@ -7666,26 +6584,20 @@ Cluster resolution method: Group
                               "rerouteTrunkGroup": {
                                  "type": "object",
                                  "properties": {
-                                    "serviceProviderId": {
-                                       "type": "string",
-                                       "minLength": 1,
-                                       "maxLength": 30
-                                    },
                                     "groupId": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     },
-                                    "name": {
+                                    "trunkGroupName": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     }
                                  },
                                  "required": [
-                                    "serviceProviderId",
                                     "groupId",
-                                    "name"
+                                    "trunkGroupName"
                                  ]
                               },
                               "initialCalls": {
@@ -7765,26 +6677,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      },
@@ -7910,26 +6816,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      }
@@ -8352,26 +7252,20 @@ Cluster resolution method: Group
                               "rerouteTrunkGroup": {
                                  "type": "object",
                                  "properties": {
-                                    "serviceProviderId": {
-                                       "type": "string",
-                                       "minLength": 1,
-                                       "maxLength": 30
-                                    },
                                     "groupId": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     },
-                                    "name": {
+                                    "trunkGroupName": {
                                        "type": "string",
                                        "minLength": 1,
                                        "maxLength": 30
                                     }
                                  },
                                  "required": [
-                                    "serviceProviderId",
                                     "groupId",
-                                    "name"
+                                    "trunkGroupName"
                                  ]
                               },
                               "initialCalls": {
@@ -8442,26 +7336,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      }
@@ -8576,26 +7464,20 @@ Cluster resolution method: Group
                         "rerouteTrunkGroup": {
                            "type": "object",
                            "properties": {
-                              "serviceProviderId": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
                               "groupId": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               },
-                              "name": {
+                              "trunkGroupName": {
                                  "type": "string",
                                  "minLength": 1,
                                  "maxLength": 30
                               }
                            },
                            "required": [
-                              "serviceProviderId",
                               "groupId",
-                              "name"
+                              "trunkGroupName"
                            ]
                         }
                      }
@@ -8835,8 +7717,7 @@ Cluster resolution method: Group
                 "transportProtocol": "TCP",
                 "accessDeviceCredentials": {
                     "enabled": true,
-                    "username": "4165551212",
-                    "password": "4D0fj$&zJ"
+                    "username": "4165551212"
                 }
             }
 
@@ -10515,8 +9396,7 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
                   "language",
                   "timeZone",
                   "timeZoneDisplayName",
-                  "defaultAlias",
-                  "alias"
+                  "defaultAlias"
                ]
             }
 
@@ -11091,7 +9971,6 @@ Retrieve the Systems's list of defined time zones, including the default time zo
                "required": [
                   "_links",
                   "ne_id",
-                  "serverTimeZone",
                   "timeZoneTable"
                ]
             }
@@ -11345,7 +10224,7 @@ Modifies the profile settings for an existing BroadWorks Service Provider/Enterp
                     "zipOrPostalCode": "10007",
                     "country": "US"
                 },
-                "useServiceProviderLanguages": "true"
+                "useServiceProviderLanguages": true
             }
 
     + Schema
@@ -11436,10 +10315,7 @@ Modifies the profile settings for an existing BroadWorks Service Provider/Enterp
                      "type": "boolean",
                      "description": "Only available for Service Providers."
                   }
-               },
-               "required": [
-                  "useServiceProviderLanguages"
-               ]
+               }
             }
 
 + Response 204
@@ -11620,7 +10496,6 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                },
                "required": [
                   "isEnterprise",
-                  "useCustomRoutingProfile",
                   "serviceProviderId",
                   "defaultDomain"
                ]
@@ -12313,8 +11188,7 @@ Retrieve the Service Provider's service authorization detail.
                         "Allocated": 10,
                         "Licensed": true,
                         "Service Pack Allocation": 0
-                    },
-                    "etc": "truncated for brevity"
+                    }
                 },
                 "userServicesAuthorizationTable": {
                     "3G\/4G Continuity": {
@@ -12340,8 +11214,7 @@ Retrieve the Service Provider's service authorization detail.
                         "Service Pack Allocation": 0,
                         "User Assignable": true,
                         "Service Pack Assignable": true
-                    },
-                    "etc": "truncated for brevity"
+                    }
                 }
             }
 
@@ -12916,7 +11789,7 @@ The following properties are omitted from the response if they have no value set
                 "userCount": 4,
                 "groupName": "exampleCom North",
                 "callingLineIdName": "ExampleCOM North",
-                "callingLineIdPhoneNumber": "+15552112700",
+                "callingLineIdPhoneNumber": "+1-5552112700",
                 "callingLineIdDisplayPhoneNumber": "5552112700",
                 "timeZone": "America\/St_Johns",
                 "timeZoneDisplayName": "(GMT-03:30) (Canada) Newfoundland",
@@ -13006,7 +11879,7 @@ The following properties are omitted from the response if they have no value set
                      "type": "string",
                      "minLength": 1,
                      "maxLength": 23,
-                     "pattern": "^\\+\\d+-\\d+$"
+                     "pattern": "^[\\+\\d+\\-]+$"
                   },
                   "timeZone": {
                      "type": "string",
@@ -14847,8 +13720,8 @@ Search for users in a BroadWorks Group
                         "In Trunk Group": true,
                         "Extension": "5301"
                     },
-                    "5003000002 ": {
-                        "User Id": "5003000002 ",
+                    "5003000002@example.com": {
+                        "User Id": "5003000002@example.com",
                         "Last Name": "Smith",
                         "First Name": "Johnnie",
                         "Department": "Department Example (Example Com - North)",
@@ -14863,7 +13736,7 @@ Search for users in a BroadWorks Group
                 },
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "ne_id": "1
+                "ne_id": "1"
             }
 
     + Schema
@@ -15581,8 +14454,7 @@ Retrieve the Group's service authorization detail.
                         "Usage": 0,
                         "Licensed": true,
                         "Allowed": 20
-                    },
-                    "etc": "truncated for brevity"
+                    }
                 },
                 "userServicesAuthorizationTable": {
                     "3G\/4G Continuity": {
@@ -15608,8 +14480,7 @@ Retrieve the Group's service authorization detail.
                         "Allowed": "Unlimited",
                         "User Assignable": true,
                         "Group Service Assignable": true
-                    },
-                    "etc": "truncated for brevity"
+                    }
                 }
             }
 
@@ -17140,94 +16011,6 @@ Retrieve Trunking Call Capacity settings for a Group.
                 "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
             }
 
-    + Schema
-
-            {
-               "title": "Retrieve Group Trunking Call Capacity response body schema",
-               "properties": {
-                  "_links": {
-                     "type": "object",
-                     "properties": {
-                        "self": {
-                           "type": "object",
-                           "properties": {
-                              "href": {
-                                 "type": "string"
-                              }
-                           },
-                           "required": [
-                              "href"
-                           ]
-                        }
-                     },
-                     "required": [
-                        "self"
-                     ]
-                  },
-                  "ne_id": {
-                     "type": "string"
-                  },
-                  "serviceProviderId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "groupId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "maxActiveCalls": {
-                     "type": "integer"
-                  },
-                  "maxAvailableActiveCalls": {
-                     "type": "object",
-                     "properties": {
-                        "quantity": {
-                           "type": "integer",
-                           "minimum": 0
-                        },
-                        "unlimited": {
-                           "type": "boolean"
-                        }
-                     }
-                  },
-                  "burstingMaxActiveCalls": {
-                     "type": "object",
-                     "properties": {
-                        "quantity": {
-                           "type": "integer",
-                           "minimum": 0
-                        },
-                        "unlimited": {
-                           "type": "boolean"
-                        }
-                     }
-                  },
-                  "burstingMaxAvailableActiveCalls": {
-                     "type": "object",
-                     "properties": {
-                        "quantity": {
-                           "type": "integer",
-                           "minimum": 0
-                        },
-                        "unlimited": {
-                           "type": "boolean"
-                        }
-                     }
-                  }
-               },
-               "required": [
-                  "_links",
-                  "ne_id",
-                  "serviceProviderId",
-                  "groupId",
-                  "maxAvailableActiveCalls",
-                  "burstingMaxActiveCalls",
-                  "burstingMaxAvailableActiveCalls"
-               ]
-            }
-
 ### Update Trunking Call Capacity [PUT]
 Update the Trunking Call Capacity settings to Group.
 
@@ -17429,8 +16212,8 @@ Retrieve Trunk Groups list from a Group.
                                  "maxLength": 30
                               },
                               "Department": {
-                                 "type": "string",
-                                 "minLength": 1,
+                                 "type": ["null", "string"],
+                                 "minLength": 0,
                                  "maxLength": 50
                               },
                               "Device Name": {
@@ -17480,94 +16263,6 @@ Retrieve Trunk Groups list from a Group.
                 "externalErrorCode": "4152",
                 "externalErrorSummary": "[Error 4152] Group not found: Example Com:Bogus Group",
                 "externalErrorDetail": "[Error 4152] Group not found: Example Com:Bogus Group"
-            }
-
-    + Schema
-
-            {
-               "title": "Retrieve Group Trunk Groups response body schema",
-               "properties": {
-                  "_links": {
-                     "type": "object",
-                     "properties": {
-                        "self": {
-                           "type": "object",
-                           "properties": {
-                              "href": {
-                                 "type": "string"
-                              }
-                           },
-                           "required": [
-                              "href"
-                           ]
-                        }
-                     },
-                     "required": [
-                        "self"
-                     ]
-                  },
-                  "ne_id": {
-                     "type": "string"
-                  },
-                  "serviceProviderId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "groupId": {
-                     "type": "string",
-                     "minLength": 1,
-                     "maxLength": 30
-                  },
-                  "trunkGroupTable": {
-                     "type": "object",
-                     "patternProperties": {
-                        "^.+$": {
-                           "type": "object",
-                           "properties": {
-                              "Name": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              },
-                              "Department": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 50
-                              },
-                              "Device Name": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 40
-                              },
-                              "Device Level": {
-                                 "enum": [
-                                    "System",
-                                    "Service Provider",
-                                    "Group"
-                                 ]
-                              },
-                              "Group Id": {
-                                 "type": "string",
-                                 "minLength": 1,
-                                 "maxLength": 30
-                              }
-                           },
-                           "required": [
-                              "Name",
-                              "Group Id"
-                           ]
-                        }
-                     }
-                  }
-               },
-               "required": [
-                  "_links",
-                  "ne_id",
-                  "serviceProviderId",
-                  "groupId",
-                  "trunkGroupTable"
-               ]
             }
 
 ### Create a Trunk Group [POST]
@@ -19762,8 +18457,7 @@ Create a device.
                      "properties": {
                         "userName": {
                            "minLength": 1,
-                           "maxLength": 161,
-                           "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+                           "maxLength": 161
                         },
                         "password": {
                            "type": "string",
@@ -19913,9 +18607,7 @@ Retrieve profile settings of a BroadWorks Group device.
                 "macAddress": "A0B1C2D3E4F6",
                 "serialNumber": "sNumberTest",
                 "description": "description",
-                "numberOfPorts": {
-                    "quantity": 3
-                },
+                "numberOfPorts": 3,
                 "numberOfAssignedPorts": 0,
                 "status": "Online",
                 "configurationMode": "Default",
@@ -20081,9 +18773,9 @@ Retrieve profile settings of a BroadWorks Group device.
                      "type": "boolean"
                   },
                   "userName": {
+                     "type": "string",
                      "minLength": 1,
-                     "maxLength": 161,
-                     "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+                     "maxLength": 161
                   }
                },
                "required": [
@@ -20274,9 +18966,9 @@ Update the profile settings of an device.
                      "type": "object",
                      "properties": {
                         "userName": {
+                           "type": "string",
                            "minLength": 1,
-                           "maxLength": 161,
-                           "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+                           "maxLength": 161
                         },
                         "password": {
                            "type": "string",
@@ -20530,7 +19222,7 @@ Actual requests should include only one or the other (or neither, for users with
                 "ne_id": "1",
                 "serviceProviderId": "Example Com",
                 "groupId": "Example Com - North",
-                "userId": "2005553001%40example.com"
+                "userId": "2005553001@example.com"
             }
 
     + Schema
@@ -20692,7 +19384,7 @@ Retrieve a BroadWorks User.
                   "userId": {
                      "minLength": 1,
                      "maxLength": 161,
-                     "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}][\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]{5,79}@[a-zA-Z\\d\\.\\-]{2,80}$"
+                     "pattern": "^[\\w\\'#\\$\\%&\\-\\/=\\?;\\.\\|~\\!`\\^\\{\\}\\+]"
                   },
                   "lastName": {
                      "type": "string",
@@ -21239,7 +19931,7 @@ This request will retrieve the services assignment status for Service Packs and 
                         "href": "http:\/\/lokiservicesdev.apiary.io:8340\/loki-services\/network-elements\/broadworks\/asp1_r21\/users\/6502342108@example.com\/services\/assigned-services"
                     }
                 },
-                "servicePacksAssignmentTable": [],
+                "servicePacksAssignmentTable": {},
                 "userServicesAssignmentTable": {
                     "Anonymous Call Rejection": {
                         "Service Name": "Anonymous Call Rejection",
