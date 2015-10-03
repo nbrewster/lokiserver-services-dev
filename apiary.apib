@@ -7,9 +7,9 @@ See also:
 * [Internal API, dev (pre-release)](http://docs.lokiservicesdev.apiary.io/) (this document)
 * [Internal API, branch (pre-release)](http://docs.lokiservicesbranch.apiary.io/)
 * [Internal API, GA release](http://docs.loki3services.apiary.io/)
-* [LWS-SOAP API, dev (pre-release)](http://docs.lokidev.apiary.io/)
-* [LWS-SOAP API, branch (pre-release)](http://docs.lokiserverbranch.apiary.io/)
-* [LWS-SOAP API, GA release](http://docs.lokiserver.apiary.io/)
+* [LWS-REST API, dev (pre-release)](http://docs.lokidev.apiary.io/)
+* [LWS-REST API, branch (pre-release)](http://docs.lokiserverbranch.apiary.io/)
+* [LWS-REST API, GA release](http://docs.lokiserver.apiary.io/)
 
 [INTERNAL] Documenting the internal APIs (service contracts) between services in the Loki3 architecture.
 
@@ -2806,8 +2806,8 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}]
-### Retrieve a Group [GET]
+## Group [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}]
+### Retrieve a Group [GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}]
 Retrieve information about a Group.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
@@ -5226,7 +5226,7 @@ Cluster resolution method: Group
             Transaction-Id: 1380080943120
 
 ## Group's Phone Number Activate Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate]
-### Activate Phone Number(s) [POST]
+### Activate Phone Numbers [POST]
 Activates one or more phone numbers and/or ranges of phone numbers in BroadWorks
 Process Name : Activate TNs (BroadWorks Entity)<br />
 Process-backed: Yes<br />
@@ -5324,7 +5324,7 @@ Cluster Resolution Method: Group
             Transaction-Id: 1380080943120
 
 ## Group's Phone Number Deactivate Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate]
-### Deactivate Phone Number(s) [POST]
+### Deactivate Phone Numbers [POST]
 Deactivates one or more phone numbers and/or ranges of phone numbers in BroadWorks.
 Process Name: Deactivate TNs (BroadWorks Entity)<br />
 Process-backed: Yes<br />
@@ -8426,7 +8426,7 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Auto Attendant's Assigned Services /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
+## Auto Attendant's Assigned Services [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services]
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of an Auto Attendant.<br />
 Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks Entity Service)<br />
@@ -14163,7 +14163,7 @@ first check for existence and verify that the TN is allowed to be deleted; in wh
             Transaction-Id: 1380080943120
 
 ## BroadWorks Group's Phone Number Activate Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate]
-### Activate Phone Number(s) [POST]
+### Activate Phone Numbers [POST]
 Activates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
 
 ### JSON Schema for URI Template Parameters
@@ -14255,7 +14255,7 @@ Activates one or more phone numbers and/or ranges of phone numbers in a BroadWor
             Transaction-Id: 1380080943120
 
 ## BroadWorks Group's Phone Number Deactivate Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate]
-### Deactivate Phone Number [POST]
+### Deactivate Phone Numbers [POST]
 Deactivates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
 
 ### JSON Schema for URI Template Parameters
@@ -14871,7 +14871,7 @@ or a 400 Bad Request, depending on the response from the BroadWorks Utility Serv
 
 
 ## BroadWorks Group Service Assign Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices]
-### Assign Group Service(s) [POST]
+### Assign Group Services [POST]
 Assign Group service(s) on Group <br />
 Note: Assigning multiple services is not an atomic operation in BroadWorks.
 If some service(s) in the specified list cannot be assigned to group, BroadWorks does not rollback services from the same request that were assigned successfully.
@@ -14936,7 +14936,7 @@ If at least one service has failed during assignment, failure response is return
             Transaction-Id: 1380080943120
 
 ## BroadWorks Group Service Unassign Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices]
-### Unassign Group Service(s) [POST]
+### Unassign Group Services [POST]
 Unassign Group service(s) from Group <br />
 Note: Unassigning multiple services is not an atomic operation in BroadWorks.
 If some service(s) in the specified list cannot be unassigned from group, BroadWorks does not rollback services from the same request that were unassigned successfully.
@@ -22275,7 +22275,7 @@ This is an internal request which updates the properties of an existing eFax use
 <!-- ======================================== FOOTER ===================================== -->
 
 # Group CHANGELOG
-2.43
+##2.43
 
 New Wit eFax Utility requests:
 
@@ -22290,7 +22290,7 @@ General:
 * Added GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users
 * JSON schemas are formatted to [draft-v4 version](http://tools.ietf.org/html/draft-zyp-json-schema-04)
 
-2.42
+##2.42
 New BroadWorks Entity requests:
 
 * GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services
@@ -22302,7 +22302,7 @@ New BroadWorks Entity requests:
 
 * GET /loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services
 
-2.41
+##2.41
 New BroadWorks Entity requests:
 
 * GET /loki-services/broadworks/service-providers/{+serviceProviderId}
@@ -22380,7 +22380,7 @@ Updated BroadWorks Utility POST requests to have response body in the 201 Create
 
 Added missing JSON schemas for all requests.
 
-#1.6
+##1.6
 Changes for *ctional Description: Update to BroadWorks Entity and Utility Service Functional Division*:
 
 * Move several requests from /loki-service/broadworks context to /loki-services/network-elements/broadworks/{+ne_id}, and add ne_id property in their response bodies.
@@ -22413,7 +22413,7 @@ General:
   GET /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
   PUT /loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services
 
-#1.5
+##1.5
 Changes for *Functional Description: Alternate API Navigation*:
 
 * Update URIs (self links, Location headers) to reflect changed URI construction
