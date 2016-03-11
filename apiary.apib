@@ -61,7 +61,19 @@ request and response properties. Note:
 * If the Sonus documentation indicates a data type of integer, short, or long, the value will be numeric in the Loki REST JSON responses.
 * If the Sonus documentation indicates a data type of string, the value will be a string (or null) in the Loki REST JSON responses.
 
-## Sonus PSX Number Translations Collection [/loki-services/network-elements/sonus-psx/{+ne_id}/number-translations{?nationalId,countryId,attributes,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType}]
+## Sonus PSX Number Translations Collection [/loki-services/network-elements/sonus-psx/{ne_id}/number-translations{?nationalId,countryId,attributes,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ nationalId: `nationalIdExample` (string, required)
+	+ countryId: `countryIdExample` (string, required)
+	+ attributes: `attributesExample` (string, required)
+	+ callProcessingElement1Id: `callProcessingElement1IdExample` (string, required)
+	+ callProcessingElement2Id: `callProcessingElement2IdExample` (string, required)
+	+ callProcessingElement3Id: `callProcessingElement3IdExample` (string, required)
+	+ callProcessingElement4Id: `callProcessingElement4IdExample` (string, required)
+	+ callProcessingElementType: `callProcessingElementTypeExample` (string, required)
+
 ### Create a Number Translation [POST]
 Create a new number translation on a Sonus PSX.
 
@@ -257,7 +269,12 @@ request and response properties. Note:
 * If the Sonus documentation indicates a data type of integer, short, or long, the value will be numeric in the Loki REST JSON responses.
 * If the Sonus documentation indicates a data type of string, the value will be a string (or null) in the Loki REST JSON responses.
 
-## Sonus PSX Number Translation [/loki-services/network-elements/sonus-psx/{+ne_id}/number-translations/{+id}]
+## Sonus PSX Number Translation [/loki-services/network-elements/sonus-psx/{ne_id}/number-translations/{id}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ id: `idExample` (string, required)
+
 ### Check if a Number Translation exists [HEAD]
 Check if a number translation exists.
 
@@ -307,8 +324,19 @@ Delete a number translation.
 
 <!-- --------------------------------- Subscribers ---------------------------------- -->
 
-## Sonus PSX Subscribers Collection [/loki-services/network-elements/sonus-psx/{+ne_id}/subscribers{?subscriberId,countryId,owningCarrierId}]
-### Create a Subscriber [POST /loki-services/network-elements/sonus-psx/{+ne_id}/subscribers]
+## Sonus PSX Subscribers Collection [/loki-services/network-elements/sonus-psx/{ne_id}/subscribers{?subscriberId,countryId,owningCarrierId}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ subscriberId: `subscriberIdExample` (string, required)
+	+ countryId: `countryIdExample` (string, required)
+	+ owningCarrierId: `owningCarrierIdExample` (string, required)
+
+### Create a Subscriber [POST /loki-services/network-elements/sonus-psx/{ne_id}/subscribers]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+
 Create a new Subscriber on a Sonus PSX.
 
 Service: Sonus Utility Service (uses the Sonus Insight API)
@@ -501,7 +529,12 @@ will contain at most one match.
             Transaction-Id: 1380080943120
 
 
-## Sonus PSX Subscriber [/loki-services/network-elements/sonus-psx/{+ne_id}/subscribers/{+id}]
+## Sonus PSX Subscriber [/loki-services/network-elements/sonus-psx/{ne_id}/subscribers/{id}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ id: `idExample` (string, required)
+
 ### Check if a Subscriber exists [HEAD]
 Check if a subscriber exists.
 
@@ -582,7 +615,13 @@ request and response properties. Note:
 * If the Sonus documentation indicates a data type of integer, short, or long, the value will be numeric in the Loki REST JSON responses.
 * If the Sonus documentation indicates a data type of string, the value will be a string (or null) in the Loki REST JSON responses.
 
-## Sonus PSX Destinations Collection [/loki-services/network-elements/sonus-psx/{+ne_id}/destinations{?nationalId,countryId}]
+## Sonus PSX Destinations Collection [/loki-services/network-elements/sonus-psx/{ne_id}/destinations{?nationalId,countryId}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ nationalId: `nationalIdExample` (string, required)
+	+ countryId: `countryIdExample` (string, required)
+
 ### Create a Destination [POST]
 Create a new Destination on a Sonus PSX.
 
@@ -726,7 +765,12 @@ will contain at most one match.
 
             Transaction-Id: 1380080943120
 
-## Sonus PSX Destination [/loki-services/network-elements/sonus-psx/{+ne_id}/destinations/{+id}]
+## Sonus PSX Destination [/loki-services/network-elements/sonus-psx/{ne_id}/destinations/{id}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ id: `idExample` (string, required)
+
 ### Check if a Destination exists [HEAD]
 Check if a destination exists.
 
@@ -802,7 +846,27 @@ request and response properties. Note:
 * If the Sonus documentation indicates a data type of integer, short, or long, the value will be numeric in the Loki REST JSON responses.
 * If the Sonus documentation indicates a data type of string, the value will be a string (or null) in the Loki REST JSON responses.
 
-## Sonus PSX Routes Collection [/loki-services/network-elements/sonus-psx/{+ne_id}/routes{?destinationNationalId,destinationCountryId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType,routingType,partitionId,calltype,transmissionMedium,userCallType,digitType,timeRangeProfileId,callParamFilterProfileId,domainName}]
+## Sonus PSX Routes Collection [/loki-services/network-elements/sonus-psx/{ne_id}/routes{?destinationNationalId,destinationCountryId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,callProcessingElementType,routingType,partitionId,calltype,transmissionMedium,userCallType,digitType,timeRangeProfileId,callParamFilterProfileId,domainName}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ destinationNationalId: `destinationNationalIdExample` (string, required)
+	+ destinationCountryId: `destinationCountryIdExample` (string, required)
+	+ callProcessingElement1Id: `callProcessingElement1IdExample` (string, required)
+	+ callProcessingElement2Id: `callProcessingElement2IdExample` (string, required)
+	+ callProcessingElement3Id: `callProcessingElement3IdExample` (string, required)
+	+ callProcessingElement4Id: `callProcessingElement4IdExample` (string, required)
+	+ callProcessingElementType: `callProcessingElementTypeExample` (string, required)
+	+ routingType: `routingTypeExample` (string, required)
+	+ partitionId: `partitionIdExample` (string, required)
+	+ calltype: `calltypeExample` (string, required)
+	+ transmissionMedium: `transmissionMediumExample` (string, required)
+	+ userCallType: `userCallTypeExample` (string, required)
+	+ digitType: `digitTypeExample` (string, required)
+	+ timeRangeProfileId: `timeRangeProfileIdExample` (string, required)
+	+ callParamFilterProfileId:`callParamFilterProfileIdExample` (string, required)
+	+ domainName: `domainNameExample` (string, required)
+
 ### Create a Route [POST]
 Create a new Route on a Sonus PSX.
 
@@ -968,7 +1032,12 @@ The URI query parameters are as follows:
 
             Transaction-Id: 1380080943120
 
-## Sonus PSX Route [/loki-services/network-elements/sonus-psx/{+ne_id}/routes/{+id}]
+## Sonus PSX Route [/loki-services/network-elements/sonus-psx/{ne_id}/routes/{id}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ id: `idExample` (string, required)
+
 ### Check if a Route exists [HEAD]
 Check if a route exists.
 
@@ -1021,7 +1090,21 @@ request and response properties. Note:
 * If the Sonus documentation indicates a data type of integer, short, or long, the value will be numeric in the Loki REST JSON responses.
 * If the Sonus documentation indicates a data type of string, the value will be a string (or null) in the Loki REST JSON responses.
 
-## Sonus PSX RouteQueries Collection [/loki-services/network-elements/sonus-psx/{+ne_id}/route-queries{?destinationNationalId,destinationCountryId,partitionId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,routingLabelId,callParamFilterProfileId,domainName}]
+## Sonus PSX RouteQueries Collection [/loki-services/network-elements/sonus-psx/{ne_id}/route-queries{?destinationNationalId,destinationCountryId,partitionId,callProcessingElement1Id,callProcessingElement2Id,callProcessingElement3Id,callProcessingElement4Id,routingLabelId,callParamFilterProfileId,domainName}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ destinationNationalId: `destinationNationalIdExample` (string, required)
+	+ destinationCountryId: `destinationCountryIdExample` (string, required)
+	+ partitionId: `partitionIdExample` (string, required)
+	+ callProcessingElement1Id: `callProcessingElement1IdExample` (string, required)
+	+ callProcessingElement2Id: `callProcessingElement2IdExample` (string, required)
+	+ callProcessingElement3Id: `callProcessingElement3IdExample` (string, required)
+	+ callProcessingElement4Id: `callProcessingElement4IdExample` (string, required)
+	+ routingLabelId: `routingLabelIdExample` (string, required)
+	+ callParamFilterProfileId: `callParamFilterProfileIdExample` (string, required)
+	+ domainName: `domainNameExample` (string, required)
+
 ### Query RouteQueries [GET]
 Query RouteQueries
 
@@ -1832,7 +1915,11 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Service Provider [/loki-services/broadworks/service-providers/{+serviceProviderId}]
+## Service Provider [/loki-services/broadworks/service-providers/{serviceProviderId}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Retrieve a Service Provider [GET]
 Retrieve information about a Service Provider/Enterprise.<br />
 Process name: Retrieve Service Provider/Enterprise (BroadWorks Entity Service)<br />
@@ -2433,7 +2520,11 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                 "externalErrorDetail": "[Error 4100] Service Provider or Enterprise with the requested name already exists."
             }
 
-## Assign Domain to Service Provider Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/assignDomain]
+## Assign Domain to Service Provider Action [/loki-services/broadworks/service-providers/{serviceProviderId}/assignDomain]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Assign a Domain [POST]
 Assigns a domain to the Service Provider/Enterprise and it automatically assigns to the System as well if it needs to.<br />
 Process name: Assign Domain to System and Service Provider/Enterprise (BroadWorks Entity)<br />
@@ -2557,7 +2648,16 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Service Provider's Phone Numbers Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/phone-numbers{?mode}]
+## Service Provider's Phone Numbers Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/phone-numbers{?mode}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+	+ mode: `create-only` (string, required)
+        + Members
+            + prevalidate-only
+            + prevalidate-and-create
+            + create-only
+
 ### Assign a Phone Number [POST]
 Assign a single phone number (TN) to an Enterprise or Service Provider.
 Process name : Assign BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
@@ -2714,7 +2814,12 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
             }
 
-## Service Provider's Phone Number [/loki-services/broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}]
+## Service Provider's Phone Number [/loki-services/broadworks/service-providers/{serviceProviderId}/phone-numbers/{phoneNumber}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+	+ phoneNumber: `phoneNumberExample` (string, required)
+
 ### Check if Phone Number exists [HEAD]
 Check existence of an individual phone number in an Enterprise or Service Provider.
 Process name : Check BroadWorks Service Provider/Enterprise TN (BroadWorks Entity Service)<br />
@@ -2806,8 +2911,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}]
-### Retrieve a Group [GET /loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}{?view}]
+## Group [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}]
+
++ Parameters
+    + serviceProviderId: `serviceProviderExample` (string, required)
+    + groupId: `groupExample` (string, required)
+
+### Retrieve a Group [GET /loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}{?view}]
 Retrieve information about a Group.
 
 Note that BroadWorks unfortunately omits the "-" in the callingLineIdPhoneNumber. At this time
@@ -2884,6 +2994,14 @@ The following properties are omitted from the response if they have no value set
             }
         }
     }
+
++ Parameters
+    + serviceProviderId: `serviceProviderExample` (string, required)
+    + groupId: `groupExample` (string, required)
+    + view: `empty` (string, required)
+        + Members
+            + empty
+            + comma-separated
 
 + Response 200 (application/hal+json)
     + Headers
@@ -3450,7 +3568,16 @@ Modify some or all editable properties of a BroadWorks Group.
 
             Transaction-Id: 1380080943120
 
-## Groups Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups{?mode}]
+## Groups Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/groups{?mode}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+    + mode: `create-only` (string, required)
+         + Members
+            + prevalidate-only
+            + prevalidate-and-create
+            + create-only
+
 ### Create a Group [POST]
 Create a new group<br />
 Also assigns the default domain to the System and Enterprise/Service Provider if needed and resolves the SIP Domain for the new group.<br />
@@ -3742,7 +3869,12 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
                 "externalErrorDetail": "[Error 4150] The Group already exists, please use a unique Group ID."
             }
 
-## Apply Group Template Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/applyTemplate]
+## Apply Group Template Action [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/applyTemplate]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Apply template to a Group [POST]
 Applies a template group to an existing group<br />
 Process name: Apply Group Template (BroadWorks Entity)
@@ -3798,7 +3930,12 @@ Process name: Apply Group Template (BroadWorks Entity)
 
             Transaction-Id: 1380080943120
 
-## Group's Extension Length [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length]
+## Group's Extension Length [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/extension-length]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Extension Length [GET]
 Retrieve Extension Dialing settings from a BroadWorks Group.<br />
 Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
@@ -3970,7 +4107,12 @@ Process name: Modify Group Extension Length (BroadWorks Entity Service)<br />
 
             Transaction-Id: 1380080943120
 
-## Group's Third-Party Voice Mail Support Service Settings [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support]
+## Group's Third-Party Voice Mail Support Service Settings [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/services/Third-Party%20Voice%20Mail%20Support]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Service Settings [GET]
 Retrieve Third-Party Voice Mail support settings from a BroadWorks Group<br />
 Process name: Retrieve Group 3PVM (BroadWorks Entity Service)<br />
@@ -4177,7 +4319,12 @@ Process name: Modify Group 3PVM (BroadWorks Entity Service)<br />
 
             Transaction-Id: 1380080943120
 
-## Group's Voice Portal Service [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal]
+## Group's Voice Portal Service [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/services/Voice%20Portal]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Service Settings [GET]
 Retrieve Voice Portal service settings from a BroadWorks Group<br />
 Process name: Retrieve Group Voice Portal (BroadWorks Entity Service)<br />
@@ -4704,7 +4851,12 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group's Users Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/users]
+## Group's Users Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/users]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve list of Users [GET]
 Retrieves the list of Users in a Group.<br />
 Process name: Retrieve List of Users in Group<br />
@@ -4983,7 +5135,17 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group's Phone Numbers Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers{?mode}]
+## Group's Phone Numbers Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers{?mode}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+	+ mode: `create-only` (string, required)
+         + Members
+            + prevalidate-only
+            + prevalidate-and-create
+            + create-only
+
 ### Assign a Phone Number [POST]
 Assign a single phone number (TN) to a Group.<br />
 Process name: Assign BroadWorks Group TN<br />
@@ -5137,7 +5299,13 @@ Cluster resolution method: Group
                ]
             }
 
-## Group's Phone Number [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}]
+## Group's Phone Number [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/{phoneNumber}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+	+ phoneNumber: `phoneNumberExample` (string, required)
+
 ### Check if a Phone Number Exists [HEAD]
 Check existence of an individual phone number in a Group.
 Process name : Check BroadWorks Group TN (BroadWorks Entity Service)<br />
@@ -5225,7 +5393,12 @@ Cluster resolution method: Group
 
             Transaction-Id: 1380080943120
 
-## Group's Phone Number Activate Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate]
+## Group's Phone Number Activate Action [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/activate]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Activate Phone Numbers [POST]
 Activates one or more phone numbers and/or ranges of phone numbers in BroadWorks
 Process Name : Activate TNs (BroadWorks Entity)<br />
@@ -5323,7 +5496,12 @@ Cluster Resolution Method: Group
 
             Transaction-Id: 1380080943120
 
-## Group's Phone Number Deactivate Action [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate]
+## Group's Phone Number Deactivate Action [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/deactivate]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Deactivate Phone Numbers [POST]
 Deactivates one or more phone numbers and/or ranges of phone numbers in BroadWorks.
 Process Name: Deactivate TNs (BroadWorks Entity)<br />
@@ -5432,7 +5610,22 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group's Trunk Groups Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups{?mode,auto-increase}]
+## Group's Trunk Groups Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/trunk-groups{?mode,auto–increase}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + mode: `create-only` (string, required)
+         + Members
+            + prevalidate-only
+            + prevalidate-and-create
+            + create-only
+    + auto–increase: `always` (string, required)
+         + Members
+            + always
+            + never
+            + enterprise-only
+
 ### Create a Group Trunk [POST]
 Creates a new BroadWorks Group Trunk Group<br />
 Process name: Create BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
@@ -6256,7 +6449,13 @@ Cluster resolution method: Group
                ]
             }
 
-## Group's Trunk Group [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}]
+## Group's Trunk Group [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/trunk-groups/{trunkGroupName}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + trunkGroupName: `trunkGroupNameExample` (string, required)
+
 ### Retrieve a Trunk Group [GET]
 Retrieve the profile settings of a BroadWorks Group Trunk Group<br />
 Process name: Retrieve BroadWorks Group Trunk Group (BroadWorks Entity Service)<br />
@@ -7643,7 +7842,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Group's Access Device [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices/{+deviceName}]
+## Group's Access Device [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/devices/{deviceName}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + deviceName: `deviceNameExample` (string, required)
+
 ### Retrieve a Device [GET]
 Retrieve information about a BroadWorks Group Device.<br />
 Process name: Retrieve BroadWorks Group Device (BroadWorks Entity Service)<br />
@@ -8130,7 +8335,17 @@ nor does it check to see if the Group Device is allowed to be deleted.
 
             Transaction-Id: 1380080943120
 
-## Group's Access Devices Collection [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/devices{?mode}]
+## Group's Access Devices Collection [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/devices{?mode}]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + mode: `create-only` (string, required)
+         + Members
+            + prevalidate-only
+            + prevalidate-and-create
+            + create-only
+
 ### Create a Device [POST]
 Creates a new BroadWorks Group Device<br />
 Process name: Create BroadWorks Group Device (BroadWorks Entity Service)<br />
@@ -8426,7 +8641,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Auto Attendant's Assigned Services [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/auto-attendants/{+autoAttendantId}/services/assigned-services]
+## Auto Attendant's Assigned Services [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/auto-attendants/{autoAttendantId}/services/assigned-services]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + autoAttendantId: `autoAttendantIdExample` (string, required)
+
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of an Auto Attendant.<br />
 Process name: Retrieve BroadWorks Auto Attendant Assigned Services (BroadWorks Entity Service)<br />
@@ -8551,7 +8772,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Hunt Group's Assigned Services [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/hunt-groups/{+huntGroupId}/services/assigned-services]
+## Hunt Group's Assigned Services [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/hunt-groups/{huntGroupId}/services/assigned-services]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + huntGroupId: `huntGroupIdExample` (string, required)
+
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of a Hunt Group.<br />
 Process name: Retrieve BroadWorks Hunt Group Assigned Services (BroadWorks Entity Service)<br />
@@ -8684,7 +8911,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Call Center's Assigned Services [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/call-centers/{+callCenterId}/services/assigned-services]
+## Call Center's Assigned Services [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/call-centers/{callCenterId}/services/assigned-services]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + callCenterId: `callCenterIdExample` (string, required)
+
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of a Call Center.<br />
 Process name: Retrieve BroadWorks Call Center Assigned Services (BroadWorks Entity Service)<br />
@@ -8817,7 +9050,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## Instant Group Calls Instance's Assigned Services [/loki-services/broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/instant-group-calls/{+instantGroupCallId}/services/assigned-services]
+## Instant Group Calls Instance's Assigned Services [/loki-services/broadworks/service-providers/{serviceProviderId}/groups/{groupId}/instant-group-calls/{instantGroupCallId}/services/assigned-services]
+
++ Parameters
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+    + instantGroupCallId: `instantGroupCallIdExample` (string, required)
+
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of a Instant Group Call.<br />
 Process name: Retrieve BroadWorks Instant Group Call Assigned Services (BroadWorks Entity Service)<br />
@@ -8952,7 +9191,11 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## User's Call Processing Policies [/loki-services/broadworks/users/{+userId}/call-processing-policy]
+## User's Call Processing Policies [/loki-services/broadworks/users/{userId}/call-processing-policy]
+
++ Parameters
+	+ userId: `userIdExample` (string, required)
+
 ### Retrieve Call Processing Policies [GET]
 Retrieve a user's call processing policies - corresponds to User > Profile > Call Processing Policies in the BroadWorks CommPortal.
 Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (data types, allowed values, etc).
@@ -9075,7 +9318,11 @@ Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (dat
 
             Transaction-Id: 1380080943120
 
-## User [/loki-services/broadworks/users/{+userId}]
+## User [/loki-services/broadworks/users/{userId}]
+
++ Parameters
+	+ userId: `userIdExample` (string, required)
+
 ### Retrieve a User [GET]
 Retrieve BroadWorks User<br />
 Process name: Retrieve BroadWorks User (BroadWorks Entity)
@@ -9414,7 +9661,11 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
                 "externalErrorDetail": "[Error 4008] User not found: JohnDoe"
             }
 
-## User's Assigned Services [/loki-services/broadworks/users/{+userId}/services/assigned-services]
+## User's Assigned Services [/loki-services/broadworks/users/{userId}/services/assigned-services]
+
++ Parameters
+	+ userId: `userIdExample` (string, required)
+
 ### Retrieve Assigned Services [GET]
 This request will retrieve the assigned services of a User.<br />
 Process name: Retrieve BroadWorks User Assigned Services (BroadWorks Entity Service)<br />
@@ -9506,7 +9757,11 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## System Domains Collection [/loki-services/network-elements/broadworks/{+ne_id}/domains]
+## System Domains Collection [/loki-services/network-elements/broadworks/{ne_id}/domains]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+
 ### Retrieve Domains [GET]
 Retrieve the Systems's domains, including the default domain.
 
@@ -9716,7 +9971,12 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Error 4260] Cannot add domain with same name as an existing domain."
             }
 
-## System Domain [/loki-services/network-elements/broadworks/{+ne_id}/domains/{+domain}]
+## System Domain [/loki-services/network-elements/broadworks/{ne_id}/domains/{domain}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ domain: `domainExample` (string, required)
+
 ### Delete a Domain [DELETE]
 Delete a System domain.
 
@@ -9749,7 +10009,11 @@ nor does it check to see if the domain is allowed to be deleted.
 
             Transaction-Id: 1380080943120
 
-## System Languages Collection [/loki-services/network-elements/broadworks/{+ne_id}/languages]
+## System Languages Collection [/loki-services/network-elements/broadworks/{ne_id}/languages]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+
 ### Reteive Languages [GET]
 Retrieve the Systems's list of defined languages, including the default language.
 
@@ -9867,7 +10131,11 @@ Retrieve the Systems's list of defined languages, including the default language
                ]
             }
 
-## System Time Zones Collection [/loki-services/network-elements/broadworks/{+ne_id}/time-zones]
+## System Time Zones Collection [/loki-services/network-elements/broadworks/{ne_id}/time-zones]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+
 ### Retrieve Time Zones [GET]
 Retrieve the Systems's list of defined time zones, including the default time zone.
 
@@ -9994,7 +10262,12 @@ URI Template Variables:
 e.g. serviceProviderId in a BroadWorks OCI ServiceProviderGetListRequest.
 * <code>ne_id</code> - Corresponds to the networkElementId of the appropriate cluster in the BroadWorks section of the configuration.
 
-## BroadWorks Service Provider [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}]
+## BroadWorks Service Provider [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Retrieve a Service Provider [GET]
 Retrieve an enterprise or service provider.
 
@@ -10351,7 +10624,11 @@ Removes an existing Service Provider/Enterprise from BroadWorks.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Service Providers Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers]
+## BroadWorks Service Providers Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+
 ### Create a Service Provider [POST]
 Creates a new Service Provider/Enterprise in BroadWorks.
 
@@ -10574,7 +10851,12 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "externalErrorDetail": "[Error 4100] Service Provider or Enterprise with the requested name already exists."
             }
 
-## BroadWorks Service Provider's Domains Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains]
+## BroadWorks Service Provider's Domains Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/domains]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Retrieve Domains [GET]
 Retrieve the Service Provider's assigned domains, including it's default domain.
 
@@ -10733,7 +11015,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{+serviceProviderId}/domains/example
+            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/domains/example
 
     + Body
 
@@ -10809,7 +11091,13 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Error 4267] Error assigning domain since the domain is already assigned: example"
             }
 
-## BroadWorks Service Provider's Domain [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/domains/{+domain}]
+## BroadWorks Service Provider's Domain [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/domains/{domain}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+	+ domain: `domainExample` (string, required)
+
 ### Delete a Domain [DELETE]
 Unassign a Service Provider domain.
 
@@ -10861,7 +11149,12 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Service Provider's Phone Numbers Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers]
+## BroadWorks Service Provider's Phone Numbers Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/phone-numbers]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Assign a Phone Number [POST]
 Assign a single phone number (TN) to an Enterprise or Service Provider.
 
@@ -10985,7 +11278,13 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Warning 4250] 1 phone number(s) not added.  Verify that the number(s) are not already assigned."
             }
 
-## BroadWorks Service Provider's Phone Number [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}]
+## BroadWorks Service Provider's Phone Number [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/phone-numbers/{phoneNumber}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+	+ phoneNumber: `phoneNumberExample` (string, required)
+
 ### Check if Phone Number Exists [HEAD]
 Check existence of an individual phone number in an Enterprise or Service Provider.
 
@@ -11076,7 +11375,7 @@ Unassign a phone number from an Enterprise or a Service Provider.
 
 This request makes no attempt to check if the TN is actually assigned on the Enterprise/Service Provider,
 nor does it check to see if the TN allowed to be deleted. In future we may choose to use
-тАЬGET /broadworks/service-providers/{+serviceProviderId}/phone-numbers/{+phoneNumber}" to first check for existence and
+тАЬGET /broadworks/service-providers/{serviceProviderId}/phone-numbers/{phoneNumber}" to first check for existence and
 verify that the TN is allowed to be deleted; in which case we could return 404 if the TN isn't assigned
 on the ent/SP, or another 4xx if it's assigned but not allowed to be deleted (e.g. if it's assigned
 to a Group).
@@ -11124,7 +11423,12 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Service Provider's Services Authorizations [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/services]
+## BroadWorks Service Provider's Services Authorizations [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/services]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Retrieve Services Authorizations [GET]
 Retrieve the Service Provider's service authorization detail.
 
@@ -11512,7 +11816,12 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Service Provider's Trunking Call Capacity [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/trunking-call-capacity]
+## BroadWorks Service Provider's Trunking Call Capacity [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/trunking-call-capacity]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderIdExample` (string, required)
+
 ### Retrieve Trunking Call Capacity [GET]
 Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
 
@@ -11723,7 +12032,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}]
+## BroadWorks Group [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+    + groupId: `groupExample` (string, required)
+
 ### Retrieve a Group [GET]
 Retrieve information about a BroadWorks group.
 Corresponds to Group > Profile > Profile in the BroadWorks CommPortal.
@@ -12165,7 +12480,12 @@ Delete a Group.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Groups Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups]
+## BroadWorks Groups Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups]
+
++ Parameters
+	+ ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+
 ### Create a Group [POST]
 Create a new Group.
 
@@ -12403,7 +12723,13 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Error 4266] Domain does not exist or is not available for assignment\/unassignment: r19.leonidsystems.com"
             }
 
-## BroadWorks Group's Password Rules [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/password-rules]
+## BroadWorks Group's Password Rules [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/password-rules]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Password Rules [GET]
 Retrieve the password rules for a group in BroadWorks.
 Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
@@ -12605,7 +12931,13 @@ Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
                ]
             }
 
-## BroadWorks Group's Extension Lenght [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/extension-length]
+## BroadWorks Group's Extension Lenght [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/extension-length]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Extension Length [GET]
 Retrieve the extension length settings for a group in BroadWorks.
 Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPortal.
@@ -12790,7 +13122,13 @@ Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPorta
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group's Domains Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains]
+## BroadWorks Group's Domains Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/domains]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Domains [GET]
 Retrieve the Group's assigned domains, including it's default domain.
 
@@ -12969,7 +13307,7 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/example
+            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/groups/{groupId}/domains/example
 
     + Body
 
@@ -13053,7 +13391,13 @@ Note that the 424 example is just one example of a possible BroadWorks error.
                 "ThexternalErrorDetail": "[Error 4266] Domain does not exist or is not available for assignment\/unassignment: example"
             }
 
-## BroadWorks Group's Domain [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/domains/{+domain}]
+## BroadWorks Group's Domain [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/domains/{domain}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ domain: `domainExample` (string, required)
+
 ### Delete a Domain [DELETE]
 Unassign a Group domain.
 
@@ -13098,7 +13442,13 @@ nor does it check to see if the domain is allowed to be deleted.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group's Feature Access Codes [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/feature-access-codes]
+## BroadWorks Group's Feature Access Codes [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/feature-access-codes]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Feature Access Codes [GET]
 Get group-level Feature Access Codes settings
 
@@ -13362,7 +13712,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Users Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/users/search]
+## BroadWorks Group's Users Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/users/search]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve the list of users in a BroadWorks Group [POST]
 Search for users in a BroadWorks Group
 
@@ -13897,7 +14253,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Phone Numbers Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers]
+## BroadWorks Group's Phone Numbers Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Assign a Phone Number [POST]
 Assign a single phone number (TN) to a Group.
 
@@ -14021,7 +14383,14 @@ Assign a single phone number (TN) to a Group.
                ]
             }
 
-## BroadWorks Group's Phone Number [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}]
+## BroadWorks Group's Phone Number [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/{phoneNumber}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+	+ phoneNumber: `phoneNumberExample` (string, required)
+
 ### Check if Phone Number Exists [HEAD]
 Check existence of an individual phone number in a Group.
 
@@ -14119,7 +14488,7 @@ Unassign a phone number from a Group.
 
 This request makes no attempt to check if the TN is actually assigned on the Group,
 nor does it check to see if the TN allowed to be deleted. In future we may choose to use
-тАЬGET /broadworks/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/{+phoneNumber}" to
+тАЬGET /broadworks/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/{phoneNumber}" to
 first check for existence and verify that the TN is allowed to be deleted; in which case we could return
 404 if the TN isn't assigned on the Group, or another 4xx if it's assigned but not allowed to be deleted
 (e.g. if it's assigned to a (v)User).
@@ -14162,7 +14531,13 @@ first check for existence and verify that the TN is allowed to be deleted; in wh
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group's Phone Number Activate Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/activate]
+## BroadWorks Group's Phone Number Activate Action [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/activate]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Activate Phone Numbers [POST]
 Activates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
 
@@ -14254,7 +14629,13 @@ Activates one or more phone numbers and/or ranges of phone numbers in a BroadWor
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group's Phone Number Deactivate Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/phone-numbers/deactivate]
+## BroadWorks Group's Phone Number Deactivate Action [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/phone-numbers/deactivate]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Deactivate Phone Numbers [POST]
 Deactivates one or more phone numbers and/or ranges of phone numbers in a BroadWorks Group.
 
@@ -14361,7 +14742,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Services Authorizations [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services]
+## BroadWorks Group's Services Authorizations [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/services]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Services Authorizations [GET]
 Retrieve the Group's service authorization detail.
 
@@ -14870,7 +15257,13 @@ or a 400 Bad Request, depending on the response from the BroadWorks Utility Serv
             Transaction-Id: 1380080943120
 
 
-## BroadWorks Group Service Assign Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/assignServices]
+## BroadWorks Group Service Assign Action [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/assignServices]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Assign Group Services [POST]
 Assign Group service(s) on Group <br />
 Note: Assigning multiple services is not an atomic operation in BroadWorks.
@@ -14935,7 +15328,13 @@ If at least one service has failed during assignment, failure response is return
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group Service Unassign Action [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/unassignServices]
+## BroadWorks Group Service Unassign Action [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/unassignServices]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Unassign Group Services [POST]
 Unassign Group service(s) from Group <br />
 Note: Unassigning multiple services is not an atomic operation in BroadWorks.
@@ -15001,7 +15400,13 @@ If at least one service has failed during unassignment, failure response is retu
             Transaction-Id: 1380080943120
 
 
-## BroadWorks Group's Third-Party Voice Mail Support Service [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Third-Party%20Voice%20Mail%20Support]
+## BroadWorks Group's Third-Party Voice Mail Support Service [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/services/Third-Party%20Voice%20Mail%20Support]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Service Settings [GET]
 Retrieve group-level settings of Third-Party Voice Mail user service.
 
@@ -15189,7 +15594,13 @@ Update group-level settings of Third-Party Voice Mail user service.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks Group's Voice Portal Service [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Voice%20Portal]
+## BroadWorks Group's Voice Portal Service [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/services/Voice%20Portal]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Service Settings [GET]
 Retrieve group-level settings of Voice Portal service
 
@@ -15680,7 +16091,13 @@ Update group-level settings of Voice Portal group service.
             Transaction-Id: 1380080943120
 
 
-## BroadWorks Group's Speed Dial 100 Service [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/services/Speed%20Dial%20100]
+## BroadWorks Group's Speed Dial 100 Service [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/services/Speed%20Dial%20100]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Service Settings [GET]
 Retrieve group-level settings of Speed Dial 100 service
 
@@ -15851,7 +16268,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Trunking Call Capacity [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunking-call-capacity]
+## BroadWorks Group's Trunking Call Capacity [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/trunking-call-capacity]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Trunking Call Capacity [GET]
 Retrieve Trunking Call Capacity settings for a Group.
 
@@ -16106,7 +16529,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Trunk Groups Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups]
+## BroadWorks Group's Trunk Groups Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/trunk-groups]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Retrieve Trunk Groups [GET]
 Retrieve Trunk Groups list from a Group.
 
@@ -17058,7 +17487,14 @@ Create a Trunk Group.
                ]
             }
 
-## BroadWorks Group's Trunk Group [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/trunk-groups/{+trunkGroupName}]
+## BroadWorks Group's Trunk Group [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/trunk-groups/{trunkGroupName}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+	+ trunkGroupName: `trunkGroupNameExample` (string, required)
+
 ### Retrieve a Trunk Group [GET]
 Retrieve a Trunk Group.
 
@@ -18302,7 +18738,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Group's Access Devices Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices]
+## BroadWorks Group's Access Devices Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/access-devices]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Create a Device [POST]
 Create a device.
 
@@ -18549,7 +18991,14 @@ Create a device.
                ]
             }
 
-## BroadWorks Group's Access Device [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/access-devices/{+deviceName}]
+## BroadWorks Group's Access Device [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/access-devices/{deviceName}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+	+ deviceName: `deviceNameExample` (string, required)
+
 ### Retrieve a Device [GET]
 Retrieve profile settings of a BroadWorks Group device.
 
@@ -19042,7 +19491,13 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks Users Collection [/loki-services/network-elements/broadworks/{+ne_id}/service-providers/{+serviceProviderId}/groups/{+groupId}/users]
+## BroadWorks Users Collection [/loki-services/network-elements/broadworks/{ne_id}/service-providers/{serviceProviderId}/groups/{groupId}/users]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ serviceProviderId: `serviceProviderExample` (string, required)
+	+ groupId: `groupExample` (string, required)
+
 ### Create a User [POST]
 Create a BroadWorks User.
 
@@ -19278,7 +19733,12 @@ Actual requests should include only one or the other (or neither, for users with
                ]
             }
 
-## BroadWorks User [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}]
+## BroadWorks User [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userId` (string, required)
+
 ### Retrieve a User [GET]
 Retrieve a BroadWorks User.
 
@@ -19783,7 +20243,12 @@ or 400 Bad Request for validation failure on the body, uri query parameters, or 
 Server Error for unhandled errors. However, for brevity, examples of these responses are only included for some
 resources/methods below.
 
-## BroadWorks User's Services Assignments [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services]
+## BroadWorks User's Services Assignments [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userId` (string, required)
+
 ### Update Service Assignments [PUT]
 Update service assignments for a user. The input specifies the desired status (assigned or un-assigned) for the services
 and/or service packs inlcluded in the input.
@@ -19894,7 +20359,12 @@ with "Assigned=false" here.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks User's Assigned Services [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/assigned-services]
+## BroadWorks User's Assigned Services [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/assigned-services]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userId` (string, required)
+
 ### Retrive Assigned Services [GET]
 This request will retrieve the services assignment status for Service Packs and User Services for regular and virtual users.
 
@@ -20140,7 +20610,12 @@ This request will retrieve the services assignment status for Service Packs and 
                ]
             }
 
-## BroadWorks User's Authentication [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Authentication]
+## BroadWorks User's Authentication [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/Authentication]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userId` (string, required)
+
 ### Update Service Settings [PUT]
 Update settings for Authentication service on a user.
 
@@ -20204,7 +20679,12 @@ Note: when connecting to BroadWorks as a BroadWorks user (rather than as an admi
 
             Transaction-Id: 1380080943120
 
-## BroadWorks User's Charge Number [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Charge%20Number]
+## BroadWorks User's Charge Number [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/Charge%20Number]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userId` (string, required)
+
 ### Update Service Settings [PUT]
 Update settings for Charge Number service on a user.
 
@@ -20268,7 +20748,12 @@ Update settings for Charge Number service on a user.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks User's Third-Party Voice Mail Support Service [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Third-Party%20Voice%20Mail%20Support]
+## BroadWorks User's Third-Party Voice Mail Support Service [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/Third-Party%20Voice%20Mail%20Support]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userIdExample` (string, required)
+
 ### Update Service Settings [PUT]
 Update settings for Third-Party Voice Mail Support (3PVM) service on a user.
 
@@ -20411,7 +20896,12 @@ Update settings for Third-Party Voice Mail Support (3PVM) service on a user.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks User's Call Forwarding No Answer Service [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20No%20Answer]
+## BroadWorks User's Call Forwarding No Answer Service [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/Call%20Forwarding%20No%20Answer]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userIdExample` (string, required)
+
 ### Update Service Settings [PUT]
 Update settings for Call Forwarding No Answer (CFNA) service on a user.
 
@@ -20514,7 +21004,12 @@ Update settings for Call Forwarding No Answer (CFNA) service on a user.
             Transaction-Id: 1380080943120
 
 
-## BroadWorks User's Call Forwarding Not Reachable Service [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/services/Call%20Forwarding%20Not%20Reachable]
+## BroadWorks User's Call Forwarding Not Reachable Service [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/services/Call%20Forwarding%20Not%20Reachable]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userIdExample` (string, required)
+
 ### Update Service Settings [PUT]
 Update settings for Call Forwarding Not Reachable (CFNR) service on a user.
 
@@ -20591,7 +21086,12 @@ Update settings for Call Forwarding Not Reachable (CFNR) service on a user.
 
             Transaction-Id: 1380080943120
 
-## BroadWorks User's Call Processing Policies [/loki-services/network-elements/broadworks/{+ne_id}/users/{+userId}/call-processing-policy]
+## BroadWorks User's Call Processing Policies [/loki-services/network-elements/broadworks/{ne_id}/users/{userId}/call-processing-policy]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ userId: `userIdExample` (string, required)
+
 ### Retrieve Call Processing Policies [GET]
 Retrieve a BroadWorks User's Call Processing Policies settings.
 Refer to BroadWorks documentation for specifics of the properties under extensions.broadworks.
@@ -20923,7 +21423,11 @@ Network Element: BroadWorks (initially supports only the AS or XSP)
 
 Provides communication with the OCI API on BroadWorks network elements, including authentication, session management, and basic error handling.
 
-## Process OCI Request Active [/loki-services/network-elements/broadworks/{+ne_id}/processOci]
+## Process OCI Request Active [/loki-services/network-elements/broadworks/{ne_id}/processOci]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+
 ### Process OCI Request [POST]
 ** This request is disabled.**<br />
 Process an OCI request. **Note, this request is intended to be consumed by the BroadWorks Utility Service only, and at this
@@ -21160,7 +21664,11 @@ Network Element: LWS-SOAP
 
 Provides communication with LWS-SOAP API.
 
-## Process LWS-SOAP Request Action [/loki-services/network-elements/lws-soap/{+ne_id}/processRequest]
+## Process LWS-SOAP Request Action [/loki-services/network-elements/lws-soap/{ne_id}/processRequest]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+
 ### Process LWS-SOAP Request [POST]
 Send a LWS-SOAP request.
 
@@ -21320,7 +21828,11 @@ Network Element: Wit-eFax
 
 Provides communication with Wit eFax API.
 
-## Wit eFax Users [/loki-services/network-elements/wit-efax/{+ne_id}/users]
+## Wit eFax Users [/loki-services/network-elements/wit-efax/{ne_id}/users]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+
 ### Create Wit eFax User [POST]
 This is an internal request which creates an eFax user. It will send a Wit eFax Create Fax User request and provide a response.
 
@@ -21861,7 +22373,12 @@ This is an internal request which retrieves an eFax user’s information. It wil
             }
 
 
-## Wit eFax User [/loki-services/network-elements/wit-efax/{+ne_id}/users/{+bwId}]
+## Wit eFax User [/loki-services/network-elements/wit-efax/{ne_id}/users/{bwId}]
+
++ Parameters
+    + ne_id: `neIdExample` (string, required)
+	+ bwId: `bwIdExample` (string, required)
+
 ### Retrieve Wit eFax User [GET]
 This is an internal request which retrieves an eFax user’s information. It will send a Wit eFax Read Fax User request and provide a response.
 
