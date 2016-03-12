@@ -4,18 +4,18 @@ FORMAT: 1A
 # This documentation is for the internal API, pre-release (dev version)
 See also:
 
-* [Internal API, dev (pre-release)](http://docs.lokiservicesdev.apiary.io/) (this document)
-* [Internal API, branch (pre-release)](http://docs.lokiservicesbranch.apiary.io/)
-* [Internal API, GA release](http://docs.loki3services.apiary.io/)
-* [LWS-REST API, dev (pre-release)](http://docs.lokidev.apiary.io/)
-* [LWS-REST API, branch (pre-release)](http://docs.lokiserverbranch.apiary.io/)
-* [LWS-REST API, GA release](http://docs.lokiserver.apiary.io/)
+* [Internal API, dev (pre-release)](http://docs.lokiservicesdev.example.com/) (this document)
+* [Internal API, branch (pre-release)](http://docs.lokiservicesbranch.example.com/)
+* [Internal API, GA release](http://docs.loki3services.example.com/)
+* [LWS-REST API, dev (pre-release)](http://docs.lokidev.example.com/)
+* [LWS-REST API, branch (pre-release)](http://docs.lokiserverbranch.example.com/)
+* [LWS-REST API, GA release](http://docs.lokiserver.example.com/)
 
 [INTERNAL] Documenting the internal APIs (service contracts) between services in the Loki3 architecture.
 
 *NOT UP TO DATE; still working on this*
 
-**Note: all references to <code>loki3.apiary.io</code> are for example purposes only. In a deployed Loki Server
+**Note: all references to <code>loki3.example.com</code> are for example purposes only. In a deployed Loki Server
 these will be references to the Loki REST API host.**
 
 **TBD: add HAL notes. Note (at least initially) in the response bodies, the _links.self.href matches the URI submitted by the client, including any query parameters**
@@ -115,7 +115,7 @@ URI Template Variables:
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/number-translations/3-1-8665554321-0-978----5
+            Location: http://loki3services.example.com/loki-services/network-elements/sonus-psx/1/number-translations/3-1-8665554321-0-978----5
 
 + Response 500
     + Headers
@@ -195,13 +195,13 @@ will contain at most one match.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/number-translations?nationalId=8665554321&countryId=1&attributes=0&callProcessingElement1Id=978&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=5"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/number-translations?nationalId=8665554321&countryId=1&attributes=0&callProcessingElement1Id=978&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=5"
                     }
                 },
                 "curies": [
                     {
                         "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/rels\/{rel}",
                         "templated": true
                     }
                 ],
@@ -210,7 +210,7 @@ will contain at most one match.
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/number-translations\/3-1-8665554321-0-978----5"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/number-translations\/3-1-8665554321-0-978----5"
                                 }
                             },
                             "id": "3-1-8665554321-0-978----5",
@@ -390,7 +390,7 @@ URI Template Variables:
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/subscribers/1-2005553001-1-16
+            Location: http://loki3services.example.com/loki-services/network-elements/sonus-psx/1/subscribers/1-2005553001-1-16
 
 + Response 200
     + Headers
@@ -452,13 +452,13 @@ will contain at most one match.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/subscribers?subscriberId=2005553001&countryId=1&owningCarrierId=16"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/subscribers?subscriberId=2005553001&countryId=1&owningCarrierId=16"
                     }
                 },
                 "curies": [
                     {
                         "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/rels\/{rel}",
                         "templated": true
                     }
                 ],
@@ -467,7 +467,7 @@ will contain at most one match.
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/subscribers\/1-2005553001-1-16"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/subscribers\/1-2005553001-1-16"
                                 }
                             },
                             "id": "1-2005553001-1-16",
@@ -656,7 +656,7 @@ URI Template Variables:
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/destinations/1-2005553001-1
+            Location: http://loki3services.example.com/loki-services/network-elements/sonus-psx/1/destinations/1-2005553001-1
 
 + Response 500
     + Headers
@@ -708,13 +708,13 @@ will contain at most one match.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/destinations?nationalId=2005553001&countryId=1"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/destinations?nationalId=2005553001&countryId=1"
                     }
                 },
                 "curies": [
                     {
                         "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/rels\/{rel}",
                         "templated": true
                     }
                 ],
@@ -723,7 +723,7 @@ will contain at most one match.
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/destinations\/1-2005553001-1"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/destinations\/1-2005553001-1"
                                 }
                             },
                             "ne_id": "1",
@@ -904,7 +904,7 @@ URI Template Variables:
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--
+            Location: http://loki3services.example.com/loki-services/network-elements/sonus-psx/1/routes/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--
 
 + Response 500
     + Headers
@@ -959,13 +959,13 @@ The URI query parameters are as follows:
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/routes?callProcessingElement1Id=&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=0&routingType=3&destinationNationalId=2005553001&destinationCountryId=1&partitionId=EXAMPLE_PARTITION&calltype=0&transmissionMedium=0&userCallType=0&digitType=2147483647&timeRangeProfileId=ALL&callParamFilterProfileId=&domainName="
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/routes?callProcessingElement1Id=&callProcessingElement2Id=&callProcessingElement3Id=&callProcessingElement4Id=&callProcessingElementType=0&routingType=3&destinationNationalId=2005553001&destinationCountryId=1&partitionId=EXAMPLE_PARTITION&calltype=0&transmissionMedium=0&userCallType=0&digitType=2147483647&timeRangeProfileId=ALL&callParamFilterProfileId=&domainName="
                     }
                 },
                 "curies": [
                     {
                         "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/rels\/{rel}",
                         "templated": true
                     }
                 ],
@@ -974,7 +974,7 @@ The URI query parameters are as follows:
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/1\/routes\/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/1\/routes\/1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--"
                                 }
                             },
                             "id": "1-----0-3-2005553001-1-EXAMPLE_PARTITION-0-0-0-2147483647-ALL--",
@@ -1152,13 +1152,13 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/44\/route-queries?routingLabelId=EXAMPLE_LBL"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/44\/route-queries?routingLabelId=EXAMPLE_LBL"
                     }
                 },
                 "curies": [
                     {
                         "name": "ls",
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/rels\/{rel}",
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/rels\/{rel}",
                         "templated": true
                     }
                 ],
@@ -1167,7 +1167,7 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/44\/routes\/44-----0-3-4152141208-1-EXAMPLE_PARTITION-50176-8191-ALL--"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/44\/routes\/44-----0-3-4152141208-1-EXAMPLE_PARTITION-50176-8191-ALL--"
                                 }
                             },
                             "id": "44-----0-3-4152141208-1-EXAMPLE_PARTITION-50176-8191-ALL--",
@@ -1193,7 +1193,7 @@ it uses ls:route-queries and embeds the resources as route-queries, instead of a
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/sonus-psx\/44\/routes\/44-----0-3-4165551212-1-EXAMPLE_PARTITION-50176-511-ALL--"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/sonus-psx\/44\/routes\/44-----0-3-4165551212-1-EXAMPLE_PARTITION-50176-511-ALL--"
                                 }
                             },
                             "id": "44-----0-3-4165551212-1-EXAMPLE_PARTITION-50176-511-ALL--",
@@ -1348,7 +1348,7 @@ in which it's being used). This request specifically supports only the "createVo
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/phone-numbers"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/phone-numbers"
                     }
                 },
                 "_embedded": {
@@ -1356,14 +1356,14 @@ in which it's being used). This request specifically supports only the "createVo
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/phone-numbers\/%2B1-2005553001"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/phone-numbers\/%2B1-2005553001"
                                 }
                             }
                         },
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/groups\/exampleComNorth\/phone-numbers\/%2B1-2005553001"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/groups\/exampleComNorth\/phone-numbers\/%2B1-2005553001"
                                 }
                             }
                         }
@@ -1479,14 +1479,14 @@ in the request and will be present in the response.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/exampleCom/users/2005553001%40example.com
+            Location: http://loki3services.example.com/loki-services/broadworks/serviceProviders/exampleCom/users/2005553001%40example.com
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/users"
                     }
                 },
                 "_embedded": {
@@ -1494,7 +1494,7 @@ in the request and will be present in the response.
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
                                 }
                             },
                             "phoneNumber": "+1-2005553001",
@@ -1616,7 +1616,7 @@ required are shown in the example.
                     {
                         "_links": {
                             "self": {
-                                "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
+                                "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
                             }
                         },
                         "phoneNumber": "+1-2005553001",
@@ -1646,7 +1646,7 @@ required are shown in the example.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/configureUserServices"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/configureUserServices"
                     }
                 },
                 "_embedded": {
@@ -1654,7 +1654,7 @@ required are shown in the example.
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
                                 }
                             },
                             "phoneNumber": "+1-2005553001",
@@ -1810,7 +1810,7 @@ same setting on the user in BroadWorks.</i>
                     {
                         "_links": {
                             "self": {
-                                "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
+                                "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
                             }
                         },
                         "phoneNumber": "+1-2005553001",
@@ -1840,7 +1840,7 @@ same setting on the user in BroadWorks.</i>
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/configureUserServices"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/configureUserServices"
                     }
                 },
                 "_embedded": {
@@ -1848,7 +1848,7 @@ same setting on the user in BroadWorks.</i>
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/exampleCom\/users\/2005553001%40example.com"
                                 }
                             },
                             "phoneNumber": "+1-2005553001",
@@ -2443,14 +2443,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com
+            Location: http://loki3services.example.com/loki-services/broadworks/service-providers/Example%20Com
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com"
                     }
                 },
                 "serviceProviderId": "Example Com"
@@ -2744,14 +2744,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com/phone-numbers/%2B1-2005553001
+            Location: http://loki3services.example.com/loki-services/broadworks/serviceProviders/Example%20Com/phone-numbers/%2B1-2005553001
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005553001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005553001"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -3013,7 +3013,7 @@ The following properties are omitted from the response if they have no value set
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
                 "_embedded": {
@@ -3021,7 +3021,7 @@ The following properties are omitted from the response if they have no value set
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/serviceProviders\/Example%20Com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/serviceProviders\/Example%20Com"
                                 }
                             },
                             "serviceProviderId": "Example Com"
@@ -3782,14 +3782,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.<br
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North
+            Location: http://loki3services.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -3972,7 +3972,7 @@ Process name: Retrieve Group Extension Length (BroadWorks Entity Service)<br />
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -4898,7 +4898,7 @@ Cluster resolution method: Group
             {
                 "_links": {
                     "self": {
-                        "href": "http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users"
+                        "href": "http://loki3services.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users"
                     }
                 },
                 "_embedded": {
@@ -4906,7 +4906,7 @@ Cluster resolution method: Group
                         {
                             "_links" : {
                                 "self" : {
-                                    "href" : "http://loki3services.apiary.io/loki-services/broadworks/users/5003000001@example.com"
+                                    "href" : "http://loki3services.example.com/loki-services/broadworks/users/5003000001@example.com"
                                 }
                             }, 
                             "userId": "5003000001@example.com",
@@ -4924,7 +4924,7 @@ Cluster resolution method: Group
                         {
                             "_links" : {
                                 "self" : {
-                                    "href" : "http://loki3services.apiary.io/loki-services/broadworks/users/5003000002@example.com"
+                                    "href" : "http://loki3services.example.com/loki-services/broadworks/users/5003000002@example.com"
                                 }
                             }, 
                             "userId": "5003000002@example.com",
@@ -5235,14 +5235,14 @@ Cluster resolution method: Group
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005553001
+            Location: http://loki3services.example.com/loki-services/broadworks/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005553001
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005553001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005553001"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -6385,14 +6385,14 @@ Cluster resolution method: Group
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/ExampleCom%20Trunk%203001
+            Location: http://loki3services.example.com/loki-services/broadworks/service-providers/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/ExampleCom%20Trunk%203001
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/ExampleCom%20Trunk%203001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/ExampleCom%20Trunk%203001"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -6500,7 +6500,7 @@ Cluster resolution method: Group
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/ExampleCom%20Trunk%203001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/ExampleCom%20Trunk%203001"
                     }
                 },
                 "serviceProviderId": "Example Com",
@@ -8567,7 +8567,7 @@ Cluster resolution method: Group
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/broadworks/service-providers/Example%20Com
+            Location: http://loki3services.example.com/loki-services/broadworks/service-providers/Example%20Com
 
     + Body
 
@@ -9212,7 +9212,7 @@ Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (dat
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users\/4155551212%20example.com\/call-processing-policy"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/users\/4155551212%20example.com\/call-processing-policy"
                     }
                 },
                 "_embedded": {
@@ -9220,7 +9220,7 @@ Refer to OCI UserCallProcessingModifyPolicyRequest documentation for schema (dat
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users\/4155551212%20example.com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/users\/4155551212%20example.com"
                                 }
                             },
                             "userId": "4155551212@example.com"
@@ -9354,7 +9354,7 @@ Process name: Retrieve BroadWorks User (BroadWorks Entity)
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/broadworks\/users\/JohnDoe"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/broadworks\/users\/JohnDoe"
                     }
                 },
                 "serviceProviderId": "EnterpriseID",
@@ -9791,7 +9791,7 @@ Note the "domains" property, if present, will always be an array (even if it has
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/domains"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/domains"
                     }
                 },
                 "ne_id": "1",
@@ -9901,14 +9901,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/domains/example
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/domains/example
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/domains\/example"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/domains\/example"
                     }
                 },
                 "ne_id": "1",
@@ -10041,7 +10041,7 @@ Retrieve the Systems's list of defined languages, including the default language
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/languages"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/languages"
                     }
                 },
                 "ne_id": "1",
@@ -10163,7 +10163,7 @@ Retrieve the Systems's list of defined time zones, including the default time zo
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/time-zones"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/time-zones"
                     }
                 },
                 "ne_id": "1",
@@ -10303,7 +10303,7 @@ Only one of "isEnterprise" and "useCustomRoutingProfile" will appear in the resp
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com"
                     }
                 },
                 "isEnterprise": true,
@@ -10782,14 +10782,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/service-providers/Example%20Com
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com"
                     }
                 },
                 "ne_id": "1",
@@ -10892,7 +10892,7 @@ Note the "domains" property, if present, will always be an array (even if it has
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains"
                     }
                 },
                 "ne_id": "1",
@@ -11015,14 +11015,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/domains/example
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/domains/example
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains\/example"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/domains\/example"
                     }
                 },
                 "ne_id": "1",
@@ -11206,14 +11206,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/phone-numbers/%2B1-2005553001
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/phone-numbers/%2B1-2005553001
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005553001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005553001"
                     }
                 },
                 "ne_id": "1",
@@ -11343,7 +11343,7 @@ fetch the group resource. really, if we want a link to the service-provider here
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005551212"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/phone-numbers\/%2B1-2005551212"
                     }
                 },
                 "_embedded": {
@@ -11351,7 +11351,7 @@ fetch the group resource. really, if we want a link to the service-provider here
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com"
                                 }
                             },
                             "ne_id": "1",
@@ -11467,7 +11467,7 @@ Retrieve the Service Provider's service authorization detail.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/services"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/services"
                     }
                 },
                 "ne_id": "1",
@@ -11855,7 +11855,7 @@ Retrieve Trunking Call Capacity settings for an Enterprise/Service Provider.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/trunking-call-capacity"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/trunking-call-capacity"
                     }
                 },
                 "maxActiveCalls": {
@@ -12093,7 +12093,7 @@ The following properties are omitted from the response if they have no value set
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
                 "ne_id": "1",
@@ -12648,14 +12648,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North"
                     }
                 },
                 "ne_id": "1",
@@ -12770,7 +12770,7 @@ Corresponds to Group > Utilities > Password Rules in the BroadWorks CommPortal.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/password-rules"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/password-rules"
                     }
                 },
                 "ne_id": "1",
@@ -12978,7 +12978,7 @@ Corresponds to Group > Utilities > Extension Dialing in the BroadWorks CommPorta
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/extension-length"
                     }
                 },
                 "ne_id": "1",
@@ -13170,7 +13170,7 @@ Note the "domains" property, if present, will always be an array (even if it has
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains"
                     }
                 },
                 "ne_id": "1",
@@ -13307,14 +13307,14 @@ Note that the 424 example is just one example of a possible BroadWorks error.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/groups/{groupId}/domains/example
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/service-providers/{serviceProviderId}/groups/{groupId}/domains/example
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains\/example"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/domains\/example"
                     }
                 },
                 "ne_id": "1",
@@ -13488,7 +13488,7 @@ Get group-level Feature Access Codes settings
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/feature-access-codes"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/feature-access-codes"
                     }
                 },
                 "useFeatureAccessCodeLevel": "Service Provider",
@@ -14059,7 +14059,7 @@ Search for users in a BroadWorks Group
             {
                 "_links": {
                     "self": {
-                        "href": "http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users/search"
+                        "href": "http://loki3services.example.com/loki-services/network-elements/broadworks/1/service-providers/Example%20Com/groups/Example%20Com%20-%20North/users/search"
                     }
                 },
                 "userTable": {
@@ -14315,14 +14315,14 @@ Assign a single phone number (TN) to a Group.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005553001
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/phone-numbers/%2B1-2005553001
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005553001"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/service-providers\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005553001"
                     }
                 },
                 "ne_id": "1",
@@ -14454,7 +14454,7 @@ The embedded "ls:broadworks-users" resource is included only when the phone numb
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005551212"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/phone-numbers\/%2B1-2005551212"
                     }
                 },
                 "_embedded": {
@@ -14462,7 +14462,7 @@ The embedded "ls:broadworks-users" resource is included only when the phone numb
                         {
                             "_links": {
                                 "self": {
-                                    "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/users\/2005553001%40example.com"
+                                    "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/users\/2005553001%40example.com"
                                 }
                             },
                             "userId": "2005553001@example.com",
@@ -14793,7 +14793,7 @@ Retrieve the Group's service authorization detail.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services"
                     }
                 },
                 "ne_id": "1",
@@ -15446,7 +15446,7 @@ Retrieve group-level settings of Third-Party Voice Mail user service.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Third-Party%20Voice%20Mail%20Support"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Third-Party%20Voice%20Mail%20Support"
                     }
                 },
                 "ne_id": "1",
@@ -15640,7 +15640,7 @@ Retrieve group-level settings of Voice Portal service
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Voice%20Portal"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Voice%20Portal"
                     }
                 },
                 "ne_id": "1",
@@ -16137,7 +16137,7 @@ Retrieve group-level settings of Speed Dial 100 service
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Speed%20Dial%20100"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/services\/Speed%20Dial%20100"
                     }
                 },
                 "ne_id": "1",
@@ -16314,7 +16314,7 @@ Retrieve Trunking Call Capacity settings for a Group.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunking-call-capacity"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunking-call-capacity"
                     }
                 },
                 "maxActiveCalls": 0,
@@ -16575,7 +16575,7 @@ Retrieve Trunk Groups list from a Group.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups"
                     }
                 },
                 "trunkGroupTable": {
@@ -17418,14 +17418,14 @@ Create a Trunk Group.
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/trunk-groups/Trunk%20Group
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/Trunk%20Group"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/Trunk%20Group"
                     }
                 },
                 "name": "Trunk Group",
@@ -17540,7 +17540,7 @@ Retrieve a Trunk Group.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/Trunk%20Group"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/trunk-groups\/Trunk%20Group"
                     }
                 },
                 "maxActiveCalls": 1,
@@ -18929,7 +18929,7 @@ Create a device.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/access-devices\/AccessDeviceTest"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/access-devices\/AccessDeviceTest"
                     }
                 },
                 "ne_id": "asp1_r21",
@@ -19044,7 +19044,7 @@ Retrieve profile settings of a BroadWorks Group device.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/access-devices\/AccessDeviceTest"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/access-devices\/AccessDeviceTest"
                     }
                 },
                 "deviceType": "Polycom Soundpoint IP 500",
@@ -19664,14 +19664,14 @@ Actual requests should include only one or the other (or neither, for users with
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/users/2005553001%40example.com
+            Location: http://loki3services.example.com/loki-services/network-elements/broadworks/1/serviceProviders/Example%20Com/groups/Example%20Com%20-%20North/users/2005553001%40example.com
 
     + Body
 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/users\/2005553001%40example.com"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/serviceProviders\/Example%20Com\/groups\/Example%20Com%20-%20North\/users\/2005553001%40example.com"
                     }
                 },
                 "ne_id": "1",
@@ -19772,7 +19772,7 @@ Retrieve a BroadWorks User.
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/1\/users\/JohnDoe"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/1\/users\/JohnDoe"
                     }
                 },
                 "serviceProviderId": "EnterpriseID",
@@ -20398,7 +20398,7 @@ This request will retrieve the services assignment status for Service Packs and 
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/lokiservicesdev.apiary.io:8340\/loki-services\/network-elements\/broadworks\/asp1_r21\/users\/6502342108@example.com\/services\/assigned-services"
+                        "href": "http:\/\/lokiservicesdev.example.com:8340\/loki-services\/network-elements\/broadworks\/asp1_r21\/users\/6502342108@example.com\/services\/assigned-services"
                     }
                 },
                 "servicePacksAssignmentTable": {},
@@ -21605,7 +21605,7 @@ Retrieve the location information (BroadWorks hosting network element informatio
             {
                 "_links": {
                     "self": {
-                        "href": "http:\/\/loki3services.apiary.io\/loki-services\/network-elements\/broadworks\/locations"
+                        "href": "http:\/\/loki3services.example.com\/loki-services\/network-elements\/broadworks\/locations"
                     }
                 },
                 "ne_id": "asp1_r21",
@@ -21945,14 +21945,14 @@ This is an internal request which creates an eFax user. It will send a Wit eFax 
     + Headers
 
             Transaction-Id: 1380080943120
-            Location: http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com
+            Location: http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com
 
     + Body
 
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                        "href" : "http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
                     }
                 },
                 "ne_id" : "1",
@@ -22196,7 +22196,7 @@ This is an internal request which retrieves an eFax user’s information. It wil
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users"
+                        "href" : "http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users"
                     }
                 },
                 "ne_id" : "1",
@@ -22205,7 +22205,7 @@ This is an internal request which retrieves an eFax user’s information. It wil
                         {
                             "_links" : {
                                 "self" : {
-                                    "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                                    "href" : "http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
                                 }
                             },
                             "active": true,
@@ -22222,7 +22222,7 @@ This is an internal request which retrieves an eFax user’s information. It wil
                         {
                             "_links" : {
                                 "self" : {
-                                    "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607687932343@example.com"
+                                    "href" : "http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users/142662607687932343@example.com"
                                 }
                             },
                             "active": true,
@@ -22437,7 +22437,7 @@ This is an internal request which retrieves an eFax user’s information. It wil
             {
                 "_links" : {
                     "self" : {
-                        "href" : "http://loki3services.apiary.io/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
+                        "href" : "http://loki3services.example.com/loki-services/network-elements/wit-efax/1/users/142662607499832343@example.com"
                     }
                 },
                 "ne_id" : "1",
